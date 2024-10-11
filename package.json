@@ -1,5 +1,5 @@
 {
-  "name": "stream-chat-react",
+  "name": "ermis-chat-react-sdk",
   "version": "0.0.0-development",
   "description": "React components to create chat conversations or livestream style chat",
   "author": "GetStream",
