@@ -2,12 +2,12 @@
   "name": "ermis-chat-react-sdk",
   "version": "0.0.0-development",
   "description": "React components to create chat conversations or livestream style chat",
-  "author": "GetStream",
+  "author": "ErmisChat",
   "homepage": "https://ermis.network/",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GetStream/stream-chat-react.git"
+    "url": "https://github.com/ermisnetwork/ermis-chat-react-sdk"
   },
   "types": "dist/index.d.ts",
   "main": "dist/index.node.cjs",
