@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "lib": ["ES2020", "DOM"],
+    "target": "ES2020",
+    "jsx": "react",
+    "module": "ES2020",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "moduleDetection": "force",
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+
+    "strict": true,
+    "allowUnreachableCode": false,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitUseStrict": false,
+    "noStrictGenericChecks": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "noEmitOnError": true,
+    "declaration": true,
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["./src/stories", "./src/mock-builders", "./src/**/__tests__/*"]
+}
