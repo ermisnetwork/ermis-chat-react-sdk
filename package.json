@@ -127,9 +127,9 @@
     "@emoji-mart/data": "^1.1.0",
     "@emoji-mart/react": "^1.1.0",
     "emoji-mart": "^5.4.0",
+    "ermis-chat-js-sdk": "^1.1.4",
     "react": "^18.0.0 || ^17.0.0 || ^16.8.0",
-    "react-dom": "^18.0.0 || ^17.0.0 || ^16.8.0",
-    "ermis-chat-js-sdk": "^1.1.4"
+    "react-dom": "^18.0.0 || ^17.0.0 || ^16.8.0"
   },
   "peerDependenciesMeta": {
     "@breezystack/lamejs": {
@@ -204,6 +204,7 @@
     "core-js": "^3.6.5",
     "dotenv": "^8.6.0",
     "emoji-mart": "^5.5.2",
+    "ermis-chat-js-sdk": "^1.1.5",
     "esbuild": "^0.23.1",
     "eslint": "7.14.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -239,7 +240,6 @@
     "react-dom": "^18.1.0",
     "react-test-renderer": "^18.1.0",
     "semantic-release": "^19.0.5",
-    "ermis-chat-js-sdk": "^1.1.4",
     "ts-jest": "^29.1.4",
     "typescript": "^5.4.5"
   },
