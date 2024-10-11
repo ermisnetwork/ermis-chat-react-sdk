@@ -1,22 +1,22 @@
 import React from 'react';
 import { Message } from 'ermis-chat-js-sdk';
 import { SendIcon } from './icons';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type SendButtonProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   sendMessage: (
     event: React.BaseSyntheticEvent,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
   ) => void;
 } & React.ComponentProps<'button'>;
 export const SendButton = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   sendMessage,
   ...rest
-}: SendButtonProps<StreamChatGenerics>) => (
+}: SendButtonProps<ErmisChatGenerics>) => (
   <button
     aria-label='Send'
     className='str-chat__send-button'

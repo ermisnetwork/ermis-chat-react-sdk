@@ -1,22 +1,22 @@
 import React, { PropsWithChildren } from 'react';
 
 import type { UserResponse } from 'ermis-chat-js-sdk';
-import type { DefaultStreamChatGenerics } from '../../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../../types/types';
 
 export type MentionProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = PropsWithChildren<{
   node: {
-    mentionedUser: UserResponse<StreamChatGenerics>;
+    mentionedUser: UserResponse<ErmisChatGenerics>;
   };
 }>;
 
 export const Mention = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   children,
   node: { mentionedUser },
-}: MentionProps<StreamChatGenerics>) => (
+}: MentionProps<ErmisChatGenerics>) => (
   <span className='str-chat__message-mention' data-user-id={mentionedUser.id}>
     {children}
   </span>

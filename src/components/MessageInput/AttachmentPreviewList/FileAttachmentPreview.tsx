@@ -5,7 +5,7 @@ import { useTranslationContext } from '../../../context';
 
 import type { AttachmentPreviewProps } from './types';
 import { LocalAttachmentCast, LocalAttachmentUploadMetadata } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 type FileLikeAttachment = {
   asset_url?: string;
@@ -15,20 +15,20 @@ type FileLikeAttachment = {
 };
 
 export type FileAttachmentPreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = AttachmentPreviewProps<
   LocalAttachmentCast<FileLikeAttachment, LocalAttachmentUploadMetadata & CustomLocalMetadata>,
-  StreamChatGenerics
+  ErmisChatGenerics
 >;
 
 export const FileAttachmentPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
   handleRetry,
   removeAttachments,
-}: FileAttachmentPreviewProps<StreamChatGenerics>) => {
+}: FileAttachmentPreviewProps<ErmisChatGenerics>) => {
   const { t } = useTranslationContext('FilePreview');
   return (
     <div className='str-chat__attachment-preview-file' data-testid='attachment-preview-file'>

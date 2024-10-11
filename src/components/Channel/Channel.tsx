@@ -25,7 +25,7 @@ import {
   MessageResponse,
   SendMessageAPIResponse,
   Channel as StreamChannel,
-  StreamChat,
+  ErmisChat,
   UpdatedMessage,
   UserResponse,
 } from 'ermis-chat-js-sdk';
@@ -79,7 +79,7 @@ import type { MessageInputProps } from '../MessageInput';
 import type {
   ChannelUnreadUiState,
   CustomTrigger,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   GiphyVersions,
   ImageAttachmentSizeHandler,
   SendMessageOptions,
@@ -94,9 +94,9 @@ import type { URLEnrichmentConfig } from '../MessageInput/hooks/useLinkPreviews'
 import { useThreadContext } from '../Threads';
 
 type ChannelPropsForwardedToComponentContext<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = Pick<
-  ComponentContextValue<StreamChatGenerics>,
+  ComponentContextValue<ErmisChatGenerics>,
   | 'Attachment'
   | 'AttachmentPreviewList'
   | 'AudioRecorder'
@@ -149,50 +149,50 @@ type ChannelPropsForwardedToComponentContext<
 >;
 
 const isUserResponseArray = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  output: string[] | UserResponse<StreamChatGenerics>[],
-): output is UserResponse<StreamChatGenerics>[] =>
-  (output as UserResponse<StreamChatGenerics>[])[0]?.id != null;
+  output: string[] | UserResponse<ErmisChatGenerics>[],
+): output is UserResponse<ErmisChatGenerics>[] =>
+  (output as UserResponse<ErmisChatGenerics>[])[0]?.id != null;
 
 export type ChannelProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
-> = ChannelPropsForwardedToComponentContext<StreamChatGenerics> & {
+> = ChannelPropsForwardedToComponentContext<ErmisChatGenerics> & {
   /** List of accepted file types */
   acceptedFiles?: string[];
   /** Custom handler function that runs when the active channel has unread messages and the app is running on a separate browser tab */
   activeUnreadHandler?: (unread: number, documentTitle: string) => void;
   /** The connected and active channel */
-  channel?: StreamChannel<StreamChatGenerics>;
+  channel?: StreamChannel<ErmisChatGenerics>;
   /**
    * Optional configuration parameters used for the initial channel query.
    * Applied only if the value of channel.initialized is false.
    * If the channel instance has already been initialized (channel has been queried),
    * then the channel query will be skipped and channelQueryOptions will not be applied.
    */
-  channelQueryOptions?: ChannelQueryOptions<StreamChatGenerics>;
+  channelQueryOptions?: ChannelQueryOptions<ErmisChatGenerics>;
   /** Custom action handler to override the default `client.deleteMessage(message.id)` function */
   doDeleteMessageRequest?: (
-    message: StreamMessage<StreamChatGenerics>,
-  ) => Promise<MessageResponse<StreamChatGenerics>>;
+    message: StreamMessage<ErmisChatGenerics>,
+  ) => Promise<MessageResponse<ErmisChatGenerics>>;
   /** Custom action handler to override the default `channel.markRead` request function (advanced usage only) */
   doMarkReadRequest?: (
-    channel: StreamChannel<StreamChatGenerics>,
+    channel: StreamChannel<ErmisChatGenerics>,
     setChannelUnreadUiState?: (state: ChannelUnreadUiState) => void,
-  ) => Promise<EventAPIResponse<StreamChatGenerics>> | void;
+  ) => Promise<EventAPIResponse<ErmisChatGenerics>> | void;
   /** Custom action handler to override the default `channel.sendMessage` request function (advanced usage only) */
   doSendMessageRequest?: (
-    channel: StreamChannel<StreamChatGenerics>,
-    message: Message<StreamChatGenerics>,
+    channel: StreamChannel<ErmisChatGenerics>,
+    message: Message<ErmisChatGenerics>,
     options?: SendMessageOptions,
-  ) => ReturnType<StreamChannel<StreamChatGenerics>['sendMessage']> | void;
+  ) => ReturnType<StreamChannel<ErmisChatGenerics>['sendMessage']> | void;
   /** Custom action handler to override the default `client.updateMessage` request function (advanced usage only) */
   doUpdateMessageRequest?: (
     cid: string,
-    updatedMessage: UpdatedMessage<StreamChatGenerics>,
+    updatedMessage: UpdatedMessage<ErmisChatGenerics>,
     options?: UpdateMessageOptions,
-  ) => ReturnType<StreamChat<StreamChatGenerics>['updateMessage']>;
+  ) => ReturnType<ErmisChat<ErmisChatGenerics>['updateMessage']>;
   /** If true, chat users will be able to drag and drop file uploads to the entire channel window */
   dragAndDropWindow?: boolean;
   /** Custom UI component to be shown if no active channel is set, defaults to null and skips rendering the Channel component */
@@ -224,11 +224,11 @@ export type ChannelProps<
   /** Whether to allow multiple attachment uploads */
   multipleUploads?: boolean;
   /** Custom action handler function to run on click of an @mention in a message */
-  onMentionsClick?: OnMentionAction<StreamChatGenerics>;
+  onMentionsClick?: OnMentionAction<ErmisChatGenerics>;
   /** Custom action handler function to run on hover of an @mention in a message */
-  onMentionsHover?: OnMentionAction<StreamChatGenerics>;
+  onMentionsHover?: OnMentionAction<ErmisChatGenerics>;
   /** If `dragAndDropWindow` prop is true, the props to pass to the MessageInput component (overrides props placed directly on MessageInput) */
-  optionalMessageInputProps?: MessageInputProps<StreamChatGenerics, V>;
+  optionalMessageInputProps?: MessageInputProps<ErmisChatGenerics, V>;
   /** You can turn on/off thumbnail generation for video attachments */
   shouldGenerateVideoThumbnail?: boolean;
   /** If true, skips the message data string comparison used to memoize the current channel messages (helpful for channels with 1000s of messages) */
@@ -238,10 +238,10 @@ export type ChannelProps<
 };
 
 const UnMemoizedChannel = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: PropsWithChildren<ChannelProps<StreamChatGenerics, V>>,
+  props: PropsWithChildren<ChannelProps<ErmisChatGenerics, V>>,
 ) => {
   const {
     channel: propsChannel,
@@ -255,7 +255,7 @@ const UnMemoizedChannel = <
     channelsQueryState,
     customClasses,
     theme,
-  } = useChatContext<StreamChatGenerics>('Channel');
+  } = useChatContext<ErmisChatGenerics>('Channel');
   const { channelClass, chatClass } = useChannelContainerClasses({
     customClasses,
   });
@@ -288,12 +288,12 @@ const UnMemoizedChannel = <
 };
 
 const ChannelInner = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
   props: PropsWithChildren<
-    ChannelProps<StreamChatGenerics, V> & {
-      channel: StreamChannel<StreamChatGenerics>;
+    ChannelProps<ErmisChatGenerics, V> & {
+      channel: StreamChannel<ErmisChatGenerics>;
       key: string;
     }
   >,
@@ -322,7 +322,7 @@ const ChannelInner = <
     skipMessageDataMemoization,
   } = props;
 
-  const channelQueryOptions: ChannelQueryOptions<StreamChatGenerics> & {
+  const channelQueryOptions: ChannelQueryOptions<ErmisChatGenerics> & {
     messages: { limit: number };
   } = useMemo(
     () =>
@@ -338,7 +338,7 @@ const ChannelInner = <
     latestMessageDatesByChannels,
     mutes,
     theme,
-  } = useChatContext<StreamChatGenerics>('Channel');
+  } = useChatContext<ErmisChatGenerics>('Channel');
   const { t } = useTranslationContext('Channel');
   const {
     channelClass,
@@ -351,12 +351,12 @@ const ChannelInner = <
 
   const [channelConfig, setChannelConfig] = useState(channel.getConfig());
   const [notifications, setNotifications] = useState<ChannelNotifications>([]);
-  const [quotedMessage, setQuotedMessage] = useState<StreamMessage<StreamChatGenerics>>();
+  const [quotedMessage, setQuotedMessage] = useState<StreamMessage<ErmisChatGenerics>>();
   const [channelUnreadUiState, _setChannelUnreadUiState] = useState<ChannelUnreadUiState>();
 
   const notificationTimeouts = useRef<Array<NodeJS.Timeout>>([]);
 
-  const [state, dispatch] = useReducer<ChannelStateReducer<StreamChatGenerics>>(
+  const [state, dispatch] = useReducer<ChannelStateReducer<ErmisChatGenerics>>(
     channelReducer,
     // channel.initialized === false if client.channel().query() was not called, e.g. ChannelList is not used
     // => Channel will call channel.watch() in useLayoutEffect => state.loading is used to signal the watch() call state
@@ -436,7 +436,7 @@ const ChannelInner = <
     [activeUnreadHandler, channel, channelConfig, doMarkReadRequest, setChannelUnreadUiState, t],
   );
 
-  const handleEvent = async (event: Event<StreamChatGenerics>) => {
+  const handleEvent = async (event: Event<ErmisChatGenerics>) => {
     if (event.message) {
       dispatch({
         channel,
@@ -536,7 +536,7 @@ const ChannelInner = <
               if (typeof member === 'string') {
                 userId = member;
               } else if (typeof member === 'object') {
-                const { user, user_id } = member as ChannelMemberResponse<StreamChatGenerics>;
+                const { user, user_id } = member as ChannelMemberResponse<ErmisChatGenerics>;
                 userId = user_id || user?.id;
               }
               if (userId) {
@@ -623,7 +623,7 @@ const ChannelInner = <
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const loadMoreFinished = useCallback(
     debounce(
-      (hasMore: boolean, messages: ChannelState<StreamChatGenerics>['messages']) => {
+      (hasMore: boolean, messages: ChannelState<ErmisChatGenerics>['messages']) => {
         if (!isMounted.current) return;
         dispatch({ hasMore, messages, type: 'loadMoreFinished' });
       },
@@ -648,7 +648,7 @@ const ChannelInner = <
 
     const oldestID = oldestMessage?.id;
     const perPage = limit;
-    let queryResponse: ChannelAPIResponse<StreamChatGenerics>;
+    let queryResponse: ChannelAPIResponse<ErmisChatGenerics>;
 
     try {
       queryResponse = await channel.query({
@@ -677,7 +677,7 @@ const ChannelInner = <
 
     const newestId = newestMessage?.id;
     const perPage = limit;
-    let queryResponse: ChannelAPIResponse<StreamChatGenerics>;
+    let queryResponse: ChannelAPIResponse<ErmisChatGenerics>;
 
     try {
       queryResponse = await channel.query({
@@ -700,7 +700,7 @@ const ChannelInner = <
 
   const clearHighlightedMessageTimeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const jumpToMessage: ChannelActionContextValue<StreamChatGenerics>['jumpToMessage'] = useCallback(
+  const jumpToMessage: ChannelActionContextValue<ErmisChatGenerics>['jumpToMessage'] = useCallback(
     async (
       messageId,
       messageLimit = DEFAULT_JUMP_TO_PAGE_SIZE,
@@ -728,7 +728,7 @@ const ChannelInner = <
     [channel, loadMoreFinished],
   );
 
-  const jumpToLatestMessage: ChannelActionContextValue<StreamChatGenerics>['jumpToLatestMessage'] = useCallback(async () => {
+  const jumpToLatestMessage: ChannelActionContextValue<ErmisChatGenerics>['jumpToLatestMessage'] = useCallback(async () => {
     await channel.state.loadMessageIntoState('latest');
     loadMoreFinished(channel.state.messagePagination.hasPrev, channel.state.messages);
     dispatch({
@@ -736,7 +736,7 @@ const ChannelInner = <
     });
   }, [channel, loadMoreFinished]);
 
-  const jumpToFirstUnreadMessage: ChannelActionContextValue<StreamChatGenerics>['jumpToFirstUnreadMessage'] = useCallback(
+  const jumpToFirstUnreadMessage: ChannelActionContextValue<ErmisChatGenerics>['jumpToFirstUnreadMessage'] = useCallback(
     async (
       queryMessageLimit = DEFAULT_JUMP_TO_PAGE_SIZE,
       highlightDuration = DEFAULT_HIGHLIGHT_DURATION,
@@ -865,8 +865,8 @@ const ChannelInner = <
 
   const deleteMessage = useCallback(
     async (
-      message: StreamMessage<StreamChatGenerics>,
-    ): Promise<MessageResponse<StreamChatGenerics>> => {
+      message: StreamMessage<ErmisChatGenerics>,
+    ): Promise<MessageResponse<ErmisChatGenerics>> => {
       if (!message?.id) {
         throw new Error('Cannot delete a message - missing message ID.');
       }
@@ -884,10 +884,10 @@ const ChannelInner = <
   );
 
   const updateMessage = (
-    updatedMessage: MessageToSend<StreamChatGenerics> | StreamMessage<StreamChatGenerics>,
+    updatedMessage: MessageToSend<ErmisChatGenerics> | StreamMessage<ErmisChatGenerics>,
   ) => {
     // add the message to the local channel state
-    channel.state.addMessageSorted(updatedMessage as MessageResponse<StreamChatGenerics>, true);
+    channel.state.addMessageSorted(updatedMessage as MessageResponse<ErmisChatGenerics>, true);
 
     dispatch({
       channel,
@@ -897,14 +897,14 @@ const ChannelInner = <
   };
 
   const doSendMessage = async (
-    message: MessageToSend<StreamChatGenerics> | StreamMessage<StreamChatGenerics>,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    message: MessageToSend<ErmisChatGenerics> | StreamMessage<ErmisChatGenerics>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => {
     const { attachments, id, mentioned_users = [], parent_id, text } = message;
 
     // channel.sendMessage expects an array of user id strings
-    const mentions = isUserResponseArray<StreamChatGenerics>(mentioned_users)
+    const mentions = isUserResponseArray<ErmisChatGenerics>(mentioned_users)
       ? mentioned_users.map(({ id }) => id)
       : mentioned_users;
 
@@ -916,10 +916,10 @@ const ChannelInner = <
       quoted_message_id: parent_id === quotedMessage?.parent_id ? quotedMessage?.id : undefined,
       text,
       ...customMessageData,
-    } as Message<StreamChatGenerics>;
+    } as Message<ErmisChatGenerics>;
 
     try {
-      let messageResponse: void | SendMessageAPIResponse<StreamChatGenerics>;
+      let messageResponse: void | SendMessageAPIResponse<ErmisChatGenerics>;
 
       if (doSendMessageRequest) {
         messageResponse = await doSendMessageRequest(channel, messageData, options);
@@ -999,13 +999,8 @@ const ChannelInner = <
   };
 
   const sendMessage = async (
-    {
-      attachments = [],
-      mentioned_users = [],
-      parent,
-      text = '',
-    }: MessageToSend<StreamChatGenerics>,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    { attachments = [], mentioned_users = [], parent, text = '' }: MessageToSend<ErmisChatGenerics>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => {
     channel.state.filterErrorMessages();
@@ -1034,7 +1029,7 @@ const ChannelInner = <
     await doSendMessage(messagePreview, customMessageData, options);
   };
 
-  const retrySendMessage = async (message: StreamMessage<StreamChatGenerics>) => {
+  const retrySendMessage = async (message: StreamMessage<ErmisChatGenerics>) => {
     updateMessage({
       ...message,
       errorStatusCode: undefined,
@@ -1049,7 +1044,7 @@ const ChannelInner = <
     await doSendMessage(message);
   };
 
-  const removeMessage = (message: StreamMessage<StreamChatGenerics>) => {
+  const removeMessage = (message: StreamMessage<ErmisChatGenerics>) => {
     channel.state.removeMessage(message);
 
     dispatch({
@@ -1062,7 +1057,7 @@ const ChannelInner = <
   /** THREAD */
 
   const openThread = (
-    message: StreamMessage<StreamChatGenerics>,
+    message: StreamMessage<ErmisChatGenerics>,
     event?: React.BaseSyntheticEvent,
   ) => {
     event?.preventDefault();
@@ -1086,7 +1081,7 @@ const ChannelInner = <
     debounce(
       (
         threadHasMore: boolean,
-        threadMessages: Array<ReturnType<ChannelState<StreamChatGenerics>['formatMessage']>>,
+        threadMessages: Array<ReturnType<ChannelState<ErmisChatGenerics>['formatMessage']>>,
       ) => {
         dispatch({
           threadHasMore,
@@ -1136,7 +1131,7 @@ const ChannelInner = <
 
   const { typing, ...restState } = state;
 
-  const channelStateContextValue = useCreateChannelStateContext<StreamChatGenerics>({
+  const channelStateContextValue = useCreateChannelStateContext<ErmisChatGenerics>({
     ...restState,
     acceptedFiles,
     channel,
@@ -1160,7 +1155,7 @@ const ChannelInner = <
     watcher_count: state.watcherCount,
   });
 
-  const channelActionContextValue: ChannelActionContextValue<StreamChatGenerics> = useMemo(
+  const channelActionContextValue: ChannelActionContextValue<ErmisChatGenerics> = useMemo(
     () => ({
       addNotification,
       closeThread,

@@ -3,7 +3,7 @@ import type { Channel, Event } from 'ermis-chat-js-sdk';
 
 import { useChatContext } from '../../../context';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 import type { StreamMessage } from '../../../context';
 
 export enum MessageDeliveryStatus {
@@ -12,26 +12,26 @@ export enum MessageDeliveryStatus {
 }
 
 type UseMessageStatusParamsChannelPreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  channel: Channel<StreamChatGenerics>;
+  channel: Channel<ErmisChatGenerics>;
   /** The last message received in a channel */
-  lastMessage?: StreamMessage<StreamChatGenerics>;
+  lastMessage?: StreamMessage<ErmisChatGenerics>;
 };
 
 export const useMessageDeliveryStatus = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   channel,
   lastMessage,
-}: UseMessageStatusParamsChannelPreviewProps<StreamChatGenerics>) => {
+}: UseMessageStatusParamsChannelPreviewProps<ErmisChatGenerics>) => {
   const { client } = useChatContext();
   const [messageDeliveryStatus, setMessageDeliveryStatus] = useState<
     MessageDeliveryStatus | undefined
   >();
 
   const isOwnMessage = useCallback(
-    (message?: StreamMessage<StreamChatGenerics>) =>
+    (message?: StreamMessage<ErmisChatGenerics>) =>
       client.user && message?.user?.id === client.user.id,
     [client],
   );
@@ -60,7 +60,7 @@ export const useMessageDeliveryStatus = <
   }, [channel.state.read, client, isOwnMessage, lastMessage]);
 
   useEffect(() => {
-    const handleMessageNew = (event: Event<StreamChatGenerics>) => {
+    const handleMessageNew = (event: Event<ErmisChatGenerics>) => {
       // the last message is not mine, so do not show the delivery status
       if (!isOwnMessage(event.message)) {
         return setMessageDeliveryStatus(undefined);
@@ -78,7 +78,7 @@ export const useMessageDeliveryStatus = <
 
   useEffect(() => {
     if (!isOwnMessage(lastMessage)) return;
-    const handleMarkRead = (event: Event<StreamChatGenerics>) => {
+    const handleMarkRead = (event: Event<ErmisChatGenerics>) => {
       if (event.user?.id !== client.user?.id) setMessageDeliveryStatus(MessageDeliveryStatus.READ);
     };
     channel.on('message.read', handleMarkRead);

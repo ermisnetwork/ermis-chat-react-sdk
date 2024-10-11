@@ -1,25 +1,25 @@
 import { useChatContext } from '../../../context/ChatContext';
 
-import type { StreamChat, UpdatedMessage } from 'ermis-chat-js-sdk';
+import type { ErmisChat, UpdatedMessage } from 'ermis-chat-js-sdk';
 
-import type { DefaultStreamChatGenerics, UpdateMessageOptions } from '../../../types/types';
+import type { DefaultErmisChatGenerics, UpdateMessageOptions } from '../../../types/types';
 
 type UpdateHandler<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = (
   cid: string,
-  updatedMessage: UpdatedMessage<StreamChatGenerics>,
+  updatedMessage: UpdatedMessage<ErmisChatGenerics>,
   options?: UpdateMessageOptions,
-) => ReturnType<StreamChat<StreamChatGenerics>['updateMessage']>;
+) => ReturnType<ErmisChat<ErmisChatGenerics>['updateMessage']>;
 
 export const useEditMessageHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  doUpdateMessageRequest?: UpdateHandler<StreamChatGenerics>,
+  doUpdateMessageRequest?: UpdateHandler<ErmisChatGenerics>,
 ) => {
-  const { channel, client } = useChatContext<StreamChatGenerics>('useEditMessageHandler');
+  const { channel, client } = useChatContext<ErmisChatGenerics>('useEditMessageHandler');
 
-  return (updatedMessage: UpdatedMessage<StreamChatGenerics>, options?: UpdateMessageOptions) => {
+  return (updatedMessage: UpdatedMessage<ErmisChatGenerics>, options?: UpdateMessageOptions) => {
     if (doUpdateMessageRequest && channel) {
       return Promise.resolve(doUpdateMessageRequest(channel.cid, updatedMessage, options));
     }

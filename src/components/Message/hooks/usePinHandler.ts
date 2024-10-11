@@ -7,7 +7,7 @@ import { useTranslationContext } from '../../../context/TranslationContext';
 
 import type { ReactEventHandler } from '../types';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 // @deprecated in favor of `channelCapabilities` - TODO: remove in next major release
 export type PinEnabledUserRoles<T extends string = string> = Partial<Record<T, boolean>> & {
@@ -34,25 +34,25 @@ export type PinPermissions<T extends string = string, U extends string = string>
 };
 
 export type PinMessageNotifications<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  getErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   notify?: (notificationText: string, type: 'success' | 'error') => void;
 };
 
 export const usePinHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: StreamMessage<StreamChatGenerics>,
+  message: StreamMessage<ErmisChatGenerics>,
   // @deprecated in favor of `channelCapabilities` - TODO: remove in next major release
   _permissions: PinPermissions = defaultPinPermissions, // eslint-disable-line
-  notifications: PinMessageNotifications<StreamChatGenerics> = {},
+  notifications: PinMessageNotifications<ErmisChatGenerics> = {},
 ) => {
   const { getErrorNotification, notify } = notifications;
 
-  const { updateMessage } = useChannelActionContext<StreamChatGenerics>('usePinHandler');
-  const { channelCapabilities = {} } = useChannelStateContext<StreamChatGenerics>('usePinHandler');
-  const { client } = useChatContext<StreamChatGenerics>('usePinHandler');
+  const { updateMessage } = useChannelActionContext<ErmisChatGenerics>('usePinHandler');
+  const { channelCapabilities = {} } = useChannelStateContext<ErmisChatGenerics>('usePinHandler');
+  const { client } = useChatContext<ErmisChatGenerics>('usePinHandler');
   const { t } = useTranslationContext('usePinHandler');
 
   const canPin = !!channelCapabilities['pin-message'];

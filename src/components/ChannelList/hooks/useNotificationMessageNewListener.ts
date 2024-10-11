@@ -7,22 +7,22 @@ import { useChatContext } from '../../../context/ChatContext';
 
 import type { Channel, Event } from 'ermis-chat-js-sdk';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useNotificationMessageNewListener = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
+  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
   customHandler?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void,
   allowNewMessagesFromUnfilteredChannels = true,
 ) => {
-  const { client } = useChatContext<StreamChatGenerics>('useNotificationMessageNewListener');
+  const { client } = useChatContext<ErmisChatGenerics>('useNotificationMessageNewListener');
 
   useEffect(() => {
-    const handleEvent = async (event: Event<StreamChatGenerics>) => {
+    const handleEvent = async (event: Event<ErmisChatGenerics>) => {
       if (customHandler && typeof customHandler === 'function') {
         customHandler(setChannels, event);
       } else if (allowNewMessagesFromUnfilteredChannels && event.channel?.type) {

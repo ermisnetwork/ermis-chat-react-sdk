@@ -6,7 +6,7 @@ import { isMessageEdited } from '../Message/utils';
 import { isDate } from '../../i18n';
 
 import type { MessageLabel, UserResponse } from 'ermis-chat-js-sdk';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import type { StreamMessage } from '../../context/ChannelStateContext';
 
 type ProcessMessagesContext = {
@@ -23,24 +23,24 @@ type ProcessMessagesContext = {
 };
 
 export type ProcessMessagesParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = ProcessMessagesContext & {
-  messages: StreamMessage<StreamChatGenerics>[];
+  messages: StreamMessage<ErmisChatGenerics>[];
   reviewProcessedMessage?: (params: {
     /** array of messages representing the changes applied around a given processed message */
-    changes: StreamMessage<StreamChatGenerics>[];
+    changes: StreamMessage<ErmisChatGenerics>[];
     /** configuration params and information forwarded from `processMessages` */
     context: ProcessMessagesContext;
     /** index of the processed message in the original messages array */
     index: number;
     /** array of messages retrieved from the back-end */
-    messages: StreamMessage<StreamChatGenerics>[];
+    messages: StreamMessage<ErmisChatGenerics>[];
     /** newly built array of messages to be later rendered */
-    processedMessages: StreamMessage<StreamChatGenerics>[];
-  }) => StreamMessage<StreamChatGenerics>[];
+    processedMessages: StreamMessage<ErmisChatGenerics>[];
+  }) => StreamMessage<ErmisChatGenerics>[];
   /** Signals whether to separate giphy preview as well as used to set the giphy preview state */
   setGiphyPreviewMessage?: React.Dispatch<
-    React.SetStateAction<StreamMessage<StreamChatGenerics> | undefined>
+    React.SetStateAction<StreamMessage<ErmisChatGenerics> | undefined>
   >;
 };
 
@@ -58,12 +58,12 @@ export type ProcessMessagesParams<
  *
  * The only required params are messages and userId, the rest are config params:
  *
- * @return {StreamMessage<StreamChatGenerics>[]} Transformed list of messages
+ * @return {StreamMessage<ErmisChatGenerics>[]} Transformed list of messages
  */
 export const processMessages = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  params: ProcessMessagesParams<StreamChatGenerics>,
+  params: ProcessMessagesParams<ErmisChatGenerics>,
 ) => {
   const { messages, reviewProcessedMessage, setGiphyPreviewMessage, ...context } = params;
   const {
@@ -77,7 +77,7 @@ export const processMessages = <
   let unread = false;
   let ephemeralMessagePresent = false;
   let lastDateSeparator;
-  const newMessages: StreamMessage<StreamChatGenerics>[] = [];
+  const newMessages: StreamMessage<ErmisChatGenerics>[] = [];
 
   for (let i = 0; i < messages.length; i += 1) {
     const message = messages[i];
@@ -92,7 +92,7 @@ export const processMessages = <
       continue;
     }
 
-    const changes: StreamMessage<StreamChatGenerics>[] = [];
+    const changes: StreamMessage<ErmisChatGenerics>[] = [];
     const messageDate =
       (message.created_at && isDate(message.created_at) && message.created_at.toDateString()) || '';
     const previousMessage = messages[i - 1];
@@ -112,7 +112,7 @@ export const processMessages = <
           date: message.created_at,
           id: makeDateMessageId(message.created_at),
           unread,
-        } as StreamMessage<StreamChatGenerics>);
+        } as StreamMessage<ErmisChatGenerics>);
       }
     }
 
@@ -133,7 +133,7 @@ export const processMessages = <
           customType: CUSTOM_MESSAGE_TYPE.date,
           date: message.created_at,
           id: makeDateMessageId(message.created_at),
-        } as StreamMessage<StreamChatGenerics>,
+        } as StreamMessage<ErmisChatGenerics>,
         message,
       );
     } else {
@@ -171,9 +171,9 @@ export const makeDateMessageId = (date?: string | Date) => {
 
 // fast since it usually iterates just the last few messages
 export const getLastReceived = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  messages: StreamMessage<StreamChatGenerics>[],
+  messages: StreamMessage<ErmisChatGenerics>[],
 ) => {
   for (let i = messages.length - 1; i > 0; i -= 1) {
     if (messages[i].status === 'received') {
@@ -185,14 +185,14 @@ export const getLastReceived = <
 };
 
 export const getReadStates = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  messages: StreamMessage<StreamChatGenerics>[],
-  read: Record<string, { last_read: Date; user: UserResponse<StreamChatGenerics> }> = {},
+  messages: StreamMessage<ErmisChatGenerics>[],
+  read: Record<string, { last_read: Date; user: UserResponse<ErmisChatGenerics> }> = {},
   returnAllReadData: boolean,
 ) => {
   // create object with empty array for each message id
-  const readData: Record<string, Array<UserResponse<StreamChatGenerics>>> = {};
+  const readData: Record<string, Array<UserResponse<ErmisChatGenerics>>> = {};
 
   Object.values(read).forEach((readState) => {
     if (!readState.last_read) return;
@@ -229,15 +229,15 @@ export const getReadStates = <
 };
 
 export const insertIntro = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  messages: StreamMessage<StreamChatGenerics>[],
+  messages: StreamMessage<ErmisChatGenerics>[],
   headerPosition?: number,
 ) => {
   const newMessages = messages;
   const intro = ({
     customType: CUSTOM_MESSAGE_TYPE.intro,
-  } as unknown) as StreamMessage<StreamChatGenerics>;
+  } as unknown) as StreamMessage<ErmisChatGenerics>;
 
   // if no headerPosition is set, HeaderComponent will go at the top
   if (!headerPosition) {
@@ -285,11 +285,11 @@ export const insertIntro = <
 export type GroupStyle = '' | 'middle' | 'top' | 'bottom' | 'single';
 
 export const getGroupStyles = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: StreamMessage<StreamChatGenerics>,
-  previousMessage: StreamMessage<StreamChatGenerics>,
-  nextMessage: StreamMessage<StreamChatGenerics>,
+  message: StreamMessage<ErmisChatGenerics>,
+  previousMessage: StreamMessage<ErmisChatGenerics>,
+  nextMessage: StreamMessage<ErmisChatGenerics>,
   noGroupByUser: boolean,
   maxTimeBetweenGroupedMessages?: number,
 ): GroupStyle => {
@@ -368,8 +368,8 @@ type DateSeparatorMessage = {
 };
 
 export function isDateSeparatorMessage<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
   // @ts-ignore
->(message: StreamMessage<StreamChatGenerics>): message is DateSeparatorMessage {
+>(message: StreamMessage<ErmisChatGenerics>): message is DateSeparatorMessage {
   return message.customType === CUSTOM_MESSAGE_TYPE.date && !!message.date && isDate(message.date);
 }

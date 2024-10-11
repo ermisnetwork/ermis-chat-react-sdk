@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react';
 
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../../types/types';
 
 const STATUSES_EXCLUDED_FROM_PREPEND = ({
   failed: true,
@@ -10,11 +10,11 @@ const STATUSES_EXCLUDED_FROM_PREPEND = ({
 } as const) as Record<string, boolean>;
 
 export function usePrependedMessagesCount<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(messages: StreamMessage<StreamChatGenerics>[], hasDateSeparator: boolean) {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+>(messages: StreamMessage<ErmisChatGenerics>[], hasDateSeparator: boolean) {
   const firstRealMessageIndex = hasDateSeparator ? 1 : 0;
-  const firstMessageOnFirstLoadedPage = useRef<StreamMessage<StreamChatGenerics>>();
-  const previousFirstMessageOnFirstLoadedPage = useRef<StreamMessage<StreamChatGenerics>>();
+  const firstMessageOnFirstLoadedPage = useRef<StreamMessage<ErmisChatGenerics>>();
+  const previousFirstMessageOnFirstLoadedPage = useRef<StreamMessage<ErmisChatGenerics>>();
   const previousNumItemsPrepended = useRef(0);
 
   const numItemsPrepended = useMemo(() => {

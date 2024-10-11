@@ -9,27 +9,27 @@ import { CloseIcon } from './icons';
 import { StreamMessage, useChannelStateContext } from '../../context/ChannelStateContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ThreadHeaderProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Callback for closing the thread */
   closeThread: (event?: React.BaseSyntheticEvent) => void;
   /** The thread parent message */
-  thread: StreamMessage<StreamChatGenerics>;
+  thread: StreamMessage<ErmisChatGenerics>;
 };
 
 export const ThreadHeader = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ThreadHeaderProps<StreamChatGenerics> &
-    Pick<ChannelPreviewInfoParams<StreamChatGenerics>, 'overrideImage' | 'overrideTitle'>,
+  props: ThreadHeaderProps<ErmisChatGenerics> &
+    Pick<ChannelPreviewInfoParams<ErmisChatGenerics>, 'overrideImage' | 'overrideTitle'>,
 ) => {
   const { closeThread, overrideImage, overrideTitle } = props;
 
   const { t } = useTranslationContext('ThreadHeader');
-  const { channel } = useChannelStateContext<StreamChatGenerics>('');
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('');
   const { displayTitle } = useChannelPreviewInfo({
     channel,
     overrideImage,

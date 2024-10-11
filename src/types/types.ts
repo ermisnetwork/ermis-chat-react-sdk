@@ -41,13 +41,13 @@ export type DefaultChannelType = UnknownType & {
 };
 
 export type DefaultMessageType<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = UnknownType & {
   customType?: CustomMessageType;
   date?: string | Date;
   error?: ErrorFromResponse<APIErrorResponse>;
   errorStatusCode?: number;
-  event?: Event<StreamChatGenerics>;
+  event?: Event<ErmisChatGenerics>;
   unread?: boolean;
 };
 
@@ -57,13 +57,13 @@ export type DefaultUserTypeInternal = {
 };
 
 export type DefaultUserType<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = UnknownType &
   DefaultUserTypeInternal & {
-    mutes?: Array<Mute<StreamChatGenerics>>;
+    mutes?: Array<Mute<ErmisChatGenerics>>;
   };
 
-export type DefaultStreamChatGenerics = ExtendableGenerics & {
+export type DefaultErmisChatGenerics = ExtendableGenerics & {
   attachmentType: DefaultAttachmentType;
   channelType: DefaultChannelType;
   commandType: LiteralStringForUnion;
@@ -132,8 +132,8 @@ export type VideoAttachmentSizeHandler = (
 ) => VideoAttachmentConfiguration;
 
 export type ChannelUnreadUiState<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Omit<ValuesType<StreamChannelState<StreamChatGenerics>['read']>, 'user'>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Omit<ValuesType<StreamChannelState<ErmisChatGenerics>['read']>, 'user'>;
 
 // todo: fix export from ermis-chat-js-sdk - for some reason not exported
 export type SendMessageOptions = {

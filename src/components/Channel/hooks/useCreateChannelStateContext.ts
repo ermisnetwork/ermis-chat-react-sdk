@@ -4,12 +4,12 @@ import { isDate, isDayOrMoment } from '../../../i18n';
 
 import type { ChannelStateContextValue } from '../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useCreateChannelStateContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  value: Omit<ChannelStateContextValue<StreamChatGenerics>, 'channelCapabilities'> & {
+  value: Omit<ChannelStateContextValue<ErmisChatGenerics>, 'channelCapabilities'> & {
     channelCapabilitiesArray: string[];
     skipMessageDataMemoization?: boolean;
   },
@@ -98,7 +98,7 @@ export const useCreateChannelStateContext = <
     )
     .join();
 
-  const channelStateContext: ChannelStateContextValue<StreamChatGenerics> = useMemo(
+  const channelStateContext: ChannelStateContextValue<ErmisChatGenerics> = useMemo(
     () => ({
       acceptedFiles,
       channel,

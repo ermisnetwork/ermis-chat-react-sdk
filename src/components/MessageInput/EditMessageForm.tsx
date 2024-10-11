@@ -3,15 +3,15 @@ import { MessageInputFlat } from './MessageInputFlat';
 
 import { useMessageInputContext, useTranslationContext } from '../../context';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../types/types';
 
 export const EditMessageForm = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >() => {
   const { t } = useTranslationContext('EditMessageForm');
 
-  const { clearEditingState, handleSubmit } = useMessageInputContext<StreamChatGenerics, V>(
+  const { clearEditingState, handleSubmit } = useMessageInputContext<ErmisChatGenerics, V>(
     'EditMessageForm',
   );
 

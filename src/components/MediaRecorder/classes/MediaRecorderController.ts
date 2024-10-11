@@ -21,7 +21,7 @@ import { isSafari } from '../../../utils/browsers';
 import { mergeDeepUndefined } from '../../../utils/mergeDeep';
 
 import type { LocalVoiceRecordingAttachment } from '../../MessageInput';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 const RECORDED_MIME_TYPE_BY_BROWSER = {
   audio: {
@@ -80,7 +80,7 @@ export enum RecordingAttachmentType {
 }
 
 export class MediaRecorderController<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > {
   permission: BrowserPermission;
   mediaRecorder: MediaRecorder | undefined;
@@ -96,12 +96,10 @@ export class MediaRecorderController<
   recordingUri: string | undefined;
   mediaType: RecordedMediaType;
 
-  signalRecordingReady:
-    | ((r: LocalVoiceRecordingAttachment<StreamChatGenerics>) => void)
-    | undefined;
+  signalRecordingReady: ((r: LocalVoiceRecordingAttachment<ErmisChatGenerics>) => void) | undefined;
 
   recordingState = new BehaviorSubject<MediaRecordingState | undefined>(undefined);
-  recording = new BehaviorSubject<LocalVoiceRecordingAttachment<StreamChatGenerics> | undefined>(
+  recording = new BehaviorSubject<LocalVoiceRecordingAttachment<ErmisChatGenerics> | undefined>(
     undefined,
   );
   error = new Subject<Error | undefined>();
@@ -349,7 +347,7 @@ export class MediaRecorderController<
       this.recordedChunkDurations.push(new Date().getTime() - this.startTime);
       this.startTime = undefined;
     }
-    const result = new Promise<LocalVoiceRecordingAttachment<StreamChatGenerics>>((res) => {
+    const result = new Promise<LocalVoiceRecordingAttachment<ErmisChatGenerics>>((res) => {
       this.signalRecordingReady = res;
     });
     this.mediaRecorder?.stop();

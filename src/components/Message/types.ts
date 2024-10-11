@@ -14,24 +14,24 @@ import type { ComponentContextValue } from '../../context/ComponentContext';
 import type { MessageContextValue } from '../../context/MessageContext';
 
 import type { RenderTextOptions } from './renderText';
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../types/types';
 
 export type ReactEventHandler = (event: React.BaseSyntheticEvent) => Promise<void> | void;
 
 export type MessageProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 > = {
   /** The message object */
-  message: StreamMessage<StreamChatGenerics>;
+  message: StreamMessage<ErmisChatGenerics>;
   /** Additional props for underlying MessageInput component, [available props] */
-  additionalMessageInputProps?: MessageInputProps<StreamChatGenerics, V>;
+  additionalMessageInputProps?: MessageInputProps<ErmisChatGenerics, V>;
   /** Call this function to keep message list scrolled to the bottom when the scroll height increases, e.g. an element appears below the last message (only used in the `VirtualizedMessageList`) */
   autoscrollToBottom?: () => void;
   /** If true, picking a reaction from the `ReactionSelector` component will close the selector */
   closeReactionSelectorOnClick?: boolean;
   /** Object containing custom message actions and function handlers */
-  customMessageActions?: MessageContextValue<StreamChatGenerics>['customMessageActions'];
+  customMessageActions?: MessageContextValue<ErmisChatGenerics>['customMessageActions'];
   /** If true, disables the ability for users to quote messages, defaults to false */
   disableQuotedMessages?: boolean;
   /** When true, the message is the last one in a group sent by a specific user (only used in the `VirtualizedMessageList`) */
@@ -41,23 +41,23 @@ export type MessageProps<
   /** Override the default formatting of the date. This is a function that has access to the original date object, returns a string  */
   formatDate?: (date: Date) => string;
   /** Function that returns the notification text to be displayed when a delete message request fails */
-  getDeleteMessageErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getDeleteMessageErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when loading message reactions fails */
-  getFetchReactionsErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getFetchReactionsErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when a flag message request fails */
-  getFlagMessageErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getFlagMessageErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when a flag message request succeeds */
-  getFlagMessageSuccessNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getFlagMessageSuccessNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when mark channel messages unread request fails */
-  getMarkMessageUnreadErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getMarkMessageUnreadErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when mark channel messages unread request succeeds */
-  getMarkMessageUnreadSuccessNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getMarkMessageUnreadSuccessNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when a mute user request fails */
-  getMuteUserErrorNotification?: (user: UserResponse<StreamChatGenerics>) => string;
+  getMuteUserErrorNotification?: (user: UserResponse<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when a mute user request succeeds */
-  getMuteUserSuccessNotification?: (user: UserResponse<StreamChatGenerics>) => string;
+  getMuteUserSuccessNotification?: (user: UserResponse<ErmisChatGenerics>) => string;
   /** Function that returns the notification text to be displayed when a pin message request fails */
-  getPinMessageErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getPinMessageErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   /** If true, group messages sent by each user (only used in the `VirtualizedMessageList`) */
   groupedByUser?: boolean;
   /** A list of styles to apply to this message, i.e. top, bottom, single */
@@ -69,7 +69,7 @@ export type MessageProps<
   /** Latest message id on current channel */
   lastReceivedId?: string | null;
   /** UI component to display a Message in MessageList, overrides value in [ComponentContext] */
-  Message?: ComponentContextValue<StreamChatGenerics>['Message'];
+  Message?: ComponentContextValue<ErmisChatGenerics>['Message'];
   /** Array of allowed message actions (ex: ['edit', 'delete', 'flag', 'mute', 'pin', 'quote', 'react', 'reply']). To disable all actions, provide an empty array. */
   messageActions?: MessageActionsArray;
   /** DOMRect object for parent MessageList component */
@@ -77,29 +77,29 @@ export type MessageProps<
   /** If true, only the sender of the message has editing privileges */
   onlySenderCanEdit?: boolean;
   /** Custom mention click handler to override default in [ChannelActionContext] */
-  onMentionsClick?: ChannelActionContextValue<StreamChatGenerics>['onMentionsClick'];
+  onMentionsClick?: ChannelActionContextValue<ErmisChatGenerics>['onMentionsClick'];
   /** Custom mention hover handler to override default in [ChannelActionContext] */
-  onMentionsHover?: ChannelActionContextValue<StreamChatGenerics>['onMentionsHover'];
+  onMentionsHover?: ChannelActionContextValue<ErmisChatGenerics>['onMentionsHover'];
   /** Custom function to run on user avatar click */
-  onUserClick?: UserEventHandler<StreamChatGenerics>;
+  onUserClick?: UserEventHandler<ErmisChatGenerics>;
   /** Custom function to run on user avatar hover */
-  onUserHover?: UserEventHandler<StreamChatGenerics>;
+  onUserHover?: UserEventHandler<ErmisChatGenerics>;
   /** Custom open thread handler to override default in [ChannelActionContext] */
-  openThread?: ChannelActionContextValue<StreamChatGenerics>['openThread'];
+  openThread?: ChannelActionContextValue<ErmisChatGenerics>['openThread'];
   /** @deprecated in favor of `channelCapabilities - The user roles allowed to pin messages in various channel types */
   pinPermissions?: PinPermissions;
   /** Sort options to provide to a reactions query */
-  reactionDetailsSort?: ReactionSort<StreamChatGenerics>;
+  reactionDetailsSort?: ReactionSort<ErmisChatGenerics>;
   /** A list of users that have read this Message if the message is the last one and was posted by my user */
-  readBy?: UserResponse<StreamChatGenerics>[];
+  readBy?: UserResponse<ErmisChatGenerics>[];
   /** Custom function to render message text content, defaults to the renderText function: [utils](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/utils.ts) */
   renderText?: (
     text?: string,
-    mentioned_users?: UserResponse<StreamChatGenerics>[],
+    mentioned_users?: UserResponse<ErmisChatGenerics>[],
     options?: RenderTextOptions,
   ) => JSX.Element | null;
   /** Custom retry send message handler to override default in [ChannelActionContext] */
-  retrySendMessage?: ChannelActionContextValue<StreamChatGenerics>['retrySendMessage'];
+  retrySendMessage?: ChannelActionContextValue<ErmisChatGenerics>['retrySendMessage'];
   /** Comparator function to sort the list of reacted users
    * @deprecated use `reactionDetailsSort` instead
    */
@@ -113,12 +113,12 @@ export type MessageProps<
 };
 
 export type MessageUIComponentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Partial<MessageContextValue<StreamChatGenerics>>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Partial<MessageContextValue<ErmisChatGenerics>>;
 
 export type PinIndicatorProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  message?: StreamMessage<StreamChatGenerics>;
+  message?: StreamMessage<ErmisChatGenerics>;
   t?: TFunction;
 };

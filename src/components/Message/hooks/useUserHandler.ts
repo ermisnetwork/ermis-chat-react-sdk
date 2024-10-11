@@ -4,19 +4,19 @@ import type { ReactEventHandler } from '../types';
 
 import type { StreamMessage } from '../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type UserEventHandler<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = (event: React.BaseSyntheticEvent, user: User<StreamChatGenerics>) => void;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = (event: React.BaseSyntheticEvent, user: User<ErmisChatGenerics>) => void;
 
 export const useUserHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
+  message?: StreamMessage<ErmisChatGenerics>,
   eventHandlers?: {
-    onUserClickHandler?: UserEventHandler<StreamChatGenerics>;
-    onUserHoverHandler?: UserEventHandler<StreamChatGenerics>;
+    onUserClickHandler?: UserEventHandler<ErmisChatGenerics>;
+    onUserHoverHandler?: UserEventHandler<ErmisChatGenerics>;
   },
 ): {
   onUserClick: ReactEventHandler;

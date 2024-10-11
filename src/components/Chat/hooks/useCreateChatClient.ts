@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 
-import { StreamChat } from 'ermis-chat-js-sdk';
+import { ErmisChat } from 'ermis-chat-js-sdk';
 
 import type {
   DefaultGenerics,
   ExtendableGenerics,
   OwnUserResponse,
-  StreamChatOptions,
+  ErmisChatOptions,
   TokenOrProvider,
   UserResponse,
 } from 'ermis-chat-js-sdk';
 
 /**
- * React hook to create, connect and return `StreamChat` client.
+ * React hook to create, connect and return `ErmisChat` client.
  */
 export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGenerics>({
   apiKey,
@@ -23,9 +23,9 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
   apiKey: string;
   tokenOrProvider: TokenOrProvider;
   userData: OwnUserResponse<SCG> | UserResponse<SCG>;
-  options?: StreamChatOptions;
+  options?: ErmisChatOptions;
 }) => {
-  const [chatClient, setChatClient] = useState<StreamChat<SCG> | null>(null);
+  const [chatClient, setChatClient] = useState<ErmisChat<SCG> | null>(null);
   const [cachedUserData, setCachedUserData] = useState(userData);
 
   if (userData.id !== cachedUserData.id) {
@@ -35,7 +35,7 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
   const [cachedOptions] = useState(options);
 
   useEffect(() => {
-    const client = new StreamChat<SCG>(apiKey, undefined, cachedOptions);
+    const client = new ErmisChat<SCG>(apiKey, undefined, cachedOptions);
     let didUserConnectInterrupt = false;
 
     const connectionPromise = client.connectUser(cachedUserData, tokenOrProvider).then(() => {

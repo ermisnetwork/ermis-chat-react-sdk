@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 
 import { useChatContext } from '../../../context/ChatContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useConnectionRecoveredListener = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   forceUpdate?: () => void,
 ) => {
-  const { client } = useChatContext<StreamChatGenerics>('useConnectionRecoveredListener');
+  const { client } = useChatContext<ErmisChatGenerics>('useConnectionRecoveredListener');
 
   useEffect(() => {
     const handleEvent = () => {

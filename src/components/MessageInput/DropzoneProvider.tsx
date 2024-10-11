@@ -13,15 +13,15 @@ import {
 
 import type { MessageInputProps } from './MessageInput';
 
-import type { CustomTrigger, DefaultStreamChatGenerics, UnknownType } from '../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 
 const DropzoneInner = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >({
   children,
 }: PropsWithChildren<UnknownType>) => {
-  const { acceptedFiles, multipleUploads } = useChannelStateContext<StreamChatGenerics>(
+  const { acceptedFiles, multipleUploads } = useChannelStateContext<ErmisChatGenerics>(
     'DropzoneProvider',
   );
 
@@ -30,7 +30,7 @@ const DropzoneInner = <
     isUploadEnabled,
     maxFilesLeft,
     uploadNewFiles,
-  } = useMessageInputContext<StreamChatGenerics, V>('DropzoneProvider');
+  } = useMessageInputContext<ErmisChatGenerics, V>('DropzoneProvider');
 
   return (
     <ImageDropzone
@@ -46,15 +46,15 @@ const DropzoneInner = <
 };
 
 export const DropzoneProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: PropsWithChildren<MessageInputProps<StreamChatGenerics, V>>,
+  props: PropsWithChildren<MessageInputProps<ErmisChatGenerics, V>>,
 ) => {
-  const cooldownTimerState = useCooldownTimer<StreamChatGenerics>();
-  const messageInputState = useMessageInputState<StreamChatGenerics, V>(props);
+  const cooldownTimerState = useCooldownTimer<ErmisChatGenerics>();
+  const messageInputState = useMessageInputState<ErmisChatGenerics, V>(props);
 
-  const messageInputContextValue = useCreateMessageInputContext<StreamChatGenerics, V>({
+  const messageInputContextValue = useCreateMessageInputContext<ErmisChatGenerics, V>({
     ...cooldownTimerState,
     ...messageInputState,
     ...props,

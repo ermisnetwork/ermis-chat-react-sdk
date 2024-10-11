@@ -6,12 +6,12 @@ import { visit } from 'unist-util-visit';
 import type { Nodes } from 'hast-util-find-and-replace/lib';
 import type { Element } from 'react-markdown/lib/ast-to-react';
 import type { UserResponse } from 'ermis-chat-js-sdk';
-import type { DefaultStreamChatGenerics } from '../../../../types';
+import type { DefaultErmisChatGenerics } from '../../../../types';
 
 export const mentionsMarkdownPlugin = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  mentioned_users: UserResponse<StreamChatGenerics>[],
+  mentioned_users: UserResponse<ErmisChatGenerics>[],
 ) => () => {
   const mentioned_usernames = mentioned_users
     .map((user) => user.name || user.id)

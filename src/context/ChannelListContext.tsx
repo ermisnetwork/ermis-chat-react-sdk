@@ -8,20 +8,20 @@ import React, {
 
 import type { Channel } from 'ermis-chat-js-sdk';
 
-import type { DefaultStreamChatGenerics } from '../types/types';
+import type { DefaultErmisChatGenerics } from '../types/types';
 
 export type ChannelListContextValue<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /**
    * State representing the array of loaded channels.
    * Channels query is executed by default only by ChannelList component in the SDK.
    */
-  channels: Channel<StreamChatGenerics>[];
+  channels: Channel<ErmisChatGenerics>[];
   /**
    * Sets the list of Channel objects to be rendered by ChannelList component.
    */
-  setChannels: Dispatch<SetStateAction<Channel<StreamChatGenerics>[]>>;
+  setChannels: Dispatch<SetStateAction<Channel<ErmisChatGenerics>[]>>;
 };
 
 export const ChannelListContext = createContext<ChannelListContextValue | undefined>(undefined);
@@ -30,12 +30,12 @@ export const ChannelListContext = createContext<ChannelListContextValue | undefi
  * Context provider for components rendered within the `ChannelList`
  */
 export const ChannelListContextProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   children,
   value,
 }: PropsWithChildren<{
-  value: ChannelListContextValue<StreamChatGenerics>;
+  value: ChannelListContextValue<ErmisChatGenerics>;
 }>) => (
   <ChannelListContext.Provider value={(value as unknown) as ChannelListContextValue}>
     {children}
@@ -43,7 +43,7 @@ export const ChannelListContextProvider = <
 );
 
 export const useChannelListContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   componentName?: string,
 ) => {
@@ -54,8 +54,8 @@ export const useChannelListContext = <
       `The useChannelListContext hook was called outside of the ChannelListContext provider. Make sure this hook is called within the ChannelList component. The errored call is located in the ${componentName} component.`,
     );
 
-    return {} as ChannelListContextValue<StreamChatGenerics>;
+    return {} as ChannelListContextValue<ErmisChatGenerics>;
   }
 
-  return (contextValue as unknown) as ChannelListContextValue<StreamChatGenerics>;
+  return (contextValue as unknown) as ChannelListContextValue<ErmisChatGenerics>;
 };

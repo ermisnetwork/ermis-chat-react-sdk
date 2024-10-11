@@ -3,18 +3,18 @@ import React from 'react';
 import { Message } from '../Message/Message';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type GiphyPreviewMessageProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  message: StreamMessage<StreamChatGenerics>;
+  message: StreamMessage<ErmisChatGenerics>;
 };
 
 export const GiphyPreviewMessage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: GiphyPreviewMessageProps<StreamChatGenerics>,
+  props: GiphyPreviewMessageProps<ErmisChatGenerics>,
 ) => {
   const { message } = props;
 

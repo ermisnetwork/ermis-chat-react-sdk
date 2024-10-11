@@ -47,7 +47,7 @@ type LocalPollType = Record<string, unknown>;
 type LocalReactionType = Record<string, unknown>;
 type LocalUserType = Record<string, unknown>;
 
-type StreamChatGenerics = {
+type ErmisChatGenerics = {
   attachmentType: LocalAttachmentType;
   channelType: LocalChannelType;
   commandType: LocalCommandType;
@@ -60,7 +60,7 @@ type StreamChatGenerics = {
 };
 
 const App = () => {
-  const chatClient = useCreateChatClient<StreamChatGenerics>({
+  const chatClient = useCreateChatClient<ErmisChatGenerics>({
     apiKey,
     tokenOrProvider: userToken,
     userData: { id: userId },

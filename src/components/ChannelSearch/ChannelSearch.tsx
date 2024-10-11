@@ -12,7 +12,7 @@ import {
 } from './SearchInput';
 import { AdditionalSearchResultsProps, SearchResults } from './SearchResults';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type AdditionalChannelSearchProps = {
   /** Custom UI component to display the search bar with text input */
@@ -22,17 +22,17 @@ export type AdditionalChannelSearchProps = {
 };
 
 export type ChannelSearchProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = AdditionalSearchBarProps &
   AdditionalSearchInputProps &
-  AdditionalSearchResultsProps<StreamChatGenerics> &
+  AdditionalSearchResultsProps<ErmisChatGenerics> &
   AdditionalChannelSearchProps &
-  ChannelSearchControllerParams<StreamChatGenerics>;
+  ChannelSearchControllerParams<ErmisChatGenerics>;
 
 const UnMemoizedChannelSearch = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ChannelSearchProps<StreamChatGenerics>,
+  props: ChannelSearchProps<ErmisChatGenerics>,
 ) => {
   const {
     AppMenu,
@@ -64,7 +64,7 @@ const UnMemoizedChannelSearch = <
     searchBarRef,
     searching,
     selectResult,
-  } = useChannelSearch<StreamChatGenerics>(channelSearchParams);
+  } = useChannelSearch<ErmisChatGenerics>(channelSearchParams);
 
   return (
     <div

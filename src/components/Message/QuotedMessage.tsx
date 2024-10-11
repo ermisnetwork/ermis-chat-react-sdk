@@ -10,17 +10,17 @@ import { useChannelActionContext } from '../../context/ChannelActionContext';
 
 import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import { Attachment as DefaultAttachment } from '../Attachment';
 
 export const QuotedMessage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
   const {
     Attachment = DefaultAttachment,
     Avatar: ContextAvatar,
-  } = useComponentContext<StreamChatGenerics>('QuotedMessage');
-  const { isMyMessage, message } = useMessageContext<StreamChatGenerics>('QuotedMessage');
+  } = useComponentContext<ErmisChatGenerics>('QuotedMessage');
+  const { isMyMessage, message } = useMessageContext<ErmisChatGenerics>('QuotedMessage');
   const { t, userLanguage } = useTranslationContext('QuotedMessage');
   const { jumpToMessage } = useChannelActionContext('QuotedMessage');
 

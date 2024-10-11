@@ -4,23 +4,23 @@ import { useMessageListScrollManager } from './useMessageListScrollManager';
 
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../../types/types';
 
 export type UseScrollLocationLogicParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   hasMoreNewer: boolean;
   listElement: HTMLDivElement | null;
   loadMoreScrollThreshold: number;
   suppressAutoscroll: boolean;
-  messages?: StreamMessage<StreamChatGenerics>[];
+  messages?: StreamMessage<ErmisChatGenerics>[];
   scrolledUpThreshold?: number;
 };
 
 export const useScrollLocationLogic = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  params: UseScrollLocationLogicParams<StreamChatGenerics>,
+  params: UseScrollLocationLogicParams<ErmisChatGenerics>,
 ) => {
   const {
     loadMoreScrollThreshold,

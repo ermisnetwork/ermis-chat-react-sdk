@@ -19,39 +19,37 @@ import type {
 import type { SearchBarController } from '../SearchBar';
 import type { SearchInputController } from '../SearchInput';
 import type { SearchResultsController } from '../SearchResults';
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type ChannelSearchFunctionParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-  setResults: React.Dispatch<React.SetStateAction<ChannelOrUserResponse<StreamChatGenerics>[]>>;
+  setResults: React.Dispatch<React.SetStateAction<ChannelOrUserResponse<ErmisChatGenerics>[]>>;
   setSearching: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type SearchController<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = SearchInputController & SearchBarController & SearchResultsController<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = SearchInputController & SearchBarController & SearchResultsController<ErmisChatGenerics>;
 
 export type SearchQueryParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   channelFilters?: {
-    filters?: ChannelFilters<StreamChatGenerics>;
+    filters?: ChannelFilters<ErmisChatGenerics>;
     options?: ChannelOptions;
-    sort?: ChannelSort<StreamChatGenerics>;
+    sort?: ChannelSort<ErmisChatGenerics>;
   };
   userFilters?: {
-    filters?:
-      | UserFilters<StreamChatGenerics>
-      | ((query: string) => UserFilters<StreamChatGenerics>);
+    filters?: UserFilters<ErmisChatGenerics> | ((query: string) => UserFilters<ErmisChatGenerics>);
     options?: UserOptions;
-    sort?: UserSort<StreamChatGenerics>;
+    sort?: UserSort<ErmisChatGenerics>;
   };
 };
 
 export type ChannelSearchParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** The type of channel to create on user result select, defaults to `messaging` */
   channelType?: string;
@@ -65,8 +63,8 @@ export type ChannelSearchParams<
   onSearchExit?: () => void;
   /** Custom handler function to run on search result item selection */
   onSelectResult?: (
-    params: ChannelSearchFunctionParams<StreamChatGenerics>,
-    result: ChannelOrUserResponse<StreamChatGenerics>,
+    params: ChannelSearchFunctionParams<ErmisChatGenerics>,
+    result: ChannelOrUserResponse<ErmisChatGenerics>,
   ) => Promise<void> | void;
   /** The number of milliseconds to debounce the search query. The default interval is 200ms. */
   searchDebounceIntervalMs?: number;
@@ -74,22 +72,22 @@ export type ChannelSearchParams<
   searchForChannels?: boolean;
   /** Custom search function to override the default implementation */
   searchFunction?: (
-    params: ChannelSearchFunctionParams<StreamChatGenerics>,
+    params: ChannelSearchFunctionParams<ErmisChatGenerics>,
     event: React.BaseSyntheticEvent,
   ) => Promise<void> | void;
   /** Object containing filters/sort/options overrides for user / channel search */
-  searchQueryParams?: SearchQueryParams<StreamChatGenerics>;
+  searchQueryParams?: SearchQueryParams<ErmisChatGenerics>;
 };
 
 export type ChannelSearchControllerParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = ChannelSearchParams<StreamChatGenerics> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = ChannelSearchParams<ErmisChatGenerics> & {
   /** Set the array of channels displayed in the ChannelList */
-  setChannels?: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>;
+  setChannels?: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>;
 };
 
 export const useChannelSearch = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   channelType = 'messaging',
   clearSearchOnClickOutside = true,
@@ -102,17 +100,17 @@ export const useChannelSearch = <
   searchFunction,
   searchQueryParams,
   setChannels,
-}: ChannelSearchControllerParams<StreamChatGenerics>): SearchController<StreamChatGenerics> => {
-  const { client, setActiveChannel } = useChatContext<StreamChatGenerics>('useChannelSearch');
+}: ChannelSearchControllerParams<ErmisChatGenerics>): SearchController<ErmisChatGenerics> => {
+  const { client, setActiveChannel } = useChatContext<ErmisChatGenerics>('useChannelSearch');
 
   const [inputIsFocused, setInputIsFocused] = useState(false);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<Array<ChannelOrUserResponse<StreamChatGenerics>>>([]);
+  const [results, setResults] = useState<Array<ChannelOrUserResponse<ErmisChatGenerics>>>([]);
   const [searching, setSearching] = useState(false);
 
   const searchQueryPromiseInProgress = useRef<
-    | Promise<UsersAPIResponse<StreamChatGenerics>>
-    | Promise<[Channel<StreamChatGenerics>[], UsersAPIResponse<StreamChatGenerics>]>
+    | Promise<UsersAPIResponse<ErmisChatGenerics>>
+    | Promise<[Channel<ErmisChatGenerics>[], UsersAPIResponse<ErmisChatGenerics>]>
   >();
   const shouldIgnoreQueryResults = useRef(false);
 
@@ -175,7 +173,7 @@ export const useChannelSearch = <
   }, [disabled]);
 
   const selectResult = useCallback(
-    async (result: ChannelOrUserResponse<StreamChatGenerics>) => {
+    async (result: ChannelOrUserResponse<ErmisChatGenerics>) => {
       if (!client.userID) return;
       if (onSelectResult) {
         await onSelectResult(
@@ -188,7 +186,7 @@ export const useChannelSearch = <
         );
         return;
       }
-      let selectedChannel: Channel<StreamChatGenerics>;
+      let selectedChannel: Channel<ErmisChatGenerics>;
       if (isChannel(result)) {
         setActiveChannel(result);
         selectedChannel = result;
@@ -210,7 +208,7 @@ export const useChannelSearch = <
 
   const getChannels = useCallback(
     async (text: string) => {
-      let results: ChannelOrUserResponse<StreamChatGenerics>[] = [];
+      let results: ChannelOrUserResponse<ErmisChatGenerics>[] = [];
       try {
         const userQueryPromise = client.queryUsers(
           // @ts-expect-error

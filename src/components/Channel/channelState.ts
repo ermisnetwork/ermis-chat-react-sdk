@@ -1,12 +1,16 @@
 import type { Reducer } from 'react';
-import type { Channel, MessageResponse, ChannelState as StreamChannelState } from 'ermis-chat-js-sdk';
+import type {
+  Channel,
+  MessageResponse,
+  ChannelState as StreamChannelState,
+} from 'ermis-chat-js-sdk';
 
 import type { ChannelState, StreamMessage } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ChannelStateReducerAction<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > =
   | {
       type: 'closeThread';
@@ -15,12 +19,12 @@ export type ChannelStateReducerAction<
       type: 'clearHighlightedMessage';
     }
   | {
-      channel: Channel<StreamChatGenerics>;
+      channel: Channel<ErmisChatGenerics>;
       type: 'copyMessagesFromChannel';
       parentId?: string | null;
     }
   | {
-      channel: Channel<StreamChatGenerics>;
+      channel: Channel<ErmisChatGenerics>;
       type: 'copyStateFromChannelOnEvent';
     }
   | {
@@ -29,28 +33,28 @@ export type ChannelStateReducerAction<
       type: 'jumpToMessageFinished';
     }
   | {
-      channel: Channel<StreamChatGenerics>;
+      channel: Channel<ErmisChatGenerics>;
       hasMore: boolean;
       type: 'initStateFromChannel';
     }
   | {
       hasMore: boolean;
-      messages: StreamMessage<StreamChatGenerics>[];
+      messages: StreamMessage<ErmisChatGenerics>[];
       type: 'loadMoreFinished';
     }
   | {
       hasMoreNewer: boolean;
-      messages: StreamMessage<StreamChatGenerics>[];
+      messages: StreamMessage<ErmisChatGenerics>[];
       type: 'loadMoreNewerFinished';
     }
   | {
       threadHasMore: boolean;
-      threadMessages: Array<ReturnType<StreamChannelState<StreamChatGenerics>['formatMessage']>>;
+      threadMessages: Array<ReturnType<StreamChannelState<ErmisChatGenerics>['formatMessage']>>;
       type: 'loadMoreThreadFinished';
     }
   | {
-      channel: Channel<StreamChatGenerics>;
-      message: StreamMessage<StreamChatGenerics>;
+      channel: Channel<ErmisChatGenerics>;
+      message: StreamMessage<ErmisChatGenerics>;
       type: 'openThread';
     }
   | {
@@ -66,19 +70,19 @@ export type ChannelStateReducerAction<
       type: 'setLoadingMoreNewer';
     }
   | {
-      message: StreamMessage<StreamChatGenerics>;
+      message: StreamMessage<ErmisChatGenerics>;
       type: 'setThread';
     }
   | {
-      channel: Channel<StreamChatGenerics>;
+      channel: Channel<ErmisChatGenerics>;
       type: 'setTyping';
     }
   | {
       type: 'startLoadingThread';
     }
   | {
-      channel: Channel<StreamChatGenerics>;
-      message: MessageResponse<StreamChatGenerics>;
+      channel: Channel<ErmisChatGenerics>;
+      message: MessageResponse<ErmisChatGenerics>;
       type: 'updateThreadOnEvent';
     }
   | {
@@ -86,14 +90,14 @@ export type ChannelStateReducerAction<
     };
 
 export type ChannelStateReducer<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Reducer<ChannelState<StreamChatGenerics>, ChannelStateReducerAction<StreamChatGenerics>>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Reducer<ChannelState<ErmisChatGenerics>, ChannelStateReducerAction<ErmisChatGenerics>>;
 
 export const channelReducer = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  state: ChannelState<StreamChatGenerics>,
-  action: ChannelStateReducerAction<StreamChatGenerics>,
+  state: ChannelState<ErmisChatGenerics>,
+  action: ChannelStateReducerAction<ErmisChatGenerics>,
 ) => {
   switch (action.type) {
     case 'closeThread': {

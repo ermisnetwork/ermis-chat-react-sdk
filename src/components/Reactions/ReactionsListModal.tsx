@@ -8,27 +8,27 @@ import { useFetchReactions } from './hooks/useFetchReactions';
 import { LoadingIndicator } from '../Loading';
 import { Avatar } from '../Avatar';
 import { MessageContextValue, useMessageContext } from '../../context';
-import { DefaultStreamChatGenerics } from '../../types/types';
+import { DefaultErmisChatGenerics } from '../../types/types';
 import { ReactionSort } from 'ermis-chat-js-sdk';
 
 type ReactionsListModalProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = ModalProps &
   Partial<
-    Pick<MessageContextValue<StreamChatGenerics>, 'handleFetchReactions' | 'reactionDetailsSort'>
+    Pick<MessageContextValue<ErmisChatGenerics>, 'handleFetchReactions' | 'reactionDetailsSort'>
   > & {
     reactions: ReactionSummary[];
-    selectedReactionType: ReactionType<StreamChatGenerics>;
-    onSelectedReactionTypeChange?: (reactionType: ReactionType<StreamChatGenerics>) => void;
-    sort?: ReactionSort<StreamChatGenerics>;
+    selectedReactionType: ReactionType<ErmisChatGenerics>;
+    onSelectedReactionTypeChange?: (reactionType: ReactionType<ErmisChatGenerics>) => void;
+    sort?: ReactionSort<ErmisChatGenerics>;
     /** @deprecated use `sort` instead */
-    sortReactionDetails?: ReactionDetailsComparator<StreamChatGenerics>;
+    sortReactionDetails?: ReactionDetailsComparator<ErmisChatGenerics>;
   };
 
 const defaultReactionDetailsSort = { created_at: -1 } as const;
 
 export function ReactionsListModal<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   handleFetchReactions,
   onSelectedReactionTypeChange,
@@ -37,7 +37,7 @@ export function ReactionsListModal<
   selectedReactionType,
   sortReactionDetails: propSortReactionDetails,
   ...modalProps
-}: ReactionsListModalProps<StreamChatGenerics>) {
+}: ReactionsListModalProps<ErmisChatGenerics>) {
   const selectedReaction = reactions.find(
     ({ reactionType }) => reactionType === selectedReactionType,
   );
@@ -45,14 +45,14 @@ export function ReactionsListModal<
   const {
     reactionDetailsSort: contextReactionDetailsSort,
     sortReactionDetails: contextSortReactionDetails,
-  } = useMessageContext<StreamChatGenerics>('ReactionsListModal');
+  } = useMessageContext<ErmisChatGenerics>('ReactionsListModal');
   const legacySortReactionDetails = propSortReactionDetails ?? contextSortReactionDetails;
   const reactionDetailsSort =
     propReactionDetailsSort ?? contextReactionDetailsSort ?? defaultReactionDetailsSort;
   const {
     isLoading: areReactionsLoading,
     reactions: reactionDetails,
-  } = useFetchReactions<StreamChatGenerics>({
+  } = useFetchReactions<ErmisChatGenerics>({
     handleFetchReactions,
     reactionType: selectedReactionType,
     shouldFetch: modalProps.open,
@@ -85,7 +85,7 @@ export function ReactionsListModal<
                   data-testid={`reaction-details-selector-${reactionType}`}
                   key={reactionType}
                   onClick={() =>
-                    onSelectedReactionTypeChange?.(reactionType as ReactionType<StreamChatGenerics>)
+                    onSelectedReactionTypeChange?.(reactionType as ReactionType<ErmisChatGenerics>)
                   }
                 >
                   <span className='str-chat__message-reaction-emoji str-chat__message-reaction-emoji--with-fallback'>

@@ -11,18 +11,18 @@ import type { MessageInputProps } from '../MessageInput';
 
 import type {
   CustomTrigger,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   SendMessageOptions,
 } from '../../../types/types';
 import type { EnrichURLsController } from './useLinkPreviews';
 
 export const useSubmitHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
-  state: MessageInputState<StreamChatGenerics>,
-  dispatch: React.Dispatch<MessageInputReducerAction<StreamChatGenerics>>,
+  props: MessageInputProps<ErmisChatGenerics, V>,
+  state: MessageInputState<ErmisChatGenerics>,
+  dispatch: React.Dispatch<MessageInputReducerAction<ErmisChatGenerics>>,
   numberOfUploads: number,
   enrichURLsController: EnrichURLsController,
 ) => {
@@ -31,8 +31,8 @@ export const useSubmitHandler = <
   const { attachments, linkPreviews, mentioned_users, text } = state;
 
   const { cancelURLEnrichment, findAndEnqueueURLsToEnrich } = enrichURLsController;
-  const { channel } = useChannelStateContext<StreamChatGenerics>('useSubmitHandler');
-  const { addNotification, editMessage, sendMessage } = useChannelActionContext<StreamChatGenerics>(
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('useSubmitHandler');
+  const { addNotification, editMessage, sendMessage } = useChannelActionContext<ErmisChatGenerics>(
     'useSubmitHandler',
   );
   const { t } = useTranslationContext('useSubmitHandler');
@@ -50,7 +50,7 @@ export const useSubmitHandler = <
 
   const handleSubmit = async (
     event?: React.BaseSyntheticEvent,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => {
     event?.preventDefault();
@@ -144,7 +144,7 @@ export const useSubmitHandler = <
             ...message,
             ...updatedMessage,
             ...customMessageData,
-          } as unknown) as UpdatedMessage<StreamChatGenerics>,
+          } as unknown) as UpdatedMessage<ErmisChatGenerics>,
           sendOptions,
         );
 

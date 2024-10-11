@@ -6,10 +6,10 @@ import type { UserResponse } from 'ermis-chat-js-sdk';
 import { Icon } from '../Threads/icons';
 import { getWholeChar } from '../../utils';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type AvatarProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Custom class that will be merged with the default class */
   className?: string;
@@ -22,16 +22,16 @@ export type AvatarProps<
   /** mouseOver event handler */
   onMouseOver?: (event: React.BaseSyntheticEvent) => void;
   /** The entire user object for the chat user displayed in the component */
-  user?: UserResponse<StreamChatGenerics>;
+  user?: UserResponse<ErmisChatGenerics>;
 };
 
 /**
  * A round avatar image with fallback to username's first letter
  */
 export const Avatar = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: AvatarProps<StreamChatGenerics>,
+  props: AvatarProps<ErmisChatGenerics>,
 ) => {
   const {
     className,

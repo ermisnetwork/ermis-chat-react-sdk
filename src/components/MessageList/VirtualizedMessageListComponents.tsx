@@ -12,7 +12,7 @@ import { isDateSeparatorMessage } from './utils';
 
 import type { GroupStyle } from './utils';
 import type { VirtuosoContext } from './VirtualizedMessageList';
-import type { DefaultStreamChatGenerics, UnknownType } from '../../types/types';
+import type { DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 
 const PREPEND_OFFSET = 10 ** 7;
 
@@ -25,10 +25,10 @@ export function calculateFirstItemIndex(numItemsPrepended: number) {
 }
 
 export const makeItemsRenderedHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  renderedItemsActions: Array<(msg: StreamMessage<StreamChatGenerics>[]) => void>,
-  processedMessages: StreamMessage<StreamChatGenerics>[],
+  renderedItemsActions: Array<(msg: StreamMessage<ErmisChatGenerics>[]) => void>,
+  processedMessages: StreamMessage<ErmisChatGenerics>[],
 ) =>
   throttle((items: ListItem<UnknownType>[]) => {
     const renderedMessages = items
@@ -38,23 +38,23 @@ export const makeItemsRenderedHandler = <
       })
       .filter((msg) => !!msg);
     renderedItemsActions.forEach((action) =>
-      action(renderedMessages as StreamMessage<StreamChatGenerics>[]),
+      action(renderedMessages as StreamMessage<ErmisChatGenerics>[]),
     );
   }, 200);
 
 type CommonVirtuosoComponentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  context?: VirtuosoContext<StreamChatGenerics>;
+  context?: VirtuosoContext<ErmisChatGenerics>;
 };
 // using 'display: inline-block'
 // traps CSS margins of the item elements, preventing incorrect item measurements
 export const Item = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   context,
   ...props
-}: ItemProps & CommonVirtuosoComponentProps<StreamChatGenerics>) => {
+}: ItemProps & CommonVirtuosoComponentProps<ErmisChatGenerics>) => {
   if (!context) return <></>;
 
   const message =
@@ -76,11 +76,11 @@ export const Item = <
   );
 };
 export const Header = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   context,
-}: CommonVirtuosoComponentProps<StreamChatGenerics>) => {
-  const { LoadingIndicator = DefaultLoadingIndicator } = useComponentContext<StreamChatGenerics>(
+}: CommonVirtuosoComponentProps<ErmisChatGenerics>) => {
+  const { LoadingIndicator = DefaultLoadingIndicator } = useComponentContext<ErmisChatGenerics>(
     'VirtualizedMessageListHeader',
   );
 
@@ -96,13 +96,13 @@ export const Header = <
   );
 };
 export const EmptyPlaceholder = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   context,
-}: CommonVirtuosoComponentProps<StreamChatGenerics>) => {
+}: CommonVirtuosoComponentProps<ErmisChatGenerics>) => {
   const {
     EmptyStateIndicator = DefaultEmptyStateIndicator,
-  } = useComponentContext<StreamChatGenerics>('VirtualizedMessageList');
+  } = useComponentContext<ErmisChatGenerics>('VirtualizedMessageList');
   return (
     <>
       {EmptyStateIndicator && (
@@ -113,11 +113,11 @@ export const EmptyPlaceholder = <
 };
 
 export const messageRenderer = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   virtuosoIndex: number,
   _data: UnknownType,
-  virtuosoContext: VirtuosoContext<StreamChatGenerics>,
+  virtuosoContext: VirtuosoContext<ErmisChatGenerics>,
 ) => {
   const {
     additionalMessageInputProps,
@@ -170,9 +170,9 @@ export const messageRenderer = <
     shouldGroupByUser &&
     streamMessageIndex > 0 &&
     message.user?.id === messageList[streamMessageIndex - 1].user?.id;
-  const maybePrevMessage: StreamMessage<StreamChatGenerics> | undefined =
+  const maybePrevMessage: StreamMessage<ErmisChatGenerics> | undefined =
     messageList[streamMessageIndex - 1];
-  const maybeNextMessage: StreamMessage<StreamChatGenerics> | undefined =
+  const maybeNextMessage: StreamMessage<ErmisChatGenerics> | undefined =
     messageList[streamMessageIndex + 1];
 
   // FIXME: firstOfGroup & endOfGroup should be derived from groupStyles which apply a more complex logic

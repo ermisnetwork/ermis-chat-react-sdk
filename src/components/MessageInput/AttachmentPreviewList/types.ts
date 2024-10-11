@@ -1,13 +1,13 @@
 import { LocalAttachment } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 export type AttachmentPreviewProps<
   A extends LocalAttachment,
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   attachment: A;
   handleRetry: (
-    attachment: LocalAttachment<StreamChatGenerics>,
-  ) => void | Promise<LocalAttachment<StreamChatGenerics> | undefined>;
+    attachment: LocalAttachment<ErmisChatGenerics>,
+  ) => void | Promise<LocalAttachment<ErmisChatGenerics> | undefined>;
   removeAttachments: (ids: string[]) => void;
 };

@@ -7,10 +7,10 @@ import { ModalGallery as DefaultModalGallery } from './ModalGallery';
 import { useComponentContext } from '../../context';
 
 import type { Attachment } from 'ermis-chat-js-sdk';
-import type { DefaultStreamChatGenerics, Dimensions } from '../../types/types';
+import type { DefaultErmisChatGenerics, Dimensions } from '../../types/types';
 
 export type ImageProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   dimensions?: Dimensions;
   innerRef?: MutableRefObject<HTMLImageElement | null>;
@@ -25,16 +25,16 @@ export type ImageProps<
       /** The thumb url */
       thumb_url?: string;
     }
-  | Attachment<StreamChatGenerics>
+  | Attachment<ErmisChatGenerics>
 );
 
 /**
  * A simple component that displays an image.
  */
 export const ImageComponent = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ImageProps<StreamChatGenerics>,
+  props: ImageProps<ErmisChatGenerics>,
 ) => {
   const { dimensions = {}, fallback, image_url, thumb_url, innerRef, previewUrl, style } = props;
 

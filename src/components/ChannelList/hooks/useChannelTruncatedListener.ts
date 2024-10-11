@@ -4,22 +4,22 @@ import { useChatContext } from '../../../context/ChatContext';
 
 import type { Channel, Event } from 'ermis-chat-js-sdk';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useChannelTruncatedListener = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
+  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
   customHandler?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void,
   forceUpdate?: () => void,
 ) => {
-  const { client } = useChatContext<StreamChatGenerics>('useChannelTruncatedListener');
+  const { client } = useChatContext<ErmisChatGenerics>('useChannelTruncatedListener');
 
   useEffect(() => {
-    const handleEvent = (event: Event<StreamChatGenerics>) => {
+    const handleEvent = (event: Event<ErmisChatGenerics>) => {
       setChannels((channels) => [...channels]);
 
       if (customHandler && typeof customHandler === 'function') {

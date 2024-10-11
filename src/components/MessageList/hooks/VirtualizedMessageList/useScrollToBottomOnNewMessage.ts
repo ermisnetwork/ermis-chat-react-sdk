@@ -1,23 +1,23 @@
 import { useEffect, useRef, useState } from 'react';
 import { StreamMessage } from '../../../../context';
-import { DefaultStreamChatGenerics } from '../../../../types/types';
+import { DefaultErmisChatGenerics } from '../../../../types/types';
 
 type UseScrollToBottomOnNewMessageParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   scrollToBottom: () => void;
-  messages?: StreamMessage<StreamChatGenerics>[];
+  messages?: StreamMessage<ErmisChatGenerics>[];
   /** When `true`, the list will scroll to the latest message when the window regains focus */
   scrollToLatestMessageOnFocus?: boolean;
 };
 
 export const useScrollToBottomOnNewMessage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   messages,
   scrollToBottom,
   scrollToLatestMessageOnFocus,
-}: UseScrollToBottomOnNewMessageParams<StreamChatGenerics>) => {
+}: UseScrollToBottomOnNewMessageParams<ErmisChatGenerics>) => {
   const [newMessagesReceivedInBackground, setNewMessagesReceivedInBackground] = useState(false);
 
   const scrollToBottomIfConfigured = useRef<(e: Event) => void>();

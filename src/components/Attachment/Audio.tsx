@@ -5,19 +5,19 @@ import type { Attachment } from 'ermis-chat-js-sdk';
 import { DownloadButton, FileSizeIndicator, PlayButton, ProgressBar } from './components';
 import { useAudioController } from './hooks/useAudioController';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type AudioProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   // fixme: rename og to attachment
-  og: Attachment<StreamChatGenerics>;
+  og: Attachment<ErmisChatGenerics>;
 };
 
 const UnMemoizedAudio = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: AudioProps<StreamChatGenerics>,
+  props: AudioProps<ErmisChatGenerics>,
 ) => {
   const {
     og: { asset_url, file_size, mime_type, title },

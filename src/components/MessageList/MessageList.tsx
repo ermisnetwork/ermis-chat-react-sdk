@@ -39,21 +39,21 @@ import type { MessageProps } from '../Message/types';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import {
   DEFAULT_LOAD_PAGE_SCROLL_THRESHOLD,
   DEFAULT_NEXT_CHANNEL_PAGE_SIZE,
 } from '../../constants/limits';
 
 type MessageListWithContextProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Omit<ChannelStateContextValue<StreamChatGenerics>, 'members' | 'mutes' | 'watchers'> &
-  MessageListProps<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Omit<ChannelStateContextValue<ErmisChatGenerics>, 'members' | 'mutes' | 'watchers'> &
+  MessageListProps<ErmisChatGenerics>;
 
 const MessageListWithContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageListWithContextProps<StreamChatGenerics>,
+  props: MessageListWithContextProps<ErmisChatGenerics>,
 ) => {
   const {
     channel,
@@ -95,7 +95,7 @@ const MessageListWithContext = <
   const [listElement, setListElement] = React.useState<HTMLDivElement | null>(null);
   const [ulElement, setUlElement] = React.useState<HTMLUListElement | null>(null);
 
-  const { customClasses } = useChatContext<StreamChatGenerics>('MessageList');
+  const { customClasses } = useChatContext<ErmisChatGenerics>('MessageList');
 
   const {
     EmptyStateIndicator = DefaultEmptyStateIndicator,
@@ -105,7 +105,7 @@ const MessageListWithContext = <
     TypingIndicator = DefaultTypingIndicator,
     UnreadMessagesNotification = DefaultUnreadMessagesNotification,
     MessageListMainPanel = DefaultMessageListMainPanel,
-  } = useComponentContext<StreamChatGenerics>('MessageList');
+  } = useComponentContext<ErmisChatGenerics>('MessageList');
 
   const {
     hasNewMessages,
@@ -311,15 +311,15 @@ type PropsDrilledToMessage =
   | 'unsafeHTML';
 
 export type MessageListProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Partial<Pick<MessageProps<StreamChatGenerics>, PropsDrilledToMessage>> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Partial<Pick<MessageProps<ErmisChatGenerics>, PropsDrilledToMessage>> & {
   /** Disables the injection of date separator components in MessageList, defaults to `false` */
   disableDateSeparator?: boolean;
   /** Callback function to set group styles for each message */
   groupStyles?: (
-    message: StreamMessage<StreamChatGenerics>,
-    previousMessage: StreamMessage<StreamChatGenerics>,
-    nextMessage: StreamMessage<StreamChatGenerics>,
+    message: StreamMessage<ErmisChatGenerics>,
+    previousMessage: StreamMessage<ErmisChatGenerics>,
+    nextMessage: StreamMessage<ErmisChatGenerics>,
     noGroupByUser: boolean,
     maxTimeBetweenGroupedMessages?: number,
   ) => GroupStyle;
@@ -350,18 +350,18 @@ export type MessageListProps<
   /** The limit to use when paginating messages */
   messageLimit?: number;
   /** The messages to render in the list, defaults to messages stored in [ChannelStateContext] */
-  messages?: StreamMessage<StreamChatGenerics>[];
+  messages?: StreamMessage<ErmisChatGenerics>[];
   /** If true, turns off message UI grouping by user */
   noGroupByUser?: boolean;
   /** Overrides the way MessageList renders messages */
-  renderMessages?: MessageRenderer<StreamChatGenerics>;
+  renderMessages?: MessageRenderer<ErmisChatGenerics>;
   /** If true, `readBy` data supplied to the `Message` components will include all user read states per sent message */
   returnAllReadData?: boolean;
   /**
    * Allows to review changes introduced to messages array on per message basis (e.g. date separator injection before a message).
    * The array returned from the function is appended to the array of messages that are later rendered into React elements in the `MessageList`.
    */
-  reviewProcessedMessage?: ProcessMessagesParams<StreamChatGenerics>['reviewProcessedMessage'];
+  reviewProcessedMessage?: ProcessMessagesParams<ErmisChatGenerics>['reviewProcessedMessage'];
   /**
    * The pixel threshold under which the message list is considered to be so near to the bottom,
    * so that if a new message is delivered, the list will be scrolled to the absolute bottom.
@@ -379,25 +379,25 @@ export type MessageListProps<
 };
 
 export const MessageList = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageListProps<StreamChatGenerics>,
+  props: MessageListProps<ErmisChatGenerics>,
 ) => {
   const {
     jumpToLatestMessage,
     loadMore,
     loadMoreNewer,
-  } = useChannelActionContext<StreamChatGenerics>('MessageList');
+  } = useChannelActionContext<ErmisChatGenerics>('MessageList');
 
   const {
     members: membersPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
     mutes: mutesPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
     watchers: watchersPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
     ...restChannelStateContext
-  } = useChannelStateContext<StreamChatGenerics>('MessageList');
+  } = useChannelStateContext<ErmisChatGenerics>('MessageList');
 
   return (
-    <MessageListWithContext<StreamChatGenerics>
+    <MessageListWithContext<ErmisChatGenerics>
       jumpToLatestMessage={jumpToLatestMessage}
       loadMore={loadMore}
       loadMoreNewer={loadMoreNewer}

@@ -32,16 +32,16 @@ import { useTranslationContext } from '../../context';
 import { MessageEditedTimestamp } from './MessageEditedTimestamp';
 
 import type { MessageUIComponentProps } from './types';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 type MessageSimpleWithContextProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = MessageContextValue<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = MessageContextValue<ErmisChatGenerics>;
 
 const MessageSimpleWithContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageSimpleWithContextProps<StreamChatGenerics>,
+  props: MessageSimpleWithContextProps<ErmisChatGenerics>,
 ) => {
   const {
     additionalMessageInputProps,
@@ -79,7 +79,7 @@ const MessageSimpleWithContext = <
 
     ReactionsList = DefaultReactionList,
     PinIndicator,
-  } = useComponentContext<StreamChatGenerics>('MessageSimple');
+  } = useComponentContext<ErmisChatGenerics>('MessageSimple');
 
   const hasAttachment = messageHasAttachments(message);
   const hasReactions = messageHasReactions(message);
@@ -226,11 +226,11 @@ const MemoizedMessageSimple = React.memo(
  * The default UI component that renders a message and receives functionality and logic from the MessageContext.
  */
 export const MessageSimple = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageUIComponentProps<StreamChatGenerics>,
+  props: MessageUIComponentProps<ErmisChatGenerics>,
 ) => {
-  const messageContext = useMessageContext<StreamChatGenerics>('MessageSimple');
+  const messageContext = useMessageContext<ErmisChatGenerics>('MessageSimple');
 
   return <MemoizedMessageSimple {...messageContext} {...props} />;
 };

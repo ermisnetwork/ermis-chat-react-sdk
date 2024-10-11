@@ -7,17 +7,17 @@ import { useChannelsQueryState } from './hooks/useChannelsQueryState';
 import { ChatProvider, CustomClasses } from '../../context/ChatContext';
 import { TranslationProvider } from '../../context/TranslationContext';
 
-import type { StreamChat } from 'ermis-chat-js-sdk';
+import type { ErmisChat } from 'ermis-chat-js-sdk';
 
 import type { SupportedTranslations } from '../../i18n/types';
 import type { Streami18n } from '../../i18n/Streami18n';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ChatProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  /** The StreamChat client object */
-  client: StreamChat<StreamChatGenerics>;
+  /** The ErmisChat client object */
+  client: ErmisChat<ErmisChatGenerics>;
   /** Object containing custom CSS classnames to override the library's default container CSS */
   customClasses?: CustomClasses;
   /** Sets the default fallback language for UI component translation, defaults to 'en' for English */
@@ -39,13 +39,11 @@ export type ChatProps<
 };
 
 /**
- * Wrapper component for a StreamChat application. Chat needs to be placed around any other chat components
+ * Wrapper component for a ErmisChat application. Chat needs to be placed around any other chat components
  * as it provides the ChatContext.
  */
-export const Chat = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(
-  props: PropsWithChildren<ChatProps<StreamChatGenerics>>,
+export const Chat = <ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics>(
+  props: PropsWithChildren<ChatProps<ErmisChatGenerics>>,
 ) => {
   const {
     children,

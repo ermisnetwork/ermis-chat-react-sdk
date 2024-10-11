@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { StreamMessage } from '../../../../context';
-import { DefaultStreamChatGenerics } from '../../../../types/types';
+import { DefaultErmisChatGenerics } from '../../../../types/types';
 
 type UseMessageSetKeyParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  messages?: StreamMessage<StreamChatGenerics>[];
+  messages?: StreamMessage<ErmisChatGenerics>[];
 };
 
 export const useMessageSetKey = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   messages,
-}: UseMessageSetKeyParams<StreamChatGenerics>) => {
+}: UseMessageSetKeyParams<ErmisChatGenerics>) => {
   /**
    * Logic to update the key of the virtuoso component when the list jumps to a new location.
    */

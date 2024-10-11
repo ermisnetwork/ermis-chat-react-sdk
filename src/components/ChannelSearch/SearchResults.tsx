@@ -8,7 +8,7 @@ import { Avatar } from '../Avatar';
 
 import { useTranslationContext } from '../../context';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 const DefaultSearchEmpty = () => {
   const { t } = useTranslationContext('SearchResults');
@@ -21,14 +21,14 @@ const DefaultSearchEmpty = () => {
 };
 
 export type SearchResultsHeaderProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Pick<SearchResultsProps<StreamChatGenerics>, 'results'>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Pick<SearchResultsProps<ErmisChatGenerics>, 'results'>;
 
 const DefaultSearchResultsHeader = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   results,
-}: SearchResultsHeaderProps<StreamChatGenerics>) => {
+}: SearchResultsHeaderProps<ErmisChatGenerics>) => {
   const { t } = useTranslationContext('SearchResultsHeader');
   return (
     <div
@@ -43,17 +43,17 @@ const DefaultSearchResultsHeader = <
 };
 
 export type SearchResultsListProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = Required<
-  Pick<SearchResultsProps<StreamChatGenerics>, 'results' | 'SearchResultItem' | 'selectResult'>
+  Pick<SearchResultsProps<ErmisChatGenerics>, 'results' | 'SearchResultItem' | 'selectResult'>
 > & {
   focusedUser?: number;
 };
 
 const DefaultSearchResultsList = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: SearchResultsListProps<StreamChatGenerics>,
+  props: SearchResultsListProps<ErmisChatGenerics>,
 ) => {
   const { focusedUser, results, SearchResultItem, selectResult } = props;
 
@@ -73,17 +73,17 @@ const DefaultSearchResultsList = <
 };
 
 export type SearchResultItemProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Pick<SearchResultsProps<StreamChatGenerics>, 'selectResult'> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Pick<SearchResultsProps<ErmisChatGenerics>, 'selectResult'> & {
   index: number;
-  result: ChannelOrUserResponse<StreamChatGenerics>;
+  result: ChannelOrUserResponse<ErmisChatGenerics>;
   focusedUser?: number;
 };
 
 const DefaultSearchResultItem = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: SearchResultItemProps<StreamChatGenerics>,
+  props: SearchResultItemProps<ErmisChatGenerics>,
 ) => {
   const { focusedUser, index, result, selectResult } = props;
   const focused = focusedUser === index;
@@ -143,15 +143,15 @@ const ResultsContainer = ({
 };
 
 export type SearchResultsController<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  results: Array<ChannelOrUserResponse<StreamChatGenerics>>;
+  results: Array<ChannelOrUserResponse<ErmisChatGenerics>>;
   searching: boolean;
-  selectResult: (result: ChannelOrUserResponse<StreamChatGenerics>) => Promise<void> | void;
+  selectResult: (result: ChannelOrUserResponse<ErmisChatGenerics>) => Promise<void> | void;
 };
 
 export type AdditionalSearchResultsProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Display search results as an absolutely positioned popup, defaults to false and shows inline */
   popupResults?: boolean;
@@ -160,21 +160,21 @@ export type AdditionalSearchResultsProps<
   /** Custom UI component to display the search loading state */
   SearchLoading?: React.ComponentType;
   /** Custom UI component to display a search result list item, defaults to and accepts the same props as: [DefaultSearchResultItem](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelSearch/SearchResults.tsx) */
-  SearchResultItem?: React.ComponentType<SearchResultItemProps<StreamChatGenerics>>;
+  SearchResultItem?: React.ComponentType<SearchResultItemProps<ErmisChatGenerics>>;
   /** Custom UI component to display the search results header */
   SearchResultsHeader?: React.ComponentType;
   /** Custom UI component to display all the search results, defaults to and accepts the same props as: [DefaultSearchResultsList](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelSearch/SearchResults.tsx)  */
-  SearchResultsList?: React.ComponentType<SearchResultsListProps<StreamChatGenerics>>;
+  SearchResultsList?: React.ComponentType<SearchResultsListProps<ErmisChatGenerics>>;
 };
 
 export type SearchResultsProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = AdditionalSearchResultsProps<StreamChatGenerics> & SearchResultsController<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = AdditionalSearchResultsProps<ErmisChatGenerics> & SearchResultsController<ErmisChatGenerics>;
 
 export const SearchResults = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: SearchResultsProps<StreamChatGenerics>,
+  props: SearchResultsProps<ErmisChatGenerics>,
 ) => {
   const {
     popupResults,

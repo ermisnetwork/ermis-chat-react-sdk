@@ -3,23 +3,23 @@ import clsx from 'clsx';
 
 import { StreamMessage, useChannelStateContext } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type WindowProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** optional prop to force addition of class str-chat__main-panel---with-thread-opn to the Window root element */
-  thread?: StreamMessage<StreamChatGenerics>;
+  thread?: StreamMessage<ErmisChatGenerics>;
 };
 
 const UnMemoizedWindow = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: PropsWithChildren<WindowProps<StreamChatGenerics>>,
+  props: PropsWithChildren<WindowProps<ErmisChatGenerics>>,
 ) => {
   const { children, thread: propThread } = props;
 
-  const { thread: contextThread } = useChannelStateContext<StreamChatGenerics>('Window');
+  const { thread: contextThread } = useChannelStateContext<ErmisChatGenerics>('Window');
 
   return (
     <div

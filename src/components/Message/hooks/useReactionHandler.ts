@@ -7,7 +7,7 @@ import { useChatContext } from '../../../context/ChatContext';
 
 import type { Reaction, ReactionResponse } from 'ermis-chat-js-sdk';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 import { useThreadContext } from '../../Threads';
 
@@ -15,23 +15,23 @@ export const reactionHandlerWarning = `Reaction handler was called, but it is mi
 Make sure the ChannelAction and ChannelState contexts are properly set and the hook is initialized with a valid message.`;
 
 export const useReactionHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
+  message?: StreamMessage<ErmisChatGenerics>,
 ) => {
   const thread = useThreadContext();
-  const { updateMessage } = useChannelActionContext<StreamChatGenerics>('useReactionHandler');
-  const { channel, channelCapabilities } = useChannelStateContext<StreamChatGenerics>(
+  const { updateMessage } = useChannelActionContext<ErmisChatGenerics>('useReactionHandler');
+  const { channel, channelCapabilities } = useChannelStateContext<ErmisChatGenerics>(
     'useReactionHandler',
   );
-  const { client } = useChatContext<StreamChatGenerics>('useReactionHandler');
+  const { client } = useChatContext<ErmisChatGenerics>('useReactionHandler');
 
   const createMessagePreview = useCallback(
     (
       add: boolean,
-      reaction: ReactionResponse<StreamChatGenerics>,
-      message: StreamMessage<StreamChatGenerics>,
-    ): StreamMessage<StreamChatGenerics> => {
+      reaction: ReactionResponse<ErmisChatGenerics>,
+      message: StreamMessage<ErmisChatGenerics>,
+    ): StreamMessage<ErmisChatGenerics> => {
       const newReactionGroups = message?.reaction_groups || {};
       const reactionType = reaction.type;
       const hasReaction = !!newReactionGroups[reactionType];
@@ -57,7 +57,7 @@ export const useReactionHandler = <
         }
       }
 
-      const newReactions: Reaction<StreamChatGenerics>[] | undefined = add
+      const newReactions: Reaction<ErmisChatGenerics>[] | undefined = add
         ? [reaction, ...(message?.latest_reactions || [])]
         : message.latest_reactions?.filter(
             (item) => !(item.type === reaction.type && item.user_id === reaction.user_id),
@@ -72,7 +72,7 @@ export const useReactionHandler = <
         latest_reactions: newReactions || message.latest_reactions,
         own_reactions: newOwnReactions,
         reaction_groups: newReactionGroups,
-      } as StreamMessage<StreamChatGenerics>;
+      } as StreamMessage<ErmisChatGenerics>;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [client.user, client.userID],
@@ -89,7 +89,7 @@ export const useReactionHandler = <
   const toggleReaction = throttle(async (id: string, type: string, add: boolean) => {
     if (!message || !channelCapabilities['send-reaction']) return;
 
-    const newReaction = createReactionPreview(type) as ReactionResponse<StreamChatGenerics>;
+    const newReaction = createReactionPreview(type) as ReactionResponse<ErmisChatGenerics>;
     const tempMessage = createMessagePreview(add, newReaction, message);
 
     try {
@@ -98,7 +98,7 @@ export const useReactionHandler = <
       thread?.upsertReplyLocally({ message: tempMessage });
 
       const messageResponse = add
-        ? await channel.sendReaction(id, { type } as Reaction<StreamChatGenerics>)
+        ? await channel.sendReaction(id, { type } as Reaction<ErmisChatGenerics>)
         : await channel.deleteReaction(id, type);
 
       // seems useless as we're expecting WS event to come in and replace this anyway
@@ -120,7 +120,7 @@ export const useReactionHandler = <
       return console.warn(reactionHandlerWarning);
     }
 
-    let userExistingReaction = (null as unknown) as ReactionResponse<StreamChatGenerics>;
+    let userExistingReaction = (null as unknown) as ReactionResponse<ErmisChatGenerics>;
 
     if (message.own_reactions) {
       message.own_reactions.forEach((reaction) => {

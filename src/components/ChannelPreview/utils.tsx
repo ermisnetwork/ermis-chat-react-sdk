@@ -6,14 +6,14 @@ import type { Channel, TranslationLanguages, UserResponse } from 'ermis-chat-js-
 
 import type { TranslationContextValue } from '../../context/TranslationContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export const renderPreviewText = (text: string) => <ReactMarkdown skipHtml>{text}</ReactMarkdown>;
 
 export const getLatestMessagePreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  channel: Channel<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
   t: TranslationContextValue['t'],
   userLanguage: TranslationContextValue['userLanguage'] = 'en',
 ): string | JSX.Element => {
@@ -48,11 +48,11 @@ export const getLatestMessagePreview = <
 };
 
 const getChannelDisplayInfo = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   info: 'name' | 'image',
-  channel: Channel<StreamChatGenerics>,
-  currentUser?: UserResponse<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
+  currentUser?: UserResponse<ErmisChatGenerics>,
 ) => {
   if (channel.data?.[info]) return channel.data[info];
   const members = Object.values(channel.state.members);
@@ -62,15 +62,15 @@ const getChannelDisplayInfo = <
 };
 
 export const getDisplayTitle = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  channel: Channel<StreamChatGenerics>,
-  currentUser?: UserResponse<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
+  currentUser?: UserResponse<ErmisChatGenerics>,
 ) => getChannelDisplayInfo('name', channel, currentUser);
 
 export const getDisplayImage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  channel: Channel<StreamChatGenerics>,
-  currentUser?: UserResponse<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
+  currentUser?: UserResponse<ErmisChatGenerics>,
 ) => getChannelDisplayInfo('image', channel, currentUser);

@@ -11,11 +11,11 @@ import { useMessageContext } from '../../context/MessageContext';
 
 import type { ReactionGroupResponse, ReactionResponse } from 'ermis-chat-js-sdk';
 import type { AvatarProps } from '../Avatar';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import type { ReactionOptions } from './reactionOptions';
 
 export type ReactionSelectorProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Custom UI component to display user avatar, defaults to and accepts same props as: [Avatar](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Avatar/Avatar.tsx) */
   Avatar?: React.ElementType<AvatarProps>;
@@ -24,9 +24,9 @@ export type ReactionSelectorProps<
   /** Function that adds/removes a reaction on a message (overrides the function stored in `MessageContext`) */
   handleReaction?: (reactionType: string, event: React.BaseSyntheticEvent) => Promise<void>;
   /** An array of the reaction objects to display in the list */
-  latest_reactions?: ReactionResponse<StreamChatGenerics>[];
+  latest_reactions?: ReactionResponse<ErmisChatGenerics>[];
   /** An array of the own reaction objects to distinguish own reactions visually */
-  own_reactions?: ReactionResponse<StreamChatGenerics>[];
+  own_reactions?: ReactionResponse<ErmisChatGenerics>[];
   /**
    * An object that keeps track of the count of each type of reaction on a message
    * @deprecated This override value is no longer taken into account. Use `reaction_groups` to override reaction counts instead.
@@ -44,9 +44,9 @@ export type ReactionSelectorProps<
 };
 
 const UnMemoizedReactionSelector = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ReactionSelectorProps<StreamChatGenerics>,
+  props: ReactionSelectorProps<ErmisChatGenerics>,
 ) => {
   const {
     Avatar: propAvatar,
@@ -62,12 +62,12 @@ const UnMemoizedReactionSelector = <
   const {
     Avatar: contextAvatar,
     reactionOptions: contextReactionOptions = defaultReactionOptions,
-  } = useComponentContext<StreamChatGenerics>('ReactionSelector');
+  } = useComponentContext<ErmisChatGenerics>('ReactionSelector');
   const {
     closeReactionSelectorOnClick,
     handleReaction: contextHandleReaction,
     message,
-  } = useMessageContext<StreamChatGenerics>('ReactionSelector');
+  } = useMessageContext<ErmisChatGenerics>('ReactionSelector');
   const dialogId = `reaction-selector--${message.id}`;
   const dialog = useDialog({ id: dialogId });
   const reactionOptions = propReactionOptions ?? contextReactionOptions;

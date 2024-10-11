@@ -3,7 +3,7 @@ import type { AppSettingsAPIResponse, FileUploadConfig, UserResponse } from 'erm
 import type { ChannelActionContextValue } from '../../../context/ChannelActionContext';
 import type { ChatContextValue } from '../../../context/ChatContext';
 import type { TranslationContextValue } from '../../../context/TranslationContext';
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 import { DEFAULT_UPLOAD_SIZE_LIMIT_BYTES } from '../../../constants/limits';
 
 export const accentsMap: { [key: string]: string } = {
@@ -60,20 +60,20 @@ export const calculateLevenshtein = (query: string, name: string) => {
 };
 
 export type SearchLocalUserParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   ownUserId: string | undefined;
   query: string;
   text: string;
-  users: UserResponse<StreamChatGenerics>[];
+  users: UserResponse<ErmisChatGenerics>[];
   useMentionsTransliteration?: boolean;
 };
 
 export const searchLocalUsers = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  params: SearchLocalUserParams<StreamChatGenerics>,
-): UserResponse<StreamChatGenerics>[] => {
+  params: SearchLocalUserParams<ErmisChatGenerics>,
+): UserResponse<ErmisChatGenerics>[] => {
   const { ownUserId, query, text, useMentionsTransliteration, users } = params;
 
   const matchingUsers = users.filter((user) => {
@@ -112,23 +112,23 @@ export const searchLocalUsers = <
 };
 
 type CheckUploadPermissionsParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  addNotification: ChannelActionContextValue<StreamChatGenerics>['addNotification'];
+  addNotification: ChannelActionContextValue<ErmisChatGenerics>['addNotification'];
   file: File;
-  getAppSettings: ChatContextValue<StreamChatGenerics>['getAppSettings'];
+  getAppSettings: ChatContextValue<ErmisChatGenerics>['getAppSettings'];
   t: TranslationContextValue['t'];
   uploadType: 'image' | 'file';
 };
 
 export const checkUploadPermissions = async <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  params: CheckUploadPermissionsParams<StreamChatGenerics>,
+  params: CheckUploadPermissionsParams<ErmisChatGenerics>,
 ) => {
   const { addNotification, file, getAppSettings, t, uploadType } = params;
 
-  let appSettings: AppSettingsAPIResponse<StreamChatGenerics> | null = null;
+  let appSettings: AppSettingsAPIResponse<ErmisChatGenerics> | null = null;
   appSettings = await getAppSettings();
 
   const {

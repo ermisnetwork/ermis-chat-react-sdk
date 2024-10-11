@@ -11,45 +11,45 @@ import type { CommandResponse, UserResponse } from 'ermis-chat-js-sdk';
 
 import type { TriggerSettings } from '../MessageInput/DefaultTriggerProvider';
 
-import type { CustomTrigger, DefaultStreamChatGenerics, UnknownType } from '../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 import { EmojiSearchIndex } from 'components/MessageInput';
 
 type ObjectUnion<T> = T[keyof T];
 
 export type SuggestionCommand<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = CommandResponse<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = CommandResponse<ErmisChatGenerics>;
 
 export type SuggestionUser<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = UserResponse<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = UserResponse<ErmisChatGenerics>;
 
 export type SuggestionEmoji<T extends UnknownType = UnknownType> = Awaited<
   ReturnType<EmojiSearchIndex<T>['search']>
 >;
 
 export type SuggestionItem<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   T extends UnknownType = UnknownType
-> = SuggestionUser<StreamChatGenerics> | SuggestionCommand<StreamChatGenerics> | SuggestionEmoji<T>;
+> = SuggestionUser<ErmisChatGenerics> | SuggestionCommand<ErmisChatGenerics> | SuggestionEmoji<T>;
 
 // FIXME: entity type is wrong, fix
 export type SuggestionItemProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   T extends UnknownType = UnknownType
 > = {
   className: string;
   component: React.ComponentType<{
-    entity: SuggestionItem<StreamChatGenerics, T>;
+    entity: SuggestionItem<ErmisChatGenerics, T>;
     selected: boolean;
   }>;
-  item: SuggestionItem<StreamChatGenerics, T>;
+  item: SuggestionItem<ErmisChatGenerics, T>;
   key: React.Key;
   onClickHandler: (
     event: React.BaseSyntheticEvent,
-    item: SuggestionItem<StreamChatGenerics, T>,
+    item: SuggestionItem<ErmisChatGenerics, T>,
   ) => void;
-  onSelectHandler: (item: SuggestionItem<StreamChatGenerics, T>) => void;
+  onSelectHandler: (item: SuggestionItem<ErmisChatGenerics, T>) => void;
   selected: boolean;
   style: React.CSSProperties;
   value: string;
@@ -61,19 +61,19 @@ export interface SuggestionHeaderProps {
 }
 
 export type SuggestionListProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 > = ObjectUnion<
   {
-    [key in keyof TriggerSettings<StreamChatGenerics, V>]: {
-      component: TriggerSettings<StreamChatGenerics, V>[key]['component'];
+    [key in keyof TriggerSettings<ErmisChatGenerics, V>]: {
+      component: TriggerSettings<ErmisChatGenerics, V>[key]['component'];
       currentTrigger: string;
       dropdownScroll: (element: HTMLDivElement) => void;
       getSelectedItem:
-        | ((item: Parameters<TriggerSettings<StreamChatGenerics, V>[key]['output']>[0]) => void)
+        | ((item: Parameters<TriggerSettings<ErmisChatGenerics, V>[key]['output']>[0]) => void)
         | null;
       getTextToReplace: (
-        item: Parameters<TriggerSettings<StreamChatGenerics, V>[key]['output']>[0],
+        item: Parameters<TriggerSettings<ErmisChatGenerics, V>[key]['output']>[0],
       ) => {
         caretPosition: 'start' | 'end' | 'next' | number;
         text: string;
@@ -87,7 +87,7 @@ export type SuggestionListProps<
       selectionEnd: number;
       SuggestionItem: React.ComponentType<SuggestionItemProps>;
       values: Parameters<
-        Parameters<TriggerSettings<StreamChatGenerics, V>[key]['dataProvider']>[2]
+        Parameters<TriggerSettings<ErmisChatGenerics, V>[key]['dataProvider']>[2]
       >[0];
       className?: string;
       itemClassName?: string;
@@ -120,7 +120,7 @@ export type ChatAutoCompleteProps<T extends UnknownType = UnknownType> = {
 };
 
 const UnMemoizedChatAutoComplete = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
   props: ChatAutoCompleteProps,
@@ -128,10 +128,10 @@ const UnMemoizedChatAutoComplete = <
   const {
     AutocompleteSuggestionItem: SuggestionItem,
     AutocompleteSuggestionList: SuggestionList,
-  } = useComponentContext<StreamChatGenerics, V>('ChatAutoComplete');
+  } = useComponentContext<ErmisChatGenerics, V>('ChatAutoComplete');
   const { t } = useTranslationContext('ChatAutoComplete');
 
-  const messageInput = useMessageInputContext<StreamChatGenerics, V>('ChatAutoComplete');
+  const messageInput = useMessageInputContext<ErmisChatGenerics, V>('ChatAutoComplete');
   const { cooldownRemaining, disabled, emojiSearchIndex, textareaRef: innerRef } = messageInput;
 
   const placeholder = props.placeholder || t('Type your message');

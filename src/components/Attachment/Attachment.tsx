@@ -32,7 +32,7 @@ import type { GalleryProps, ImageProps } from '../Gallery';
 import type { UnsupportedAttachmentProps } from './UnsupportedAttachment';
 import type { ActionHandlerReturnType } from '../Message/hooks/useActionHandler';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 const CONTAINER_MAP = {
   audio: AudioContainer,
@@ -55,22 +55,22 @@ export const ATTACHMENT_GROUPS_ORDER = [
 ] as const;
 
 export type AttachmentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** The message attachments to render, see [attachment structure] **/
-  attachments: StreamAttachment<StreamChatGenerics>[];
+  attachments: StreamAttachment<ErmisChatGenerics>[];
   /**	The handler function to call when an action is performed on an attachment, examples include canceling a \/giphy command or shuffling the results. */
   actionHandler?: ActionHandlerReturnType;
   /** Custom UI component for displaying attachment actions, defaults to and accepts same props as: [AttachmentActions](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Attachment/AttachmentActions.tsx) */
-  AttachmentActions?: React.ComponentType<AttachmentActionsProps<StreamChatGenerics>>;
+  AttachmentActions?: React.ComponentType<AttachmentActionsProps<ErmisChatGenerics>>;
   /** Custom UI component for displaying an audio type attachment, defaults to and accepts same props as: [Audio](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Attachment/Audio.tsx) */
-  Audio?: React.ComponentType<AudioProps<StreamChatGenerics>>;
+  Audio?: React.ComponentType<AudioProps<ErmisChatGenerics>>;
   /** Custom UI component for displaying a card type attachment, defaults to and accepts same props as: [Card](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Attachment/Card.tsx) */
   Card?: React.ComponentType<CardProps>;
   /** Custom UI component for displaying a file type attachment, defaults to and accepts same props as: [File](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Attachment/FileAttachment.tsx) */
-  File?: React.ComponentType<FileAttachmentProps<StreamChatGenerics>>;
+  File?: React.ComponentType<FileAttachmentProps<ErmisChatGenerics>>;
   /** Custom UI component for displaying a gallery of image type attachments, defaults to and accepts same props as: [Gallery](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Gallery/Gallery.tsx) */
-  Gallery?: React.ComponentType<GalleryProps<StreamChatGenerics>>;
+  Gallery?: React.ComponentType<GalleryProps<ErmisChatGenerics>>;
   /** Custom UI component for displaying an image type attachment, defaults to and accepts same props as: [Image](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Gallery/Image.tsx) */
   Image?: React.ComponentType<ImageProps>;
   /** Optional flag to signal that an attachment is a displayed as a part of a quoted message */
@@ -80,16 +80,16 @@ export type AttachmentProps<
   /** Custom UI component for displaying unsupported attachment types, defaults to NullComponent */
   UnsupportedAttachment?: React.ComponentType<UnsupportedAttachmentProps>;
   /** Custom UI component for displaying an audio recording attachment, defaults to and accepts same props as: [VoiceRecording](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Attachment/VoiceRecording.tsx) */
-  VoiceRecording?: React.ComponentType<VoiceRecordingProps<StreamChatGenerics>>;
+  VoiceRecording?: React.ComponentType<VoiceRecordingProps<ErmisChatGenerics>>;
 };
 
 /**
  * A component used for rendering message attachments. By default, the component supports: AttachmentActions, Audio, Card, File, Gallery, Image, and Video
  */
 export const Attachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: AttachmentProps<StreamChatGenerics>,
+  props: AttachmentProps<ErmisChatGenerics>,
 ) => {
   const { attachments } = props;
 
@@ -107,12 +107,12 @@ export const Attachment = <
 };
 
 const renderGroupedAttachments = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachments,
   ...rest
-}: AttachmentProps<StreamChatGenerics>): GroupedRenderedAttachment => {
-  const uploadedImages: StreamAttachment<StreamChatGenerics>[] = attachments.filter((attachment) =>
+}: AttachmentProps<ErmisChatGenerics>): GroupedRenderedAttachment => {
+  const uploadedImages: StreamAttachment<ErmisChatGenerics>[] = attachments.filter((attachment) =>
     isUploadedImage(attachment),
   );
 
@@ -169,9 +169,9 @@ const renderGroupedAttachments = <
 };
 
 const getAttachmentType = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: AttachmentProps<StreamChatGenerics>['attachments'][number],
+  attachment: AttachmentProps<ErmisChatGenerics>['attachments'][number],
 ): keyof typeof CONTAINER_MAP => {
   if (isScrapedContent(attachment)) {
     return 'card';

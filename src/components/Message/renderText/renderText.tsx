@@ -13,7 +13,7 @@ import { emojiMarkdownPlugin, mentionsMarkdownPlugin } from './rehypePlugins';
 import { htmlToTextPlugin, keepLineBreaksPlugin } from './remarkPlugins';
 import { ErrorBoundary } from '../../UtilityComponents';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type RenderTextPluginConfigurator = (defaultPlugins: PluggableList) => PluggableList;
 
@@ -64,24 +64,24 @@ export const markDownRenderers: RenderTextOptions['customMarkDownRenderers'] = {
 };
 
 export type RenderTextOptions<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   // eslint-disable-next-line @typescript-eslint/ban-types
   allowedTagNames?: Array<keyof JSX.IntrinsicElements | 'emoji' | 'mention' | (string & {})>;
   customMarkDownRenderers?: Options['components'] &
     Partial<{
       emoji: ComponentType;
-      mention: ComponentType<MentionProps<StreamChatGenerics>>;
+      mention: ComponentType<MentionProps<ErmisChatGenerics>>;
     }>;
   getRehypePlugins?: RenderTextPluginConfigurator;
   getRemarkPlugins?: RenderTextPluginConfigurator;
 };
 
 export const renderText = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   text?: string,
-  mentionedUsers?: UserResponse<StreamChatGenerics>[],
+  mentionedUsers?: UserResponse<ErmisChatGenerics>[],
   {
     allowedTagNames = defaultAllowedTagNames,
     customMarkDownRenderers,

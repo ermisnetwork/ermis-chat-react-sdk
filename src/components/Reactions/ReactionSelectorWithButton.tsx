@@ -2,7 +2,7 @@ import React, { ElementRef, useRef } from 'react';
 import { ReactionSelector as DefaultReactionSelector } from './ReactionSelector';
 import { DialogAnchor, useDialog, useDialogIsOpen } from '../Dialog';
 import { useComponentContext, useMessageContext, useTranslationContext } from '../../context';
-import type { DefaultStreamChatGenerics } from '../../types';
+import type { DefaultErmisChatGenerics } from '../../types';
 import type { IconProps } from '../../types/types';
 
 type ReactionSelectorWithButtonProps = {
@@ -17,13 +17,13 @@ type ReactionSelectorWithButtonProps = {
  * cluttering the parent component.
  */
 export const ReactionSelectorWithButton = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   ReactionIcon,
   theme,
 }: ReactionSelectorWithButtonProps) => {
   const { t } = useTranslationContext('ReactionSelectorWithButton');
-  const { isMyMessage, message } = useMessageContext<StreamChatGenerics>('MessageOptions');
+  const { isMyMessage, message } = useMessageContext<ErmisChatGenerics>('MessageOptions');
   const { ReactionSelector = DefaultReactionSelector } = useComponentContext('MessageOptions');
   const buttonRef = useRef<ElementRef<'button'>>(null);
   const dialogId = `reaction-selector--${message.id}`;

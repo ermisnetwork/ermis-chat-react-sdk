@@ -20,7 +20,7 @@ import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 const selectColor = (number: number, dark: boolean) => {
   const hue = number * 137.508; // use golden angle approximation
@@ -39,27 +39,27 @@ const getUserColor = (theme: string, userId: string) =>
   selectColor(hashUserId(userId), theme.includes('dark'));
 
 export type FixedHeightMessageProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   groupedByUser?: boolean;
-  message?: StreamMessage<StreamChatGenerics>;
+  message?: StreamMessage<ErmisChatGenerics>;
 };
 
 const UnMemoizedFixedHeightMessage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: FixedHeightMessageProps<StreamChatGenerics>,
+  props: FixedHeightMessageProps<ErmisChatGenerics>,
 ) => {
   const { groupedByUser: propGroupedByUser, message: propMessage } = props;
 
-  const { theme } = useChatContext<StreamChatGenerics>('FixedHeightMessage');
+  const { theme } = useChatContext<ErmisChatGenerics>('FixedHeightMessage');
 
   const {
     groupedByUser: contextGroupedByUser,
     message: contextMessage,
-  } = useMessageContext<StreamChatGenerics>('FixedHeightMessage');
+  } = useMessageContext<ErmisChatGenerics>('FixedHeightMessage');
 
-  const { MessageDeleted = DefaultMessageDeleted } = useComponentContext<StreamChatGenerics>(
+  const { MessageDeleted = DefaultMessageDeleted } = useComponentContext<ErmisChatGenerics>(
     'FixedHeightMessage',
   );
 

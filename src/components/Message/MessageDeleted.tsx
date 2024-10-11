@@ -6,18 +6,18 @@ import { useTranslationContext } from '../../context/TranslationContext';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type MessageDeletedProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  message: StreamMessage<StreamChatGenerics>;
+  message: StreamMessage<ErmisChatGenerics>;
 };
 
 export const MessageDeleted = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageDeletedProps<StreamChatGenerics>,
+  props: MessageDeletedProps<ErmisChatGenerics>,
 ) => {
   const { message } = props;
 

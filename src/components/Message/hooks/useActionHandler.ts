@@ -3,7 +3,7 @@ import { StreamMessage, useChannelStateContext } from '../../../context/ChannelS
 
 import type React from 'react';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type FormData = Record<string, string>;
 
@@ -17,12 +17,12 @@ export const handleActionWarning = `Action handler was called, but it is missing
 Make sure the ChannelAction and ChannelState contexts are properly set and the hook is initialized with a valid message.`;
 
 export function useActionHandler<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(message?: StreamMessage<StreamChatGenerics>): ActionHandlerReturnType {
-  const { removeMessage, updateMessage } = useChannelActionContext<StreamChatGenerics>(
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+>(message?: StreamMessage<ErmisChatGenerics>): ActionHandlerReturnType {
+  const { removeMessage, updateMessage } = useChannelActionContext<ErmisChatGenerics>(
     'useActionHandler',
   );
-  const { channel } = useChannelStateContext<StreamChatGenerics>('useActionHandler');
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('useActionHandler');
 
   return async (dataOrName, value, event) => {
     if (event) event.preventDefault();

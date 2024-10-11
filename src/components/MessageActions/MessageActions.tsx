@@ -11,7 +11,7 @@ import { useChatContext } from '../../context/ChatContext';
 import { MessageContextValue, useMessageContext } from '../../context/MessageContext';
 import { useComponentContext, useTranslationContext } from '../../context';
 
-import type { DefaultStreamChatGenerics, IconProps } from '../../types/types';
+import type { DefaultErmisChatGenerics, IconProps } from '../../types/types';
 
 type MessageContextPropsToPick =
   | 'getMessageActions'
@@ -23,8 +23,8 @@ type MessageContextPropsToPick =
   | 'message';
 
 export type MessageActionsProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Partial<Pick<MessageContextValue<StreamChatGenerics>, MessageContextPropsToPick>> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Partial<Pick<MessageContextValue<ErmisChatGenerics>, MessageContextPropsToPick>> & {
   /* Custom component rendering the icon used in message actions button. This button invokes the message actions menu. */
   ActionsIcon?: React.ComponentType<IconProps>;
   /* Custom CSS class to be added to the `div` wrapping the component */
@@ -36,9 +36,9 @@ export type MessageActionsProps<
 };
 
 export const MessageActions = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageActionsProps<StreamChatGenerics>,
+  props: MessageActionsProps<ErmisChatGenerics>,
 ) => {
   const {
     ActionsIcon = DefaultActionsIcon,
@@ -54,7 +54,7 @@ export const MessageActions = <
     mine,
   } = props;
 
-  const { mutes } = useChatContext<StreamChatGenerics>('MessageActions');
+  const { mutes } = useChatContext<ErmisChatGenerics>('MessageActions');
 
   const {
     customMessageActions,
@@ -68,9 +68,9 @@ export const MessageActions = <
     message: contextMessage,
     setEditingState,
     threadList,
-  } = useMessageContext<StreamChatGenerics>('MessageActions');
+  } = useMessageContext<ErmisChatGenerics>('MessageActions');
 
-  const { CustomMessageActionsList } = useComponentContext<StreamChatGenerics>('MessageActions');
+  const { CustomMessageActionsList } = useComponentContext<ErmisChatGenerics>('MessageActions');
 
   const { t } = useTranslationContext('MessageActions');
 
@@ -91,7 +91,7 @@ export const MessageActions = <
 
   const messageActions = getMessageActions();
 
-  const renderMessageActions = shouldRenderMessageActions<StreamChatGenerics>({
+  const renderMessageActions = shouldRenderMessageActions<ErmisChatGenerics>({
     customMessageActions,
     CustomMessageActionsList,
     inThread: threadList,

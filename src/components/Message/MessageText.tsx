@@ -10,25 +10,25 @@ import { MessageErrorText } from './MessageErrorText';
 
 import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 import type { MessageContextValue, StreamMessage } from '../../context';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type MessageTextProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /* Replaces the CSS class name placed on the component's inner `div` container */
   customInnerClass?: string;
   /* Adds a CSS class name to the component's outer `div` container */
   customWrapperClass?: string;
-  /* The `StreamChat` message object, which provides necessary data to the underlying UI components (overrides the value stored in `MessageContext`) */
-  message?: StreamMessage<StreamChatGenerics>;
+  /* The `ErmisChat` message object, which provides necessary data to the underlying UI components (overrides the value stored in `MessageContext`) */
+  message?: StreamMessage<ErmisChatGenerics>;
   /* Theme string to be added to CSS class names */
   theme?: string;
-} & Pick<MessageContextValue<StreamChatGenerics>, 'renderText'>;
+} & Pick<MessageContextValue<ErmisChatGenerics>, 'renderText'>;
 
 const UnMemoizedMessageTextComponent = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageTextProps<StreamChatGenerics>,
+  props: MessageTextProps<ErmisChatGenerics>,
 ) => {
   const {
     customInnerClass,
@@ -38,7 +38,7 @@ const UnMemoizedMessageTextComponent = <
     theme = 'simple',
   } = props;
 
-  const { QuotedMessage = DefaultQuotedMessage } = useComponentContext<StreamChatGenerics>(
+  const { QuotedMessage = DefaultQuotedMessage } = useComponentContext<ErmisChatGenerics>(
     'MessageText',
   );
 
@@ -48,7 +48,7 @@ const UnMemoizedMessageTextComponent = <
     onMentionsHoverMessage,
     renderText: contextRenderText,
     unsafeHTML,
-  } = useMessageContext<StreamChatGenerics>('MessageText');
+  } = useMessageContext<ErmisChatGenerics>('MessageText');
 
   const renderText = propsRenderText ?? contextRenderText ?? defaultRenderText;
 

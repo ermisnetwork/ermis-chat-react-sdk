@@ -4,19 +4,19 @@ import type { MessageInputReducerAction, MessageInputState } from './useMessageI
 import type { MessageInputProps } from '../MessageInput';
 import { useChannelStateContext } from '../../../context/ChannelStateContext';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../../types/types';
 import type { EnrichURLsController } from './useLinkPreviews';
 
 export const useMessageInputText = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
-  state: MessageInputState<StreamChatGenerics>,
-  dispatch: React.Dispatch<MessageInputReducerAction<StreamChatGenerics>>,
+  props: MessageInputProps<ErmisChatGenerics, V>,
+  state: MessageInputState<ErmisChatGenerics>,
+  dispatch: React.Dispatch<MessageInputReducerAction<ErmisChatGenerics>>,
   findAndEnqueueURLsToEnrich?: EnrichURLsController['findAndEnqueueURLsToEnrich'],
 ) => {
-  const { channel } = useChannelStateContext<StreamChatGenerics>('useMessageInputText');
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('useMessageInputText');
   const { additionalTextareaProps, focus, parent, publishTypingEvent = true } = props;
   const { text } = state;
 

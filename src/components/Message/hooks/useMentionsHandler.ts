@@ -7,21 +7,21 @@ import type { ReactEventHandler } from '../types';
 
 import type { StreamMessage } from '../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type CustomMentionHandler<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = (event: React.BaseSyntheticEvent, mentioned_users: UserResponse<StreamChatGenerics>[]) => void;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = (event: React.BaseSyntheticEvent, mentioned_users: UserResponse<ErmisChatGenerics>[]) => void;
 
 export type MentionedUserEventHandler<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = (event: React.BaseSyntheticEvent, mentionedUsers: UserResponse<StreamChatGenerics>[]) => void;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = (event: React.BaseSyntheticEvent, mentionedUsers: UserResponse<ErmisChatGenerics>[]) => void;
 
 function createEventHandler<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  fn?: CustomMentionHandler<StreamChatGenerics>,
-  message?: StreamMessage<StreamChatGenerics>,
+  fn?: CustomMentionHandler<ErmisChatGenerics>,
+  message?: StreamMessage<ErmisChatGenerics>,
 ): ReactEventHandler {
   return (event) => {
     if (typeof fn !== 'function' || !message?.mentioned_users?.length) {
@@ -32,18 +32,18 @@ function createEventHandler<
 }
 
 export const useMentionsHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
+  message?: StreamMessage<ErmisChatGenerics>,
   customMentionHandler?: {
-    onMentionsClick?: CustomMentionHandler<StreamChatGenerics>;
-    onMentionsHover?: CustomMentionHandler<StreamChatGenerics>;
+    onMentionsClick?: CustomMentionHandler<ErmisChatGenerics>;
+    onMentionsHover?: CustomMentionHandler<ErmisChatGenerics>;
   },
 ) => {
   const {
     onMentionsClick: contextOnMentionsClick,
     onMentionsHover: contextOnMentionsHover,
-  } = useChannelActionContext<StreamChatGenerics>('useMentionsHandler');
+  } = useChannelActionContext<ErmisChatGenerics>('useMentionsHandler');
 
   const onMentionsClick =
     customMentionHandler?.onMentionsClick || contextOnMentionsClick || (() => null);

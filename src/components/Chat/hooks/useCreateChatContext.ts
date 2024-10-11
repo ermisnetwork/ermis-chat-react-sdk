@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
 import type { ChatContextValue } from '../../../context/ChatContext';
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useCreateChatContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  value: ChatContextValue<StreamChatGenerics>,
+  value: ChatContextValue<ErmisChatGenerics>,
 ) => {
   const {
     channel,
@@ -33,7 +33,7 @@ export const useCreateChatContext = <
   ${client.user?.id}`;
   const mutedUsersLength = mutes.length;
 
-  const chatContext: ChatContextValue<StreamChatGenerics> = useMemo(
+  const chatContext: ChatContextValue<ErmisChatGenerics> = useMemo(
     () => ({
       channel,
       channelsQueryState,

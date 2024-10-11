@@ -30,7 +30,7 @@ import {
 import { MessageSimple as DefaultMessage } from './MessageSimple';
 
 import type { MessageProps } from './types';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 type MessagePropsToOmit = 'onMentionsClick' | 'onMentionsHover' | 'openThread' | 'retrySendMessage';
 
@@ -53,17 +53,17 @@ type MessageContextPropsToPick =
   | 'sortReactionDetails';
 
 type MessageWithContextProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Omit<MessageProps<StreamChatGenerics>, MessagePropsToOmit> &
-  Pick<MessageContextValue<StreamChatGenerics>, MessageContextPropsToPick> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Omit<MessageProps<ErmisChatGenerics>, MessagePropsToOmit> &
+  Pick<MessageContextValue<ErmisChatGenerics>, MessageContextPropsToPick> & {
     canPin: boolean;
     userRoles: ReturnType<typeof useUserRole>;
   };
 
 const MessageWithContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageWithContextProps<StreamChatGenerics>,
+  props: MessageWithContextProps<ErmisChatGenerics>,
 ) => {
   const {
     canPin,
@@ -78,7 +78,7 @@ const MessageWithContext = <
 
   const { client } = useChatContext('Message');
   const { read } = useChannelStateContext('Message');
-  const { Message: contextMessage } = useComponentContext<StreamChatGenerics>('Message');
+  const { Message: contextMessage } = useComponentContext<ErmisChatGenerics>('Message');
 
   const actionsEnabled = message.type === 'regular' && message.status === 'received';
   const MessageUIComponent = propMessage ?? contextMessage ?? DefaultMessage;
@@ -152,7 +152,7 @@ const MessageWithContext = <
     ...rest
   } = props;
 
-  const messageContextValue: MessageContextValue<StreamChatGenerics> = {
+  const messageContextValue: MessageContextValue<ErmisChatGenerics> = {
     ...rest,
     actionsEnabled,
     clearEditingState: clearEdit,
@@ -184,9 +184,9 @@ const MemoizedMessage = React.memo(
  * an individual message. The actual UI of the message is delegated via the Message prop on Channel.
  */
 export const Message = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageProps<StreamChatGenerics>,
+  props: MessageProps<ErmisChatGenerics>,
 ) => {
   const {
     closeReactionSelectorOnClick,
@@ -212,8 +212,8 @@ export const Message = <
     sortReactions,
   } = props;
 
-  const { addNotification } = useChannelActionContext<StreamChatGenerics>('Message');
-  const { highlightedMessageId, mutes } = useChannelStateContext<StreamChatGenerics>('Message');
+  const { addNotification } = useChannelActionContext<ErmisChatGenerics>('Message');
+  const { highlightedMessageId, mutes } = useChannelStateContext<ErmisChatGenerics>('Message');
 
   const handleAction = useActionHandler(message);
   const handleOpenThread = useOpenThreadHandler(message, propOpenThread);

@@ -3,25 +3,25 @@ import { useChannelStateContext, useTranslationContext } from '../../../context'
 
 import type { StreamMessage } from '../../../context';
 import type { ReactEventHandler } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type MarkUnreadHandlerNotifications<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  getErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
-  getSuccessNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
+  getSuccessNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   notify?: (notificationText: string, type: 'success' | 'error') => void;
 };
 
 export const useMarkUnreadHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
-  notifications: MarkUnreadHandlerNotifications<StreamChatGenerics> = {},
+  message?: StreamMessage<ErmisChatGenerics>,
+  notifications: MarkUnreadHandlerNotifications<ErmisChatGenerics> = {},
 ): ReactEventHandler => {
   const { getErrorNotification, getSuccessNotification, notify } = notifications;
 
-  const { channel } = useChannelStateContext<StreamChatGenerics>('useMarkUnreadHandler');
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('useMarkUnreadHandler');
   const { t } = useTranslationContext('useMarkUnreadHandler');
 
   return async (event) => {

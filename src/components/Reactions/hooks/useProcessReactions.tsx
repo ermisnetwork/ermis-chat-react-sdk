@@ -4,7 +4,7 @@ import { useComponentContext, useMessageContext } from '../../../context';
 import { defaultReactionOptions } from '../reactionOptions';
 
 import type { ReactionsListProps } from '../ReactionsList';
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 import type { ReactionsComparator, ReactionSummary } from '../types';
 
 type SharedReactionListProps =
@@ -27,7 +27,7 @@ export const defaultReactionsSort: ReactionsComparator = (a, b) => {
 };
 
 export const useProcessReactions = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   params: UseProcessReactionsParams,
 ) => {
@@ -38,12 +38,12 @@ export const useProcessReactions = <
     reactions: propReactions,
     sortReactions: propSortReactions,
   } = params;
-  const { message, sortReactions: contextSortReactions } = useMessageContext<StreamChatGenerics>(
+  const { message, sortReactions: contextSortReactions } = useMessageContext<ErmisChatGenerics>(
     'useProcessReactions',
   );
   const {
     reactionOptions: contextReactionOptions = defaultReactionOptions,
-  } = useComponentContext<StreamChatGenerics>('useProcessReactions');
+  } = useComponentContext<ErmisChatGenerics>('useProcessReactions');
 
   const reactionOptions = propReactionOptions ?? contextReactionOptions;
   const sortReactions = propSortReactions ?? contextSortReactions ?? defaultReactionsSort;

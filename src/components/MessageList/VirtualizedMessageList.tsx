@@ -62,7 +62,7 @@ import { ChatContextValue, useChatContext } from '../../context/ChatContext';
 import { ComponentContextValue, useComponentContext } from '../../context/ComponentContext';
 
 import type { Channel, ChannelState as StreamChannelState, UserResponse } from 'ermis-chat-js-sdk';
-import type { DefaultStreamChatGenerics, UnknownType } from '../../types/types';
+import type { DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 import { DEFAULT_NEXT_CHANNEL_PAGE_SIZE } from '../../constants/limits';
 
 type PropsDrilledToMessage =
@@ -89,15 +89,15 @@ type VirtualizedMessageListPropsForContext =
  * Context object provided to some Virtuoso props that are functions (components rendered by Virtuoso and other functions)
  */
 export type VirtuosoContext<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = Required<
   Pick<
-    ComponentContextValue<StreamChatGenerics>,
+    ComponentContextValue<ErmisChatGenerics>,
     'DateSeparator' | 'MessageSystem' | 'UnreadMessagesSeparator'
   >
 > &
-  Pick<VirtualizedMessageListProps<StreamChatGenerics>, VirtualizedMessageListPropsForContext> &
-  Pick<ChatContextValue<StreamChatGenerics>, 'customClasses'> & {
+  Pick<VirtualizedMessageListProps<ErmisChatGenerics>, VirtualizedMessageListPropsForContext> &
+  Pick<ChatContextValue<ErmisChatGenerics>, 'customClasses'> & {
     /** Latest received message id in the current channel */
     lastReceivedMessageId: string | null | undefined;
     /** Object mapping between the message ID and a string representing the position in the group of a sequence of messages posted by the same user. */
@@ -105,9 +105,9 @@ export type VirtuosoContext<
     /** Number of messages prepended before the first page of messages. This is needed to calculate the virtual position in the virtual list. */
     numItemsPrepended: number;
     /** Mapping of message ID of own messages to the array of users, who read the given message */
-    ownMessagesReadByOthers: Record<string, UserResponse<StreamChatGenerics>[]>;
+    ownMessagesReadByOthers: Record<string, UserResponse<ErmisChatGenerics>[]>;
     /** The original message list enriched with date separators, omitted deleted messages or giphy previews. */
-    processedMessages: StreamMessage<StreamChatGenerics>[];
+    processedMessages: StreamMessage<ErmisChatGenerics>[];
     /** Instance of VirtuosoHandle object providing the API to navigate in the virtualized list by various scroll actions. */
     virtuosoRef: RefObject<VirtuosoHandle>;
     /** Message id which was marked as unread. ALl the messages following this message are considered unrea.  */
@@ -123,16 +123,16 @@ export type VirtuosoContext<
   };
 
 type VirtualizedMessageListWithContextProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = VirtualizedMessageListProps<StreamChatGenerics> & {
-  channel: Channel<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = VirtualizedMessageListProps<ErmisChatGenerics> & {
+  channel: Channel<ErmisChatGenerics>;
   hasMore: boolean;
   hasMoreNewer: boolean;
   jumpToLatestMessage: () => Promise<void>;
   loadingMore: boolean;
   loadingMoreNewer: boolean;
   notifications: ChannelNotifications;
-  read?: StreamChannelState<StreamChatGenerics>['read'];
+  read?: StreamChannelState<ErmisChatGenerics>['read'];
 };
 
 function captureResizeObserverExceededError(e: ErrorEvent) {
@@ -175,9 +175,9 @@ function calculateInitialTopMostItemIndex(
 }
 
 const VirtualizedMessageListWithContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: VirtualizedMessageListWithContextProps<StreamChatGenerics>,
+  props: VirtualizedMessageListWithContextProps<ErmisChatGenerics>,
 ) => {
   const {
     additionalMessageInputProps,
@@ -245,10 +245,10 @@ const VirtualizedMessageListWithContext = <
     UnreadMessagesSeparator = DefaultUnreadMessagesSeparator,
     VirtualMessage: MessageUIComponentFromContext = MessageSimple,
     TypingIndicator,
-  } = useComponentContext<StreamChatGenerics>('VirtualizedMessageList');
+  } = useComponentContext<ErmisChatGenerics>('VirtualizedMessageList');
   const MessageUIComponent = MessageUIComponentFromProps || MessageUIComponentFromContext;
 
-  const { client, customClasses } = useChatContext<StreamChatGenerics>('VirtualizedMessageList');
+  const { client, customClasses } = useChatContext<ErmisChatGenerics>('VirtualizedMessageList');
 
   const virtuoso = useRef<VirtuosoHandle>(null);
 
@@ -263,7 +263,7 @@ const VirtualizedMessageListWithContext = <
     unreadCount: channelUnreadUiState?.unread_messages ?? 0,
   });
 
-  const { giphyPreviewMessage, setGiphyPreviewMessage } = useGiphyPreview<StreamChatGenerics>(
+  const { giphyPreviewMessage, setGiphyPreviewMessage } = useGiphyPreview<ErmisChatGenerics>(
     separateGiphyPreview,
   );
 
@@ -281,7 +281,7 @@ const VirtualizedMessageListWithContext = <
       return messages;
     }
 
-    return processMessages<StreamChatGenerics>({
+    return processMessages<ErmisChatGenerics>({
       enableDateSeparator: !disableDateSeparator,
       hideDeletedMessages,
       hideNewMessageSeparator,
@@ -395,7 +395,7 @@ const VirtualizedMessageListWithContext = <
   };
 
   const computeItemKey = useCallback<
-    ComputeItemKey<UnknownType, VirtuosoContext<StreamChatGenerics>>
+    ComputeItemKey<UnknownType, VirtuosoContext<ErmisChatGenerics>>
   >(
     (index, _, { numItemsPrepended, processedMessages }) =>
       processedMessages[calculateItemIndex(index, numItemsPrepended)].id,
@@ -442,7 +442,7 @@ const VirtualizedMessageListWithContext = <
             <UnreadMessagesNotification unreadCount={channelUnreadUiState?.unread_messages} />
           )}
           <div className={customClasses?.virtualizedMessageList || 'str-chat__virtual-list'}>
-            <Virtuoso<UnknownType, VirtuosoContext<StreamChatGenerics>>
+            <Virtuoso<UnknownType, VirtuosoContext<ErmisChatGenerics>>
               atBottomStateChange={atBottomStateChange}
               atBottomThreshold={100}
               atTopStateChange={atTopStateChange}
@@ -525,16 +525,16 @@ const VirtualizedMessageListWithContext = <
 };
 
 export type VirtualizedMessageListProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Partial<Pick<MessageProps<StreamChatGenerics>, PropsDrilledToMessage>> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Partial<Pick<MessageProps<ErmisChatGenerics>, PropsDrilledToMessage>> & {
   /** Additional props to be passed the underlying [`react-virtuoso` virtualized list dependency](https://virtuoso.dev/virtuoso-api-reference/) */
-  additionalVirtuosoProps?: VirtuosoProps<UnknownType, VirtuosoContext<StreamChatGenerics>>;
+  additionalVirtuosoProps?: VirtuosoProps<UnknownType, VirtuosoContext<ErmisChatGenerics>>;
   channelUnreadUiState?: ChannelStateContextValue['channelUnreadUiState'];
   /** If true, picking a reaction from the `ReactionSelector` component will close the selector */
   closeReactionSelectorOnClick?: boolean;
   /** Custom render function, if passed, certain UI props are ignored */
   customMessageRenderer?: (
-    messageList: StreamMessage<StreamChatGenerics>[],
+    messageList: StreamMessage<ErmisChatGenerics>[],
     index: number,
   ) => React.ReactElement;
   /** @deprecated Use additionalVirtuosoProps.defaultItemHeight instead. Will be removed with next major release - `v11.0.0`.
@@ -545,9 +545,9 @@ export type VirtualizedMessageListProps<
   disableDateSeparator?: boolean;
   /** Callback function to set group styles for each message */
   groupStyles?: (
-    message: StreamMessage<StreamChatGenerics>,
-    previousMessage: StreamMessage<StreamChatGenerics>,
-    nextMessage: StreamMessage<StreamChatGenerics>,
+    message: StreamMessage<ErmisChatGenerics>,
+    previousMessage: StreamMessage<ErmisChatGenerics>,
+    nextMessage: StreamMessage<ErmisChatGenerics>,
     noGroupByUser: boolean,
     maxTimeBetweenGroupedMessages?: number,
   ) => GroupStyle;
@@ -577,11 +577,11 @@ export type VirtualizedMessageListProps<
   /** Maximum time in milliseconds that should occur between messages to still consider them grouped together */
   maxTimeBetweenGroupedMessages?: number;
   /** Custom UI component to display a message, defaults to and accepts same props as [MessageSimple](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageSimple.tsx) */
-  Message?: React.ComponentType<MessageUIComponentProps<StreamChatGenerics>>;
+  Message?: React.ComponentType<MessageUIComponentProps<ErmisChatGenerics>>;
   /** The limit to use when paginating messages */
   messageLimit?: number;
   /** Optional prop to override the messages available from [ChannelStateContext] */
-  messages?: StreamMessage<StreamChatGenerics>[];
+  messages?: StreamMessage<ErmisChatGenerics>[];
   /**
    * @deprecated Use additionalVirtuosoProps.overscan instead. Will be removed with next major release - `v11.0.0`.
    * The amount of extra content the list should render in addition to what's necessary to fill in the viewport
@@ -593,7 +593,7 @@ export type VirtualizedMessageListProps<
    * Allows to review changes introduced to messages array on per message basis (e.g. date separator injected before a message).
    * The array returned from the function is appended to the array of messages that are later rendered into React elements in the `VirtualizedMessageList`.
    */
-  reviewProcessedMessage?: ProcessMessagesParams<StreamChatGenerics>['reviewProcessedMessage'];
+  reviewProcessedMessage?: ProcessMessagesParams<ErmisChatGenerics>['reviewProcessedMessage'];
   /**
    * @deprecated Pass additionalVirtuosoProps.scrollSeekConfiguration and specify the placeholder in additionalVirtuosoProps.components.ScrollSeekPlaceholder instead.  Will be removed with next major release - `v11.0.0`.
    * Performance improvement by showing placeholders if user scrolls fast through list.
@@ -635,13 +635,13 @@ export type VirtualizedMessageListProps<
  * It is a consumer of the React contexts set in [Channel](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Channel/Channel.tsx).
  */
 export function VirtualizedMessageList<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(props: VirtualizedMessageListProps<StreamChatGenerics>) {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+>(props: VirtualizedMessageListProps<ErmisChatGenerics>) {
   const {
     jumpToLatestMessage,
     loadMore,
     loadMoreNewer,
-  } = useChannelActionContext<StreamChatGenerics>('VirtualizedMessageList');
+  } = useChannelActionContext<ErmisChatGenerics>('VirtualizedMessageList');
   const {
     channel,
     channelUnreadUiState,
@@ -654,7 +654,7 @@ export function VirtualizedMessageList<
     notifications,
     read,
     suppressAutoscroll,
-  } = useChannelStateContext<StreamChatGenerics>('VirtualizedMessageList');
+  } = useChannelStateContext<ErmisChatGenerics>('VirtualizedMessageList');
 
   const messages = props.messages || contextMessages;
 

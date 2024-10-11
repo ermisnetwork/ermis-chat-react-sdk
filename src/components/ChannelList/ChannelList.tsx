@@ -34,19 +34,25 @@ import { NullComponent } from '../UtilityComponents';
 import { ChannelListContextProvider } from '../../context';
 import { useChatContext } from '../../context/ChatContext';
 
-import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, Event } from 'ermis-chat-js-sdk';
+import type {
+  Channel,
+  ChannelFilters,
+  ChannelOptions,
+  ChannelSort,
+  Event,
+} from 'ermis-chat-js-sdk';
 
-import type { DefaultStreamChatGenerics, PaginatorProps } from '../../types/types';
+import type { DefaultErmisChatGenerics, PaginatorProps } from '../../types/types';
 
 const DEFAULT_FILTERS = {};
 const DEFAULT_OPTIONS = {};
 const DEFAULT_SORT = {};
 
 export type ChannelListProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Additional props for underlying ChannelSearch component and channel search controller */
-  additionalChannelSearchProps?: Omit<ChannelSearchProps<StreamChatGenerics>, 'setChannels'>;
+  additionalChannelSearchProps?: Omit<ChannelSearchProps<ErmisChatGenerics>, 'setChannels'>;
   /**
    * When the client receives `message.new`, `notification.message_new`, and `notification.added_to_channel` events, we automatically
    * push that channel to the top of the list. If the channel doesn't currently exist in the list, we grab the channel from
@@ -58,20 +64,20 @@ export type ChannelListProps<
   Avatar?: React.ComponentType<AvatarProps>;
   /** Optional function to filter channels prior to loading in the DOM. Do not use any complex or async logic that would delay the loading of the ChannelList. We recommend using a pure function with array methods like filter/sort/reduce. */
   channelRenderFilterFn?: (
-    channels: Array<Channel<StreamChatGenerics>>,
-  ) => Array<Channel<StreamChatGenerics>>;
+    channels: Array<Channel<ErmisChatGenerics>>,
+  ) => Array<Channel<ErmisChatGenerics>>;
   /** Custom UI component to display search results, defaults to and accepts same props as: [ChannelSearch](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelSearch/ChannelSearch.tsx) */
-  ChannelSearch?: React.ComponentType<ChannelSearchProps<StreamChatGenerics>>;
+  ChannelSearch?: React.ComponentType<ChannelSearchProps<ErmisChatGenerics>>;
   /** Set a channel (with this ID) to active and manually move it to the top of the list */
   customActiveChannel?: string;
   /** Custom function that handles the channel pagination. Has to build query filters, sort and options and query and append channels to the current channels state and update the hasNext pagination flag after each query. */
-  customQueryChannels?: CustomQueryChannelsFn<StreamChatGenerics>;
+  customQueryChannels?: CustomQueryChannelsFn<ErmisChatGenerics>;
   /** Custom UI component for rendering an empty list, defaults to and accepts same props as: [EmptyStateIndicator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/EmptyStateIndicator/EmptyStateIndicator.tsx) */
   EmptyStateIndicator?: React.ComponentType<EmptyStateIndicatorProps>;
   /** An object containing channel query filters */
-  filters?: ChannelFilters<StreamChatGenerics>;
+  filters?: ChannelFilters<ErmisChatGenerics>;
   /** Custom UI component to display the container for the queried channels, defaults to and accepts same props as: [ChannelListMessenger](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelList/ChannelListMessenger.tsx) */
-  List?: React.ComponentType<ChannelListMessengerProps<StreamChatGenerics>>;
+  List?: React.ComponentType<ChannelListMessengerProps<ErmisChatGenerics>>;
   /** Custom UI component to display the loading error indicator, defaults to component that renders null */
   LoadingErrorIndicator?: React.ComponentType;
   /** Custom UI component to display the loading state, defaults to and accepts same props as: [LoadingChannels](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Loading/LoadingChannels.tsx) */
@@ -80,55 +86,55 @@ export type ChannelListProps<
   lockChannelOrder?: boolean;
   /** Function to override the default behavior when a user is added to a channel, corresponds to [notification.added\_to\_channel] event*/
   onAddedToChannel?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default behavior when a channel is deleted, corresponds to [channel.deleted] event*/
   onChannelDeleted?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default behavior when a channel is hidden, corresponds to [channel.hidden] event*/
   onChannelHidden?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default behavior when a channel is truncated, corresponds to [channel.truncated] event*/
   onChannelTruncated?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default behavior when a channel is updated, corresponds to [channel.updated] event*/
   onChannelUpdated?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default channel visible behavior, corresponds to [channel.visible] event*/
   onChannelVisible?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default behavior when a message is received on a channel not being watched, corresponds to [notification.message\_new]*/
   onMessageNew?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default behavior when a message is received on a channel being watched, handles [message.new] event */
   onMessageNewHandler?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** Function to override the default behavior when a user gets removed from a channel, corresponds to [notification.removed\_from\_channel] event */
   onRemovedFromChannel?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void;
   /** An object containing channel query options */
   options?: ChannelOptions;
   /** Custom UI component to handle channel pagination logic, defaults to and accepts same props as: [LoadMorePaginator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/LoadMore/LoadMorePaginator.tsx) */
   Paginator?: React.ComponentType<PaginatorProps | LoadMorePaginatorProps>;
   /** Custom UI component to display the channel preview in the list, defaults to and accepts same props as: [ChannelPreviewMessenger](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelPreview/ChannelPreviewMessenger.tsx) */
-  Preview?: React.ComponentType<ChannelPreviewUIComponentProps<StreamChatGenerics>>;
+  Preview?: React.ComponentType<ChannelPreviewUIComponentProps<ErmisChatGenerics>>;
   /**
    * Custom interval during which the recovery channel list queries will be prevented.
    * This is to avoid firing unnecessary queries during internet connection fluctuation.
@@ -138,8 +144,8 @@ export type ChannelListProps<
   recoveryThrottleIntervalMs?: number;
   /** Function to override the default behavior when rendering channels, so this function is called instead of rendering the Preview directly */
   renderChannels?: (
-    channels: Channel<StreamChatGenerics>[],
-    channelPreview: (item: Channel<StreamChatGenerics>) => React.ReactNode,
+    channels: Channel<ErmisChatGenerics>[],
+    channelPreview: (item: Channel<ErmisChatGenerics>) => React.ReactNode,
   ) => React.ReactNode;
   /** If true, sends the list's currently loaded channels to the `List` component as the `loadedChannels` prop */
   sendChannelsToList?: boolean;
@@ -148,15 +154,15 @@ export type ChannelListProps<
   /** Whether or not to load the list with a search component, defaults to false */
   showChannelSearch?: boolean;
   /** An object containing channel query sort parameters */
-  sort?: ChannelSort<StreamChatGenerics>;
+  sort?: ChannelSort<ErmisChatGenerics>;
   /** An object containing query parameters for fetching channel watchers */
   watchers?: { limit?: number; offset?: number };
 };
 
 const UnMemoizedChannelList = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ChannelListProps<StreamChatGenerics>,
+  props: ChannelListProps<ErmisChatGenerics>,
 ) => {
   const {
     additionalChannelSearchProps,
@@ -203,7 +209,7 @@ const UnMemoizedChannelList = <
     setActiveChannel,
     theme,
     useImageFlagEmojisOnWindows,
-  } = useChatContext<StreamChatGenerics>('ChannelList');
+  } = useChatContext<ErmisChatGenerics>('ChannelList');
 
   const channelListRef = useRef<HTMLDivElement>(null);
   const [channelUpdateCount, setChannelUpdateCount] = useState(0);
@@ -213,8 +219,8 @@ const UnMemoizedChannelList = <
    * If customActiveChannel prop is absent, then set the first channel in list as active channel.
    */
   const activeChannelHandler = async (
-    channels: Array<Channel<StreamChatGenerics>>,
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
+    channels: Array<Channel<ErmisChatGenerics>>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
   ) => {
     if (!channels.length || channels.length > (options?.limit || MAX_QUERY_CHANNELS_LIMIT)) {
       return;
@@ -312,7 +318,7 @@ const UnMemoizedChannelList = <
   useUserPresenceChangedListener(setChannels);
 
   useEffect(() => {
-    const handleEvent = (event: Event<StreamChatGenerics>) => {
+    const handleEvent = (event: Event<ErmisChatGenerics>) => {
       if (event.cid === channel?.cid) {
         setActiveChannel();
       }
@@ -328,7 +334,7 @@ const UnMemoizedChannelList = <
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channel?.cid]);
 
-  const renderChannel = (item: Channel<StreamChatGenerics>) => {
+  const renderChannel = (item: Channel<ErmisChatGenerics>) => {
     const previewProps = {
       activeChannel: channel,
       Avatar,

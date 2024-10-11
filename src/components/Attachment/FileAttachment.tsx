@@ -4,19 +4,19 @@ import type { Attachment } from 'ermis-chat-js-sdk';
 
 import { DownloadButton, FileSizeIndicator } from './components';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type FileAttachmentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  attachment: Attachment<StreamChatGenerics>;
+  attachment: Attachment<ErmisChatGenerics>;
 };
 
 const UnMemoizedFileAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
-}: FileAttachmentProps<StreamChatGenerics>) => (
+}: FileAttachmentProps<ErmisChatGenerics>) => (
   <div className='str-chat__message-attachment-file--item' data-testid='attachment-file'>
     <FileIcon className='str-chat__file-icon' mimeType={attachment.mime_type} />
     <div className='str-chat__message-attachment-file--item-text'>

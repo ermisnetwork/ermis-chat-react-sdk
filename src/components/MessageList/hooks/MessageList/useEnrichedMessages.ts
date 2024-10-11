@@ -15,27 +15,27 @@ import type { Channel } from 'ermis-chat-js-sdk';
 
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../../types/types';
 
 export const useEnrichedMessages = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(args: {
-  channel: Channel<StreamChatGenerics>;
+  channel: Channel<ErmisChatGenerics>;
   disableDateSeparator: boolean;
   hideDeletedMessages: boolean;
   hideNewMessageSeparator: boolean;
-  messages: StreamMessage<StreamChatGenerics>[];
+  messages: StreamMessage<ErmisChatGenerics>[];
   noGroupByUser: boolean;
   groupStyles?: (
-    message: StreamMessage<StreamChatGenerics>,
-    previousMessage: StreamMessage<StreamChatGenerics>,
-    nextMessage: StreamMessage<StreamChatGenerics>,
+    message: StreamMessage<ErmisChatGenerics>,
+    previousMessage: StreamMessage<ErmisChatGenerics>,
+    nextMessage: StreamMessage<ErmisChatGenerics>,
     noGroupByUser: boolean,
     maxTimeBetweenGroupedMessages?: number,
   ) => GroupStyle;
   headerPosition?: number;
   maxTimeBetweenGroupedMessages?: number;
-  reviewProcessedMessage?: ProcessMessagesParams<StreamChatGenerics>['reviewProcessedMessage'];
+  reviewProcessedMessage?: ProcessMessagesParams<ErmisChatGenerics>['reviewProcessedMessage'];
 }) => {
   const {
     channel,
@@ -50,8 +50,8 @@ export const useEnrichedMessages = <
     reviewProcessedMessage,
   } = args;
 
-  const { client } = useChatContext<StreamChatGenerics>('useEnrichedMessages');
-  const { HeaderComponent } = useComponentContext<StreamChatGenerics>('useEnrichedMessages');
+  const { client } = useChatContext<ErmisChatGenerics>('useEnrichedMessages');
+  const { HeaderComponent } = useComponentContext<ErmisChatGenerics>('useEnrichedMessages');
 
   const lastRead = useMemo(() => channel.lastRead?.(), [channel]);
 
@@ -60,7 +60,7 @@ export const useEnrichedMessages = <
   let messagesWithDates =
     !enableDateSeparator && !hideDeletedMessages && hideNewMessageSeparator
       ? messages
-      : processMessages<StreamChatGenerics>({
+      : processMessages<ErmisChatGenerics>({
           enableDateSeparator,
           hideDeletedMessages,
           hideNewMessageSeparator,

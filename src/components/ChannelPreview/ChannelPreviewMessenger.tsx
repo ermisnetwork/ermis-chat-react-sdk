@@ -4,12 +4,12 @@ import clsx from 'clsx';
 import { Avatar as DefaultAvatar } from '../Avatar';
 import type { ChannelPreviewUIComponentProps } from './ChannelPreview';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 const UnMemoizedChannelPreviewMessenger = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ChannelPreviewUIComponentProps<StreamChatGenerics>,
+  props: ChannelPreviewUIComponentProps<ErmisChatGenerics>,
 ) => {
   const {
     active,

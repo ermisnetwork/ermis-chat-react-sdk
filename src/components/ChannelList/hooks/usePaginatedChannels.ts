@@ -3,11 +3,17 @@ import uniqBy from 'lodash.uniqby';
 
 import { MAX_QUERY_CHANNELS_LIMIT } from '../utils';
 
-import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, StreamChat } from 'ermis-chat-js-sdk';
+import type {
+  Channel,
+  ChannelFilters,
+  ChannelOptions,
+  ChannelSort,
+  ErmisChat,
+} from 'ermis-chat-js-sdk';
 
 import { useChatContext } from '../../../context/ChatContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 import type { ChannelsQueryState } from '../../Chat/hooks/useChannelsQueryState';
 import { DEFAULT_INITIAL_CHANNEL_PAGE_SIZE } from '../../../constants/limits';
 
@@ -17,36 +23,36 @@ const MIN_RECOVER_LOADED_CHANNELS_THROTTLE_INTERVAL_IN_MS = 2000;
 type AllowedQueryType = Extract<ChannelsQueryState['queryInProgress'], 'reload' | 'load-more'>;
 
 export type CustomQueryChannelParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  currentChannels: Array<Channel<StreamChatGenerics>>;
+  currentChannels: Array<Channel<ErmisChatGenerics>>;
   queryType: AllowedQueryType;
-  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>;
+  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>;
   setHasNextPage: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type CustomQueryChannelsFn<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = (params: CustomQueryChannelParams<StreamChatGenerics>) => Promise<void>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = (params: CustomQueryChannelParams<ErmisChatGenerics>) => Promise<void>;
 
 export const usePaginatedChannels = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  client: StreamChat<StreamChatGenerics>,
-  filters: ChannelFilters<StreamChatGenerics>,
-  sort: ChannelSort<StreamChatGenerics>,
+  client: ErmisChat<ErmisChatGenerics>,
+  filters: ChannelFilters<ErmisChatGenerics>,
+  sort: ChannelSort<ErmisChatGenerics>,
   options: ChannelOptions,
   activeChannelHandler: (
-    channels: Array<Channel<StreamChatGenerics>>,
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
+    channels: Array<Channel<ErmisChatGenerics>>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
   ) => void,
   recoveryThrottleIntervalMs: number = RECOVER_LOADED_CHANNELS_THROTTLE_INTERVAL_IN_MS,
-  customQueryChannels?: CustomQueryChannelsFn<StreamChatGenerics>,
+  customQueryChannels?: CustomQueryChannelsFn<ErmisChatGenerics>,
 ) => {
   const {
     channelsQueryState: { error, setError, setQueryInProgress },
   } = useChatContext('usePaginatedChannels');
-  const [channels, setChannels] = useState<Array<Channel<StreamChatGenerics>>>([]);
+  const [channels, setChannels] = useState<Array<Channel<ErmisChatGenerics>>>([]);
   const [hasNextPage, setHasNextPage] = useState(true);
   const lastRecoveryTimestamp = useRef<number | undefined>();
 

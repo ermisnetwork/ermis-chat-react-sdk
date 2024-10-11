@@ -9,7 +9,7 @@ import { useChannelStateContext } from '../../context/ChannelStateContext';
 import { useChatContext } from '../../context/ChatContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ChannelHeaderProps = {
   /** UI component to display a user's avatar, defaults to and accepts same props as: [Avatar](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Avatar/Avatar.tsx) */
@@ -28,7 +28,7 @@ export type ChannelHeaderProps = {
  * The ChannelHeader component renders some basic information about a Channel.
  */
 export const ChannelHeader = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   props: ChannelHeaderProps,
 ) => {
@@ -40,8 +40,8 @@ export const ChannelHeader = <
     title: overrideTitle,
   } = props;
 
-  const { channel, watcher_count } = useChannelStateContext<StreamChatGenerics>('ChannelHeader');
-  const { openMobileNav } = useChatContext<StreamChatGenerics>('ChannelHeader');
+  const { channel, watcher_count } = useChannelStateContext<ErmisChatGenerics>('ChannelHeader');
+  const { openMobileNav } = useChatContext<ErmisChatGenerics>('ChannelHeader');
   const { t } = useTranslationContext('ChannelHeader');
   const { displayImage, displayTitle } = useChannelPreviewInfo({
     channel,

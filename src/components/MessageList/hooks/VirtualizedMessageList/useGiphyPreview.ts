@@ -6,21 +6,21 @@ import type { EventHandler } from 'ermis-chat-js-sdk';
 
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../../types/types';
 
 export const useGiphyPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   separateGiphyPreview: boolean,
 ) => {
   const [giphyPreviewMessage, setGiphyPreviewMessage] = useState<
-    StreamMessage<StreamChatGenerics>
+    StreamMessage<ErmisChatGenerics>
   >();
 
-  const { client } = useChatContext<StreamChatGenerics>('useGiphyPreview');
+  const { client } = useChatContext<ErmisChatGenerics>('useGiphyPreview');
 
   useEffect(() => {
-    const handleEvent: EventHandler<StreamChatGenerics> = (event) => {
+    const handleEvent: EventHandler<ErmisChatGenerics> = (event) => {
       const { message, user } = event;
 
       if (message?.command === 'giphy' && user?.id === client.userID) {

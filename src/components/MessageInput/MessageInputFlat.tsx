@@ -31,10 +31,10 @@ import { useTranslationContext } from '../../context/TranslationContext';
 import { useMessageInputContext } from '../../context/MessageInputContext';
 import { useComponentContext } from '../../context/ComponentContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export const MessageInputFlat = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
   const { t } = useTranslationContext('MessageInputFlat');
   const {
@@ -54,7 +54,7 @@ export const MessageInputFlat = <
     setCooldownRemaining,
     text,
     uploadNewFiles,
-  } = useMessageInputContext<StreamChatGenerics>('MessageInputFlat');
+  } = useMessageInputContext<ErmisChatGenerics>('MessageInputFlat');
 
   const {
     AudioRecorder = DefaultAudioRecorder,
@@ -67,14 +67,14 @@ export const MessageInputFlat = <
     SendButton = DefaultSendButton,
     StartRecordingAudioButton = DefaultStartRecordingAudioButton,
     EmojiPicker,
-  } = useComponentContext<StreamChatGenerics>('MessageInputFlat');
+  } = useComponentContext<ErmisChatGenerics>('MessageInputFlat');
   const {
     acceptedFiles = [],
     multipleUploads,
     quotedMessage,
-  } = useChannelStateContext<StreamChatGenerics>('MessageInputFlat');
+  } = useChannelStateContext<ErmisChatGenerics>('MessageInputFlat');
   const { setQuotedMessage } = useChannelActionContext('MessageInputFlat');
-  const { channel } = useChatContext<StreamChatGenerics>('MessageInputFlat');
+  const { channel } = useChatContext<ErmisChatGenerics>('MessageInputFlat');
 
   const [
     showRecordingPermissionDeniedNotification,
@@ -108,7 +108,7 @@ export const MessageInputFlat = <
   });
 
   useEffect(() => {
-    const handleQuotedMessageUpdate = (e: Event<StreamChatGenerics>) => {
+    const handleQuotedMessageUpdate = (e: Event<ErmisChatGenerics>) => {
       if (e.message?.id !== quotedMessage?.id) return;
       if (e.type === 'message.deleted') {
         setQuotedMessage(undefined);

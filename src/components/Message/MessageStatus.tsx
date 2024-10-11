@@ -14,7 +14,7 @@ import { useComponentContext } from '../../context/ComponentContext';
 import { useMessageContext } from '../../context/MessageContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type MessageStatusProps = {
   /* Custom UI component to display a user's avatar (overrides the value from `ComponentContext`) */
@@ -32,7 +32,7 @@ export type MessageStatusProps = {
 };
 
 const UnMemoizedMessageStatus = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   props: MessageStatusProps,
 ) => {
@@ -47,15 +47,15 @@ const UnMemoizedMessageStatus = <
 
   const { handleEnter, handleLeave, tooltipVisible } = useEnterLeaveHandlers<HTMLSpanElement>();
 
-  const { client } = useChatContext<StreamChatGenerics>('MessageStatus');
-  const { Avatar: contextAvatar } = useComponentContext<StreamChatGenerics>('MessageStatus');
+  const { client } = useChatContext<ErmisChatGenerics>('MessageStatus');
+  const { Avatar: contextAvatar } = useComponentContext<ErmisChatGenerics>('MessageStatus');
   const {
     isMyMessage,
     lastReceivedId,
     message,
     readBy,
     threadList,
-  } = useMessageContext<StreamChatGenerics>('MessageStatus');
+  } = useMessageContext<ErmisChatGenerics>('MessageStatus');
   const { t } = useTranslationContext('MessageStatus');
   const [referenceElement, setReferenceElement] = useState<HTMLSpanElement | null>(null);
 
