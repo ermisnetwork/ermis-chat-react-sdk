@@ -36,7 +36,7 @@ const Controls = () => {
               },
             ],
             text:
-              'chat: https://getstream.io/chat/\nactivity-feeds: https://getstream.io/activity-feeds/',
+              'chat',
           })
         }
       >

@@ -84,7 +84,7 @@ export type MessageInputProps<
   grow?: boolean;
   /** Allows to hide MessageInput's send button. */
   hideSendButton?: boolean;
-  /** Custom UI component handling how the message input is rendered, defaults to and accepts the same props as [MessageInputFlat](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/MessageInputFlat.tsx) */
+  /** Custom UI component handling how the message input is rendered, defaults to and accepts the same props as [MessageInputFlat](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/MessageInputFlat.tsx) */
   Input?: React.ComponentType<MessageInputProps<ErmisChatGenerics, V>>;
   /** Max number of rows the underlying `textarea` component is allowed to grow */
   maxRows?: number;

@@ -558,15 +558,15 @@ export type VirtualizedMessageListProps<
   loadingMore?: boolean;
   /** Whether or not the list is currently loading newer items */
   loadingMoreNewer?: boolean;
-  /** Function called when more messages are to be loaded, defaults to function stored in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Function called when more messages are to be loaded, defaults to function stored in [ChannelActionContext] */
   loadMore?: ChannelActionContextValue['loadMore'] | (() => Promise<void>);
-  /** Function called when new messages are to be loaded, defaults to function stored in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Function called when new messages are to be loaded, defaults to function stored in [ChannelActionContext] */
   loadMoreNewer?: ChannelActionContextValue['loadMore'] | (() => Promise<void>);
-  /** Custom UI component to display a message, defaults to and accepts same props as [MessageSimple](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageSimple.tsx) */
+  /** Custom UI component to display a message, defaults to and accepts same props as [MessageSimple](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageSimple.tsx) */
   Message?: React.ComponentType<MessageUIComponentProps<ErmisChatGenerics>>;
   /** The limit to use when paginating messages */
   messageLimit?: number;
-  /** Optional prop to override the messages available from [ChannelStateContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_state_context/) */
+  /** Optional prop to override the messages available from [ChannelStateContext] */
   messages?: StreamMessage<ErmisChatGenerics>[];
   /**
    * @deprecated Use additionalVirtuosoProps.overscan instead. Will be removed with next major release - `v11.0.0`.
@@ -618,7 +618,7 @@ export type VirtualizedMessageListProps<
 
 /**
  * The VirtualizedMessageList component renders a list of messages in a virtualized list.
- * It is a consumer of the React contexts set in [Channel](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Channel/Channel.tsx).
+ * It is a consumer of the React contexts set in [Channel](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Channel/Channel.tsx).
  */
 export function VirtualizedMessageList<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics

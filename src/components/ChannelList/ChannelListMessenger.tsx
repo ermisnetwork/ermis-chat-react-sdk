@@ -17,9 +17,9 @@ export type ChannelListMessengerProps<
   loadedChannels?: Channel<ErmisChatGenerics>[];
   /** Whether or not channels are currently loading */
   loading?: boolean;
-  /** Custom UI component to display a loading error, defaults to and accepts same props as: [ChatDown](https://github.com/GetStream/stream-chat-react/blob/master/src/components/ChatDown/ChatDown.tsx) */
+  /** Custom UI component to display a loading error, defaults to and accepts same props as: [ChatDown](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChatDown/ChatDown.tsx) */
   LoadingErrorIndicator?: React.ComponentType<ChatDownProps>;
-  /** Custom UI component to display a loading indicator, defaults to and accepts same props as: [LoadingChannels](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Loading/LoadingChannels.tsx) */
+  /** Custom UI component to display a loading indicator, defaults to and accepts same props as: [LoadingChannels](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Loading/LoadingChannels.tsx) */
   LoadingIndicator?: React.ComponentType;
   /** Local state hook that resets the currently loaded channels */
   setChannels?: React.Dispatch<React.SetStateAction<Channel<ErmisChatGenerics>[]>>;

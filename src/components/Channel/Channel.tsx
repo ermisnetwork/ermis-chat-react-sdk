@@ -103,103 +103,103 @@ import { DateSeparator } from '../DateSeparator';
 type ChannelPropsForwardedToComponentContext<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  /** Custom UI component to display a message attachment, defaults to and accepts same props as: [Attachment](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Attachment/Attachment.tsx) */
+  /** Custom UI component to display a message attachment, defaults to and accepts same props as: [Attachment](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Attachment/Attachment.tsx) */
   Attachment?: ComponentContextValue<ErmisChatGenerics>['Attachment'];
-  /** Custom UI component to display an attachment previews in MessageInput, defaults to and accepts same props as: [Attachment](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/AttachmentPreviewList.tsx) */
+  /** Custom UI component to display an attachment previews in MessageInput, defaults to and accepts same props as: [Attachment](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/AttachmentPreviewList.tsx) */
   AttachmentPreviewList?: ComponentContextValue<ErmisChatGenerics>['AttachmentPreviewList'];
-  /** Custom UI component to display AudioRecorder in MessageInput, defaults to and accepts same props as: [AudioRecorder](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/AudioRecorder.tsx) */
+  /** Custom UI component to display AudioRecorder in MessageInput, defaults to and accepts same props as: [AudioRecorder](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/AudioRecorder.tsx) */
   AudioRecorder?: ComponentContextValue<ErmisChatGenerics>['AudioRecorder'];
-  /** Optional UI component to override the default suggestion Header component, defaults to and accepts same props as: [Header](https://github.com/GetStream/stream-chat-react/blob/master/src/components/AutoCompleteTextarea/Header.tsx) */
+  /** Optional UI component to override the default suggestion Header component, defaults to and accepts same props as: [Header](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/AutoCompleteTextarea/Header.tsx) */
   AutocompleteSuggestionHeader?: ComponentContextValue<ErmisChatGenerics>['AutocompleteSuggestionHeader'];
-  /** Optional UI component to override the default suggestion Item component, defaults to and accepts same props as: [Item](https://github.com/GetStream/stream-chat-react/blob/master/src/components/AutoCompleteTextarea/Item.js) */
+  /** Optional UI component to override the default suggestion Item component, defaults to and accepts same props as: [Item](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/AutoCompleteTextarea/Item.js) */
   AutocompleteSuggestionItem?: ComponentContextValue<ErmisChatGenerics>['AutocompleteSuggestionItem'];
-  /** Optional UI component to override the default List component that displays suggestions, defaults to and accepts same props as: [List](https://github.com/GetStream/stream-chat-react/blob/master/src/components/AutoCompleteTextarea/List.js) */
+  /** Optional UI component to override the default List component that displays suggestions, defaults to and accepts same props as: [List](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/AutoCompleteTextarea/List.js) */
   AutocompleteSuggestionList?: ComponentContextValue<ErmisChatGenerics>['AutocompleteSuggestionList'];
-  /** UI component to display a user's avatar, defaults to and accepts same props as: [Avatar](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Avatar/Avatar.tsx) */
+  /** UI component to display a user's avatar, defaults to and accepts same props as: [Avatar](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Avatar/Avatar.tsx) */
   Avatar?: ComponentContextValue<ErmisChatGenerics>['Avatar'];
-  /** Custom UI component to display <img/> elements resp. a fallback in case of load error, defaults to and accepts same props as: [BaseImage](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Gallery/BaseImage.tsx) */
+  /** Custom UI component to display <img/> elements resp. a fallback in case of load error, defaults to and accepts same props as: [BaseImage](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Gallery/BaseImage.tsx) */
   BaseImage?: ComponentContextValue<ErmisChatGenerics>['BaseImage'];
-  /** Custom UI component to display the slow mode cooldown timer, defaults to and accepts same props as: [CooldownTimer](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/CooldownTimer.tsx) */
+  /** Custom UI component to display the slow mode cooldown timer, defaults to and accepts same props as: [CooldownTimer](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/CooldownTimer.tsx) */
   CooldownTimer?: ComponentContextValue<ErmisChatGenerics>['CooldownTimer'];
-  /** Custom UI component to render set of buttons to be displayed in the MessageActionsBox, defaults to and accepts same props as: [CustomMessageActionsList](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageActions/CustomMessageActionsList.tsx) */
+  /** Custom UI component to render set of buttons to be displayed in the MessageActionsBox, defaults to and accepts same props as: [CustomMessageActionsList](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageActions/CustomMessageActionsList.tsx) */
   CustomMessageActionsList?: ComponentContextValue<ErmisChatGenerics>['CustomMessageActionsList'];
-  /** Custom UI component for date separators, defaults to and accepts same props as: [DateSeparator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/DateSeparator.tsx) */
+  /** Custom UI component for date separators, defaults to and accepts same props as: [DateSeparator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/DateSeparator.tsx) */
   DateSeparator?: ComponentContextValue<ErmisChatGenerics>['DateSeparator'];
-  /** Custom UI component to override default edit message input, defaults to and accepts same props as: [EditMessageForm](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/EditMessageForm.tsx) */
+  /** Custom UI component to override default edit message input, defaults to and accepts same props as: [EditMessageForm](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/EditMessageForm.tsx) */
   EditMessageInput?: ComponentContextValue<ErmisChatGenerics>['EditMessageInput'];
   /** Custom UI component for rendering button with emoji picker in MessageInput */
   EmojiPicker?: ComponentContextValue<ErmisChatGenerics>['EmojiPicker'];
   /** Mechanism to be used with autocomplete and text replace features of the `MessageInput` component, see [emoji-mart `SearchIndex`](https://github.com/missive/emoji-mart#%EF%B8%8F%EF%B8%8F-headless-search) */
   emojiSearchIndex?: ComponentContextValue<ErmisChatGenerics>['emojiSearchIndex'];
-  /** Custom UI component to be displayed when the `MessageList` is empty, defaults to and accepts same props as: [EmptyStateIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/EmptyStateIndicator/EmptyStateIndicator.tsx)  */
+  /** Custom UI component to be displayed when the `MessageList` is empty, defaults to and accepts same props as: [EmptyStateIndicator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/EmptyStateIndicator/EmptyStateIndicator.tsx)  */
   EmptyStateIndicator?: ComponentContextValue<ErmisChatGenerics>['EmptyStateIndicator'];
-  /** Custom UI component for file upload icon, defaults to and accepts same props as: [FileUploadIcon](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/icons.tsx) */
+  /** Custom UI component for file upload icon, defaults to and accepts same props as: [FileUploadIcon](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/icons.tsx) */
   FileUploadIcon?: ComponentContextValue<ErmisChatGenerics>['FileUploadIcon'];
   /** Custom UI component to render a Giphy preview in the `VirtualizedMessageList` */
   GiphyPreviewMessage?: ComponentContextValue<ErmisChatGenerics>['GiphyPreviewMessage'];
   /** Custom UI component to render at the top of the `MessageList` */
   HeaderComponent?: ComponentContextValue<ErmisChatGenerics>['HeaderComponent'];
-  /** Custom UI component handling how the message input is rendered, defaults to and accepts the same props as [MessageInputFlat](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/MessageInputFlat.tsx) */
+  /** Custom UI component handling how the message input is rendered, defaults to and accepts the same props as [MessageInputFlat](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/MessageInputFlat.tsx) */
   Input?: ComponentContextValue<ErmisChatGenerics>['Input'];
   /** Custom component to render link previews in message input **/
   LinkPreviewList?: ComponentContextValue<ErmisChatGenerics>['LinkPreviewList'];
-  /** Custom UI component to be shown if the channel query fails, defaults to and accepts same props as: [LoadingErrorIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Loading/LoadingErrorIndicator.tsx) */
+  /** Custom UI component to be shown if the channel query fails, defaults to and accepts same props as: [LoadingErrorIndicator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Loading/LoadingErrorIndicator.tsx) */
   LoadingErrorIndicator?: React.ComponentType<LoadingErrorIndicatorProps>;
-  /** Custom UI component to render while the `MessageList` is loading new messages, defaults to and accepts same props as: [LoadingIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Loading/LoadingIndicator.tsx) */
+  /** Custom UI component to render while the `MessageList` is loading new messages, defaults to and accepts same props as: [LoadingIndicator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Loading/LoadingIndicator.tsx) */
   LoadingIndicator?: ComponentContextValue<ErmisChatGenerics>['LoadingIndicator'];
-  /** Custom UI component to display a message in the standard `MessageList`, defaults to and accepts the same props as: [MessageSimple](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageSimple.tsx) */
+  /** Custom UI component to display a message in the standard `MessageList`, defaults to and accepts the same props as: [MessageSimple](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageSimple.tsx) */
   Message?: ComponentContextValue<ErmisChatGenerics>['Message'];
-  /** Custom UI component to display the contents of a bounced message modal. Usually it allows to retry, edit, or delete the message. Defaults to and accepts the same props as: [MessageBouncePrompt](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageBounce/MessageBouncePrompt.tsx) */
+  /** Custom UI component to display the contents of a bounced message modal. Usually it allows to retry, edit, or delete the message. Defaults to and accepts the same props as: [MessageBouncePrompt](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageBounce/MessageBouncePrompt.tsx) */
   MessageBouncePrompt?: ComponentContextValue<ErmisChatGenerics>['MessageBouncePrompt'];
-  /** Custom UI component for a deleted message, defaults to and accepts same props as: [MessageDeleted](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageDeleted.tsx) */
+  /** Custom UI component for a deleted message, defaults to and accepts same props as: [MessageDeleted](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageDeleted.tsx) */
   MessageDeleted?: ComponentContextValue<ErmisChatGenerics>['MessageDeleted'];
-  /** Custom UI component that displays message and connection status notifications in the `MessageList`, defaults to and accepts same props as [DefaultMessageListNotifications](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/MessageListNotifications.tsx) */
+  /** Custom UI component that displays message and connection status notifications in the `MessageList`, defaults to and accepts same props as [DefaultMessageListNotifications](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageList/MessageListNotifications.tsx) */
   MessageListNotifications?: ComponentContextValue<ErmisChatGenerics>['MessageListNotifications'];
-  /** Custom UI component to display a notification when scrolled up the list and new messages arrive, defaults to and accepts same props as [MessageNotification](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/MessageNotification.tsx) */
+  /** Custom UI component to display a notification when scrolled up the list and new messages arrive, defaults to and accepts same props as [MessageNotification](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageList/MessageNotification.tsx) */
   MessageNotification?: ComponentContextValue<ErmisChatGenerics>['MessageNotification'];
-  /** Custom UI component for message options popup, defaults to and accepts same props as: [MessageOptions](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageOptions.tsx) */
+  /** Custom UI component for message options popup, defaults to and accepts same props as: [MessageOptions](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageOptions.tsx) */
   MessageOptions?: ComponentContextValue<ErmisChatGenerics>['MessageOptions'];
-  /** Custom UI component to display message replies, defaults to and accepts same props as: [MessageRepliesCountButton](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageRepliesCountButton.tsx) */
+  /** Custom UI component to display message replies, defaults to and accepts same props as: [MessageRepliesCountButton](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageRepliesCountButton.tsx) */
   MessageRepliesCountButton?: ComponentContextValue<ErmisChatGenerics>['MessageRepliesCountButton'];
-  /** Custom UI component to display message delivery status, defaults to and accepts same props as: [MessageStatus](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageStatus.tsx) */
+  /** Custom UI component to display message delivery status, defaults to and accepts same props as: [MessageStatus](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageStatus.tsx) */
   MessageStatus?: ComponentContextValue<ErmisChatGenerics>['MessageStatus'];
-  /** Custom UI component to display system messages, defaults to and accepts same props as: [EventComponent](https://github.com/GetStream/stream-chat-react/blob/master/src/components/EventComponent/EventComponent.tsx) */
+  /** Custom UI component to display system messages, defaults to and accepts same props as: [EventComponent](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/EventComponent/EventComponent.tsx) */
   MessageSystem?: ComponentContextValue<ErmisChatGenerics>['MessageSystem'];
-  /** Custom UI component to display a timestamp on a message, defaults to and accepts same props as: [MessageTimestamp](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageTimestamp.tsx) */
+  /** Custom UI component to display a timestamp on a message, defaults to and accepts same props as: [MessageTimestamp](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageTimestamp.tsx) */
   MessageTimestamp?: ComponentContextValue<ErmisChatGenerics>['MessageTimestamp'];
-  /** Custom UI component for viewing message's image attachments, defaults to and accepts the same props as [ModalGallery](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Gallery/ModalGallery.tsx) */
+  /** Custom UI component for viewing message's image attachments, defaults to and accepts the same props as [ModalGallery](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Gallery/ModalGallery.tsx) */
   ModalGallery?: ComponentContextValue<ErmisChatGenerics>['ModalGallery'];
-  /** Custom UI component to override default pinned message indicator, defaults to and accepts same props as: [PinIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/icons.tsx) */
+  /** Custom UI component to override default pinned message indicator, defaults to and accepts same props as: [PinIndicator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/icons.tsx) */
   PinIndicator?: ComponentContextValue<ErmisChatGenerics>['PinIndicator'];
-  /** Custom UI component to override quoted message UI on a sent message, defaults to and accepts same props as: [QuotedMessage](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/QuotedMessage.tsx) */
+  /** Custom UI component to override quoted message UI on a sent message, defaults to and accepts same props as: [QuotedMessage](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/QuotedMessage.tsx) */
   QuotedMessage?: ComponentContextValue<ErmisChatGenerics>['QuotedMessage'];
-  /** Custom UI component to override the message input's quoted message preview, defaults to and accepts same props as: [QuotedMessagePreview](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/QuotedMessagePreview.tsx) */
+  /** Custom UI component to override the message input's quoted message preview, defaults to and accepts same props as: [QuotedMessagePreview](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/QuotedMessagePreview.tsx) */
   QuotedMessagePreview?: ComponentContextValue<ErmisChatGenerics>['QuotedMessagePreview'];
   /** Custom reaction options to be applied to ReactionSelector, ReactionList and SimpleReactionList components */
   reactionOptions?: ReactionOptions;
-  /** Custom UI component to display the reaction selector, defaults to and accepts same props as: [ReactionSelector](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Reactions/ReactionSelector.tsx) */
+  /** Custom UI component to display the reaction selector, defaults to and accepts same props as: [ReactionSelector](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Reactions/ReactionSelector.tsx) */
   ReactionSelector?: ComponentContextValue<ErmisChatGenerics>['ReactionSelector'];
-  /** Custom UI component to display the list of reactions on a message, defaults to and accepts same props as: [ReactionsList](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Reactions/ReactionsList.tsx) */
+  /** Custom UI component to display the list of reactions on a message, defaults to and accepts same props as: [ReactionsList](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Reactions/ReactionsList.tsx) */
   ReactionsList?: ComponentContextValue<ErmisChatGenerics>['ReactionsList'];
-  /** Custom UI component for send button, defaults to and accepts same props as: [SendButton](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/icons.tsx) */
+  /** Custom UI component for send button, defaults to and accepts same props as: [SendButton](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/icons.tsx) */
   SendButton?: ComponentContextValue<ErmisChatGenerics>['SendButton'];
-  /** Custom UI component button for initiating audio recording, defaults to and accepts same props as: [StartRecordingAudioButton](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MediaRecorder/AudioRecorder/AudioRecordingButtons.tsx) */
+  /** Custom UI component button for initiating audio recording, defaults to and accepts same props as: [StartRecordingAudioButton](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MediaRecorder/AudioRecorder/AudioRecordingButtons.tsx) */
   StartRecordingAudioButton?: ComponentContextValue<ErmisChatGenerics>['StartRecordingAudioButton'];
-  /** Custom UI component that displays thread's parent or other message at the top of the `MessageList`, defaults to and accepts same props as [MessageSimple](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageSimple.tsx) */
+  /** Custom UI component that displays thread's parent or other message at the top of the `MessageList`, defaults to and accepts same props as [MessageSimple](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message/MessageSimple.tsx) */
   ThreadHead?: React.ComponentType<MessageProps<ErmisChatGenerics>>;
-  /** Custom UI component to display the header of a `Thread`, defaults to and accepts same props as: [DefaultThreadHeader](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Thread/Thread.tsx) */
+  /** Custom UI component to display the header of a `Thread`, defaults to and accepts same props as: [DefaultThreadHeader](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Thread/Thread.tsx) */
   ThreadHeader?: ComponentContextValue<ErmisChatGenerics>['ThreadHeader'];
-  /** Custom UI component to display the start of a threaded `MessageList`, defaults to and accepts same props as: [DefaultThreadStart](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Thread/Thread.tsx) */
+  /** Custom UI component to display the start of a threaded `MessageList`, defaults to and accepts same props as: [DefaultThreadStart](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Thread/Thread.tsx) */
   ThreadStart?: ComponentContextValue<ErmisChatGenerics>['ThreadStart'];
   /** Custom UI component to display a date used in timestamps. It's used internally by the default `MessageTimestamp`, and to display a timestamp for edited messages. */
   Timestamp?: ComponentContextValue<ErmisChatGenerics>['Timestamp'];
-  /** Optional context provider that lets you override the default autocomplete triggers, defaults to: [DefaultTriggerProvider](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/DefaultTriggerProvider.tsx) */
+  /** Optional context provider that lets you override the default autocomplete triggers, defaults to: [DefaultTriggerProvider](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/DefaultTriggerProvider.tsx) */
   TriggerProvider?: ComponentContextValue<ErmisChatGenerics>['TriggerProvider'];
-  /** Custom UI component for the typing indicator, defaults to and accepts same props as: [TypingIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/TypingIndicator/TypingIndicator.tsx) */
+  /** Custom UI component for the typing indicator, defaults to and accepts same props as: [TypingIndicator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/TypingIndicator/TypingIndicator.tsx) */
   TypingIndicator?: ComponentContextValue<ErmisChatGenerics>['TypingIndicator'];
-  /** Custom UI component that indicates a user is viewing unread messages. It disappears once the user scrolls to UnreadMessagesSeparator. Defaults to and accepts same props as: [UnreadMessagesNotification](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/UnreadMessagesNotification.tsx) */
+  /** Custom UI component that indicates a user is viewing unread messages. It disappears once the user scrolls to UnreadMessagesSeparator. Defaults to and accepts same props as: [UnreadMessagesNotification](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageList/UnreadMessagesNotification.tsx) */
   UnreadMessagesNotification?: React.ComponentType<UnreadMessagesNotificationProps>;
-  /** Custom UI component that separates read messages from unread, defaults to and accepts same props as: [UnreadMessagesSeparator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/UnreadMessagesSeparator.tsx) */
+  /** Custom UI component that separates read messages from unread, defaults to and accepts same props as: [UnreadMessagesSeparator](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageList/UnreadMessagesSeparator.tsx) */
   UnreadMessagesSeparator?: ComponentContextValue<ErmisChatGenerics>['UnreadMessagesSeparator'];
   /** Custom UI component to display a message in the `VirtualizedMessageList`, does not have a default implementation */
   VirtualMessage?: ComponentContextValue<ErmisChatGenerics>['VirtualMessage'];
@@ -1358,12 +1358,4 @@ const ChannelInner = <
   );
 };
 
-/**
- * A wrapper component that provides channel data and renders children.
- * The Channel component provides the following contexts:
- * - [ChannelStateContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_state_context/)
- * - [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/)
- * - [ComponentContext](https://getstream.io/chat/docs/sdk/react/contexts/component_context/)
- * - [TypingContext](https://getstream.io/chat/docs/sdk/react/contexts/typing_context/)
- */
 export const Channel = React.memo(UnMemoizedChannel) as typeof UnMemoizedChannel;

@@ -24,7 +24,7 @@ export type MessageProps<
 > = {
   /** The message object */
   message: StreamMessage<ErmisChatGenerics>;
-  /** Additional props for underlying MessageInput component, [available props](https://getstream.io/chat/docs/sdk/react/message-input-components/message_input/#props) */
+  /** Additional props for underlying MessageInput component, [available props] */
   additionalMessageInputProps?: MessageInputProps<ErmisChatGenerics, V>;
   /** Call this function to keep message list scrolled to the bottom when the scroll height increases, e.g. an element appears below the last message (only used in the `VirtualizedMessageList`) */
   autoscrollToBottom?: () => void;
@@ -68,7 +68,7 @@ export type MessageProps<
   initialMessage?: boolean;
   /** Latest message id on current channel */
   lastReceivedId?: string | null;
-  /** UI component to display a Message in MessageList, overrides value in [ComponentContext](https://getstream.io/chat/docs/sdk/react/contexts/component_context/#message) */
+  /** UI component to display a Message in MessageList, overrides value in [ComponentContext] */
   Message?: ComponentContextValue<ErmisChatGenerics>['Message'];
   /** Array of allowed message actions (ex: ['edit', 'delete', 'flag', 'mute', 'pin', 'quote', 'react', 'reply']). To disable all actions, provide an empty array. */
   messageActions?: MessageActionsArray;
@@ -76,15 +76,15 @@ export type MessageProps<
   messageListRect?: DOMRect;
   /** If true, only the sender of the message has editing privileges */
   onlySenderCanEdit?: boolean;
-  /** Custom mention click handler to override default in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Custom mention click handler to override default in [ChannelActionContext] */
   onMentionsClick?: ChannelActionContextValue<ErmisChatGenerics>['onMentionsClick'];
-  /** Custom mention hover handler to override default in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Custom mention hover handler to override default in [ChannelActionContext] */
   onMentionsHover?: ChannelActionContextValue<ErmisChatGenerics>['onMentionsHover'];
   /** Custom function to run on user avatar click */
   onUserClick?: UserEventHandler<ErmisChatGenerics>;
   /** Custom function to run on user avatar hover */
   onUserHover?: UserEventHandler<ErmisChatGenerics>;
-  /** Custom open thread handler to override default in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Custom open thread handler to override default in [ChannelActionContext] */
   openThread?: ChannelActionContextValue<ErmisChatGenerics>['openThread'];
   /** @deprecated in favor of `channelCapabilities - The user roles allowed to pin messages in various channel types */
   pinPermissions?: PinPermissions;
@@ -92,13 +92,13 @@ export type MessageProps<
   reactionDetailsSort?: ReactionSort<ErmisChatGenerics>;
   /** A list of users that have read this Message if the message is the last one and was posted by my user */
   readBy?: UserResponse<ErmisChatGenerics>[];
-  /** Custom function to render message text content, defaults to the renderText function: [utils](https://github.com/GetStream/stream-chat-react/blob/master/src/utils.ts) */
+  /** Custom function to render message text content, defaults to the renderText function: [utils](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/utils.ts) */
   renderText?: (
     text?: string,
     mentioned_users?: UserResponse<ErmisChatGenerics>[],
     options?: RenderTextOptions,
   ) => JSX.Element | null;
-  /** Custom retry send message handler to override default in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Custom retry send message handler to override default in [ChannelActionContext] */
   retrySendMessage?: ChannelActionContextValue<ErmisChatGenerics>['retrySendMessage'];
   /** Comparator function to sort the list of reacted users
    * @deprecated use `reactionDetailsSort` instead

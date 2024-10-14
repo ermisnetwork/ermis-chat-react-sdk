@@ -40,7 +40,7 @@ export type MessageContextValue<
   editing: boolean;
   /**
    * Returns all allowed actions on message by current user e.g., ['edit', 'delete', 'flag', 'mute', 'pin', 'quote', 'react', 'reply'].
-   * Please check [Message](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message.tsx) component for default implementation.
+   * Please check [Message](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Message.tsx) component for default implementation.
    */
   getMessageActions: () => MessageActionsArray<string>;
   /** Function to send an action in a Channel */
@@ -94,7 +94,7 @@ export type MessageContextValue<
   setEditingState: ReactEventHandler;
   /** Whether or not to show reaction list details */
   showDetailedReactions: boolean;
-  /** Additional props for underlying MessageInput component, [available props](https://getstream.io/chat/docs/sdk/react/message-input-components/message_input/#props) */
+  /** Additional props for underlying MessageInput component, [available props] */
   additionalMessageInputProps?: MessageInputProps<ErmisChatGenerics>;
   /** Call this function to keep message list scrolled to the bottom when the scroll height increases, e.g. an element appears below the last message (only used in the `VirtualizedMessageList`) */
   autoscrollToBottom?: () => void;
@@ -118,7 +118,7 @@ export type MessageContextValue<
   lastReceivedId?: string | null;
   /** DOMRect object for parent MessageList component */
   messageListRect?: DOMRect;
-  /** Array of muted users coming from [ChannelStateContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_state_context/#mutes) */
+  /** Array of muted users coming from [ChannelStateContext] */
   mutes?: Mute<ErmisChatGenerics>[];
   /** @deprecated in favor of `channelCapabilities - The user roles allowed to pin Messages in various channel types */
   pinPermissions?: PinPermissions;
@@ -126,7 +126,7 @@ export type MessageContextValue<
   reactionDetailsSort?: ReactionSort<ErmisChatGenerics>;
   /** A list of users that have read this Message */
   readBy?: UserResponse<ErmisChatGenerics>[];
-  /** Custom function to render message text content, defaults to the renderText function: [utils](https://github.com/GetStream/stream-chat-react/blob/master/src/utils.tsx) */
+  /** Custom function to render message text content, defaults to the renderText function: [utils](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/utils.tsx) */
   renderText?: (
     text?: string,
     mentioned_users?: UserResponse<ErmisChatGenerics>[],

@@ -331,7 +331,7 @@ export type MessageListProps<
   hideDeletedMessages?: boolean;
   /** Hides the DateSeparator component when new messages are received in a channel that's watched but not active, defaults to false */
   hideNewMessageSeparator?: boolean;
-  /** Overrides the default props passed to [InfiniteScroll](https://github.com/GetStream/stream-chat-react/blob/master/src/components/InfiniteScrollPaginator/InfiniteScroll.tsx) */
+  /** Overrides the default props passed to [InfiniteScroll](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/InfiniteScrollPaginator/InfiniteScroll.tsx) */
   internalInfiniteScrollProps?: Partial<InfiniteScrollProps>;
   /** Function called when latest messages should be loaded, after the list has jumped at an earlier message set */
   jumpToLatestMessage?: () => Promise<void>;
@@ -339,13 +339,13 @@ export type MessageListProps<
   loadingMore?: boolean;
   /** Whether or not the list is currently loading newer items */
   loadingMoreNewer?: boolean;
-  /** Function called when more messages are to be loaded, defaults to function stored in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Function called when more messages are to be loaded, defaults to function stored in [ChannelActionContext] */
   loadMore?: ChannelActionContextValue['loadMore'] | (() => Promise<void>);
-  /** Function called when newer messages are to be loaded, defaults to function stored in [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/) */
+  /** Function called when newer messages are to be loaded, defaults to function stored in [ChannelActionContext] */
   loadMoreNewer?: ChannelActionContextValue['loadMoreNewer'] | (() => Promise<void>);
   /** The limit to use when paginating messages */
   messageLimit?: number;
-  /** The messages to render in the list, defaults to messages stored in [ChannelStateContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_state_context/) */
+  /** The messages to render in the list, defaults to messages stored in [ChannelStateContext] */
   messages?: StreamMessage<ErmisChatGenerics>[];
   /** If true, turns off message UI grouping by user */
   noGroupByUser?: boolean;
@@ -374,14 +374,6 @@ export type MessageListProps<
   threadList?: boolean; // todo: refactor needed - message list should have a state in which among others it would be optionally flagged as thread
 };
 
-/**
- * The MessageList component renders a list of Messages.
- * It is a consumer of the following contexts:
- * - [ChannelStateContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_state_context/)
- * - [ChannelActionContext](https://getstream.io/chat/docs/sdk/react/contexts/channel_action_context/)
- * - [ComponentContext](https://getstream.io/chat/docs/sdk/react/contexts/component_context/)
- * - [TypingContext](https://getstream.io/chat/docs/sdk/react/contexts/typing_context/)
- */
 export const MessageList = <
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(

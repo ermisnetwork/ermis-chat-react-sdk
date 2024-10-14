@@ -33,13 +33,13 @@ export type ThreadProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 > = {
-  /** Additional props for `MessageInput` component: [available props](https://getstream.io/chat/docs/sdk/react/message-input-components/message_input/#props) */
+  /** Additional props for `MessageInput` component: [available props] */
   additionalMessageInputProps?: MessageInputProps<ErmisChatGenerics, V>;
-  /** Additional props for `MessageList` component: [available props](https://getstream.io/chat/docs/sdk/react/core-components/message_list/#props) */
+  /** Additional props for `MessageList` component: [available props] */
   additionalMessageListProps?: MessageListProps<ErmisChatGenerics>;
-  /** Additional props for `Message` component of the parent message: [available props](https://getstream.io/chat/docs/sdk/react/message-components/message/#props) */
+  /** Additional props for `Message` component of the parent message: [available props] */
   additionalParentMessageProps?: Partial<MessageProps<ErmisChatGenerics>>;
-  /** Additional props for `VirtualizedMessageList` component: [available props](https://getstream.io/chat/docs/sdk/react/core-components/virtualized_list/#props) */
+  /** Additional props for `VirtualizedMessageList` component: [available props] */
   additionalVirtualizedMessageListProps?: VirtualizedMessageListProps<ErmisChatGenerics>;
   /** If true, focuses the `MessageInput` component on opening a thread */
   autoFocus?: boolean;
@@ -47,7 +47,7 @@ export type ThreadProps<
   enableDateSeparator?: boolean;
   /** Display the thread on 100% width of its parent container. Useful for mobile style view */
   fullWidth?: boolean;
-  /** Custom thread input UI component used to override the default `Input` value stored in `ComponentContext` or the [MessageInputSmall](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/MessageInputSmall.tsx) default */
+  /** Custom thread input UI component used to override the default `Input` value stored in `ComponentContext` or the [MessageInputSmall](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/MessageInput/MessageInputSmall.tsx) default */
   Input?: React.ComponentType;
   /** Custom thread message UI component used to override the default `Message` value stored in `ComponentContext` */
   Message?: React.ComponentType<MessageUIComponentProps<ErmisChatGenerics>>;

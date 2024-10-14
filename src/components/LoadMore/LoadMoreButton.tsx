@@ -10,7 +10,7 @@ export type LoadMoreButtonProps = {
   isLoading?: boolean;
   /**
    * @desc If true, LoadingIndicator is displayed instead of button
-   * @deprecated Use loading prop instead of refreshing. Planned for removal: https://github.com/GetStream/stream-chat-react/issues/1804
+   * @deprecated Use loading prop instead of refreshing. Planned for removal: https://github.com/ermisnetwork/ermis-chat-react-sdk/issues/1804
    */
   refreshing?: boolean;
 };

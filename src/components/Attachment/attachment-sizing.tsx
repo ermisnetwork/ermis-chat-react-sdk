@@ -97,7 +97,7 @@ const getCSSSizeRestrictions = (htmlElement: HTMLElement) => {
 
   if (!((height || maxHeight) && maxWidth)) {
     console.warn(
-      `Invalid value set for height/max-height and/or max-width for HTML element, this can cause scrolling issues inside the message list, more info https://getstream.io/chat/docs/sdk/react/message-components/attachment/#image-and-video-sizing`,
+      `Invalid value set for height/max-height and/or max-width for HTML element, this can cause scrolling issues inside the message list,
     );
   }
 

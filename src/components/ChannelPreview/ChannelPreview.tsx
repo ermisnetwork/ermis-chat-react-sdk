@@ -40,11 +40,11 @@ export type ChannelPreviewUIComponentProps<
 export type ChannelPreviewProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  /** Comes from either the `channelRenderFilterFn` or `usePaginatedChannels` call from [ChannelList](https://github.com/GetStream/stream-chat-react/blob/master/src/components/ChannelList/ChannelList.tsx) */
+  /** Comes from either the `channelRenderFilterFn` or `usePaginatedChannels` call from [ChannelList](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelList/ChannelList.tsx) */
   channel: Channel<ErmisChatGenerics>;
   /** Current selected channel object */
   activeChannel?: Channel<ErmisChatGenerics>;
-  /** Custom UI component to display user avatar, defaults to and accepts same props as: [Avatar](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Avatar/Avatar.tsx) */
+  /** Custom UI component to display user avatar, defaults to and accepts same props as: [Avatar](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/Avatar/Avatar.tsx) */
   Avatar?: React.ComponentType<AvatarProps>;
   /** Forces the update of preview component on channel update */
   channelUpdateCount?: number;
@@ -53,7 +53,7 @@ export type ChannelPreviewProps<
   key?: string;
   /** Custom ChannelPreview click handler function */
   onSelect?: (event: React.MouseEvent) => void;
-  /** Custom UI component to display the channel preview in the list, defaults to and accepts same props as: [ChannelPreviewMessenger](https://github.com/GetStream/stream-chat-react/blob/master/src/components/ChannelPreview/ChannelPreviewMessenger.tsx) */
+  /** Custom UI component to display the channel preview in the list, defaults to and accepts same props as: [ChannelPreviewMessenger](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelPreview/ChannelPreviewMessenger.tsx) */
   Preview?: React.ComponentType<ChannelPreviewUIComponentProps<ErmisChatGenerics>>;
   /** Setter for selected Channel */
   setActiveChannel?: ChatContextValue<ErmisChatGenerics>['setActiveChannel'];

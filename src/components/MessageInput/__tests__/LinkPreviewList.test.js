@@ -292,7 +292,7 @@ describe('Link preview', () => {
     await act(async () => {
       fireEvent.change(await screen.findByPlaceholderText(inputPlaceholder), {
         target: {
-          value: 'X https://getstream.io',
+          value: 'X https://ermis.network',
         },
       });
     });
@@ -310,7 +310,7 @@ describe('Link preview', () => {
     await act(async () => {
       fireEvent.change(await screen.findByPlaceholderText(inputPlaceholder), {
         target: {
-          value: 'X https://getstream.io',
+          value: 'X https://ermis.network',
         },
       });
     });
