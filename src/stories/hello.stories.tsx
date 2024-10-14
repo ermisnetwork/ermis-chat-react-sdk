@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import type { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
+import type { ChannelFilters, ChannelOptions, ChannelSort } from 'ermis-chat-js-sdk';
 import {
   Channel,
   ChannelHeader,

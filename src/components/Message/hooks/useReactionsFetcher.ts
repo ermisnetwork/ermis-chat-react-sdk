@@ -1,6 +1,6 @@
 import { StreamMessage, useChatContext, useTranslationContext } from '../../../context';
 import { DefaultErmisChatGenerics } from '../../../types/types';
-import { ReactionResponse, ReactionSort, ErmisChat } from 'stream-chat';
+import { ReactionResponse, ReactionSort, ErmisChat } from 'ermis-chat-js-sdk';
 import { ReactionType } from '../../Reactions/types';
 
 export const MAX_MESSAGE_REACTIONS_TO_FETCH = 1000;

@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import { ChatDown, ChatDownProps } from '../ChatDown/ChatDown';
 import { LoadingChannels } from '../Loading/LoadingChannels';
 
-import type { APIErrorResponse, Channel, ErrorFromResponse } from 'stream-chat';
+import type { APIErrorResponse, Channel, ErrorFromResponse } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';
 import { useTranslationContext } from '../../context';

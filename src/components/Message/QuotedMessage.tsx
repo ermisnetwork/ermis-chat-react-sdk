@@ -8,7 +8,7 @@ import { useMessageContext } from '../../context/MessageContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 import { useChannelActionContext } from '../../context/ChannelActionContext';
 
-import type { TranslationLanguages } from 'stream-chat';
+import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';
 

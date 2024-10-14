@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import type { Event } from 'stream-chat';
+import type { Event } from 'ermis-chat-js-sdk';
 
 import { CustomNotification } from './CustomNotification';
 import { useChatContext, useTranslationContext } from '../../context';

@@ -28,7 +28,7 @@ import {
   ErmisChat,
   UpdatedMessage,
   UserResponse,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 import { nanoid } from 'nanoid';
 import clsx from 'clsx';
 

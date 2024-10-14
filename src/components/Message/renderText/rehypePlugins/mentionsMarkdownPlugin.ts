@@ -5,7 +5,7 @@ import { visit } from 'unist-util-visit';
 
 import type { Nodes } from 'hast-util-find-and-replace/lib';
 import type { Element } from 'react-markdown/lib';
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../../../../types/types';
 
 export const mentionsMarkdownPlugin = <

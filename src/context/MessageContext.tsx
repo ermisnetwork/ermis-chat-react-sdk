@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useContext } from 'react';
 
-import type { Mute, ReactionResponse, ReactionSort, UserResponse } from 'stream-chat';
+import type { Mute, ReactionResponse, ReactionSort, UserResponse } from 'ermis-chat-js-sdk';
 
 import type { ChannelActionContextValue } from './ChannelActionContext';
 import type { StreamMessage } from './ChannelStateContext';

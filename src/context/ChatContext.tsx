@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useContext } from 'react';
 
-import type { AppSettingsAPIResponse, Channel, Mute } from 'stream-chat';
+import type { AppSettingsAPIResponse, Channel, Mute } from 'ermis-chat-js-sdk';
 
 import { getDisplayName } from './utils/getDisplayName';
 import type { ChatProps } from '../components/Chat/Chat';

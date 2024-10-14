@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ReactionResponse, ReactionSort } from 'stream-chat';
+import { ReactionResponse, ReactionSort } from 'ermis-chat-js-sdk';
 import { MessageContextValue, useMessageContext } from '../../../context';
 import { DefaultErmisChatGenerics } from '../../../types/types';
 import { ReactionType } from '../types';

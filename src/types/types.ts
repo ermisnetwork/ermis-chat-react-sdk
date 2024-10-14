@@ -9,7 +9,7 @@ import type {
   LiteralStringForUnion,
   Mute,
   ChannelState as StreamChannelState,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 
 export type UnknownType = Record<string, unknown>;
 export type PropsWithChildrenOnly = PropsWithChildren<Record<never, never>>;

@@ -5,7 +5,7 @@ import { ArrowDown } from './icons';
 
 import { useChannelStateContext, useChatContext } from '../../context';
 
-import type { Event } from 'stream-chat';
+import type { Event } from 'ermis-chat-js-sdk';
 import type { MessageNotificationProps } from './MessageNotification';
 
 const UnMemoizedScrollToBottomButton = (

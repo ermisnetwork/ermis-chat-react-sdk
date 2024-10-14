@@ -121,9 +121,9 @@ const fullBrowserBundle = ({ min } = { min: false }) => ({
       globals: {
         react: 'React',
         'react-dom': 'ReactDOM',
-        'stream-chat': 'StreamChat',
+        'ermis-chat': 'ErmisChat',
       },
-      name: 'StreamChatReact', // write all exported values to window under key StreamChatReact
+      name: 'ErmisChatReactSdk', // write all exported values to window under key ErmisChatReactSdk
       sourcemap: true,
     },
   ],
@@ -142,10 +142,10 @@ const fullBrowserBundle = ({ min } = { min: false }) => ({
       globals: false,
       process: true,
     }),
-    // To work with globals rollup expects them to be namespaced, which is not the case with stream-chat.
-    // This injects some code to define stream-chat globals as expected by rollup.
+    // To work with globals rollup expects them to be namespaced, which is not the case with ermis-chat.
+    // This injects some code to define ermis-chat globals as expected by rollup.
     prepend(
-      'window.StreamChat.StreamChat=StreamChat;window.StreamChat.logChatPromiseExecution=logChatPromiseExecution;window.StreamChat.Channel=Channel;window.ICAL=window.ICAL||{};',
+      'window.ErmisChat.ErmisChat=ErmisChat;window.ErmisChat.logChatPromiseExecution=logChatPromiseExecution;window.ErmisChat.Channel=Channel;window.ICAL=window.ICAL||{};',
     ),
     min ? terser() : null,
   ],

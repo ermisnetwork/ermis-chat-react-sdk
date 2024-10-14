@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { Channel, Event } from 'stream-chat';
+import type { Channel, Event } from 'ermis-chat-js-sdk';
 
 import { useChatContext } from '../../../context';
 

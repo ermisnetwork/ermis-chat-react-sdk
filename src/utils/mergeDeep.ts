@@ -1,5 +1,5 @@
 import mergeWith from 'lodash.mergewith';
-import { UR } from 'stream-chat';
+import { UR } from 'ermis-chat-js-sdk';
 
 const overrideEverything = (_: unknown, source: unknown) => source;
 

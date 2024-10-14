@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, useState } from 'react';
 import clsx from 'clsx';
 
-import type { ReactionGroupResponse, ReactionResponse } from 'stream-chat';
+import type { ReactionGroupResponse, ReactionResponse } from 'ermis-chat-js-sdk';
 
 import { useChatContext } from '../../context/ChatContext';
 import { MessageContextValue, useMessageContext } from '../../context/MessageContext';

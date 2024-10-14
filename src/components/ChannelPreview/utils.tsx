@@ -2,7 +2,7 @@ import React from 'react';
 
 import ReactMarkdown from 'react-markdown';
 
-import type { Channel, TranslationLanguages, UserResponse } from 'stream-chat';
+import type { Channel, TranslationLanguages, UserResponse } from 'ermis-chat-js-sdk';
 
 import type { TranslationContextValue } from '../../context/TranslationContext';
 

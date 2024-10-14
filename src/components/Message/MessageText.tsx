@@ -7,7 +7,7 @@ import { useComponentContext, useMessageContext, useTranslationContext } from '.
 import { renderText as defaultRenderText } from './renderText';
 import { MessageErrorText } from './MessageErrorText';
 
-import type { TranslationLanguages } from 'stream-chat';
+import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 import type { MessageContextValue, StreamMessage } from '../../context';
 import type { DefaultErmisChatGenerics } from '../../types/types';
 

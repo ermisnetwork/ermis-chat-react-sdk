@@ -8,7 +8,7 @@ import { Card as DefaultCard } from './Card';
 import { FileAttachment as DefaultFile } from './FileAttachment';
 import { Gallery as DefaultGallery, ImageComponent as DefaultImage } from '../Gallery';
 
-import type { Attachment } from 'stream-chat';
+import type { Attachment } from 'ermis-chat-js-sdk';
 import type { ATTACHMENT_GROUPS_ORDER, AttachmentProps } from './Attachment';
 import type { DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 import type {

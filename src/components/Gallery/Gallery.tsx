@@ -9,7 +9,7 @@ import { ModalGallery as DefaultModalGallery } from './ModalGallery';
 import { useComponentContext } from '../../context/ComponentContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 
-import type { Attachment } from 'stream-chat';
+import type { Attachment } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';
 

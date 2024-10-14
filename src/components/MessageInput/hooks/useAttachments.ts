@@ -13,7 +13,7 @@ import {
   useTranslationContext,
 } from '../../../context';
 
-import type { Attachment, SendFileAPIResponse } from 'stream-chat';
+import type { Attachment, SendFileAPIResponse } from 'ermis-chat-js-sdk';
 import type { MessageInputReducerAction, MessageInputState } from './useMessageInputState';
 import type { MessageInputProps } from '../MessageInput';
 import type {

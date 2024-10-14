@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
-import { ErmisChat } from 'stream-chat';
+import { ErmisChat } from 'ermis-chat-js-sdk';
 import { nanoid } from 'nanoid';
 
 const apiKey = 'API_KEY';

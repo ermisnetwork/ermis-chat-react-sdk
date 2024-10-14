@@ -6,7 +6,7 @@ import { Modal } from '../Modal';
 import { ModalGallery as DefaultModalGallery } from './ModalGallery';
 import { useComponentContext } from '../../context';
 
-import type { Attachment } from 'stream-chat';
+import type { Attachment } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics, Dimensions } from '../../types/types';
 
 export type ImageProps<

@@ -8,7 +8,7 @@ import { AvatarProps, Avatar as DefaultAvatar } from '../Avatar';
 import { useComponentContext } from '../../context/ComponentContext';
 import { useMessageContext } from '../../context/MessageContext';
 
-import type { ReactionGroupResponse, ReactionResponse } from 'stream-chat';
+import type { ReactionGroupResponse, ReactionResponse } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';
 import type { ReactionOptions } from './reactionOptions';

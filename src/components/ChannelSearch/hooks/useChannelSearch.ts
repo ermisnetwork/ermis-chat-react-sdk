@@ -15,7 +15,7 @@ import type {
   UserOptions,
   UsersAPIResponse,
   UserSort,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 import type { SearchBarController } from '../SearchBar';
 import type { SearchInputController } from '../SearchInput';
 import type { SearchResultsController } from '../SearchResults';

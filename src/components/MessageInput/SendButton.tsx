@@ -1,5 +1,5 @@
 import React from 'react';
-import { Message } from 'stream-chat';
+import { Message } from 'ermis-chat-js-sdk';
 import { useChatContext } from '../../context';
 import { SendIconV1, SendIconV2 } from './icons';
 import type { DefaultErmisChatGenerics } from '../../types/types';

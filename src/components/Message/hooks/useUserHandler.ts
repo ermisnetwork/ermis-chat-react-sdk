@@ -1,4 +1,4 @@
-import type { User } from 'stream-chat';
+import type { User } from 'ermis-chat-js-sdk';
 
 import type { ReactEventHandler } from '../types';
 

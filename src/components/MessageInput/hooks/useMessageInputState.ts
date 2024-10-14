@@ -13,7 +13,7 @@ import { LinkPreviewState, SetLinkPreviewMode } from '../types';
 
 import type { FileUpload, ImageUpload, LinkPreviewMap, LocalAttachment } from '../types';
 import type { FileLike } from '../../ReactFileUtilities';
-import type { Attachment, Message, OGAttachment, UserResponse } from 'stream-chat';
+import type { Attachment, Message, OGAttachment, UserResponse } from 'ermis-chat-js-sdk';
 
 import type { MessageInputProps } from '../MessageInput';
 

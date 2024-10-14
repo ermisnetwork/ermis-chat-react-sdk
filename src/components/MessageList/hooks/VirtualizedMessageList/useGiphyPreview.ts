@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useChatContext } from '../../../../context/ChatContext';
 
-import type { EventHandler } from 'stream-chat';
+import type { EventHandler } from 'ermis-chat-js-sdk';
 
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 

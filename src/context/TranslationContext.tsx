@@ -7,7 +7,7 @@ import { getDisplayName } from './utils/getDisplayName';
 
 import type { TFunction } from 'i18next';
 import type { Moment } from 'moment-timezone';
-import type { TranslationLanguages } from 'stream-chat';
+import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 
 import type { UnknownType } from '../types/types';
 import { defaultTranslatorFunction } from '../i18n';

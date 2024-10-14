@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FileUploadButton, ImageDropzone } from '../ReactFileUtilities';
-import type { Event } from 'stream-chat';
+import type { Event } from 'ermis-chat-js-sdk';
 
 import { FileUploadIconFlat as DefaultFileUploadIcon, EmojiIconSmall } from './icons';
 import { UploadsPreview } from './UploadsPreview';

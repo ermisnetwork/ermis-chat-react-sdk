@@ -6,7 +6,7 @@ import type {
   MessageResponse,
   Mute,
   ChannelState as StreamChannelState,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 
 import type {
   ChannelUnreadUiState,

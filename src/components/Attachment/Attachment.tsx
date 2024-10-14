@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import type { ReactPlayerProps } from 'react-player';
-import type { Attachment as StreamAttachment } from 'stream-chat';
+import type { Attachment as StreamAttachment } from 'ermis-chat-js-sdk';
 
 import {
   GroupedRenderedAttachment,

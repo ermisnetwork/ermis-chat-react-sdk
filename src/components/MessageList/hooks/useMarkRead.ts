@@ -5,7 +5,7 @@ import {
   useChannelStateContext,
   useChatContext,
 } from '../../../context';
-import { Event, MessageResponse } from 'stream-chat';
+import { Event, MessageResponse } from 'ermis-chat-js-sdk';
 import { DefaultErmisChatGenerics } from '../../../types';
 
 type UseMarkReadParams = {

@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import type { DefaultGenerics, ExtendableGenerics, ReactionResponse } from 'stream-chat';
+import type { DefaultGenerics, ExtendableGenerics, ReactionResponse } from 'ermis-chat-js-sdk';
 import { DefaultErmisChatGenerics } from '../../types';
 
 export interface ReactionSummary {

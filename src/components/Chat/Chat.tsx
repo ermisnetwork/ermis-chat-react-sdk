@@ -8,7 +8,7 @@ import { CustomStyles, darkModeTheme, useCustomStyles } from './hooks/useCustomS
 import { ChatProvider, CustomClasses, ThemeVersion } from '../../context/ChatContext';
 import { SupportedTranslations, TranslationProvider } from '../../context/TranslationContext';
 
-import type { ErmisChat } from 'stream-chat';
+import type { ErmisChat } from 'ermis-chat-js-sdk';
 
 import type { Streami18n } from '../../i18n/Streami18n';
 

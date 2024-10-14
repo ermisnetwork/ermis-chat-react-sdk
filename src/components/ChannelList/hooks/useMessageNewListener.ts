@@ -5,7 +5,7 @@ import { moveChannelUp } from '../utils';
 
 import { useChatContext } from '../../../context/ChatContext';
 
-import type { Channel, Event } from 'stream-chat';
+import type { Channel, Event } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 

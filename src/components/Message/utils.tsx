@@ -2,7 +2,7 @@ import deepequal from 'react-fast-compare';
 import emojiRegex from 'emoji-regex';
 
 import type { TFunction } from 'i18next';
-import type { MessageResponse, Mute, ErmisChat, UserResponse } from 'stream-chat';
+import type { MessageResponse, Mute, ErmisChat, UserResponse } from 'ermis-chat-js-sdk';
 import type { PinPermissions } from './hooks';
 import type { MessageProps } from './types';
 import type { MessageContextValue, StreamMessage } from '../../context';

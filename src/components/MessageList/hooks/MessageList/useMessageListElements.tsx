@@ -6,7 +6,7 @@ import { getLastReceived, GroupStyle } from '../../utils';
 import { useChatContext } from '../../../../context/ChatContext';
 import { useComponentContext } from '../../../../context/ComponentContext';
 
-import type { ChannelState as StreamChannelState } from 'stream-chat';
+import type { ChannelState as StreamChannelState } from 'ermis-chat-js-sdk';
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 
 import type { ChannelUnreadUiState, DefaultErmisChatGenerics } from '../../../../types/types';

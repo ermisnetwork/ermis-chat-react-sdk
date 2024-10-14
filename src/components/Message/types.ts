@@ -1,5 +1,5 @@
 import type { TFunction } from 'i18next';
-import type { ReactionSort, UserResponse } from 'stream-chat';
+import type { ReactionSort, UserResponse } from 'ermis-chat-js-sdk';
 
 import type { PinPermissions, UserEventHandler } from './hooks';
 import type { MessageActionsArray } from './utils';

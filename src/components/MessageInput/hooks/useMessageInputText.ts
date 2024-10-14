@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { logChatPromiseExecution } from 'stream-chat';
+import { logChatPromiseExecution } from 'ermis-chat-js-sdk';
 import type { MessageInputReducerAction, MessageInputState } from './useMessageInputState';
 import type { MessageInputProps } from '../MessageInput';
 import { useChannelStateContext } from '../../../context/ChannelStateContext';

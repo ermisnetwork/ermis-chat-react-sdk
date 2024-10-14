@@ -10,7 +10,7 @@ import { emojiMarkdownPlugin, mentionsMarkdownPlugin } from './rehypePlugins';
 import { htmlToTextPlugin, keepLineBreaksPlugin } from './remarkPlugins';
 
 import type { PluggableList } from 'react-markdown/lib';
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type RenderTextPluginConfigurator = (defaultPlugins: PluggableList) => PluggableList;

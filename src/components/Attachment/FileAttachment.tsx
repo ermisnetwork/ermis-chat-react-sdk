@@ -1,6 +1,6 @@
 import React from 'react';
 import { FileIcon } from '../ReactFileUtilities';
-import type { Attachment } from 'stream-chat';
+import type { Attachment } from 'ermis-chat-js-sdk';
 
 import { DownloadButton, FileSizeIndicator } from './components';
 import { SafeAnchor } from '../SafeAnchor/SafeAnchor';

@@ -9,7 +9,7 @@ import {
 import { Streami18n } from '../../../i18n';
 import { version } from '../../../version';
 
-import type { AppSettingsAPIResponse, Channel, Event, Mute, ErmisChat } from 'stream-chat';
+import type { AppSettingsAPIResponse, Channel, Event, Mute, ErmisChat } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 

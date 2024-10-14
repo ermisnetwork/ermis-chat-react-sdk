@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Channel } from 'stream-chat';
+import type { Channel } from 'ermis-chat-js-sdk';
 
 import { getDisplayImage, getDisplayTitle } from '../utils';
 import type { DefaultErmisChatGenerics } from '../../../types/types';

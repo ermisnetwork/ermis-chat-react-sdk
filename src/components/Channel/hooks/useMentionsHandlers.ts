@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 

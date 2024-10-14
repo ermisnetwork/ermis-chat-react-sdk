@@ -1,4 +1,4 @@
-import type { Channel } from 'stream-chat';
+import type { Channel } from 'ermis-chat-js-sdk';
 import uniqBy from 'lodash.uniqby';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';

@@ -3,7 +3,7 @@ import uniqBy from 'lodash.uniqby';
 
 import { MAX_QUERY_CHANNELS_LIMIT } from '../utils';
 
-import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, ErmisChat } from 'stream-chat';
+import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, ErmisChat } from 'ermis-chat-js-sdk';
 
 import { useChatContext } from '../../../context/ChatContext';
 

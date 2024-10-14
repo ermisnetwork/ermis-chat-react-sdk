@@ -1,7 +1,7 @@
 import { useChannelActionContext } from '../../../context/ChannelActionContext';
 
 import type React from 'react';
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 
 import type { ReactEventHandler } from '../types';
 

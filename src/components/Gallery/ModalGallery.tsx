@@ -3,7 +3,7 @@ import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery';
 import { BaseImage } from './BaseImage';
 import { useTranslationContext } from '../../context';
 
-import type { Attachment } from 'stream-chat';
+import type { Attachment } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ModalGalleryProps<

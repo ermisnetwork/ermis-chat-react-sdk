@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback } from 'react';
-import type { ChannelSort } from 'stream-chat';
+import type { ChannelSort } from 'ermis-chat-js-sdk';
 import {
   Channel,
   ChannelHeader,

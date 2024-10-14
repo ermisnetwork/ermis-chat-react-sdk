@@ -5,7 +5,7 @@ import { Message, MessageProps } from '../Message';
 import { ComponentContextValue, CustomClasses } from '../../context';
 import { CUSTOM_MESSAGE_TYPE } from '../../constants/messageTypes';
 
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 import type { ChannelUnreadUiState, DefaultErmisChatGenerics } from '../../types';
 import type { StreamMessage } from '../../context/ChannelStateContext';
 

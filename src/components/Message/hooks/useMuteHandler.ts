@@ -4,7 +4,7 @@ import { StreamMessage, useChannelStateContext } from '../../../context/ChannelS
 import { useChatContext } from '../../../context/ChatContext';
 import { useTranslationContext } from '../../../context/TranslationContext';
 
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 
 import type { ReactEventHandler } from '../types';
 

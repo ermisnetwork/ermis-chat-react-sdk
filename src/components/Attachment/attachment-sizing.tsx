@@ -1,4 +1,4 @@
-import type { Attachment } from 'stream-chat';
+import type { Attachment } from 'ermis-chat-js-sdk';
 import * as linkify from 'linkifyjs';
 
 export const getImageAttachmentConfiguration = (attachment: Attachment, element: HTMLElement) => {

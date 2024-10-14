@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { getReadStates } from '../utils';
 
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 
 import type { StreamMessage } from '../../../context/ChannelStateContext';
 

@@ -4,7 +4,7 @@ import { useChannelStateContext } from '../../../context/ChannelStateContext';
 import { useChatContext } from '../../../context/ChatContext';
 import { useTranslationContext } from '../../../context';
 
-import type { CommandResponse } from 'stream-chat';
+import type { CommandResponse } from 'ermis-chat-js-sdk';
 
 import type { CommandTriggerSetting } from '../DefaultTriggerProvider';
 

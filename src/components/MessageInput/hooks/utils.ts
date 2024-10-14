@@ -1,5 +1,5 @@
 import type { ImageUpload } from '../../ReactFileUtilities';
-import type { AppSettingsAPIResponse, FileUploadConfig, UserResponse } from 'stream-chat';
+import type { AppSettingsAPIResponse, FileUploadConfig, UserResponse } from 'ermis-chat-js-sdk';
 
 import type { ChannelActionContextValue } from '../../../context/ChannelActionContext';
 import type { ChatContextValue } from '../../../context/ChatContext';

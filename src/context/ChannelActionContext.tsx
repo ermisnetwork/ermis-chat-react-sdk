@@ -9,7 +9,7 @@ import type {
   UpdatedMessage,
   UpdateMessageAPIResponse,
   UserResponse,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 
 import type { StreamMessage } from './ChannelStateContext';
 

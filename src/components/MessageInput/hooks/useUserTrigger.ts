@@ -8,7 +8,7 @@ import { UserItem } from '../../UserItem/UserItem';
 import { useChatContext } from '../../../context/ChatContext';
 import { useChannelStateContext } from '../../../context/ChannelStateContext';
 
-import type { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 
 import type { SearchQueryParams } from '../../ChannelSearch/hooks/useChannelSearch';
 import type { UserTriggerSetting } from '../../MessageInput/DefaultTriggerProvider';

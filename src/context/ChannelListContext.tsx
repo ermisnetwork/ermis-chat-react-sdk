@@ -6,7 +6,7 @@ import React, {
   useContext,
 } from 'react';
 
-import type { Channel } from 'stream-chat';
+import type { Channel } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../types/types';
 

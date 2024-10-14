@@ -7,7 +7,7 @@ import { useChatContext } from '../../../context/ChatContext';
 
 import type { ReactEventHandler } from '../types';
 
-import type { Reaction, ReactionResponse } from 'stream-chat';
+import type { Reaction, ReactionResponse } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 

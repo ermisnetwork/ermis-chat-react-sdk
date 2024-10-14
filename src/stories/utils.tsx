@@ -7,7 +7,7 @@ import {
   ErmisChat,
   TokenOrProvider,
   UserResponse,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 
 const appKey = import.meta.env.E2E_APP_KEY;
 if (!appKey || typeof appKey !== 'string') {

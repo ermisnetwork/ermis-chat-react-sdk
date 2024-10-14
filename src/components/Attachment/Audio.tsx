@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Attachment } from 'stream-chat';
+import type { Attachment } from 'ermis-chat-js-sdk';
 
 import { DownloadButton, FileSizeIndicator, PlayButton, ProgressBar } from './components';
 import { useAudioController } from './hooks/useAudioController';

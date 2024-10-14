@@ -16,7 +16,7 @@ import { useMessageContext } from '../../context/MessageContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 import { renderText } from './renderText';
 
-import type { TranslationLanguages } from 'stream-chat';
+import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
 

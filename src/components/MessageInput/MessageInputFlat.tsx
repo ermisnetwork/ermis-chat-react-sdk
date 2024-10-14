@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FileUploadButton, ImageDropzone, UploadButton } from '../ReactFileUtilities';
-import type { Event } from 'stream-chat';
+import type { Event } from 'ermis-chat-js-sdk';
 import clsx from 'clsx';
 import { useDropzone } from 'react-dropzone';
 import { nanoid } from 'nanoid';

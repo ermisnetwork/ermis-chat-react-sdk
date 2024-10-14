@@ -7,7 +7,7 @@ import {
   ErmisChat,
   TokenOrProvider,
   UserResponse,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 
 /**
  * React hook to create, connect and return `ErmisChat` client.

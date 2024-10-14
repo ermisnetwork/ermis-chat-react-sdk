@@ -34,7 +34,7 @@ import { LoadMorePaginator, LoadMorePaginatorProps } from '../LoadMore/LoadMoreP
 import { ChannelListContextProvider } from '../../context';
 import { useChatContext } from '../../context/ChatContext';
 
-import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, Event } from 'stream-chat';
+import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, Event } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics, PaginatorProps } from '../../types/types';
 

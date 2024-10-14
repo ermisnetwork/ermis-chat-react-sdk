@@ -3,7 +3,7 @@ import type {
   ChannelQueryOptions,
   QueryChannelAPIResponse,
   ErmisChat,
-} from 'stream-chat';
+} from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../types/types';
 
 /**

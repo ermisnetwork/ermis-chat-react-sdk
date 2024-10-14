@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import type { TranslationLanguages } from 'stream-chat';
+import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 
 import { Avatar as DefaultAvatar } from '../Avatar';
 import { CloseIcon } from './icons';

@@ -1,6 +1,6 @@
 import { useChatContext } from '../../../context/ChatContext';
 
-import type { ErmisChat, UpdatedMessage } from 'stream-chat';
+import type { ErmisChat, UpdatedMessage } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics, UpdateMessageOptions } from '../../../types/types';
 

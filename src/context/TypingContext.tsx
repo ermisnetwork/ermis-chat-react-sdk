@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useContext } from 'react';
 
-import type { ChannelState as StreamChannelState } from 'stream-chat';
+import type { ChannelState as StreamChannelState } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics, UnknownType } from '../types/types';
 

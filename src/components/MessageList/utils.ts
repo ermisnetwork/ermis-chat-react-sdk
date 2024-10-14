@@ -5,7 +5,7 @@ import { CUSTOM_MESSAGE_TYPE } from '../../constants/messageTypes';
 
 import { isDate } from '../../context/TranslationContext';
 
-import type { MessageLabel, UserResponse } from 'stream-chat';
+import type { MessageLabel, UserResponse } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../../types/types';
 import type { StreamMessage } from '../../context/ChannelStateContext';
 import { isMessageEdited } from '../Message/utils';

@@ -4,7 +4,7 @@ import { useChannelStateContext } from '../../../context/ChannelStateContext';
 import { useTranslationContext } from '../../../context/TranslationContext';
 import { LinkPreviewState } from '../types';
 
-import type { Attachment, Message, UpdatedMessage } from 'stream-chat';
+import type { Attachment, Message, UpdatedMessage } from 'ermis-chat-js-sdk';
 
 import type { MessageInputReducerAction, MessageInputState } from './useMessageInputState';
 import type { MessageInputProps } from '../MessageInput';

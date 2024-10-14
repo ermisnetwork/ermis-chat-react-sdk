@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Action, Attachment } from 'stream-chat';
+import type { Action, Attachment } from 'ermis-chat-js-sdk';
 
 import { useTranslationContext } from '../../context';
 

@@ -10,7 +10,7 @@ import { ChatContextValue, useChatContext } from '../../context/ChatContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 import { MessageDeliveryStatus, useMessageDeliveryStatus } from './hooks/useMessageDeliveryStatus';
 
-import type { Channel, Event } from 'stream-chat';
+import type { Channel, Event } from 'ermis-chat-js-sdk';
 
 import type { AvatarProps } from '../Avatar/Avatar';
 

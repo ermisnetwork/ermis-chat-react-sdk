@@ -7,7 +7,7 @@ import { useMessageInputContext } from '../../context/MessageInputContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 import { useComponentContext } from '../../context/ComponentContext';
 
-import type { CommandResponse, UserResponse } from 'stream-chat';
+import type { CommandResponse, UserResponse } from 'ermis-chat-js-sdk';
 
 import type { TriggerSettings } from '../MessageInput/DefaultTriggerProvider';
 

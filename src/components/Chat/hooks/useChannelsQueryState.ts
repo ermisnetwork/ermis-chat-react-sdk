@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import type { APIErrorResponse, ErrorFromResponse } from 'stream-chat';
+import type { APIErrorResponse, ErrorFromResponse } from 'ermis-chat-js-sdk';
 
 type ChannelQueryState =
   | 'uninitialized' // the initial state before the first channels query is triggered

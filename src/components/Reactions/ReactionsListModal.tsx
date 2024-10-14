@@ -9,7 +9,7 @@ import { LoadingIndicator } from '../Loading';
 import { Avatar } from '../Avatar';
 import { MessageContextValue, useMessageContext } from '../../context';
 import { DefaultErmisChatGenerics } from '../../types/types';
-import { ReactionSort } from 'stream-chat';
+import { ReactionSort } from 'ermis-chat-js-sdk';
 
 type ReactionsListModalProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics

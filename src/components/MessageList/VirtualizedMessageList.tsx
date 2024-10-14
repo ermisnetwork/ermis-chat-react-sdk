@@ -57,7 +57,7 @@ import {
 import { ChatContextValue, useChatContext } from '../../context/ChatContext';
 import { ComponentContextValue, useComponentContext } from '../../context/ComponentContext';
 
-import type { Channel, ChannelState as StreamChannelState, UserResponse } from 'stream-chat';
+import type { Channel, ChannelState as StreamChannelState, UserResponse } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 import { DEFAULT_NEXT_CHANNEL_PAGE_SIZE } from '../../constants/limits';
 
