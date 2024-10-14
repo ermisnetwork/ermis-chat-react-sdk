@@ -38,155 +38,6 @@ Dayjs.extend(updateLocale);
 Dayjs.extend(utc);
 Dayjs.extend(timezone);
 
-Dayjs.updateLocale('de', {
-  calendar: {
-    lastDay: '[gestern um] LT',
-    lastWeek: '[letzten] dddd [um] LT',
-    nextDay: '[morgen um] LT',
-    nextWeek: 'dddd [um] LT',
-    sameDay: '[heute um] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('es', {
-  calendar: {
-    lastDay: '[ayer a las] LT',
-    lastWeek: '[pasado] dddd [a] LT',
-    nextDay: '[mañana a] LT',
-    nextWeek: 'dddd [a] LT',
-    sameDay: '[hoy a las] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('fr', {
-  calendar: {
-    lastDay: '[Hier à] LT',
-    lastWeek: 'dddd [dernier à] LT',
-    nextDay: '[Demain à] LT',
-    nextWeek: 'dddd [à] LT',
-    sameDay: '[Aujourd’hui à] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('hi', {
-  calendar: {
-    lastDay: '[कल] LT',
-    lastWeek: '[पिछले] dddd, LT',
-    nextDay: '[कल] LT',
-    nextWeek: 'dddd, LT',
-    sameDay: '[आज] LT',
-    sameElse: 'L',
-  },
-  // Hindi notation for meridiems are quite fuzzy in practice. While there exists
-  // a rigid notion of a 'Pahar' it is not used as rigidly in modern Hindi.
-  meridiem(hour: number) {
-    if (hour < 4) {
-      return 'रात';
-    } else if (hour < 10) {
-      return 'सुबह';
-    } else if (hour < 17) {
-      return 'दोपहर';
-    } else if (hour < 20) {
-      return 'शाम';
-    } else {
-      return 'रात';
-    }
-  },
-  meridiemHour(hour: number, meridiem: string) {
-    if (hour === 12) {
-      hour = 0;
-    }
-    if (meridiem === 'रात') {
-      return hour < 4 ? hour : hour + 12;
-    } else if (meridiem === 'सुबह') {
-      return hour;
-    } else if (meridiem === 'दोपहर') {
-      return hour >= 10 ? hour : hour + 12;
-    } else if (meridiem === 'शाम') {
-      return hour + 12;
-    }
-    return hour;
-  },
-  meridiemParse: /रात|सुबह|दोपहर|शाम/,
-});
-
-Dayjs.updateLocale('it', {
-  calendar: {
-    lastDay: '[Ieri alle] LT',
-    lastWeek: '[lo scorso] dddd [alle] LT',
-    nextDay: '[Domani alle] LT',
-    nextWeek: 'dddd [alle] LT',
-    sameDay: '[Oggi alle] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('ja', {
-  calendar: {
-    lastDay: '[昨日] LT',
-    lastWeek: 'dddd LT',
-    nextDay: '[明日] LT',
-    nextWeek: '[次の] dddd LT',
-    sameDay: '[今日] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('ko', {
-  calendar: {
-    lastDay: '[어제] LT',
-    lastWeek: '[지난] dddd LT',
-    nextDay: '[내일] LT',
-    nextWeek: 'dddd LT',
-    sameDay: '[오늘] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('nl', {
-  calendar: {
-    lastDay: '[gisteren om] LT',
-    lastWeek: '[afgelopen] dddd [om] LT',
-    nextDay: '[morgen om] LT',
-    nextWeek: 'dddd [om] LT',
-    sameDay: '[vandaag om] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('pt', {
-  calendar: {
-    lastDay: '[ontem às] LT',
-    lastWeek: 'dddd [passada às] LT',
-    nextDay: '[amanhã às] LT',
-    nextWeek: 'dddd [às] LT',
-    sameDay: '[hoje às] LT',
-    sameElse: 'L',
-  },
-});
-
-Dayjs.updateLocale('ru', {
-  calendar: {
-    lastDay: '[Вчера, в] LT',
-    nextDay: '[Завтра, в] LT',
-    sameDay: '[Сегодня, в] LT',
-  },
-});
-
-Dayjs.updateLocale('tr', {
-  calendar: {
-    lastDay: '[dün] LT',
-    lastWeek: '[geçen] dddd [saat] LT',
-    nextDay: '[yarın saat] LT',
-    nextWeek: '[gelecek] dddd [saat] LT',
-    sameDay: '[bugün saat] LT',
-    sameElse: 'L',
-  },
-});
-
 const en_locale = {
   formats: {},
   months: [
@@ -235,22 +86,11 @@ export type Streami18nOptions = {
  * Instance of this class should be provided to Chat component to handle translations.
  * Stream provides following list of in-built translations:
  * 1. English (en)
- * 2. Dutch (nl)
- * 3. Russian (ru)
- * 4. Turkish (tr)
- * 5. French (fr)
- * 6. Italian (it)
- * 7. Hindi (hi)
- * 8. Spanish (es)
- * 9. Portuguese (pt)
- * 10. German (de)
- * 11. Japanese (ja)
- * 12. Korean (ko)
  *
  * Simplest way to start using chat components in one of the in-built languages would be following:
  *
  * ```
- * const i18n = new Streami18n({ language 'nl' });
+ * const i18n = new Streami18n({ language 'en' });
  * <Chat client={chatClient} i18nInstance={i18n}>
  *  ...
  * </Chat>
@@ -261,7 +101,7 @@ export type Streami18nOptions = {
  *
  * ```
  * const i18n = new Streami18n({
- *  language: 'nl',
+ *  language: 'en',
  *  translationsForLanguage: {
  *    'Nothing yet...': 'Nog Niet ...',
  *    '{{ firstUser }} and {{ secondUser }} are typing...': '{{ firstUser }} en {{ secondUser }} zijn aan het typen...',
