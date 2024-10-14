@@ -95,7 +95,7 @@ export const useReactionHandler = <
       updateMessage(tempMessage);
 
       const messageResponse = add
-        ? await channel.sendReaction(id, { type } as Reaction<ErmisChatGenerics>)
+        ? await channel.sendReaction(id, type)
         : await channel.deleteReaction(id, type);
 
       updateMessage(messageResponse.message);

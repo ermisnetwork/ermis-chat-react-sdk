@@ -42,9 +42,7 @@ export type SearchQueryParams<
     sort?: ChannelSort<ErmisChatGenerics>;
   };
   userFilters?: {
-    filters?:
-      | UserFilters<ErmisChatGenerics>
-      | ((query: string) => UserFilters<ErmisChatGenerics>);
+    filters?: UserFilters<ErmisChatGenerics> | ((query: string) => UserFilters<ErmisChatGenerics>);
     options?: UserOptions;
     sort?: UserSort<ErmisChatGenerics>;
   };
@@ -217,21 +215,14 @@ export const useChannelSearch = <
     async (text: string) => {
       let results: ChannelOrUserResponse<ErmisChatGenerics>[] = [];
       try {
-        const userQueryPromise = client.queryUsers(
-          // @ts-expect-error
-          {
-            $or: [{ id: { $autocomplete: text } }, { name: { $autocomplete: text } }],
-            id: { $ne: client.userID },
-            ...searchQueryParams?.userFilters?.filters,
-          },
-          { id: 1, ...searchQueryParams?.userFilters?.sort },
-          { limit: 8, ...searchQueryParams?.userFilters?.options },
-        );
+        const page = 1;
+        const page_size = '1000';
+        const userQueryPromise: any = client.queryUsers(page_size, page);
 
         if (!searchForChannels) {
-          searchQueryPromiseInProgress.current = userQueryPromise;
-          const { users } = await searchQueryPromiseInProgress.current;
-          results = users;
+          // searchQueryPromiseInProgress.current = userQueryPromise;
+          // const { users } = await searchQueryPromiseInProgress.current;
+          results = userQueryPromise.data;
         } else {
           const channelQueryPromise = client.queryChannels(
             // @ts-expect-error

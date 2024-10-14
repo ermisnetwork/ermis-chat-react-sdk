@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 import {
   DefaultGenerics,
+  ErmisChat,
   ExtendableGenerics,
   OwnUserResponse,
-  ErmisChat,
   TokenOrProvider,
   UserResponse,
 } from 'ermis-chat-js-sdk';
@@ -14,10 +14,12 @@ import {
  */
 export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGenerics>({
   apiKey,
+  projectId,
   tokenOrProvider,
   userData,
 }: {
   apiKey: string;
+  projectId: string;
   tokenOrProvider: TokenOrProvider;
   userData: OwnUserResponse<SCG> | UserResponse<SCG>;
 }) => {
@@ -29,7 +31,7 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
   }
 
   useEffect(() => {
-    const client = new ErmisChat<SCG>(apiKey);
+    const client = new ErmisChat<SCG>(apiKey, projectId);
     let didUserConnectInterrupt = false;
 
     const connectionPromise = client.connectUser(cachedUserData, tokenOrProvider).then(() => {

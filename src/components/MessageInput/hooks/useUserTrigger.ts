@@ -65,29 +65,26 @@ export const useUserTrigger = <
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const queryMembersThrottled = useCallback(
-    throttle(
-      async (query: string, onReady: (users: UserResponse<ErmisChatGenerics>[]) => void) => {
-        try {
-          // @ts-expect-error
-          const response = await channel.queryMembers({
-            name: { $autocomplete: query },
-          });
+    throttle(async (query: string, onReady: (users: UserResponse<ErmisChatGenerics>[]) => void) => {
+      try {
+        // @ts-expect-error
+        const response = await channel.queryMembers({
+          name: { $autocomplete: query },
+        });
 
-          const users = response.members.map(
-            (member) => member.user,
-          ) as UserResponse<ErmisChatGenerics>[];
+        const users = response.members.map(
+          (member) => member.user,
+        ) as UserResponse<ErmisChatGenerics>[];
 
-          if (onReady && users.length) {
-            onReady(users);
-          } else {
-            onReady([]);
-          }
-        } catch (error) {
-          console.log({ error });
+        if (onReady && users.length) {
+          onReady(users);
+        } else {
+          onReady([]);
         }
-      },
-      200,
-    ),
+      } catch (error) {
+        console.log({ error });
+      }
+    }, 200),
     [channel],
   );
 
@@ -99,23 +96,12 @@ export const useUserTrigger = <
     setSearching(true);
 
     try {
-      const { users } = await client.queryUsers(
-        // @ts-expect-error
-        {
-          $or: [{ id: { $autocomplete: query } }, { name: { $autocomplete: query } }],
-          id: { $ne: client.userID },
-          ...(typeof mentionQueryParams.filters === 'function'
-            ? mentionQueryParams.filters(query)
-            : mentionQueryParams.filters),
-        },
-        Array.isArray(mentionQueryParams.sort)
-          ? [{ id: 1 }, ...mentionQueryParams.sort]
-          : { id: 1, ...mentionQueryParams.sort },
-        { limit: 10, ...mentionQueryParams.options },
-      );
+      const page = 1;
+      const page_size = '1000';
+      const response = await client.queryUsers(page_size, page);
 
-      if (onReady && users.length) {
-        onReady(users);
+      if (onReady && response && response.data.length) {
+        onReady(response.data);
       } else {
         onReady([]);
       }

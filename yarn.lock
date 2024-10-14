@@ -2397,6 +2397,11 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
+"@types/event-source-polyfill@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@types/event-source-polyfill/-/event-source-polyfill-1.0.5.tgz#7223387b99ff519b0fed6278961c84315ffc14b7"
+  integrity sha512-iaiDuDI2aIFft7XkcwMzDWLqo7LVDixd2sR6B4wxJut9xcp/Ev9bO4EFg4rm6S9QxATLBj5OPxdeocgmhjwKaw==
+
 "@types/fs-extra@^8.0.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-8.1.1.tgz#1e49f22d09aa46e19b51c0b013cb63d0d923a068"
@@ -5676,6 +5681,23 @@ eol@^0.9.1:
   resolved "https://registry.yarnpkg.com/eol/-/eol-0.9.1.tgz#f701912f504074be35c6117a5c4ade49cd547acd"
   integrity sha512-Ds/TEoZjwggRoz/Q2O7SE3i4Jm66mqTDfmdHdq/7DKVk3bro9Q8h6WdXKdPqFLMoqxrDK5SVRzHVPOS6uuGtrg==
 
+ermis-chat-js-sdk@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/ermis-chat-js-sdk/-/ermis-chat-js-sdk-1.1.5.tgz#0f143126a4266e8efadf5e00c8169a527be6958d"
+  integrity sha512-Mh8zR8bgZyUIniTMvB7/cmPyamrBYTrNujsmFx/mipcB5ARDodkR/8g73oyhZHALPkzybfiRMXayBM/1/W/neA==
+  dependencies:
+    "@babel/runtime" "^7.16.3"
+    "@types/event-source-polyfill" "^1.0.5"
+    "@types/jsonwebtoken" "~9.0.0"
+    "@types/ws" "^7.4.0"
+    axios "^1.6.0"
+    base64-js "^1.5.1"
+    event-source-polyfill "^1.0.31"
+    form-data "^4.0.0"
+    isomorphic-ws "^4.0.1"
+    jsonwebtoken "~9.0.0"
+    ws "^7.4.4"
+
 err-code@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/err-code/-/err-code-2.0.3.tgz#23c2f3b756ffdfc608d30e27c9a941024807e7f9"
@@ -6303,6 +6325,11 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==
+
+event-source-polyfill@^1.0.31:
+  version "1.0.31"
+  resolved "https://registry.yarnpkg.com/event-source-polyfill/-/event-source-polyfill-1.0.31.tgz#45fb0a6fc1375b2ba597361ba4287ffec5bf2e0c"
+  integrity sha512-4IJSItgS/41IxN5UVAVuAyczwZF7ZIEsM1XAoUzIHA6A+xzusEZUutdXz2Nr+MQPLxfTiCvqE79/C8HT8fKFvA==
 
 eventemitter3@^4.0.0:
   version "4.0.7"
@@ -13321,21 +13348,6 @@ stream-browserify@^2.0.1:
   dependencies:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
-
-stream-chat@^8.33.1:
-  version "8.33.1"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.33.1.tgz#d4e7f3bb10ac4564572431922c97e7c4eda7fe3b"
-  integrity sha512-r4vUjjsBTtCER2wEFYJzbgSY7eipPkM9gyQNV5VVdZhegY/NggeinwY1bYpBXBpQ5JIEvNFIWWRPOFYkMae3MQ==
-  dependencies:
-    "@babel/runtime" "^7.16.3"
-    "@types/jsonwebtoken" "~9.0.0"
-    "@types/ws" "^7.4.0"
-    axios "^1.6.0"
-    base64-js "^1.5.1"
-    form-data "^4.0.0"
-    isomorphic-ws "^4.0.1"
-    jsonwebtoken "~9.0.0"
-    ws "^7.4.4"
 
 stream-combiner2@~1.1.1:
   version "1.1.1"
