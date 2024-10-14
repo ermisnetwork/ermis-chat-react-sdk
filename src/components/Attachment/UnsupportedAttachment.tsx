@@ -2,19 +2,19 @@ import React from 'react';
 import { FileIcon } from '../ReactFileUtilities';
 import { useTranslationContext } from '../../context';
 import type { Attachment } from 'stream-chat';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type UnsupportedAttachmentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  attachment: Attachment<StreamChatGenerics>;
+  attachment: Attachment<ErmisChatGenerics>;
 };
 
 export const UnsupportedAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
-}: UnsupportedAttachmentProps<StreamChatGenerics>) => {
+}: UnsupportedAttachmentProps<ErmisChatGenerics>) => {
   const { t } = useTranslationContext('UnsupportedAttachment');
   return (
     <div className='str-chat__message-attachment-unsupported' data-testid='attachment-unsupported'>

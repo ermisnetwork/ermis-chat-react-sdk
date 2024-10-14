@@ -4,18 +4,18 @@ import type { Event } from 'stream-chat';
 
 import { CustomNotification } from './CustomNotification';
 import { useChatContext, useTranslationContext } from '../../context';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 const UnMemoizedConnectionStatus = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
-  const { client } = useChatContext<StreamChatGenerics>('ConnectionStatus');
+  const { client } = useChatContext<ErmisChatGenerics>('ConnectionStatus');
   const { t } = useTranslationContext('ConnectionStatus');
 
   const [online, setOnline] = useState(true);
 
   useEffect(() => {
-    const connectionChanged = ({ online: onlineStatus = false }: Event<StreamChatGenerics>) => {
+    const connectionChanged = ({ online: onlineStatus = false }: Event<ErmisChatGenerics>) => {
       if (online !== onlineStatus) {
         setOnline(onlineStatus);
       }

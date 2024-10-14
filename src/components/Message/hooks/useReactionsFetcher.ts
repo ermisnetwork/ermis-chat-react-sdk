@@ -1,30 +1,30 @@
 import { StreamMessage, useChatContext, useTranslationContext } from '../../../context';
-import { DefaultStreamChatGenerics } from '../../../types/types';
-import { ReactionResponse, ReactionSort, StreamChat } from 'stream-chat';
+import { DefaultErmisChatGenerics } from '../../../types/types';
+import { ReactionResponse, ReactionSort, ErmisChat } from 'stream-chat';
 import { ReactionType } from '../../Reactions/types';
 
 export const MAX_MESSAGE_REACTIONS_TO_FETCH = 1000;
 
 type FetchMessageReactionsNotifications<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  getErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   notify?: (notificationText: string, type: 'success' | 'error') => void;
 };
 
 export function useReactionsFetcher<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: StreamMessage<StreamChatGenerics>,
-  notifications: FetchMessageReactionsNotifications<StreamChatGenerics> = {},
+  message: StreamMessage<ErmisChatGenerics>,
+  notifications: FetchMessageReactionsNotifications<ErmisChatGenerics> = {},
 ) {
   const { client } = useChatContext('useRectionsFetcher');
   const { t } = useTranslationContext('useReactionFetcher');
   const { getErrorNotification, notify } = notifications;
 
   return async (
-    reactionType?: ReactionType<StreamChatGenerics>,
-    sort?: ReactionSort<StreamChatGenerics>,
+    reactionType?: ReactionType<ErmisChatGenerics>,
+    sort?: ReactionSort<ErmisChatGenerics>,
   ) => {
     try {
       return await fetchMessageReactions(client, message.id, reactionType, sort);
@@ -37,14 +37,14 @@ export function useReactionsFetcher<
 }
 
 async function fetchMessageReactions<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  client: StreamChat<StreamChatGenerics>,
+  client: ErmisChat<ErmisChatGenerics>,
   messageId: string,
-  reactionType?: ReactionType<StreamChatGenerics>,
-  sort?: ReactionSort<StreamChatGenerics>,
+  reactionType?: ReactionType<ErmisChatGenerics>,
+  sort?: ReactionSort<ErmisChatGenerics>,
 ) {
-  const reactions: ReactionResponse<StreamChatGenerics>[] = [];
+  const reactions: ReactionResponse<ErmisChatGenerics>[] = [];
   const limit = 25;
   let next: string | undefined;
   let hasNext = true;

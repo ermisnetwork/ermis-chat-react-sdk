@@ -18,7 +18,7 @@ import type { CustomMentionHandler } from '../components/Message/hooks/useMentio
 
 import type {
   ChannelUnreadUiState,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   SendMessageOptions,
   UnknownType,
   UpdateMessageOptions,
@@ -34,40 +34,40 @@ export type MarkReadWrapperOptions = {
 };
 
 export type MessageAttachments<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Array<Attachment<StreamChatGenerics>>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Array<Attachment<ErmisChatGenerics>>;
 
 export type MessageToSend<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  attachments?: MessageAttachments<StreamChatGenerics>;
+  attachments?: MessageAttachments<ErmisChatGenerics>;
   error?: ErrorFromResponse<APIErrorResponse>;
   errorStatusCode?: number;
   id?: string;
-  mentioned_users?: UserResponse<StreamChatGenerics>[];
-  parent?: StreamMessage<StreamChatGenerics>;
+  mentioned_users?: UserResponse<ErmisChatGenerics>[];
+  parent?: StreamMessage<ErmisChatGenerics>;
   parent_id?: string;
   status?: string;
   text?: string;
 };
 
 export type RetrySendMessage<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = (message: StreamMessage<StreamChatGenerics>) => Promise<void>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = (message: StreamMessage<ErmisChatGenerics>) => Promise<void>;
 
 export type ChannelActionContextValue<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   addNotification: (text: string, type: 'success' | 'error') => void;
   closeThread: (event?: React.BaseSyntheticEvent) => void;
   deleteMessage: (
-    message: StreamMessage<StreamChatGenerics>,
-  ) => Promise<MessageResponse<StreamChatGenerics>>;
-  dispatch: React.Dispatch<ChannelStateReducerAction<StreamChatGenerics>>;
+    message: StreamMessage<ErmisChatGenerics>,
+  ) => Promise<MessageResponse<ErmisChatGenerics>>;
+  dispatch: React.Dispatch<ChannelStateReducerAction<ErmisChatGenerics>>;
   editMessage: (
-    message: UpdatedMessage<StreamChatGenerics>,
+    message: UpdatedMessage<ErmisChatGenerics>,
     options?: UpdateMessageOptions,
-  ) => Promise<UpdateMessageAPIResponse<StreamChatGenerics> | void>;
+  ) => Promise<UpdateMessageAPIResponse<ErmisChatGenerics> | void>;
   jumpToFirstUnreadMessage: (queryMessageLimit?: number) => Promise<void>;
   jumpToLatestMessage: () => Promise<void>;
   jumpToMessage: (messageId: string, limit?: number) => Promise<void>;
@@ -75,24 +75,24 @@ export type ChannelActionContextValue<
   loadMoreNewer: (limit?: number) => Promise<number>;
   loadMoreThread: () => Promise<void>;
   markRead: (options?: MarkReadWrapperOptions) => void;
-  onMentionsClick: CustomMentionHandler<StreamChatGenerics>;
-  onMentionsHover: CustomMentionHandler<StreamChatGenerics>;
+  onMentionsClick: CustomMentionHandler<ErmisChatGenerics>;
+  onMentionsHover: CustomMentionHandler<ErmisChatGenerics>;
   openThread: (
-    message: StreamMessage<StreamChatGenerics>,
+    message: StreamMessage<ErmisChatGenerics>,
     event?: React.BaseSyntheticEvent,
   ) => void;
-  removeMessage: (message: StreamMessage<StreamChatGenerics>) => void;
-  retrySendMessage: RetrySendMessage<StreamChatGenerics>;
+  removeMessage: (message: StreamMessage<ErmisChatGenerics>) => void;
+  retrySendMessage: RetrySendMessage<ErmisChatGenerics>;
   sendMessage: (
-    message: MessageToSend<StreamChatGenerics>,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    message: MessageToSend<ErmisChatGenerics>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => Promise<void>;
   setChannelUnreadUiState: React.Dispatch<React.SetStateAction<ChannelUnreadUiState | undefined>>;
   setQuotedMessage: React.Dispatch<
-    React.SetStateAction<StreamMessage<StreamChatGenerics> | undefined>
+    React.SetStateAction<StreamMessage<ErmisChatGenerics> | undefined>
   >;
-  updateMessage: (message: StreamMessage<StreamChatGenerics>) => void;
+  updateMessage: (message: StreamMessage<ErmisChatGenerics>) => void;
 };
 
 export const ChannelActionContext = React.createContext<ChannelActionContextValue | undefined>(
@@ -100,12 +100,12 @@ export const ChannelActionContext = React.createContext<ChannelActionContextValu
 );
 
 export const ChannelActionProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   children,
   value,
 }: PropsWithChildren<{
-  value: ChannelActionContextValue<StreamChatGenerics>;
+  value: ChannelActionContextValue<ErmisChatGenerics>;
 }>) => (
   <ChannelActionContext.Provider value={(value as unknown) as ChannelActionContextValue}>
     {children}
@@ -113,7 +113,7 @@ export const ChannelActionProvider = <
 );
 
 export const useChannelActionContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   componentName?: string,
 ) => {
@@ -124,10 +124,10 @@ export const useChannelActionContext = <
       `The useChannelActionContext hook was called outside of the ChannelActionContext provider. Make sure this hook is called within a child of the Channel component. The errored call is located in the ${componentName} component.`,
     );
 
-    return {} as ChannelActionContextValue<StreamChatGenerics>;
+    return {} as ChannelActionContextValue<ErmisChatGenerics>;
   }
 
-  return (contextValue as unknown) as ChannelActionContextValue<StreamChatGenerics>;
+  return (contextValue as unknown) as ChannelActionContextValue<ErmisChatGenerics>;
 };
 
 /**
@@ -137,14 +137,14 @@ export const useChannelActionContext = <
  */
 export const withChannelActionContext = <
   P extends UnknownType,
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   Component: React.ComponentType<P>,
 ) => {
   const WithChannelActionContextComponent = (
-    props: Omit<P, keyof ChannelActionContextValue<StreamChatGenerics>>,
+    props: Omit<P, keyof ChannelActionContextValue<ErmisChatGenerics>>,
   ) => {
-    const channelActionContext = useChannelActionContext<StreamChatGenerics>();
+    const channelActionContext = useChannelActionContext<ErmisChatGenerics>();
 
     return <Component {...(props as P)} {...channelActionContext} />;
   };

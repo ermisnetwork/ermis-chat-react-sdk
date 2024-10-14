@@ -1,25 +1,25 @@
 import type { Channel } from 'stream-chat';
 import uniqBy from 'lodash.uniqby';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export const MAX_QUERY_CHANNELS_LIMIT = 30;
 
 type MoveChannelUpParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  channels: Array<Channel<StreamChatGenerics>>;
+  channels: Array<Channel<ErmisChatGenerics>>;
   cid: string;
-  activeChannel?: Channel<StreamChatGenerics>;
+  activeChannel?: Channel<ErmisChatGenerics>;
 };
 
 export const moveChannelUp = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   activeChannel,
   channels,
   cid,
-}: MoveChannelUpParams<StreamChatGenerics>) => {
+}: MoveChannelUpParams<ErmisChatGenerics>) => {
   // get index of channel to move up
   const channelIndex = channels.findIndex((channel) => channel.cid === cid);
 

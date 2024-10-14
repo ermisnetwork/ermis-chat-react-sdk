@@ -7,19 +7,19 @@ import { SafeAnchor } from '../SafeAnchor/SafeAnchor';
 
 import { useChatContext } from '../../context/ChatContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type FileAttachmentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  attachment: Attachment<StreamChatGenerics>;
+  attachment: Attachment<ErmisChatGenerics>;
 };
 
 const UnMemoizedFileAttachmentV1 = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
-}: FileAttachmentProps<StreamChatGenerics>) => (
+}: FileAttachmentProps<ErmisChatGenerics>) => (
   <div className='str-chat__message-attachment-file--item' data-testid='attachment-file'>
     <FileIcon big={true} mimeType={attachment.mime_type} size={30} />
     <div className='str-chat__message-attachment-file--item-text'>
@@ -32,10 +32,10 @@ const UnMemoizedFileAttachmentV1 = <
 );
 
 const UnMemoizedFileAttachmentV2 = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
-}: FileAttachmentProps<StreamChatGenerics>) => (
+}: FileAttachmentProps<ErmisChatGenerics>) => (
   <div className='str-chat__message-attachment-file--item' data-testid='attachment-file'>
     <FileIcon className='str-chat__file-icon' mimeType={attachment.mime_type} version={'2'} />
     <div className='str-chat__message-attachment-file--item-text'>
@@ -51,10 +51,10 @@ const UnMemoizedFileAttachmentV2 = <
 );
 
 const UnMemoizedFileAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
-}: FileAttachmentProps<StreamChatGenerics>) => {
+}: FileAttachmentProps<ErmisChatGenerics>) => {
   const { themeVersion } = useChatContext('FileAttachment');
 
   return themeVersion === '2' ? (

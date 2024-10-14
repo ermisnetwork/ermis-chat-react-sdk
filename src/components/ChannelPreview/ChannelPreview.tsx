@@ -16,11 +16,11 @@ import type { AvatarProps } from '../Avatar/Avatar';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ChannelPreviewUIComponentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = ChannelPreviewProps<StreamChatGenerics> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = ChannelPreviewProps<ErmisChatGenerics> & {
   /** If the component's channel is the active (selected) Channel */
   active?: boolean;
   /** Image of Channel to display */
@@ -28,7 +28,7 @@ export type ChannelPreviewUIComponentProps<
   /** Title of Channel to display */
   displayTitle?: string;
   /** The last message received in a channel */
-  lastMessage?: StreamMessage<StreamChatGenerics>;
+  lastMessage?: StreamMessage<ErmisChatGenerics>;
   /** Latest message preview to display, will be a string or JSX element supporting markdown. */
   latestMessage?: string | JSX.Element;
   /** Status describing whether own message has been delivered or read by another. If the last message is not an own message, then the status is undefined. */
@@ -38,12 +38,12 @@ export type ChannelPreviewUIComponentProps<
 };
 
 export type ChannelPreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Comes from either the `channelRenderFilterFn` or `usePaginatedChannels` call from [ChannelList](https://github.com/GetStream/stream-chat-react/blob/master/src/components/ChannelList/ChannelList.tsx) */
-  channel: Channel<StreamChatGenerics>;
+  channel: Channel<ErmisChatGenerics>;
   /** Current selected channel object */
-  activeChannel?: Channel<StreamChatGenerics>;
+  activeChannel?: Channel<ErmisChatGenerics>;
   /** Custom UI component to display user avatar, defaults to and accepts same props as: [Avatar](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Avatar/Avatar.tsx) */
   Avatar?: React.ComponentType<AvatarProps>;
   /** Forces the update of preview component on channel update */
@@ -54,30 +54,30 @@ export type ChannelPreviewProps<
   /** Custom ChannelPreview click handler function */
   onSelect?: (event: React.MouseEvent) => void;
   /** Custom UI component to display the channel preview in the list, defaults to and accepts same props as: [ChannelPreviewMessenger](https://github.com/GetStream/stream-chat-react/blob/master/src/components/ChannelPreview/ChannelPreviewMessenger.tsx) */
-  Preview?: React.ComponentType<ChannelPreviewUIComponentProps<StreamChatGenerics>>;
+  Preview?: React.ComponentType<ChannelPreviewUIComponentProps<ErmisChatGenerics>>;
   /** Setter for selected Channel */
-  setActiveChannel?: ChatContextValue<StreamChatGenerics>['setActiveChannel'];
+  setActiveChannel?: ChatContextValue<ErmisChatGenerics>['setActiveChannel'];
   /** Object containing watcher parameters */
   watchers?: { limit?: number; offset?: number };
 };
 
 export const ChannelPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ChannelPreviewProps<StreamChatGenerics>,
+  props: ChannelPreviewProps<ErmisChatGenerics>,
 ) => {
   const { channel, Preview = ChannelPreviewMessenger, channelUpdateCount } = props;
-  const { channel: activeChannel, client, setActiveChannel } = useChatContext<StreamChatGenerics>(
+  const { channel: activeChannel, client, setActiveChannel } = useChatContext<ErmisChatGenerics>(
     'ChannelPreview',
   );
   const { t, userLanguage } = useTranslationContext('ChannelPreview');
   const { displayImage, displayTitle } = useChannelPreviewInfo({ channel });
 
-  const [lastMessage, setLastMessage] = useState<StreamMessage<StreamChatGenerics>>(
+  const [lastMessage, setLastMessage] = useState<StreamMessage<ErmisChatGenerics>>(
     channel.state.messages[channel.state.messages.length - 1],
   );
   const [unread, setUnread] = useState(0);
-  const { messageDeliveryStatus } = useMessageDeliveryStatus<StreamChatGenerics>({
+  const { messageDeliveryStatus } = useMessageDeliveryStatus<ErmisChatGenerics>({
     channel,
     lastMessage,
   });
@@ -123,7 +123,7 @@ export const ChannelPreview = <
   useEffect(() => {
     refreshUnreadCount();
 
-    const handleEvent = (event: Event<StreamChatGenerics>) => {
+    const handleEvent = (event: Event<ErmisChatGenerics>) => {
       if (event.message) setLastMessage(event.message);
       refreshUnreadCount();
     };

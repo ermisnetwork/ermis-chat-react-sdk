@@ -27,20 +27,20 @@ import {
 import type { MessageProps, MessageUIComponentProps } from '../Message/types';
 import type { MessageActionsArray } from '../Message/utils';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../types/types';
 
 export type ThreadProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 > = {
   /** Additional props for `MessageInput` component: [available props](https://getstream.io/chat/docs/sdk/react/message-input-components/message_input/#props) */
-  additionalMessageInputProps?: MessageInputProps<StreamChatGenerics, V>;
+  additionalMessageInputProps?: MessageInputProps<ErmisChatGenerics, V>;
   /** Additional props for `MessageList` component: [available props](https://getstream.io/chat/docs/sdk/react/core-components/message_list/#props) */
-  additionalMessageListProps?: MessageListProps<StreamChatGenerics>;
+  additionalMessageListProps?: MessageListProps<ErmisChatGenerics>;
   /** Additional props for `Message` component of the parent message: [available props](https://getstream.io/chat/docs/sdk/react/message-components/message/#props) */
-  additionalParentMessageProps?: Partial<MessageProps<StreamChatGenerics>>;
+  additionalParentMessageProps?: Partial<MessageProps<ErmisChatGenerics>>;
   /** Additional props for `VirtualizedMessageList` component: [available props](https://getstream.io/chat/docs/sdk/react/core-components/virtualized_list/#props) */
-  additionalVirtualizedMessageListProps?: VirtualizedMessageListProps<StreamChatGenerics>;
+  additionalVirtualizedMessageListProps?: VirtualizedMessageListProps<ErmisChatGenerics>;
   /** If true, focuses the `MessageInput` component on opening a thread */
   autoFocus?: boolean;
   /** Injects date separator components into `Thread`, defaults to `false`. To be passed to the underlying `MessageList` or `VirtualizedMessageList` components */
@@ -50,7 +50,7 @@ export type ThreadProps<
   /** Custom thread input UI component used to override the default `Input` value stored in `ComponentContext` or the [MessageInputSmall](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/MessageInputSmall.tsx) default */
   Input?: React.ComponentType;
   /** Custom thread message UI component used to override the default `Message` value stored in `ComponentContext` */
-  Message?: React.ComponentType<MessageUIComponentProps<StreamChatGenerics>>;
+  Message?: React.ComponentType<MessageUIComponentProps<ErmisChatGenerics>>;
   /** Array of allowed message actions (ex: ['edit', 'delete', 'flag', 'mute', 'pin', 'quote', 'react', 'reply']). To disable all actions, provide an empty array. */
   messageActions?: MessageActionsArray;
   /** If true, render the `VirtualizedMessageList` instead of the standard `MessageList` component */
@@ -61,12 +61,12 @@ export type ThreadProps<
  * The Thread component renders a parent Message with a list of replies
  */
 export const Thread = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: ThreadProps<StreamChatGenerics, V>,
+  props: ThreadProps<ErmisChatGenerics, V>,
 ) => {
-  const { channel, channelConfig, thread } = useChannelStateContext<StreamChatGenerics>('Thread');
+  const { channel, channelConfig, thread } = useChannelStateContext<ErmisChatGenerics>('Thread');
 
   if (!thread || channelConfig?.replies === false) return null;
 
@@ -75,10 +75,10 @@ export const Thread = <
 };
 
 const ThreadInner = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: ThreadProps<StreamChatGenerics, V> & { key: string },
+  props: ThreadProps<ErmisChatGenerics, V> & { key: string },
 ) => {
   const {
     additionalMessageInputProps,
@@ -100,16 +100,16 @@ const ThreadInner = <
     threadLoadingMore,
     threadMessages,
     threadSuppressAutoscroll,
-  } = useChannelStateContext<StreamChatGenerics>('Thread');
-  const { closeThread, loadMoreThread } = useChannelActionContext<StreamChatGenerics>('Thread');
-  const { customClasses, themeVersion } = useChatContext<StreamChatGenerics>('Thread');
+  } = useChannelStateContext<ErmisChatGenerics>('Thread');
+  const { closeThread, loadMoreThread } = useChannelActionContext<ErmisChatGenerics>('Thread');
+  const { customClasses, themeVersion } = useChatContext<ErmisChatGenerics>('Thread');
   const {
     ThreadInput: ContextInput,
     Message: ContextMessage,
     ThreadHead = DefaultThreadHead,
     ThreadHeader = DefaultThreadHeader,
     VirtualMessage,
-  } = useComponentContext<StreamChatGenerics>('Thread');
+  } = useComponentContext<ErmisChatGenerics>('Thread');
 
   const ThreadInput =
     PropInput ??

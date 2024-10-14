@@ -3,26 +3,26 @@ import React from 'react';
 import { CustomMessageActions } from '../../context/MessageContext';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type CustomMessageActionsListProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  message: StreamMessage<StreamChatGenerics>;
-  customMessageActions?: CustomMessageActions<StreamChatGenerics>;
+  message: StreamMessage<ErmisChatGenerics>;
+  customMessageActions?: CustomMessageActions<ErmisChatGenerics>;
 };
 
 /**
  * @deprecated alias for `CustomMessageActionsListProps`, will be removed in the next major release
  */
 export type CustomMessageActionsType<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = CustomMessageActionsListProps<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = CustomMessageActionsListProps<ErmisChatGenerics>;
 
 export const CustomMessageActionsList = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: CustomMessageActionsListProps<StreamChatGenerics>,
+  props: CustomMessageActionsListProps<ErmisChatGenerics>,
 ) => {
   const { customMessageActions, message } = props;
 

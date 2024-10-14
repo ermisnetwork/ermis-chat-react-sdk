@@ -34,18 +34,18 @@ import { MessageContextValue, useMessageContext } from '../../context/MessageCon
 
 import type { MessageUIComponentProps } from './types';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import { useTranslationContext } from '../../context';
 import { MessageEditedTimestamp } from './MessageEditedTimestamp';
 
 type MessageSimpleWithContextProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = MessageContextValue<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = MessageContextValue<ErmisChatGenerics>;
 
 const MessageSimpleWithContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageSimpleWithContextProps<StreamChatGenerics>,
+  props: MessageSimpleWithContextProps<ErmisChatGenerics>,
 ) => {
   const {
     additionalMessageInputProps,
@@ -86,7 +86,7 @@ const MessageSimpleWithContext = <
     ReactionSelector = DefaultReactionSelector,
     ReactionsList = DefaultReactionList,
     PinIndicator,
-  } = useComponentContext<StreamChatGenerics>('MessageSimple');
+  } = useComponentContext<ErmisChatGenerics>('MessageSimple');
   const { themeVersion } = useChatContext('MessageSimple');
 
   const hasAttachment = messageHasAttachments(message);
@@ -260,11 +260,11 @@ const MemoizedMessageSimple = React.memo(
  * The default UI component that renders a message and receives functionality and logic from the MessageContext.
  */
 export const MessageSimple = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageUIComponentProps<StreamChatGenerics>,
+  props: MessageUIComponentProps<ErmisChatGenerics>,
 ) => {
-  const messageContext = useMessageContext<StreamChatGenerics>('MessageSimple');
+  const messageContext = useMessageContext<ErmisChatGenerics>('MessageSimple');
 
   return <MemoizedMessageSimple {...messageContext} {...props} />;
 };

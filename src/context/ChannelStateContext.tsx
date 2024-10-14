@@ -10,7 +10,7 @@ import type {
 
 import type {
   ChannelUnreadUiState,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   GiphyVersions,
   ImageAttachmentSizeHandler,
   UnknownType,
@@ -25,13 +25,13 @@ export type ChannelNotifications = Array<{
 }>;
 
 export type StreamMessage<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > =
-  | ReturnType<StreamChannelState<StreamChatGenerics>['formatMessage']>
-  | MessageResponse<StreamChatGenerics>;
+  | ReturnType<StreamChannelState<ErmisChatGenerics>['formatMessage']>
+  | MessageResponse<ErmisChatGenerics>;
 
 export type ChannelState<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   suppressAutoscroll: boolean;
   error?: Error | null;
@@ -41,41 +41,41 @@ export type ChannelState<
   loading?: boolean;
   loadingMore?: boolean;
   loadingMoreNewer?: boolean;
-  members?: StreamChannelState<StreamChatGenerics>['members'];
-  messages?: StreamMessage<StreamChatGenerics>[];
-  pinnedMessages?: StreamMessage<StreamChatGenerics>[];
-  quotedMessage?: StreamMessage<StreamChatGenerics>;
-  read?: StreamChannelState<StreamChatGenerics>['read'];
-  thread?: StreamMessage<StreamChatGenerics> | null;
+  members?: StreamChannelState<ErmisChatGenerics>['members'];
+  messages?: StreamMessage<ErmisChatGenerics>[];
+  pinnedMessages?: StreamMessage<ErmisChatGenerics>[];
+  quotedMessage?: StreamMessage<ErmisChatGenerics>;
+  read?: StreamChannelState<ErmisChatGenerics>['read'];
+  thread?: StreamMessage<ErmisChatGenerics> | null;
   threadHasMore?: boolean;
   threadLoadingMore?: boolean;
-  threadMessages?: StreamMessage<StreamChatGenerics>[];
+  threadMessages?: StreamMessage<ErmisChatGenerics>[];
   threadSuppressAutoscroll?: boolean;
-  typing?: StreamChannelState<StreamChatGenerics>['typing'];
+  typing?: StreamChannelState<ErmisChatGenerics>['typing'];
   watcherCount?: number;
-  watchers?: StreamChannelState<StreamChatGenerics>['watchers'];
+  watchers?: StreamChannelState<ErmisChatGenerics>['watchers'];
 };
 
 export type ChannelStateContextValue<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Omit<ChannelState<StreamChatGenerics>, 'typing'> & {
-  channel: Channel<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Omit<ChannelState<ErmisChatGenerics>, 'typing'> & {
+  channel: Channel<ErmisChatGenerics>;
   channelCapabilities: Record<string, boolean>;
-  channelConfig: ChannelConfigWithInfo<StreamChatGenerics> | undefined;
+  channelConfig: ChannelConfigWithInfo<ErmisChatGenerics> | undefined;
   imageAttachmentSizeHandler: ImageAttachmentSizeHandler;
   multipleUploads: boolean;
   notifications: ChannelNotifications;
   shouldGenerateVideoThumbnail: boolean;
   videoAttachmentSizeHandler: VideoAttachmentSizeHandler;
   acceptedFiles?: string[];
-  channelUnreadUiState?: ChannelUnreadUiState<StreamChatGenerics>;
+  channelUnreadUiState?: ChannelUnreadUiState<ErmisChatGenerics>;
   debounceURLEnrichmentMs?: URLEnrichmentConfig['debounceURLEnrichmentMs'];
   dragAndDropWindow?: boolean;
   enrichURLForPreview?: URLEnrichmentConfig['enrichURLForPreview'];
   findURLFn?: URLEnrichmentConfig['findURLFn'];
   giphyVersion?: GiphyVersions;
   maxNumberOfFiles?: number;
-  mutes?: Array<Mute<StreamChatGenerics>>;
+  mutes?: Array<Mute<ErmisChatGenerics>>;
   onLinkPreviewDismissed?: URLEnrichmentConfig['onLinkPreviewDismissed'];
   watcher_count?: number;
 };
@@ -85,12 +85,12 @@ export const ChannelStateContext = React.createContext<ChannelStateContextValue 
 );
 
 export const ChannelStateProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   children,
   value,
 }: PropsWithChildren<{
-  value: ChannelStateContextValue<StreamChatGenerics>;
+  value: ChannelStateContextValue<ErmisChatGenerics>;
 }>) => (
   <ChannelStateContext.Provider value={(value as unknown) as ChannelStateContextValue}>
     {children}
@@ -98,7 +98,7 @@ export const ChannelStateProvider = <
 );
 
 export const useChannelStateContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   componentName?: string,
 ) => {
@@ -109,10 +109,10 @@ export const useChannelStateContext = <
       `The useChannelStateContext hook was called outside of the ChannelStateContext provider. Make sure this hook is called within a child of the Channel component. The errored call is located in the ${componentName} component.`,
     );
 
-    return {} as ChannelStateContextValue<StreamChatGenerics>;
+    return {} as ChannelStateContextValue<ErmisChatGenerics>;
   }
 
-  return (contextValue as unknown) as ChannelStateContextValue<StreamChatGenerics>;
+  return (contextValue as unknown) as ChannelStateContextValue<ErmisChatGenerics>;
 };
 
 /**
@@ -122,14 +122,14 @@ export const useChannelStateContext = <
  */
 export const withChannelStateContext = <
   P extends UnknownType,
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   Component: React.ComponentType<P>,
 ) => {
   const WithChannelStateContextComponent = (
-    props: Omit<P, keyof ChannelStateContextValue<StreamChatGenerics>>,
+    props: Omit<P, keyof ChannelStateContextValue<ErmisChatGenerics>>,
   ) => {
-    const channelStateContext = useChannelStateContext<StreamChatGenerics>();
+    const channelStateContext = useChannelStateContext<ErmisChatGenerics>();
 
     return <Component {...(props as P)} {...channelStateContext} />;
   };

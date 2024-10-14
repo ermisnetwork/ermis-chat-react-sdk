@@ -7,13 +7,13 @@ import { displayDuration } from './utils';
 import { FileIcon } from '../ReactFileUtilities';
 import { useTranslationContext } from '../../context';
 
-import type { DefaultStreamChatGenerics } from '../../types';
+import type { DefaultErmisChatGenerics } from '../../types';
 
 const rootClassName = 'str-chat__message-attachment__voice-recording-widget';
 
 export type VoiceRecordingPlayerProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Pick<VoiceRecordingProps<StreamChatGenerics>, 'attachment'> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Pick<VoiceRecordingProps<ErmisChatGenerics>, 'attachment'> & {
   /** An array of fractional numeric values of playback speed to override the defaults (1.0, 1.5, 2.0) */
   playbackRates?: number[];
 };
@@ -86,8 +86,8 @@ export const VoiceRecordingPlayer = ({ attachment, playbackRates }: VoiceRecordi
 };
 
 export type QuotedVoiceRecordingProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Pick<VoiceRecordingProps<StreamChatGenerics>, 'attachment'>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Pick<VoiceRecordingProps<ErmisChatGenerics>, 'attachment'>;
 
 export const QuotedVoiceRecording = ({ attachment }: QuotedVoiceRecordingProps) => {
   const { t } = useTranslationContext();
@@ -120,10 +120,10 @@ export const QuotedVoiceRecording = ({ attachment }: QuotedVoiceRecordingProps) 
 };
 
 export type VoiceRecordingProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** The attachment object from the message's attachment list. */
-  attachment: Attachment<StreamChatGenerics>;
+  attachment: Attachment<ErmisChatGenerics>;
   /** A boolean flag to signal whether the attachment will be rendered inside the quoted reply. */
   isQuoted?: boolean;
 };

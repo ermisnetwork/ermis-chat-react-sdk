@@ -1,5 +1,5 @@
 import type { Attachment, DefaultGenerics, ExtendableGenerics, OGAttachment } from 'stream-chat';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type AttachmentLoadingState = 'uploading' | 'finished' | 'failed';
 
@@ -18,7 +18,7 @@ export type FileUpload = {
   url?: string;
 };
 export type ImageUpload<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   file: {
     name: string;
@@ -35,7 +35,7 @@ export type ImageUpload<
   previewUri?: string;
   url?: string;
 } & Pick<
-  Attachment<StreamChatGenerics>,
+  Attachment<ErmisChatGenerics>,
   'og_scrape_url' | 'title' | 'title_link' | 'author_name' | 'text'
 >;
 
@@ -67,8 +67,8 @@ export enum SetLinkPreviewMode {
 export type LinkPreviewMap = Map<LinkURL, LinkPreview>;
 
 export type VoiceRecordingAttachment<
-  StreamChatGenerics extends ExtendableGenerics = DefaultGenerics
-> = Attachment<StreamChatGenerics> & {
+  ErmisChatGenerics extends ExtendableGenerics = DefaultGenerics
+> = Attachment<ErmisChatGenerics> & {
   asset_url: string;
   type: 'voiceRecording';
   duration?: number;
@@ -79,8 +79,8 @@ export type VoiceRecordingAttachment<
 };
 
 type FileAttachment<
-  StreamChatGenerics extends ExtendableGenerics = DefaultGenerics
-> = Attachment<StreamChatGenerics> & {
+  ErmisChatGenerics extends ExtendableGenerics = DefaultGenerics
+> = Attachment<ErmisChatGenerics> & {
   type: 'file';
   asset_url?: string;
   file_size?: number;
@@ -89,8 +89,8 @@ type FileAttachment<
 };
 
 export type AudioAttachment<
-  StreamChatGenerics extends ExtendableGenerics = DefaultGenerics
-> = Attachment<StreamChatGenerics> & {
+  ErmisChatGenerics extends ExtendableGenerics = DefaultGenerics
+> = Attachment<ErmisChatGenerics> & {
   type: 'audio';
   asset_url?: string;
   file_size?: number;
@@ -99,8 +99,8 @@ export type AudioAttachment<
 };
 
 export type VideoAttachment<
-  StreamChatGenerics extends ExtendableGenerics = DefaultGenerics
-> = Attachment<StreamChatGenerics> & {
+  ErmisChatGenerics extends ExtendableGenerics = DefaultGenerics
+> = Attachment<ErmisChatGenerics> & {
   type: 'video';
   asset_url?: string;
   mime_type?: string;
@@ -109,8 +109,8 @@ export type VideoAttachment<
 };
 
 type ImageAttachment<
-  StreamChatGenerics extends ExtendableGenerics = DefaultGenerics
-> = Attachment<StreamChatGenerics> & {
+  ErmisChatGenerics extends ExtendableGenerics = DefaultGenerics
+> = Attachment<ErmisChatGenerics> & {
   type: 'image';
   fallback?: string;
   image_url?: string;
@@ -140,59 +140,59 @@ export type LocalAttachmentMetadata<
 > = CustomLocalMetadata & BaseLocalAttachmentMetadata & LocalImageAttachmentUploadMetadata;
 
 export type LocalVoiceRecordingAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = LocalAttachmentCast<
-  VoiceRecordingAttachment<StreamChatGenerics>,
+  VoiceRecordingAttachment<ErmisChatGenerics>,
   LocalAttachmentUploadMetadata & CustomLocalMetadata
 >;
 
 export type LocalAudioAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = LocalAttachmentCast<
-  AudioAttachment<StreamChatGenerics>,
+  AudioAttachment<ErmisChatGenerics>,
   LocalAttachmentUploadMetadata & CustomLocalMetadata
 >;
 
 export type LocalVideoAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = LocalAttachmentCast<
-  VideoAttachment<StreamChatGenerics>,
+  VideoAttachment<ErmisChatGenerics>,
   LocalAttachmentUploadMetadata & CustomLocalMetadata
 >;
 
 export type LocalImageAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = LocalAttachmentCast<
-  ImageAttachment<StreamChatGenerics>,
+  ImageAttachment<ErmisChatGenerics>,
   LocalImageAttachmentUploadMetadata & CustomLocalMetadata
 >;
 
 export type LocalFileAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = LocalAttachmentCast<
-  FileAttachment<StreamChatGenerics>,
+  FileAttachment<ErmisChatGenerics>,
   LocalAttachmentUploadMetadata & CustomLocalMetadata
 >;
 
 export type AnyLocalAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = LocalAttachmentCast<
-  Attachment<StreamChatGenerics>,
+  Attachment<ErmisChatGenerics>,
   LocalAttachmentMetadata<CustomLocalMetadata>
 >;
 
 export type LocalAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > =
-  | AnyLocalAttachment<StreamChatGenerics>
-  | LocalFileAttachment<StreamChatGenerics>
-  | LocalImageAttachment<StreamChatGenerics>
-  | LocalAudioAttachment<StreamChatGenerics>
-  | LocalVideoAttachment<StreamChatGenerics>
-  | LocalVoiceRecordingAttachment<StreamChatGenerics>;
+  | AnyLocalAttachment<ErmisChatGenerics>
+  | LocalFileAttachment<ErmisChatGenerics>
+  | LocalImageAttachment<ErmisChatGenerics>
+  | LocalAudioAttachment<ErmisChatGenerics>
+  | LocalVideoAttachment<ErmisChatGenerics>
+  | LocalVoiceRecordingAttachment<ErmisChatGenerics>;

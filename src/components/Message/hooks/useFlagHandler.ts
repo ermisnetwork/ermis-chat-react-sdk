@@ -7,26 +7,26 @@ import type { ReactEventHandler } from '../types';
 
 import type { StreamMessage } from '../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const missingUseFlagHandlerParameterWarning =
   'useFlagHandler was called but it is missing one or more necessary parameters.';
 
 export type FlagMessageNotifications<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  getErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
-  getSuccessNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
+  getSuccessNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   notify?: (notificationText: string, type: 'success' | 'error') => void;
 };
 
 export const useFlagHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
-  notifications: FlagMessageNotifications<StreamChatGenerics> = {},
+  message?: StreamMessage<ErmisChatGenerics>,
+  notifications: FlagMessageNotifications<ErmisChatGenerics> = {},
 ): ReactEventHandler => {
-  const { client } = useChatContext<StreamChatGenerics>('useFlagHandler');
+  const { client } = useChatContext<ErmisChatGenerics>('useFlagHandler');
   const { t } = useTranslationContext('useFlagHandler');
 
   return async (event) => {

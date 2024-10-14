@@ -4,13 +4,13 @@ import { BaseImage } from './BaseImage';
 import { useTranslationContext } from '../../context';
 
 import type { Attachment } from 'stream-chat';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ModalGalleryProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** The images for the Carousel component */
-  images: Attachment<StreamChatGenerics>[];
+  images: Attachment<ErmisChatGenerics>[];
   /** The index for the component */
   index?: number;
 };
@@ -26,9 +26,9 @@ const renderItem = ({ original, originalAlt }: ReactImageGalleryItem) => (
 );
 
 export const ModalGallery = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ModalGalleryProps<StreamChatGenerics>,
+  props: ModalGalleryProps<ErmisChatGenerics>,
 ) => {
   const { images, index } = props;
   const { t } = useTranslationContext('ModalGallery');

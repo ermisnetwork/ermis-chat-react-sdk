@@ -3,25 +3,25 @@ import clsx from 'clsx';
 
 import { StreamMessage, useChannelStateContext } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type WindowProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** show or hide the window when a thread is active */
   hideOnThread?: boolean;
   /** optional prop to force addition of class str-chat__main-panel--hideOnThread to the Window root element */
-  thread?: StreamMessage<StreamChatGenerics>;
+  thread?: StreamMessage<ErmisChatGenerics>;
 };
 
 const UnMemoizedWindow = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: PropsWithChildren<WindowProps<StreamChatGenerics>>,
+  props: PropsWithChildren<WindowProps<ErmisChatGenerics>>,
 ) => {
   const { children, hideOnThread = false, thread: propThread } = props;
 
-  const { thread: contextThread } = useChannelStateContext<StreamChatGenerics>('Window');
+  const { thread: contextThread } = useChannelStateContext<ErmisChatGenerics>('Window');
 
   return (
     <div

@@ -3,7 +3,7 @@ import { Dispatch, useCallback, useEffect, useRef } from 'react';
 import debounce from 'lodash.debounce';
 import { useChannelStateContext, useChatContext } from '../../../context';
 import type { MessageInputReducerAction, MessageInputState } from './useMessageInputState';
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 import type { LinkPreview, LinkPreviewMap } from '../types';
 import { LinkPreviewState, SetLinkPreviewMode } from '../types';
 import type { DebouncedFunc } from 'lodash';
@@ -20,10 +20,10 @@ export type URLEnrichmentConfig = {
 };
 
 type UseEnrichURLsParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = URLEnrichmentConfig & {
-  dispatch: Dispatch<MessageInputReducerAction<StreamChatGenerics>>;
-  linkPreviews: MessageInputState<StreamChatGenerics>['linkPreviews'];
+  dispatch: Dispatch<MessageInputReducerAction<ErmisChatGenerics>>;
+  linkPreviews: MessageInputState<ErmisChatGenerics>['linkPreviews'];
 };
 
 export type EnrichURLsController = {
@@ -36,7 +36,7 @@ export type EnrichURLsController = {
 };
 
 export const useLinkPreviews = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   debounceURLEnrichmentMs: debounceURLEnrichmentMsInputContext,
   dispatch,
@@ -44,7 +44,7 @@ export const useLinkPreviews = <
   findURLFn: findURLFnInputContext,
   linkPreviews,
   onLinkPreviewDismissed: onLinkPreviewDismissedInputContext,
-}: UseEnrichURLsParams<StreamChatGenerics>): EnrichURLsController => {
+}: UseEnrichURLsParams<ErmisChatGenerics>): EnrichURLsController => {
   const { client } = useChatContext();
   // FIXME: the value of channelConfig is stale due to omitting it from the memoization deps in useCreateChannelStateContext
   const {

@@ -9,16 +9,16 @@ import type {
   MessageInputState,
 } from '../components/MessageInput/hooks/useMessageInputState';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../types/types';
 
 export type MessageInputContextValue<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
-> = MessageInputState<StreamChatGenerics> &
-  MessageInputHookProps<StreamChatGenerics> &
-  Omit<MessageInputProps<StreamChatGenerics, V>, 'Input'> &
+> = MessageInputState<ErmisChatGenerics> &
+  MessageInputHookProps<ErmisChatGenerics> &
+  Omit<MessageInputProps<ErmisChatGenerics, V>, 'Input'> &
   CooldownTimerState & {
-    autocompleteTriggers?: TriggerSettings<StreamChatGenerics, V>;
+    autocompleteTriggers?: TriggerSettings<ErmisChatGenerics, V>;
   } & CommandsListState &
   MentionsListState;
 
@@ -27,13 +27,13 @@ export const MessageInputContext = createContext<
 >(undefined);
 
 export const MessageInputContextProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >({
   children,
   value,
 }: PropsWithChildren<{
-  value: MessageInputContextValue<StreamChatGenerics, V>;
+  value: MessageInputContextValue<ErmisChatGenerics, V>;
 }>) => (
   <MessageInputContext.Provider value={value as MessageInputContextValue}>
     {children}
@@ -41,7 +41,7 @@ export const MessageInputContextProvider = <
 );
 
 export const useMessageInputContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
   componentName?: string,
@@ -53,8 +53,8 @@ export const useMessageInputContext = <
       `The useMessageInputContext hook was called outside of the MessageInputContext provider. Make sure this hook is called within the MessageInput's UI component. The errored call is located in the ${componentName} component.`,
     );
 
-    return {} as MessageInputContextValue<StreamChatGenerics, V>;
+    return {} as MessageInputContextValue<ErmisChatGenerics, V>;
   }
 
-  return contextValue as MessageInputContextValue<StreamChatGenerics, V>;
+  return contextValue as MessageInputContextValue<ErmisChatGenerics, V>;
 };

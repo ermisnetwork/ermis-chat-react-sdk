@@ -9,13 +9,13 @@ import { useComponentContext } from '../../context/ComponentContext';
 import { useTypingContext } from '../../context/TypingContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type TypingIndicatorProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Custom UI component to display user avatar, defaults to and accepts same props as: [Avatar](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Avatar/Avatar.tsx) */
-  Avatar?: React.ComponentType<AvatarProps<StreamChatGenerics>>;
+  Avatar?: React.ComponentType<AvatarProps<ErmisChatGenerics>>;
   /** Avatar size in pixels, @default 32px */
   avatarSize?: number;
   /** Whether the typing indicator is in a thread */
@@ -55,16 +55,16 @@ const useJoinTypingUsers = (names: string[]) => {
  * TypingIndicator lists users currently typing, it needs to be a child of Channel component
  */
 const UnMemoizedTypingIndicator = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: TypingIndicatorProps<StreamChatGenerics>,
+  props: TypingIndicatorProps<ErmisChatGenerics>,
 ) => {
   const { Avatar: PropAvatar, avatarSize = 32, threadList } = props;
 
-  const { channelConfig, thread } = useChannelStateContext<StreamChatGenerics>('TypingIndicator');
-  const { client, themeVersion } = useChatContext<StreamChatGenerics>('TypingIndicator');
-  const { Avatar: ContextAvatar } = useComponentContext<StreamChatGenerics>('TypingIndicator');
-  const { typing = {} } = useTypingContext<StreamChatGenerics>('TypingIndicator');
+  const { channelConfig, thread } = useChannelStateContext<ErmisChatGenerics>('TypingIndicator');
+  const { client, themeVersion } = useChatContext<ErmisChatGenerics>('TypingIndicator');
+  const { Avatar: ContextAvatar } = useComponentContext<ErmisChatGenerics>('TypingIndicator');
+  const { typing = {} } = useTypingContext<ErmisChatGenerics>('TypingIndicator');
 
   const Avatar = PropAvatar || ContextAvatar || DefaultAvatar;
 

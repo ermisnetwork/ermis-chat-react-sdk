@@ -2,23 +2,23 @@ import React, { PropsWithChildren, useContext } from 'react';
 
 import type { ChannelState as StreamChannelState } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics, UnknownType } from '../types/types';
+import type { DefaultErmisChatGenerics, UnknownType } from '../types/types';
 
 export type TypingContextValue<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  typing?: StreamChannelState<StreamChatGenerics>['typing'];
+  typing?: StreamChannelState<ErmisChatGenerics>['typing'];
 };
 
 export const TypingContext = React.createContext<TypingContextValue | undefined>(undefined);
 
 export const TypingProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   children,
   value,
 }: PropsWithChildren<{
-  value: TypingContextValue<StreamChatGenerics>;
+  value: TypingContextValue<ErmisChatGenerics>;
 }>) => (
   <TypingContext.Provider value={(value as unknown) as TypingContextValue}>
     {children}
@@ -26,7 +26,7 @@ export const TypingProvider = <
 );
 
 export const useTypingContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   componentName?: string,
 ) => {
@@ -37,10 +37,10 @@ export const useTypingContext = <
       `The useTypingContext hook was called outside of the TypingContext provider. Make sure this hook is called within a child of the Channel component. The errored call is located in the ${componentName} component.`,
     );
 
-    return {} as TypingContextValue<StreamChatGenerics>;
+    return {} as TypingContextValue<ErmisChatGenerics>;
   }
 
-  return contextValue as TypingContextValue<StreamChatGenerics>;
+  return contextValue as TypingContextValue<ErmisChatGenerics>;
 };
 
 /**
@@ -50,14 +50,14 @@ export const useTypingContext = <
  */
 export const withTypingContext = <
   P extends UnknownType,
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   Component: React.ComponentType<P>,
 ) => {
   const WithTypingContextComponent = (
-    props: Omit<P, keyof TypingContextValue<StreamChatGenerics>>,
+    props: Omit<P, keyof TypingContextValue<ErmisChatGenerics>>,
   ) => {
-    const typingContext = useTypingContext<StreamChatGenerics>();
+    const typingContext = useTypingContext<ErmisChatGenerics>();
 
     return <Component {...(props as P)} {...typingContext} />;
   };

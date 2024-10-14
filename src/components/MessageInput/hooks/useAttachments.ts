@@ -22,15 +22,15 @@ import type {
   LocalAttachment,
 } from '../types';
 import type { FileLike } from '../../ReactFileUtilities';
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../../types/types';
 
 const apiMaxNumberOfFiles = 10;
 
 const ensureIsLocalAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
-): LocalAttachment<StreamChatGenerics> => {
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
+): LocalAttachment<ErmisChatGenerics> => {
   if (isLocalAttachment(attachment)) {
     return attachment;
   }
@@ -45,26 +45,26 @@ const ensureIsLocalAttachment = <
 };
 
 export const useAttachments = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
-  state: MessageInputState<StreamChatGenerics>,
-  dispatch: React.Dispatch<MessageInputReducerAction<StreamChatGenerics>>,
+  props: MessageInputProps<ErmisChatGenerics, V>,
+  state: MessageInputState<ErmisChatGenerics>,
+  dispatch: React.Dispatch<MessageInputReducerAction<ErmisChatGenerics>>,
   textareaRef: React.MutableRefObject<HTMLTextAreaElement | undefined>,
 ) => {
   const { doFileUploadRequest, doImageUploadRequest, errorHandler, noFiles } = props;
   const { fileUploads, imageUploads } = state;
-  const { getAppSettings } = useChatContext<StreamChatGenerics>('useAttachments');
+  const { getAppSettings } = useChatContext<ErmisChatGenerics>('useAttachments');
   const { t } = useTranslationContext('useAttachments');
-  const { addNotification } = useChannelActionContext<StreamChatGenerics>('useAttachments');
-  const { channel, maxNumberOfFiles, multipleUploads } = useChannelStateContext<StreamChatGenerics>(
+  const { addNotification } = useChannelActionContext<ErmisChatGenerics>('useAttachments');
+  const { channel, maxNumberOfFiles, multipleUploads } = useChannelStateContext<ErmisChatGenerics>(
     'useAttachments',
   );
 
-  const { removeFile, uploadFile } = useFileUploads<StreamChatGenerics, V>(props, state, dispatch);
+  const { removeFile, uploadFile } = useFileUploads<ErmisChatGenerics, V>(props, state, dispatch);
 
-  const { removeImage, uploadImage } = useImageUploads<StreamChatGenerics, V>(
+  const { removeImage, uploadImage } = useImageUploads<ErmisChatGenerics, V>(
     props,
     state,
     dispatch,
@@ -121,7 +121,7 @@ export const useAttachments = <
   );
 
   const upsertAttachments = useCallback(
-    (attachments: (Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>)[]) => {
+    (attachments: (Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>)[]) => {
       if (!attachments.length) return;
       dispatch({
         attachments: attachments.map(ensureIsLocalAttachment),
@@ -133,8 +133,8 @@ export const useAttachments = <
 
   const uploadAttachment = useCallback(
     async (
-      att: LocalAttachment<StreamChatGenerics>,
-    ): Promise<LocalAttachment<StreamChatGenerics> | undefined> => {
+      att: LocalAttachment<ErmisChatGenerics>,
+    ): Promise<LocalAttachment<ErmisChatGenerics> | undefined> => {
       const { localMetadata, ...attachment } = att;
       if (!localMetadata?.file) return att;
 
@@ -188,7 +188,7 @@ export const useAttachments = <
         console.error(finalError);
         addNotification(finalError.message, 'error');
 
-        const failedAttachment: LocalAttachment<StreamChatGenerics> = {
+        const failedAttachment: LocalAttachment<ErmisChatGenerics> = {
           ...attachment,
           localMetadata: {
             ...localMetadata,
@@ -214,7 +214,7 @@ export const useAttachments = <
         return;
       }
 
-      const uploadedAttachment: LocalAttachment<StreamChatGenerics> = {
+      const uploadedAttachment: LocalAttachment<ErmisChatGenerics> = {
         ...attachment,
         localMetadata: {
           ...localMetadata,

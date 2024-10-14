@@ -25,7 +25,7 @@ import {
   MessageResponse,
   SendMessageAPIResponse,
   Channel as StreamChannel,
-  StreamChat,
+  ErmisChat,
   UpdatedMessage,
   UserResponse,
 } from 'stream-chat';
@@ -84,7 +84,7 @@ import type { MessageInputProps } from '../MessageInput/MessageInput';
 import type {
   ChannelUnreadUiState,
   CustomTrigger,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   GiphyVersions,
   ImageAttachmentSizeHandler,
   SendMessageOptions,
@@ -101,155 +101,155 @@ import { EventComponent } from '../EventComponent';
 import { DateSeparator } from '../DateSeparator';
 
 type ChannelPropsForwardedToComponentContext<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Custom UI component to display a message attachment, defaults to and accepts same props as: [Attachment](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Attachment/Attachment.tsx) */
-  Attachment?: ComponentContextValue<StreamChatGenerics>['Attachment'];
+  Attachment?: ComponentContextValue<ErmisChatGenerics>['Attachment'];
   /** Custom UI component to display an attachment previews in MessageInput, defaults to and accepts same props as: [Attachment](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/AttachmentPreviewList.tsx) */
-  AttachmentPreviewList?: ComponentContextValue<StreamChatGenerics>['AttachmentPreviewList'];
+  AttachmentPreviewList?: ComponentContextValue<ErmisChatGenerics>['AttachmentPreviewList'];
   /** Custom UI component to display AudioRecorder in MessageInput, defaults to and accepts same props as: [AudioRecorder](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/AudioRecorder.tsx) */
-  AudioRecorder?: ComponentContextValue<StreamChatGenerics>['AudioRecorder'];
+  AudioRecorder?: ComponentContextValue<ErmisChatGenerics>['AudioRecorder'];
   /** Optional UI component to override the default suggestion Header component, defaults to and accepts same props as: [Header](https://github.com/GetStream/stream-chat-react/blob/master/src/components/AutoCompleteTextarea/Header.tsx) */
-  AutocompleteSuggestionHeader?: ComponentContextValue<StreamChatGenerics>['AutocompleteSuggestionHeader'];
+  AutocompleteSuggestionHeader?: ComponentContextValue<ErmisChatGenerics>['AutocompleteSuggestionHeader'];
   /** Optional UI component to override the default suggestion Item component, defaults to and accepts same props as: [Item](https://github.com/GetStream/stream-chat-react/blob/master/src/components/AutoCompleteTextarea/Item.js) */
-  AutocompleteSuggestionItem?: ComponentContextValue<StreamChatGenerics>['AutocompleteSuggestionItem'];
+  AutocompleteSuggestionItem?: ComponentContextValue<ErmisChatGenerics>['AutocompleteSuggestionItem'];
   /** Optional UI component to override the default List component that displays suggestions, defaults to and accepts same props as: [List](https://github.com/GetStream/stream-chat-react/blob/master/src/components/AutoCompleteTextarea/List.js) */
-  AutocompleteSuggestionList?: ComponentContextValue<StreamChatGenerics>['AutocompleteSuggestionList'];
+  AutocompleteSuggestionList?: ComponentContextValue<ErmisChatGenerics>['AutocompleteSuggestionList'];
   /** UI component to display a user's avatar, defaults to and accepts same props as: [Avatar](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Avatar/Avatar.tsx) */
-  Avatar?: ComponentContextValue<StreamChatGenerics>['Avatar'];
+  Avatar?: ComponentContextValue<ErmisChatGenerics>['Avatar'];
   /** Custom UI component to display <img/> elements resp. a fallback in case of load error, defaults to and accepts same props as: [BaseImage](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Gallery/BaseImage.tsx) */
-  BaseImage?: ComponentContextValue<StreamChatGenerics>['BaseImage'];
+  BaseImage?: ComponentContextValue<ErmisChatGenerics>['BaseImage'];
   /** Custom UI component to display the slow mode cooldown timer, defaults to and accepts same props as: [CooldownTimer](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/CooldownTimer.tsx) */
-  CooldownTimer?: ComponentContextValue<StreamChatGenerics>['CooldownTimer'];
+  CooldownTimer?: ComponentContextValue<ErmisChatGenerics>['CooldownTimer'];
   /** Custom UI component to render set of buttons to be displayed in the MessageActionsBox, defaults to and accepts same props as: [CustomMessageActionsList](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageActions/CustomMessageActionsList.tsx) */
-  CustomMessageActionsList?: ComponentContextValue<StreamChatGenerics>['CustomMessageActionsList'];
+  CustomMessageActionsList?: ComponentContextValue<ErmisChatGenerics>['CustomMessageActionsList'];
   /** Custom UI component for date separators, defaults to and accepts same props as: [DateSeparator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/DateSeparator.tsx) */
-  DateSeparator?: ComponentContextValue<StreamChatGenerics>['DateSeparator'];
+  DateSeparator?: ComponentContextValue<ErmisChatGenerics>['DateSeparator'];
   /** Custom UI component to override default edit message input, defaults to and accepts same props as: [EditMessageForm](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/EditMessageForm.tsx) */
-  EditMessageInput?: ComponentContextValue<StreamChatGenerics>['EditMessageInput'];
+  EditMessageInput?: ComponentContextValue<ErmisChatGenerics>['EditMessageInput'];
   /** Custom UI component for rendering button with emoji picker in MessageInput */
-  EmojiPicker?: ComponentContextValue<StreamChatGenerics>['EmojiPicker'];
+  EmojiPicker?: ComponentContextValue<ErmisChatGenerics>['EmojiPicker'];
   /** Mechanism to be used with autocomplete and text replace features of the `MessageInput` component, see [emoji-mart `SearchIndex`](https://github.com/missive/emoji-mart#%EF%B8%8F%EF%B8%8F-headless-search) */
-  emojiSearchIndex?: ComponentContextValue<StreamChatGenerics>['emojiSearchIndex'];
+  emojiSearchIndex?: ComponentContextValue<ErmisChatGenerics>['emojiSearchIndex'];
   /** Custom UI component to be displayed when the `MessageList` is empty, defaults to and accepts same props as: [EmptyStateIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/EmptyStateIndicator/EmptyStateIndicator.tsx)  */
-  EmptyStateIndicator?: ComponentContextValue<StreamChatGenerics>['EmptyStateIndicator'];
+  EmptyStateIndicator?: ComponentContextValue<ErmisChatGenerics>['EmptyStateIndicator'];
   /** Custom UI component for file upload icon, defaults to and accepts same props as: [FileUploadIcon](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/icons.tsx) */
-  FileUploadIcon?: ComponentContextValue<StreamChatGenerics>['FileUploadIcon'];
+  FileUploadIcon?: ComponentContextValue<ErmisChatGenerics>['FileUploadIcon'];
   /** Custom UI component to render a Giphy preview in the `VirtualizedMessageList` */
-  GiphyPreviewMessage?: ComponentContextValue<StreamChatGenerics>['GiphyPreviewMessage'];
+  GiphyPreviewMessage?: ComponentContextValue<ErmisChatGenerics>['GiphyPreviewMessage'];
   /** Custom UI component to render at the top of the `MessageList` */
-  HeaderComponent?: ComponentContextValue<StreamChatGenerics>['HeaderComponent'];
+  HeaderComponent?: ComponentContextValue<ErmisChatGenerics>['HeaderComponent'];
   /** Custom UI component handling how the message input is rendered, defaults to and accepts the same props as [MessageInputFlat](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/MessageInputFlat.tsx) */
-  Input?: ComponentContextValue<StreamChatGenerics>['Input'];
+  Input?: ComponentContextValue<ErmisChatGenerics>['Input'];
   /** Custom component to render link previews in message input **/
-  LinkPreviewList?: ComponentContextValue<StreamChatGenerics>['LinkPreviewList'];
+  LinkPreviewList?: ComponentContextValue<ErmisChatGenerics>['LinkPreviewList'];
   /** Custom UI component to be shown if the channel query fails, defaults to and accepts same props as: [LoadingErrorIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Loading/LoadingErrorIndicator.tsx) */
   LoadingErrorIndicator?: React.ComponentType<LoadingErrorIndicatorProps>;
   /** Custom UI component to render while the `MessageList` is loading new messages, defaults to and accepts same props as: [LoadingIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Loading/LoadingIndicator.tsx) */
-  LoadingIndicator?: ComponentContextValue<StreamChatGenerics>['LoadingIndicator'];
+  LoadingIndicator?: ComponentContextValue<ErmisChatGenerics>['LoadingIndicator'];
   /** Custom UI component to display a message in the standard `MessageList`, defaults to and accepts the same props as: [MessageSimple](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageSimple.tsx) */
-  Message?: ComponentContextValue<StreamChatGenerics>['Message'];
+  Message?: ComponentContextValue<ErmisChatGenerics>['Message'];
   /** Custom UI component to display the contents of a bounced message modal. Usually it allows to retry, edit, or delete the message. Defaults to and accepts the same props as: [MessageBouncePrompt](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageBounce/MessageBouncePrompt.tsx) */
-  MessageBouncePrompt?: ComponentContextValue<StreamChatGenerics>['MessageBouncePrompt'];
+  MessageBouncePrompt?: ComponentContextValue<ErmisChatGenerics>['MessageBouncePrompt'];
   /** Custom UI component for a deleted message, defaults to and accepts same props as: [MessageDeleted](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageDeleted.tsx) */
-  MessageDeleted?: ComponentContextValue<StreamChatGenerics>['MessageDeleted'];
+  MessageDeleted?: ComponentContextValue<ErmisChatGenerics>['MessageDeleted'];
   /** Custom UI component that displays message and connection status notifications in the `MessageList`, defaults to and accepts same props as [DefaultMessageListNotifications](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/MessageListNotifications.tsx) */
-  MessageListNotifications?: ComponentContextValue<StreamChatGenerics>['MessageListNotifications'];
+  MessageListNotifications?: ComponentContextValue<ErmisChatGenerics>['MessageListNotifications'];
   /** Custom UI component to display a notification when scrolled up the list and new messages arrive, defaults to and accepts same props as [MessageNotification](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/MessageNotification.tsx) */
-  MessageNotification?: ComponentContextValue<StreamChatGenerics>['MessageNotification'];
+  MessageNotification?: ComponentContextValue<ErmisChatGenerics>['MessageNotification'];
   /** Custom UI component for message options popup, defaults to and accepts same props as: [MessageOptions](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageOptions.tsx) */
-  MessageOptions?: ComponentContextValue<StreamChatGenerics>['MessageOptions'];
+  MessageOptions?: ComponentContextValue<ErmisChatGenerics>['MessageOptions'];
   /** Custom UI component to display message replies, defaults to and accepts same props as: [MessageRepliesCountButton](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageRepliesCountButton.tsx) */
-  MessageRepliesCountButton?: ComponentContextValue<StreamChatGenerics>['MessageRepliesCountButton'];
+  MessageRepliesCountButton?: ComponentContextValue<ErmisChatGenerics>['MessageRepliesCountButton'];
   /** Custom UI component to display message delivery status, defaults to and accepts same props as: [MessageStatus](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageStatus.tsx) */
-  MessageStatus?: ComponentContextValue<StreamChatGenerics>['MessageStatus'];
+  MessageStatus?: ComponentContextValue<ErmisChatGenerics>['MessageStatus'];
   /** Custom UI component to display system messages, defaults to and accepts same props as: [EventComponent](https://github.com/GetStream/stream-chat-react/blob/master/src/components/EventComponent/EventComponent.tsx) */
-  MessageSystem?: ComponentContextValue<StreamChatGenerics>['MessageSystem'];
+  MessageSystem?: ComponentContextValue<ErmisChatGenerics>['MessageSystem'];
   /** Custom UI component to display a timestamp on a message, defaults to and accepts same props as: [MessageTimestamp](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageTimestamp.tsx) */
-  MessageTimestamp?: ComponentContextValue<StreamChatGenerics>['MessageTimestamp'];
+  MessageTimestamp?: ComponentContextValue<ErmisChatGenerics>['MessageTimestamp'];
   /** Custom UI component for viewing message's image attachments, defaults to and accepts the same props as [ModalGallery](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Gallery/ModalGallery.tsx) */
-  ModalGallery?: ComponentContextValue<StreamChatGenerics>['ModalGallery'];
+  ModalGallery?: ComponentContextValue<ErmisChatGenerics>['ModalGallery'];
   /** Custom UI component to override default pinned message indicator, defaults to and accepts same props as: [PinIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/icons.tsx) */
-  PinIndicator?: ComponentContextValue<StreamChatGenerics>['PinIndicator'];
+  PinIndicator?: ComponentContextValue<ErmisChatGenerics>['PinIndicator'];
   /** Custom UI component to override quoted message UI on a sent message, defaults to and accepts same props as: [QuotedMessage](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/QuotedMessage.tsx) */
-  QuotedMessage?: ComponentContextValue<StreamChatGenerics>['QuotedMessage'];
+  QuotedMessage?: ComponentContextValue<ErmisChatGenerics>['QuotedMessage'];
   /** Custom UI component to override the message input's quoted message preview, defaults to and accepts same props as: [QuotedMessagePreview](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/QuotedMessagePreview.tsx) */
-  QuotedMessagePreview?: ComponentContextValue<StreamChatGenerics>['QuotedMessagePreview'];
+  QuotedMessagePreview?: ComponentContextValue<ErmisChatGenerics>['QuotedMessagePreview'];
   /** Custom reaction options to be applied to ReactionSelector, ReactionList and SimpleReactionList components */
   reactionOptions?: ReactionOptions;
   /** Custom UI component to display the reaction selector, defaults to and accepts same props as: [ReactionSelector](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Reactions/ReactionSelector.tsx) */
-  ReactionSelector?: ComponentContextValue<StreamChatGenerics>['ReactionSelector'];
+  ReactionSelector?: ComponentContextValue<ErmisChatGenerics>['ReactionSelector'];
   /** Custom UI component to display the list of reactions on a message, defaults to and accepts same props as: [ReactionsList](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Reactions/ReactionsList.tsx) */
-  ReactionsList?: ComponentContextValue<StreamChatGenerics>['ReactionsList'];
+  ReactionsList?: ComponentContextValue<ErmisChatGenerics>['ReactionsList'];
   /** Custom UI component for send button, defaults to and accepts same props as: [SendButton](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/icons.tsx) */
-  SendButton?: ComponentContextValue<StreamChatGenerics>['SendButton'];
+  SendButton?: ComponentContextValue<ErmisChatGenerics>['SendButton'];
   /** Custom UI component button for initiating audio recording, defaults to and accepts same props as: [StartRecordingAudioButton](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MediaRecorder/AudioRecorder/AudioRecordingButtons.tsx) */
-  StartRecordingAudioButton?: ComponentContextValue<StreamChatGenerics>['StartRecordingAudioButton'];
+  StartRecordingAudioButton?: ComponentContextValue<ErmisChatGenerics>['StartRecordingAudioButton'];
   /** Custom UI component that displays thread's parent or other message at the top of the `MessageList`, defaults to and accepts same props as [MessageSimple](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Message/MessageSimple.tsx) */
-  ThreadHead?: React.ComponentType<MessageProps<StreamChatGenerics>>;
+  ThreadHead?: React.ComponentType<MessageProps<ErmisChatGenerics>>;
   /** Custom UI component to display the header of a `Thread`, defaults to and accepts same props as: [DefaultThreadHeader](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Thread/Thread.tsx) */
-  ThreadHeader?: ComponentContextValue<StreamChatGenerics>['ThreadHeader'];
+  ThreadHeader?: ComponentContextValue<ErmisChatGenerics>['ThreadHeader'];
   /** Custom UI component to display the start of a threaded `MessageList`, defaults to and accepts same props as: [DefaultThreadStart](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Thread/Thread.tsx) */
-  ThreadStart?: ComponentContextValue<StreamChatGenerics>['ThreadStart'];
+  ThreadStart?: ComponentContextValue<ErmisChatGenerics>['ThreadStart'];
   /** Custom UI component to display a date used in timestamps. It's used internally by the default `MessageTimestamp`, and to display a timestamp for edited messages. */
-  Timestamp?: ComponentContextValue<StreamChatGenerics>['Timestamp'];
+  Timestamp?: ComponentContextValue<ErmisChatGenerics>['Timestamp'];
   /** Optional context provider that lets you override the default autocomplete triggers, defaults to: [DefaultTriggerProvider](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/DefaultTriggerProvider.tsx) */
-  TriggerProvider?: ComponentContextValue<StreamChatGenerics>['TriggerProvider'];
+  TriggerProvider?: ComponentContextValue<ErmisChatGenerics>['TriggerProvider'];
   /** Custom UI component for the typing indicator, defaults to and accepts same props as: [TypingIndicator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/TypingIndicator/TypingIndicator.tsx) */
-  TypingIndicator?: ComponentContextValue<StreamChatGenerics>['TypingIndicator'];
+  TypingIndicator?: ComponentContextValue<ErmisChatGenerics>['TypingIndicator'];
   /** Custom UI component that indicates a user is viewing unread messages. It disappears once the user scrolls to UnreadMessagesSeparator. Defaults to and accepts same props as: [UnreadMessagesNotification](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/UnreadMessagesNotification.tsx) */
   UnreadMessagesNotification?: React.ComponentType<UnreadMessagesNotificationProps>;
   /** Custom UI component that separates read messages from unread, defaults to and accepts same props as: [UnreadMessagesSeparator](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageList/UnreadMessagesSeparator.tsx) */
-  UnreadMessagesSeparator?: ComponentContextValue<StreamChatGenerics>['UnreadMessagesSeparator'];
+  UnreadMessagesSeparator?: ComponentContextValue<ErmisChatGenerics>['UnreadMessagesSeparator'];
   /** Custom UI component to display a message in the `VirtualizedMessageList`, does not have a default implementation */
-  VirtualMessage?: ComponentContextValue<StreamChatGenerics>['VirtualMessage'];
+  VirtualMessage?: ComponentContextValue<ErmisChatGenerics>['VirtualMessage'];
 };
 
 const isUserResponseArray = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  output: string[] | UserResponse<StreamChatGenerics>[],
-): output is UserResponse<StreamChatGenerics>[] =>
-  (output as UserResponse<StreamChatGenerics>[])[0]?.id != null;
+  output: string[] | UserResponse<ErmisChatGenerics>[],
+): output is UserResponse<ErmisChatGenerics>[] =>
+  (output as UserResponse<ErmisChatGenerics>[])[0]?.id != null;
 
 export type ChannelProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
-> = ChannelPropsForwardedToComponentContext<StreamChatGenerics> & {
+> = ChannelPropsForwardedToComponentContext<ErmisChatGenerics> & {
   /** List of accepted file types */
   acceptedFiles?: string[];
   /** Custom handler function that runs when the active channel has unread messages and the app is running on a separate browser tab */
   activeUnreadHandler?: (unread: number, documentTitle: string) => void;
   /** The connected and active channel */
-  channel?: StreamChannel<StreamChatGenerics>;
+  channel?: StreamChannel<ErmisChatGenerics>;
   /**
    * Optional configuration parameters used for the initial channel query.
    * Applied only if the value of channel.initialized is false.
    * If the channel instance has already been initialized (channel has been queried),
    * then the channel query will be skipped and channelQueryOptions will not be applied.
    */
-  channelQueryOptions?: ChannelQueryOptions<StreamChatGenerics>;
+  channelQueryOptions?: ChannelQueryOptions<ErmisChatGenerics>;
   /** Custom action handler to override the default `client.deleteMessage(message.id)` function */
   doDeleteMessageRequest?: (
-    message: StreamMessage<StreamChatGenerics>,
-  ) => Promise<MessageResponse<StreamChatGenerics>>;
+    message: StreamMessage<ErmisChatGenerics>,
+  ) => Promise<MessageResponse<ErmisChatGenerics>>;
   /** Custom action handler to override the default `channel.markRead` request function (advanced usage only) */
   doMarkReadRequest?: (
-    channel: StreamChannel<StreamChatGenerics>,
+    channel: StreamChannel<ErmisChatGenerics>,
     setChannelUnreadUiState?: (state: ChannelUnreadUiState) => void,
-  ) => Promise<EventAPIResponse<StreamChatGenerics>> | void;
+  ) => Promise<EventAPIResponse<ErmisChatGenerics>> | void;
   /** Custom action handler to override the default `channel.sendMessage` request function (advanced usage only) */
   doSendMessageRequest?: (
-    channel: StreamChannel<StreamChatGenerics>,
-    message: Message<StreamChatGenerics>,
+    channel: StreamChannel<ErmisChatGenerics>,
+    message: Message<ErmisChatGenerics>,
     options?: SendMessageOptions,
-  ) => ReturnType<StreamChannel<StreamChatGenerics>['sendMessage']> | void;
+  ) => ReturnType<StreamChannel<ErmisChatGenerics>['sendMessage']> | void;
   /** Custom action handler to override the default `client.updateMessage` request function (advanced usage only) */
   doUpdateMessageRequest?: (
     cid: string,
-    updatedMessage: UpdatedMessage<StreamChatGenerics>,
+    updatedMessage: UpdatedMessage<ErmisChatGenerics>,
     options?: UpdateMessageOptions,
-  ) => ReturnType<StreamChat<StreamChatGenerics>['updateMessage']>;
+  ) => ReturnType<ErmisChat<ErmisChatGenerics>['updateMessage']>;
   /** If true, chat users will be able to drag and drop file uploads to the entire channel window */
   dragAndDropWindow?: boolean;
   /** Custom UI component to be shown if no active channel is set, defaults to null and skips rendering the Channel component */
@@ -279,11 +279,11 @@ export type ChannelProps<
   /** Whether to allow multiple attachment uploads */
   multipleUploads?: boolean;
   /** Custom action handler function to run on click of an @mention in a message */
-  onMentionsClick?: OnMentionAction<StreamChatGenerics>;
+  onMentionsClick?: OnMentionAction<ErmisChatGenerics>;
   /** Custom action handler function to run on hover of an @mention in a message */
-  onMentionsHover?: OnMentionAction<StreamChatGenerics>;
+  onMentionsHover?: OnMentionAction<ErmisChatGenerics>;
   /** If `dragAndDropWindow` prop is true, the props to pass to the MessageInput component (overrides props placed directly on MessageInput) */
-  optionalMessageInputProps?: MessageInputProps<StreamChatGenerics, V>;
+  optionalMessageInputProps?: MessageInputProps<ErmisChatGenerics, V>;
   /** You can turn on/off thumbnail generation for video attachments */
   shouldGenerateVideoThumbnail?: boolean;
   /** If true, skips the message data string comparison used to memoize the current channel messages (helpful for channels with 1000s of messages) */
@@ -293,10 +293,10 @@ export type ChannelProps<
 };
 
 const UnMemoizedChannel = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: PropsWithChildren<ChannelProps<StreamChatGenerics, V>>,
+  props: PropsWithChildren<ChannelProps<ErmisChatGenerics, V>>,
 ) => {
   const {
     channel: propsChannel,
@@ -310,7 +310,7 @@ const UnMemoizedChannel = <
     channelsQueryState,
     customClasses,
     theme,
-  } = useChatContext<StreamChatGenerics>('Channel');
+  } = useChatContext<ErmisChatGenerics>('Channel');
   const { channelClass, chatClass } = useChannelContainerClasses({
     customClasses,
   });
@@ -343,12 +343,12 @@ const UnMemoizedChannel = <
 };
 
 const ChannelInner = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
   props: PropsWithChildren<
-    ChannelProps<StreamChatGenerics, V> & {
-      channel: StreamChannel<StreamChatGenerics>;
+    ChannelProps<ErmisChatGenerics, V> & {
+      channel: StreamChannel<ErmisChatGenerics>;
       key: string;
     }
   >,
@@ -377,7 +377,7 @@ const ChannelInner = <
     skipMessageDataMemoization,
   } = props;
 
-  const channelQueryOptions: ChannelQueryOptions<StreamChatGenerics> & {
+  const channelQueryOptions: ChannelQueryOptions<ErmisChatGenerics> & {
     messages: { limit: number };
   } = useMemo(
     () =>
@@ -393,7 +393,7 @@ const ChannelInner = <
     latestMessageDatesByChannels,
     mutes,
     theme,
-  } = useChatContext<StreamChatGenerics>('Channel');
+  } = useChatContext<ErmisChatGenerics>('Channel');
   const { t } = useTranslationContext('Channel');
   const {
     channelClass,
@@ -404,12 +404,12 @@ const ChannelInner = <
 
   const [channelConfig, setChannelConfig] = useState(channel.getConfig());
   const [notifications, setNotifications] = useState<ChannelNotifications>([]);
-  const [quotedMessage, setQuotedMessage] = useState<StreamMessage<StreamChatGenerics>>();
+  const [quotedMessage, setQuotedMessage] = useState<StreamMessage<ErmisChatGenerics>>();
   const [channelUnreadUiState, _setChannelUnreadUiState] = useState<ChannelUnreadUiState>();
 
   const notificationTimeouts: Array<NodeJS.Timeout> = [];
 
-  const [state, dispatch] = useReducer<ChannelStateReducer<StreamChatGenerics>>(
+  const [state, dispatch] = useReducer<ChannelStateReducer<ErmisChatGenerics>>(
     channelReducer,
     // channel.initialized === false if client.channel().query() was not called, e.g. ChannelList is not used
     // => Channel will call channel.watch() in useLayoutEffect => state.loading is used to signal the watch() call state
@@ -485,7 +485,7 @@ const ChannelInner = <
     [activeUnreadHandler, channel, channelConfig, doMarkReadRequest, setChannelUnreadUiState, t],
   );
 
-  const handleEvent = async (event: Event<StreamChatGenerics>) => {
+  const handleEvent = async (event: Event<ErmisChatGenerics>) => {
     if (event.message) {
       dispatch({
         channel,
@@ -586,7 +586,7 @@ const ChannelInner = <
               if (typeof member === 'string') {
                 userId = member;
               } else if (typeof member === 'object') {
-                const { user, user_id } = member as ChannelMemberResponse<StreamChatGenerics>;
+                const { user, user_id } = member as ChannelMemberResponse<ErmisChatGenerics>;
                 userId = user_id || user?.id;
               }
               if (userId) {
@@ -676,7 +676,7 @@ const ChannelInner = <
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const loadMoreFinished = useCallback(
     debounce(
-      (hasMore: boolean, messages: ChannelState<StreamChatGenerics>['messages']) => {
+      (hasMore: boolean, messages: ChannelState<ErmisChatGenerics>['messages']) => {
         if (!isMounted.current) return;
         dispatch({ hasMore, messages, type: 'loadMoreFinished' });
       },
@@ -700,7 +700,7 @@ const ChannelInner = <
 
     const oldestID = oldestMessage?.id;
     const perPage = limit;
-    let queryResponse: ChannelAPIResponse<StreamChatGenerics>;
+    let queryResponse: ChannelAPIResponse<ErmisChatGenerics>;
 
     try {
       queryResponse = await channel.query({
@@ -729,7 +729,7 @@ const ChannelInner = <
 
     const newestId = newestMessage?.id;
     const perPage = limit;
-    let queryResponse: ChannelAPIResponse<StreamChatGenerics>;
+    let queryResponse: ChannelAPIResponse<ErmisChatGenerics>;
 
     try {
       queryResponse = await channel.query({
@@ -934,8 +934,8 @@ const ChannelInner = <
 
   const deleteMessage = useCallback(
     async (
-      message: StreamMessage<StreamChatGenerics>,
-    ): Promise<MessageResponse<StreamChatGenerics>> => {
+      message: StreamMessage<ErmisChatGenerics>,
+    ): Promise<MessageResponse<ErmisChatGenerics>> => {
       if (!message?.id) {
         throw new Error('Cannot delete a message - missing message ID.');
       }
@@ -953,10 +953,10 @@ const ChannelInner = <
   );
 
   const updateMessage = (
-    updatedMessage: MessageToSend<StreamChatGenerics> | StreamMessage<StreamChatGenerics>,
+    updatedMessage: MessageToSend<ErmisChatGenerics> | StreamMessage<ErmisChatGenerics>,
   ) => {
     // add the message to the local channel state
-    channel.state.addMessageSorted(updatedMessage as MessageResponse<StreamChatGenerics>, true);
+    channel.state.addMessageSorted(updatedMessage as MessageResponse<ErmisChatGenerics>, true);
 
     dispatch({
       channel,
@@ -966,14 +966,14 @@ const ChannelInner = <
   };
 
   const doSendMessage = async (
-    message: MessageToSend<StreamChatGenerics> | StreamMessage<StreamChatGenerics>,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    message: MessageToSend<ErmisChatGenerics> | StreamMessage<ErmisChatGenerics>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => {
     const { attachments, id, mentioned_users = [], parent_id, text } = message;
 
     // channel.sendMessage expects an array of user id strings
-    const mentions = isUserResponseArray<StreamChatGenerics>(mentioned_users)
+    const mentions = isUserResponseArray<ErmisChatGenerics>(mentioned_users)
       ? mentioned_users.map(({ id }) => id)
       : mentioned_users;
 
@@ -985,10 +985,10 @@ const ChannelInner = <
       quoted_message_id: parent_id === quotedMessage?.parent_id ? quotedMessage?.id : undefined,
       text,
       ...customMessageData,
-    } as Message<StreamChatGenerics>;
+    } as Message<ErmisChatGenerics>;
 
     try {
-      let messageResponse: void | SendMessageAPIResponse<StreamChatGenerics>;
+      let messageResponse: void | SendMessageAPIResponse<ErmisChatGenerics>;
 
       if (doSendMessageRequest) {
         messageResponse = await doSendMessageRequest(channel, messageData, options);
@@ -1058,13 +1058,8 @@ const ChannelInner = <
   };
 
   const sendMessage = async (
-    {
-      attachments = [],
-      mentioned_users = [],
-      parent,
-      text = '',
-    }: MessageToSend<StreamChatGenerics>,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    { attachments = [], mentioned_users = [], parent, text = '' }: MessageToSend<ErmisChatGenerics>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => {
     channel.state.filterErrorMessages();
@@ -1089,7 +1084,7 @@ const ChannelInner = <
     await doSendMessage(messagePreview, customMessageData, options);
   };
 
-  const retrySendMessage = async (message: StreamMessage<StreamChatGenerics>) => {
+  const retrySendMessage = async (message: StreamMessage<ErmisChatGenerics>) => {
     updateMessage({
       ...message,
       errorStatusCode: undefined,
@@ -1104,7 +1099,7 @@ const ChannelInner = <
     await doSendMessage(message);
   };
 
-  const removeMessage = (message: StreamMessage<StreamChatGenerics>) => {
+  const removeMessage = (message: StreamMessage<ErmisChatGenerics>) => {
     channel.state.removeMessage(message);
 
     dispatch({
@@ -1117,7 +1112,7 @@ const ChannelInner = <
   /** THREAD */
 
   const openThread = (
-    message: StreamMessage<StreamChatGenerics>,
+    message: StreamMessage<ErmisChatGenerics>,
     event?: React.BaseSyntheticEvent,
   ) => {
     event?.preventDefault();
@@ -1141,7 +1136,7 @@ const ChannelInner = <
     debounce(
       (
         threadHasMore: boolean,
-        threadMessages: Array<ReturnType<ChannelState<StreamChatGenerics>['formatMessage']>>,
+        threadMessages: Array<ReturnType<ChannelState<ErmisChatGenerics>['formatMessage']>>,
       ) => {
         dispatch({
           threadHasMore,
@@ -1191,7 +1186,7 @@ const ChannelInner = <
 
   const { typing, ...restState } = state;
 
-  const channelStateContextValue = useCreateChannelStateContext<StreamChatGenerics>({
+  const channelStateContextValue = useCreateChannelStateContext<ErmisChatGenerics>({
     ...restState,
     acceptedFiles,
     channel,
@@ -1215,7 +1210,7 @@ const ChannelInner = <
     watcher_count: state.watcherCount,
   });
 
-  const channelActionContextValue: ChannelActionContextValue<StreamChatGenerics> = useMemo(
+  const channelActionContextValue: ChannelActionContextValue<ErmisChatGenerics> = useMemo(
     () => ({
       addNotification,
       closeThread,
@@ -1257,7 +1252,7 @@ const ChannelInner = <
     ],
   );
 
-  const componentContextValue: ComponentContextValue<StreamChatGenerics> = useMemo(
+  const componentContextValue: ComponentContextValue<ErmisChatGenerics> = useMemo(
     () => ({
       Attachment: props.Attachment || DefaultAttachment,
       AttachmentPreviewList: props.AttachmentPreviewList,

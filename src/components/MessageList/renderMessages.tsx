@@ -6,40 +6,40 @@ import { ComponentContextValue, CustomClasses } from '../../context';
 import { CUSTOM_MESSAGE_TYPE } from '../../constants/messageTypes';
 
 import type { UserResponse } from 'stream-chat';
-import type { ChannelUnreadUiState, DefaultStreamChatGenerics } from '../../types';
+import type { ChannelUnreadUiState, DefaultErmisChatGenerics } from '../../types';
 import type { StreamMessage } from '../../context/ChannelStateContext';
 
 export interface RenderMessagesOptions<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > {
-  components: ComponentContextValue<StreamChatGenerics>;
+  components: ComponentContextValue<ErmisChatGenerics>;
   lastReceivedMessageId: string | null;
   messageGroupStyles: Record<string, GroupStyle>;
-  messages: Array<StreamMessage<StreamChatGenerics>>;
+  messages: Array<StreamMessage<ErmisChatGenerics>>;
   /**
    * Object mapping message IDs of own messages to the users who read those messages.
    */
-  readData: Record<string, Array<UserResponse<StreamChatGenerics>>>;
+  readData: Record<string, Array<UserResponse<ErmisChatGenerics>>>;
   /**
    * Props forwarded to the Message component.
    */
-  sharedMessageProps: SharedMessageProps<StreamChatGenerics>;
+  sharedMessageProps: SharedMessageProps<ErmisChatGenerics>;
   /**
    * Current user's channel read state used to render components reflecting unread state.
    * It does not reflect the back-end state if a channel is marked read on mount.
    * This is in order to keep the unread UI when an unread channel is open.
    */
-  channelUnreadUiState?: ChannelUnreadUiState<StreamChatGenerics>;
+  channelUnreadUiState?: ChannelUnreadUiState<ErmisChatGenerics>;
   customClasses?: CustomClasses;
 }
 
 export type SharedMessageProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Omit<MessageProps<StreamChatGenerics>, MessagePropsToOmit>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Omit<MessageProps<ErmisChatGenerics>, MessagePropsToOmit>;
 
 export type MessageRenderer<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = (options: RenderMessagesOptions<StreamChatGenerics>) => Array<ReactNode>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = (options: RenderMessagesOptions<ErmisChatGenerics>) => Array<ReactNode>;
 
 type MessagePropsToOmit =
   | 'channel'
@@ -50,7 +50,7 @@ type MessagePropsToOmit =
   | 'readBy';
 
 export function defaultRenderMessages<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   channelUnreadUiState,
   components,
@@ -60,7 +60,7 @@ export function defaultRenderMessages<
   messages,
   readData,
   sharedMessageProps: messageProps,
-}: RenderMessagesOptions<StreamChatGenerics>) {
+}: RenderMessagesOptions<ErmisChatGenerics>) {
   const { DateSeparator, HeaderComponent, MessageSystem, UnreadMessagesSeparator } = components;
   const renderedMessages = [];
   let firstMessage;

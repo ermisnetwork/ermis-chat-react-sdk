@@ -34,7 +34,7 @@ import type { SuggestionListHeaderProps } from '../components/AutoCompleteTextar
 import type { ThreadHeaderProps } from '../components/Thread/ThreadHeader';
 import type { TypingIndicatorProps } from '../components/TypingIndicator/TypingIndicator';
 
-import type { CustomTrigger, DefaultStreamChatGenerics, UnknownType } from '../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics, UnknownType } from '../types/types';
 import {
   BaseImageProps,
   CooldownTimerProps,
@@ -51,72 +51,72 @@ import type { RecordingPermissionDeniedNotificationProps } from '../components';
 import type { TimestampProps } from '../components/Message/Timestamp';
 
 export type ComponentContextValue<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 > = {
-  Attachment: React.ComponentType<AttachmentProps<StreamChatGenerics>>;
+  Attachment: React.ComponentType<AttachmentProps<ErmisChatGenerics>>;
   DateSeparator: React.ComponentType<DateSeparatorProps>;
-  Message: React.ComponentType<MessageUIComponentProps<StreamChatGenerics>>;
-  MessageSystem: React.ComponentType<EventComponentProps<StreamChatGenerics>>;
+  Message: React.ComponentType<MessageUIComponentProps<ErmisChatGenerics>>;
+  MessageSystem: React.ComponentType<EventComponentProps<ErmisChatGenerics>>;
   reactionOptions: ReactionOptions;
   UnreadMessagesSeparator: React.ComponentType<UnreadMessagesSeparatorProps>;
   AttachmentPreviewList?: React.ComponentType<AttachmentPreviewListProps>;
   AudioRecorder?: React.ComponentType;
   AutocompleteSuggestionHeader?: React.ComponentType<SuggestionListHeaderProps>;
-  AutocompleteSuggestionItem?: React.ComponentType<SuggestionItemProps<StreamChatGenerics>>;
-  AutocompleteSuggestionList?: React.ComponentType<SuggestionListProps<StreamChatGenerics>>;
-  Avatar?: React.ComponentType<AvatarProps<StreamChatGenerics>>;
+  AutocompleteSuggestionItem?: React.ComponentType<SuggestionItemProps<ErmisChatGenerics>>;
+  AutocompleteSuggestionList?: React.ComponentType<SuggestionListProps<ErmisChatGenerics>>;
+  Avatar?: React.ComponentType<AvatarProps<ErmisChatGenerics>>;
   BaseImage?: React.ComponentType<BaseImageProps>;
   CooldownTimer?: React.ComponentType<CooldownTimerProps>;
-  CustomMessageActionsList?: React.ComponentType<CustomMessageActionsListProps<StreamChatGenerics>>;
-  EditMessageInput?: React.ComponentType<MessageInputProps<StreamChatGenerics>>;
+  CustomMessageActionsList?: React.ComponentType<CustomMessageActionsListProps<ErmisChatGenerics>>;
+  EditMessageInput?: React.ComponentType<MessageInputProps<ErmisChatGenerics>>;
   EmojiPicker?: React.ComponentType;
   emojiSearchIndex?: EmojiSearchIndex;
   EmptyStateIndicator?: React.ComponentType<EmptyStateIndicatorProps>;
   FileUploadIcon?: React.ComponentType;
-  GiphyPreviewMessage?: React.ComponentType<GiphyPreviewMessageProps<StreamChatGenerics>>;
+  GiphyPreviewMessage?: React.ComponentType<GiphyPreviewMessageProps<ErmisChatGenerics>>;
   HeaderComponent?: React.ComponentType;
-  Input?: React.ComponentType<MessageInputProps<StreamChatGenerics, V>>;
+  Input?: React.ComponentType<MessageInputProps<ErmisChatGenerics, V>>;
   LinkPreviewList?: React.ComponentType<LinkPreviewListProps>;
   LoadingIndicator?: React.ComponentType<LoadingIndicatorProps>;
   MessageBouncePrompt?: React.ComponentType<MessageBouncePromptProps>;
-  MessageDeleted?: React.ComponentType<MessageDeletedProps<StreamChatGenerics>>;
+  MessageDeleted?: React.ComponentType<MessageDeletedProps<ErmisChatGenerics>>;
   MessageListNotifications?: React.ComponentType<MessageListNotificationsProps>;
   MessageNotification?: React.ComponentType<MessageNotificationProps>;
-  MessageOptions?: React.ComponentType<MessageOptionsProps<StreamChatGenerics>>;
+  MessageOptions?: React.ComponentType<MessageOptionsProps<ErmisChatGenerics>>;
   MessageRepliesCountButton?: React.ComponentType<MessageRepliesCountButtonProps>;
   MessageStatus?: React.ComponentType<MessageStatusProps>;
-  MessageTimestamp?: React.ComponentType<MessageTimestampProps<StreamChatGenerics>>;
+  MessageTimestamp?: React.ComponentType<MessageTimestampProps<ErmisChatGenerics>>;
   ModalGallery?: React.ComponentType<ModalGalleryProps>;
-  PinIndicator?: React.ComponentType<PinIndicatorProps<StreamChatGenerics>>;
+  PinIndicator?: React.ComponentType<PinIndicatorProps<ErmisChatGenerics>>;
   QuotedMessage?: React.ComponentType;
-  QuotedMessagePreview?: React.ComponentType<QuotedMessagePreviewProps<StreamChatGenerics>>;
-  ReactionSelector?: React.ForwardRefExoticComponent<ReactionSelectorProps<StreamChatGenerics>>;
-  ReactionsList?: React.ComponentType<ReactionsListProps<StreamChatGenerics>>;
+  QuotedMessagePreview?: React.ComponentType<QuotedMessagePreviewProps<ErmisChatGenerics>>;
+  ReactionSelector?: React.ForwardRefExoticComponent<ReactionSelectorProps<ErmisChatGenerics>>;
+  ReactionsList?: React.ComponentType<ReactionsListProps<ErmisChatGenerics>>;
   RecordingPermissionDeniedNotification?: React.ComponentType<RecordingPermissionDeniedNotificationProps>;
-  SendButton?: React.ComponentType<SendButtonProps<StreamChatGenerics>>;
+  SendButton?: React.ComponentType<SendButtonProps<ErmisChatGenerics>>;
   StartRecordingAudioButton?: React.ComponentType<StartRecordingAudioButtonProps>;
-  ThreadHead?: React.ComponentType<MessageProps<StreamChatGenerics>>;
-  ThreadHeader?: React.ComponentType<ThreadHeaderProps<StreamChatGenerics>>;
-  ThreadInput?: React.ComponentType<MessageInputProps<StreamChatGenerics, V>>;
+  ThreadHead?: React.ComponentType<MessageProps<ErmisChatGenerics>>;
+  ThreadHeader?: React.ComponentType<ThreadHeaderProps<ErmisChatGenerics>>;
+  ThreadInput?: React.ComponentType<MessageInputProps<ErmisChatGenerics, V>>;
   ThreadStart?: React.ComponentType;
   Timestamp?: React.ComponentType<TimestampProps>;
   TriggerProvider?: React.ComponentType;
   TypingIndicator?: React.ComponentType<TypingIndicatorProps>;
   UnreadMessagesNotification?: React.ComponentType<UnreadMessagesNotificationProps>;
-  VirtualMessage?: React.ComponentType<FixedHeightMessageProps<StreamChatGenerics>>;
+  VirtualMessage?: React.ComponentType<FixedHeightMessageProps<ErmisChatGenerics>>;
 };
 
 export const ComponentContext = React.createContext<ComponentContextValue | undefined>(undefined);
 
 export const ComponentProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >({
   children,
   value,
 }: PropsWithChildren<{
-  value: Partial<ComponentContextValue<StreamChatGenerics, V>>;
+  value: Partial<ComponentContextValue<ErmisChatGenerics, V>>;
 }>) => (
   <ComponentContext.Provider value={(value as unknown) as ComponentContextValue}>
     {children}
@@ -124,7 +124,7 @@ export const ComponentProvider = <
 );
 
 export const useComponentContext = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
   componentName?: string,
@@ -136,10 +136,10 @@ export const useComponentContext = <
       `The useComponentContext hook was called outside of the ComponentContext provider. Make sure this hook is called within a child of the Channel component. The errored call is located in the ${componentName} component.`,
     );
 
-    return {} as ComponentContextValue<StreamChatGenerics, V>;
+    return {} as ComponentContextValue<ErmisChatGenerics, V>;
   }
 
-  return contextValue as ComponentContextValue<StreamChatGenerics, V>;
+  return contextValue as ComponentContextValue<ErmisChatGenerics, V>;
 };
 
 /**
@@ -149,15 +149,15 @@ export const useComponentContext = <
  */
 export const withComponentContext = <
   P extends UnknownType,
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
   Component: React.ComponentType<P>,
 ) => {
   const WithComponentContextComponent = (
-    props: Omit<P, keyof ComponentContextValue<StreamChatGenerics, V>>,
+    props: Omit<P, keyof ComponentContextValue<ErmisChatGenerics, V>>,
   ) => {
-    const componentContext = useComponentContext<StreamChatGenerics, V>();
+    const componentContext = useComponentContext<ErmisChatGenerics, V>();
 
     return <Component {...(props as P)} {...componentContext} />;
   };

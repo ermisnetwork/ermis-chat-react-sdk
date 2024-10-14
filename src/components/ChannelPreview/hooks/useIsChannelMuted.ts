@@ -4,14 +4,14 @@ import { useChatContext } from '../../../context/ChatContext';
 
 import type { Channel } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useIsChannelMuted = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  channel: Channel<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
 ) => {
-  const { client } = useChatContext<StreamChatGenerics>('useIsChannelMuted');
+  const { client } = useChatContext<ErmisChatGenerics>('useIsChannelMuted');
 
   const [muted, setMuted] = useState(channel.muteStatus());
 

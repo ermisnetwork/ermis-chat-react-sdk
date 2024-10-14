@@ -4,7 +4,7 @@ import {
   DefaultGenerics,
   ExtendableGenerics,
   OwnUserResponse,
-  StreamChat,
+  ErmisChat,
   TokenOrProvider,
   UserResponse,
 } from 'stream-chat';
@@ -23,7 +23,7 @@ type LocalMessageType = Record<string, unknown>;
 type LocalReactionType = Record<string, unknown>;
 type LocalUserType = Record<string, unknown>;
 
-export type StreamChatGenerics = {
+export type ErmisChatGenerics = {
   attachmentType: LocalAttachmentType;
   channelType: LocalChannelType;
   commandType: LocalCommandType;
@@ -47,10 +47,10 @@ const useClient = <SCG extends ExtendableGenerics = DefaultGenerics>({
   tokenOrProvider: TokenOrProvider;
   userData: OwnUserResponse<SCG> | UserResponse<SCG>;
 }) => {
-  const [chatClient, setChatClient] = useState<StreamChat<SCG> | null>(null);
+  const [chatClient, setChatClient] = useState<ErmisChat<SCG> | null>(null);
 
   useEffect(() => {
-    const client = new StreamChat<SCG>(apiKey);
+    const client = new ErmisChat<SCG>(apiKey);
 
     let didUserConnectInterrupt = false;
     const connectionPromise = client.connectUser(userData, tokenOrProvider).then(() => {
@@ -72,7 +72,7 @@ const useClient = <SCG extends ExtendableGenerics = DefaultGenerics>({
   return chatClient;
 };
 
-export const ConnectedUser = <SCG extends DefaultGenerics = StreamChatGenerics>({
+export const ConnectedUser = <SCG extends DefaultGenerics = ErmisChatGenerics>({
   children,
   token,
   userId,

@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-underscore-dangle */
-import { StreamChat } from 'stream-chat';
+import { ErmisChat } from 'stream-chat';
 import { nanoid } from 'nanoid';
 
 const apiKey = 'API_KEY';
@@ -32,10 +32,10 @@ function mockClient(client, mocks = {}) {
   return client;
 }
 
-export const getTestClient = (mocks) => mockClient(new StreamChat(apiKey), mocks);
+export const getTestClient = (mocks) => mockClient(new ErmisChat(apiKey), mocks);
 
 export const getTestClientWithUser = async (user = { id: nanoid() }) => {
-  const client = mockClient(new StreamChat(apiKey));
+  const client = mockClient(new ErmisChat(apiKey));
   await connectUser(client, user);
   return client;
 };

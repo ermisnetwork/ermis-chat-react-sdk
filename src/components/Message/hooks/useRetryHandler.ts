@@ -1,13 +1,13 @@
 import { RetrySendMessage, useChannelActionContext } from '../../../context/ChannelActionContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useRetryHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  customRetrySendMessage?: RetrySendMessage<StreamChatGenerics>,
-): RetrySendMessage<StreamChatGenerics> => {
-  const { retrySendMessage: contextRetrySendMessage } = useChannelActionContext<StreamChatGenerics>(
+  customRetrySendMessage?: RetrySendMessage<ErmisChatGenerics>,
+): RetrySendMessage<ErmisChatGenerics> => {
+  const { retrySendMessage: contextRetrySendMessage } = useChannelActionContext<ErmisChatGenerics>(
     'useRetryHandler',
   );
 

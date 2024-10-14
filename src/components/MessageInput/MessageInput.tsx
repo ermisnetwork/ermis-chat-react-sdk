@@ -15,7 +15,7 @@ import type { SearchQueryParams } from '../ChannelSearch/hooks/useChannelSearch'
 import type { MessageToSend } from '../../context/ChannelActionContext';
 import type {
   CustomTrigger,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   SendMessageOptions,
   UnknownType,
 } from '../../types/types';
@@ -38,7 +38,7 @@ export interface EmojiSearchIndex<T extends UnknownType = UnknownType> {
 }
 
 export type MessageInputProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 > = {
   /** Additional props to be passed to the underlying `AutoCompleteTextarea` component, [available props](https://www.npmjs.com/package/react-textarea-autosize) */
@@ -61,12 +61,12 @@ export type MessageInputProps<
   /** Function to override the default file upload request */
   doFileUploadRequest?: (
     file: FileUpload['file'],
-    channel: Channel<StreamChatGenerics>,
+    channel: Channel<ErmisChatGenerics>,
   ) => Promise<SendFileAPIResponse>;
   /** Function to override the default image upload request */
   doImageUploadRequest?: (
     file: ImageUpload['file'],
-    channel: Channel<StreamChatGenerics>,
+    channel: Channel<ErmisChatGenerics>,
   ) => Promise<SendFileAPIResponse>;
   /** Mechanism to be used with autocomplete and text replace features of the `MessageInput` component, see [emoji-mart `SearchIndex`](https://github.com/missive/emoji-mart#%EF%B8%8F%EF%B8%8F-headless-search) */
   emojiSearchIndex?: ComponentContextValue['emojiSearchIndex'];
@@ -85,26 +85,26 @@ export type MessageInputProps<
   /** Allows to hide MessageInput's send button. */
   hideSendButton?: boolean;
   /** Custom UI component handling how the message input is rendered, defaults to and accepts the same props as [MessageInputFlat](https://github.com/GetStream/stream-chat-react/blob/master/src/components/MessageInput/MessageInputFlat.tsx) */
-  Input?: React.ComponentType<MessageInputProps<StreamChatGenerics, V>>;
+  Input?: React.ComponentType<MessageInputProps<ErmisChatGenerics, V>>;
   /** Max number of rows the underlying `textarea` component is allowed to grow */
   maxRows?: number;
   /** If true, the suggestion list will search all app users for an @mention, not just current channel members/watchers. Default: false. */
   mentionAllAppUsers?: boolean;
   /** Object containing filters/sort/options overrides for an @mention user query */
-  mentionQueryParams?: SearchQueryParams<StreamChatGenerics>['userFilters'];
+  mentionQueryParams?: SearchQueryParams<ErmisChatGenerics>['userFilters'];
   /** If provided, the existing message will be edited on submit */
-  message?: StreamMessage<StreamChatGenerics>;
+  message?: StreamMessage<ErmisChatGenerics>;
   /** If true, disables file uploads for all attachments except for those with type 'image'. Default: false */
   noFiles?: boolean;
   /** Function to override the default submit handler */
   overrideSubmitHandler?: (
-    message: MessageToSend<StreamChatGenerics>,
+    message: MessageToSend<ErmisChatGenerics>,
     channelCid: string,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => Promise<void> | void;
   /** When replying in a thread, the parent message object */
-  parent?: StreamMessage<StreamChatGenerics>;
+  parent?: StreamMessage<ErmisChatGenerics>;
   /** If true, triggers typing events on text input keystroke */
   publishTypingEvent?: boolean;
   /** If true, will use an optional dependency to support transliteration in the input for mentions, default is false. See: https://github.com/getstream/transliterate */
@@ -124,16 +124,16 @@ export type MessageInputProps<
 };
 
 const MessageInputProvider = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: PropsWithChildren<MessageInputProps<StreamChatGenerics, V>>,
+  props: PropsWithChildren<MessageInputProps<ErmisChatGenerics, V>>,
 ) => {
-  const cooldownTimerState = useCooldownTimer<StreamChatGenerics>();
-  const messageInputState = useMessageInputState<StreamChatGenerics, V>(props);
+  const cooldownTimerState = useCooldownTimer<ErmisChatGenerics>();
+  const messageInputState = useMessageInputState<ErmisChatGenerics, V>(props);
   const { emojiSearchIndex } = useComponentContext('MessageInput');
 
-  const messageInputContextValue = useCreateMessageInputContext<StreamChatGenerics, V>({
+  const messageInputContextValue = useCreateMessageInputContext<ErmisChatGenerics, V>({
     ...cooldownTimerState,
     ...messageInputState,
     ...props,
@@ -141,23 +141,23 @@ const MessageInputProvider = <
   });
 
   return (
-    <MessageInputContextProvider<StreamChatGenerics, V> value={messageInputContextValue}>
+    <MessageInputContextProvider<ErmisChatGenerics, V> value={messageInputContextValue}>
       {props.children}
     </MessageInputContextProvider>
   );
 };
 
 const UnMemoizedMessageInput = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
+  props: MessageInputProps<ErmisChatGenerics, V>,
 ) => {
   const { Input: PropInput } = props;
 
-  const { dragAndDropWindow } = useChannelStateContext<StreamChatGenerics>();
+  const { dragAndDropWindow } = useChannelStateContext<ErmisChatGenerics>();
   const { Input: ContextInput, TriggerProvider = DefaultTriggerProvider } = useComponentContext<
-    StreamChatGenerics,
+    ErmisChatGenerics,
     V
   >('MessageInput');
 

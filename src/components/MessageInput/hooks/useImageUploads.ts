@@ -11,22 +11,22 @@ import type { SendFileAPIResponse } from 'stream-chat';
 import type { MessageInputReducerAction, MessageInputState } from './useMessageInputState';
 import type { MessageInputProps } from '../MessageInput';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useImageUploads = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
-  state: MessageInputState<StreamChatGenerics>,
-  dispatch: React.Dispatch<MessageInputReducerAction<StreamChatGenerics>>,
+  props: MessageInputProps<ErmisChatGenerics, V>,
+  state: MessageInputState<ErmisChatGenerics>,
+  dispatch: React.Dispatch<MessageInputReducerAction<ErmisChatGenerics>>,
 ) => {
   const { doImageUploadRequest, errorHandler } = props;
   const { imageUploads } = state;
 
-  const { channel } = useChannelStateContext<StreamChatGenerics>('useImageUploads');
-  const { getAppSettings } = useChatContext<StreamChatGenerics>('useImageUploads');
-  const { addNotification } = useChannelActionContext<StreamChatGenerics>('useImageUploads');
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('useImageUploads');
+  const { getAppSettings } = useChatContext<ErmisChatGenerics>('useImageUploads');
+  const { addNotification } = useChannelActionContext<ErmisChatGenerics>('useImageUploads');
   const { t } = useTranslationContext('useImageUploads');
 
   const removeImage = useCallback((id: string) => {

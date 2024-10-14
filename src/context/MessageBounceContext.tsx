@@ -1,23 +1,23 @@
 import React, { createContext, ReactEventHandler, useCallback, useContext, useMemo } from 'react';
 import { useMessageContext } from './MessageContext';
-import { DefaultStreamChatGenerics, PropsWithChildrenOnly } from '../types/types';
+import { DefaultErmisChatGenerics, PropsWithChildrenOnly } from '../types/types';
 import { StreamMessage } from './ChannelStateContext';
 import { useChannelActionContext } from './ChannelActionContext';
 import { isMessageBounced } from '../components';
 
 export interface MessageBounceContextValue<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > {
   handleDelete: ReactEventHandler;
   handleEdit: ReactEventHandler;
   handleRetry: ReactEventHandler;
-  message: StreamMessage<StreamChatGenerics>;
+  message: StreamMessage<ErmisChatGenerics>;
 }
 
 const MessageBounceContext = createContext<MessageBounceContextValue | undefined>(undefined);
 
 export function useMessageBounceContext<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(componentName?: string) {
   const contextValue = useContext(MessageBounceContext);
 
@@ -26,20 +26,20 @@ export function useMessageBounceContext<
       `The useMessageBounceContext hook was called outside of the MessageBounceContext provider. The errored call is located in the ${componentName} component.`,
     );
 
-    return {} as MessageBounceContextValue<StreamChatGenerics>;
+    return {} as MessageBounceContextValue<ErmisChatGenerics>;
   }
 
   return contextValue;
 }
 
 export function MessageBounceProvider<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({ children }: PropsWithChildrenOnly) {
   const {
     handleRetry: doHandleRetry,
     message,
     setEditingState,
-  } = useMessageContext<StreamChatGenerics>('MessageBounceProvider');
+  } = useMessageContext<ErmisChatGenerics>('MessageBounceProvider');
 
   if (!isMessageBounced(message)) {
     console.warn(

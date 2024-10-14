@@ -10,12 +10,12 @@ import { useTranslationContext } from '../../context/TranslationContext';
 import { useChatContext } from '../../context/ChatContext';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export const QuotedMessagePreviewHeader = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
-  const { setQuotedMessage } = useChannelActionContext<StreamChatGenerics>('QuotedMessagePreview');
+  const { setQuotedMessage } = useChannelActionContext<ErmisChatGenerics>('QuotedMessagePreview');
   const { t } = useTranslationContext('QuotedMessagePreview');
 
   return (
@@ -35,17 +35,17 @@ export const QuotedMessagePreviewHeader = <
 };
 
 export type QuotedMessagePreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  quotedMessage: StreamMessage<StreamChatGenerics>;
+  quotedMessage: StreamMessage<ErmisChatGenerics>;
 };
 
 export const QuotedMessagePreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   quotedMessage,
-}: QuotedMessagePreviewProps<StreamChatGenerics>) => {
-  const { Attachment, Avatar = DefaultAvatar } = useComponentContext<StreamChatGenerics>(
+}: QuotedMessagePreviewProps<ErmisChatGenerics>) => {
+  const { Attachment, Avatar = DefaultAvatar } = useComponentContext<ErmisChatGenerics>(
     'QuotedMessagePreview',
   );
   const { userLanguage } = useTranslationContext('QuotedMessagePreview');

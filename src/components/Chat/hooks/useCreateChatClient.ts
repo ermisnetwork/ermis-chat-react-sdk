@@ -4,13 +4,13 @@ import {
   DefaultGenerics,
   ExtendableGenerics,
   OwnUserResponse,
-  StreamChat,
+  ErmisChat,
   TokenOrProvider,
   UserResponse,
 } from 'stream-chat';
 
 /**
- * React hook to create, connect and return `StreamChat` client.
+ * React hook to create, connect and return `ErmisChat` client.
  */
 export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGenerics>({
   apiKey,
@@ -21,7 +21,7 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
   tokenOrProvider: TokenOrProvider;
   userData: OwnUserResponse<SCG> | UserResponse<SCG>;
 }) => {
-  const [chatClient, setChatClient] = useState<StreamChat<SCG> | null>(null);
+  const [chatClient, setChatClient] = useState<ErmisChat<SCG> | null>(null);
   const [cachedUserData, setCachedUserData] = useState(userData);
 
   if (userData.id !== cachedUserData.id) {
@@ -29,7 +29,7 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
   }
 
   useEffect(() => {
-    const client = new StreamChat<SCG>(apiKey);
+    const client = new ErmisChat<SCG>(apiKey);
     let didUserConnectInterrupt = false;
 
     const connectionPromise = client.connectUser(cachedUserData, tokenOrProvider).then(() => {

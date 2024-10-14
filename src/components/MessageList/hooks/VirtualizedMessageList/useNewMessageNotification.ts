@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../../types/types';
 
 export function useNewMessageNotification<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  messages: StreamMessage<StreamChatGenerics>[],
+  messages: StreamMessage<ErmisChatGenerics>[],
   currentUserId: string | undefined,
   hasMoreNewer?: boolean,
 ) {

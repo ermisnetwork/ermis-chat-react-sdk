@@ -1,19 +1,19 @@
 import { StreamMessage, useChannelStateContext } from '../../../context/ChannelStateContext';
 import { useChatContext } from '../../../context/ChatContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useUserRole = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: StreamMessage<StreamChatGenerics>,
+  message: StreamMessage<ErmisChatGenerics>,
   onlySenderCanEdit?: boolean,
   disableQuotedMessages?: boolean,
 ) => {
-  const { channel, channelCapabilities = {} } = useChannelStateContext<StreamChatGenerics>(
+  const { channel, channelCapabilities = {} } = useChannelStateContext<ErmisChatGenerics>(
     'useUserRole',
   );
-  const { client } = useChatContext<StreamChatGenerics>('useUserRole');
+  const { client } = useChatContext<ErmisChatGenerics>('useUserRole');
 
   /**
    * @deprecated as it relies on `membership.role` check which is already deprecated and shouldn't be used anymore.

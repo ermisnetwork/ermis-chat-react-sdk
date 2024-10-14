@@ -8,11 +8,11 @@ import { CustomStyles, darkModeTheme, useCustomStyles } from './hooks/useCustomS
 import { ChatProvider, CustomClasses, ThemeVersion } from '../../context/ChatContext';
 import { SupportedTranslations, TranslationProvider } from '../../context/TranslationContext';
 
-import type { StreamChat } from 'stream-chat';
+import type { ErmisChat } from 'stream-chat';
 
 import type { Streami18n } from '../../i18n/Streami18n';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 /**
  * @deprecated will be removed with the complete transition to the theming V2 (next major release - `v11.0.0`)
@@ -29,10 +29,10 @@ export type Theme<T extends string = string> =
   | T;
 
 export type ChatProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  /** The StreamChat client object */
-  client: StreamChat<StreamChatGenerics>;
+  /** The ErmisChat client object */
+  client: ErmisChat<ErmisChatGenerics>;
   /** Object containing custom CSS classnames to override the library's default container CSS */
   customClasses?: CustomClasses;
   /**
@@ -64,13 +64,13 @@ export type ChatProps<
 };
 
 /**
- * Wrapper component for a StreamChat application. Chat needs to be placed around any other chat components
+ * Wrapper component for a ErmisChat application. Chat needs to be placed around any other chat components
  * as it provides the ChatContext.
  */
 export const Chat = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: PropsWithChildren<ChatProps<StreamChatGenerics>>,
+  props: PropsWithChildren<ChatProps<ErmisChatGenerics>>,
 ) => {
   const {
     children,

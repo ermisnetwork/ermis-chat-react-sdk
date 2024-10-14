@@ -5,24 +5,24 @@ import { useComponentContext, useMessageContext, useTranslationContext } from '.
 import { Timestamp as DefaultTimestamp } from './Timestamp';
 import { isMessageEdited } from './utils';
 
-import type { DefaultStreamChatGenerics } from '../../types';
+import type { DefaultErmisChatGenerics } from '../../types';
 import type { MessageTimestampProps } from './MessageTimestamp';
 
 export type MessageEditedTimestampProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = MessageTimestampProps<StreamChatGenerics> & {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = MessageTimestampProps<ErmisChatGenerics> & {
   open: boolean;
 };
 
 export function MessageEditedTimestamp<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   message: propMessage,
   open,
   ...timestampProps
-}: MessageEditedTimestampProps<StreamChatGenerics>) {
+}: MessageEditedTimestampProps<ErmisChatGenerics>) {
   const { t } = useTranslationContext('MessageEditedTimestamp');
-  const { message: contextMessage } = useMessageContext<StreamChatGenerics>(
+  const { message: contextMessage } = useMessageContext<ErmisChatGenerics>(
     'MessageEditedTimestamp',
   );
   const { Timestamp = DefaultTimestamp } = useComponentContext('MessageEditedTimestamp');

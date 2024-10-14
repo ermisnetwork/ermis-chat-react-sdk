@@ -11,22 +11,22 @@ import type { SendFileAPIResponse } from 'stream-chat';
 import type { MessageInputReducerAction, MessageInputState } from './useMessageInputState';
 import type { MessageInputProps } from '../MessageInput';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useFileUploads = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
-  state: MessageInputState<StreamChatGenerics>,
-  dispatch: React.Dispatch<MessageInputReducerAction<StreamChatGenerics>>,
+  props: MessageInputProps<ErmisChatGenerics, V>,
+  state: MessageInputState<ErmisChatGenerics>,
+  dispatch: React.Dispatch<MessageInputReducerAction<ErmisChatGenerics>>,
 ) => {
   const { doFileUploadRequest, errorHandler } = props;
   const { fileUploads } = state;
 
-  const { channel } = useChannelStateContext<StreamChatGenerics>('useFileUploads');
-  const { addNotification } = useChannelActionContext<StreamChatGenerics>('useFileUploads');
-  const { getAppSettings } = useChatContext<StreamChatGenerics>('useFileUploads');
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('useFileUploads');
+  const { addNotification } = useChannelActionContext<ErmisChatGenerics>('useFileUploads');
+  const { getAppSettings } = useChatContext<ErmisChatGenerics>('useFileUploads');
   const { t } = useTranslationContext('useFileUploads');
 
   const uploadFile = useCallback((id: string) => {

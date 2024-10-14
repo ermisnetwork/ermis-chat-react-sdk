@@ -3,24 +3,24 @@ import { MessageInputContextValue, useTranslationContext } from '../../../contex
 import { AudioRecorderConfig, MediaRecorderController, MediaRecordingState } from '../classes';
 
 import type { LocalVoiceRecordingAttachment } from '../../MessageInput';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 export type CustomAudioRecordingConfig = Partial<AudioRecorderConfig>;
 
 export type RecordingController<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   completeRecording: () => void;
   permissionState?: PermissionState;
   recorder?: MediaRecorderController;
-  recording?: LocalVoiceRecordingAttachment<StreamChatGenerics>;
+  recording?: LocalVoiceRecordingAttachment<ErmisChatGenerics>;
   recordingState?: MediaRecordingState;
 };
 
 type UseMediaRecorderParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = Pick<
-  MessageInputContextValue<StreamChatGenerics>,
+  MessageInputContextValue<ErmisChatGenerics>,
   'asyncMessagesMultiSendEnabled' | 'handleSubmit' | 'uploadAttachment'
 > & {
   enabled: boolean;
@@ -29,7 +29,7 @@ type UseMediaRecorderParams<
 };
 
 export const useMediaRecorder = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   asyncMessagesMultiSendEnabled,
   enabled,
@@ -37,10 +37,10 @@ export const useMediaRecorder = <
   handleSubmit,
   recordingConfig,
   uploadAttachment,
-}: UseMediaRecorderParams<StreamChatGenerics>): RecordingController<StreamChatGenerics> => {
+}: UseMediaRecorderParams<ErmisChatGenerics>): RecordingController<ErmisChatGenerics> => {
   const { t } = useTranslationContext('useMediaRecorder');
 
-  const [recording, setRecording] = useState<LocalVoiceRecordingAttachment<StreamChatGenerics>>();
+  const [recording, setRecording] = useState<LocalVoiceRecordingAttachment<ErmisChatGenerics>>();
   const [recordingState, setRecordingState] = useState<MediaRecordingState>();
   const [permissionState, setPermissionState] = useState<PermissionState>();
   const [isScheduledForSubmit, scheduleForSubmit] = useState(false);

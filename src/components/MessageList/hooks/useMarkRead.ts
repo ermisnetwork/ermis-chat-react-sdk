@@ -6,7 +6,7 @@ import {
   useChatContext,
 } from '../../../context';
 import { Event, MessageResponse } from 'stream-chat';
-import { DefaultStreamChatGenerics } from '../../../types';
+import { DefaultErmisChatGenerics } from '../../../types';
 
 type UseMarkReadParams = {
   isMessageListScrolledToBottom: boolean;
@@ -26,14 +26,14 @@ type UseMarkReadParams = {
  * @param wasChannelMarkedUnread
  */
 export const useMarkRead = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   isMessageListScrolledToBottom,
   messageListIsThread,
   unreadCount,
   wasMarkedUnread,
 }: UseMarkReadParams) => {
-  const { client } = useChatContext<StreamChatGenerics>('useMarkRead');
+  const { client } = useChatContext<ErmisChatGenerics>('useMarkRead');
   const { markRead, setChannelUnreadUiState } = useChannelActionContext('useMarkRead');
   const { channel } = useChannelStateContext('useMarkRead');
   const previousRenderMessageListScrolledToBottom = useRef(isMessageListScrolledToBottom);
@@ -50,7 +50,7 @@ export const useMarkRead = <
       if (shouldMarkRead(channel.countUnread())) markRead();
     };
 
-    const handleMessageNew = (event: Event<StreamChatGenerics>) => {
+    const handleMessageNew = (event: Event<ErmisChatGenerics>) => {
       const newMessageToCurrentChannel = event.cid === channel.cid;
       const isOwnMessage = event.user?.id && event.user.id === client.user?.id;
       const mainChannelUpdated = !event.message?.parent_id || event.message?.show_in_channel;
@@ -58,7 +58,7 @@ export const useMarkRead = <
       if (!isMessageListScrolledToBottom || wasMarkedUnread || document.hidden) {
         setChannelUnreadUiState((prev) => {
           const previousUnreadCount = prev?.unread_messages ?? 0;
-          const previousLastMessage = getPreviousLastMessage<StreamChatGenerics>(
+          const previousLastMessage = getPreviousLastMessage<ErmisChatGenerics>(
             channel.state.messages,
             event.message,
           );
@@ -108,8 +108,8 @@ export const useMarkRead = <
 };
 
 function getPreviousLastMessage<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(messages: StreamMessage<StreamChatGenerics>[], newMessage?: MessageResponse<StreamChatGenerics>) {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+>(messages: StreamMessage<ErmisChatGenerics>[], newMessage?: MessageResponse<ErmisChatGenerics>) {
   if (!newMessage) return;
   let previousLastMessage;
   for (let i = messages.length - 1; i >= 0; i--) {

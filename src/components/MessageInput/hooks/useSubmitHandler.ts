@@ -11,7 +11,7 @@ import type { MessageInputProps } from '../MessageInput';
 
 import type {
   CustomTrigger,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   SendMessageOptions,
 } from '../../../types/types';
 import type { EnrichURLsController } from './useLinkPreviews';
@@ -23,12 +23,12 @@ const getAttachmentTypeFromMime = (mime: string) => {
 };
 
 export const useSubmitHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
-  state: MessageInputState<StreamChatGenerics>,
-  dispatch: React.Dispatch<MessageInputReducerAction<StreamChatGenerics>>,
+  props: MessageInputProps<ErmisChatGenerics, V>,
+  state: MessageInputState<ErmisChatGenerics>,
+  dispatch: React.Dispatch<MessageInputReducerAction<ErmisChatGenerics>>,
   numberOfUploads: number,
   enrichURLsController: EnrichURLsController,
 ) => {
@@ -46,8 +46,8 @@ export const useSubmitHandler = <
   } = state;
 
   const { cancelURLEnrichment, findAndEnqueueURLsToEnrich } = enrichURLsController;
-  const { channel } = useChannelStateContext<StreamChatGenerics>('useSubmitHandler');
-  const { addNotification, editMessage, sendMessage } = useChannelActionContext<StreamChatGenerics>(
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('useSubmitHandler');
+  const { addNotification, editMessage, sendMessage } = useChannelActionContext<ErmisChatGenerics>(
     'useSubmitHandler',
   );
   const { t } = useTranslationContext('useSubmitHandler');
@@ -78,7 +78,7 @@ export const useSubmitHandler = <
         if (!textReference.current.hasChanged) return true;
         return !upload.og_scrape_url;
       })
-      .map<Attachment<StreamChatGenerics>>(({ file: { name }, url, ...rest }) => ({
+      .map<Attachment<ErmisChatGenerics>>(({ file: { name }, url, ...rest }) => ({
         author_name: rest.author_name,
         fallback: name,
         image_url: url,
@@ -92,7 +92,7 @@ export const useSubmitHandler = <
     const fileAttachments = fileOrder
       .map((id) => fileUploads[id])
       .filter((upload) => upload.state !== 'failed')
-      .map<Attachment<StreamChatGenerics>>((upload) => ({
+      .map<Attachment<ErmisChatGenerics>>((upload) => ({
         asset_url: upload.url,
         file_size: upload.file.size,
         mime_type: upload.file.type,
@@ -113,7 +113,7 @@ export const useSubmitHandler = <
 
   const handleSubmit = async (
     event?: React.BaseSyntheticEvent,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => {
     event?.preventDefault();
@@ -209,7 +209,7 @@ export const useSubmitHandler = <
             ...message,
             ...updatedMessage,
             ...customMessageData,
-          } as unknown) as UpdatedMessage<StreamChatGenerics>,
+          } as unknown) as UpdatedMessage<ErmisChatGenerics>,
           sendOptions,
         );
 

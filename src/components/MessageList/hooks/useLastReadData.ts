@@ -6,21 +6,21 @@ import type { UserResponse } from 'stream-chat';
 
 import type { StreamMessage } from '../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 type UseLastReadDataParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  messages: StreamMessage<StreamChatGenerics>[];
+  messages: StreamMessage<ErmisChatGenerics>[];
   returnAllReadData: boolean;
   userID: string | undefined;
-  read?: Record<string, { last_read: Date; user: UserResponse<StreamChatGenerics> }>;
+  read?: Record<string, { last_read: Date; user: UserResponse<ErmisChatGenerics> }>;
 };
 
 export const useLastReadData = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: UseLastReadDataParams<StreamChatGenerics>,
+  props: UseLastReadDataParams<ErmisChatGenerics>,
 ) => {
   const { messages, read, returnAllReadData, userID } = props;
 

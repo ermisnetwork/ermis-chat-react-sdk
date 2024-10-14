@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
 import { ReactionResponse, ReactionSort } from 'stream-chat';
 import { MessageContextValue, useMessageContext } from '../../../context';
-import { DefaultStreamChatGenerics } from '../../../types/types';
+import { DefaultErmisChatGenerics } from '../../../types/types';
 import { ReactionType } from '../types';
 
 export interface FetchReactionsOptions<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > {
-  reactionType: ReactionType<StreamChatGenerics>;
+  reactionType: ReactionType<ErmisChatGenerics>;
   shouldFetch: boolean;
-  handleFetchReactions?: MessageContextValue<StreamChatGenerics>['handleFetchReactions'];
-  sort?: ReactionSort<StreamChatGenerics>;
+  handleFetchReactions?: MessageContextValue<ErmisChatGenerics>['handleFetchReactions'];
+  sort?: ReactionSort<ErmisChatGenerics>;
 }
 
 export function useFetchReactions<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(options: FetchReactionsOptions<StreamChatGenerics>) {
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+>(options: FetchReactionsOptions<ErmisChatGenerics>) {
   const {
     handleFetchReactions: contextHandleFetchReactions,
-  } = useMessageContext<StreamChatGenerics>('useFetchReactions');
-  const [reactions, setReactions] = useState<ReactionResponse<StreamChatGenerics>[]>([]);
+  } = useMessageContext<ErmisChatGenerics>('useFetchReactions');
+  const [reactions, setReactions] = useState<ReactionResponse<ErmisChatGenerics>[]>([]);
   const {
     handleFetchReactions: propHandleFetchReactions,
     reactionType,

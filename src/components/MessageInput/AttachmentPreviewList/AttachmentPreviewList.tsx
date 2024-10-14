@@ -27,23 +27,23 @@ import {
 } from '../../Attachment';
 import { useMessageInputContext } from '../../../context';
 
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 export type AttachmentPreviewListProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   AudioAttachmentPreview?: ComponentType<FileAttachmentPreviewProps>;
   FileAttachmentPreview?: ComponentType<FileAttachmentPreviewProps>;
-  ImageAttachmentPreview?: ComponentType<ImageAttachmentPreviewProps<StreamChatGenerics>>;
+  ImageAttachmentPreview?: ComponentType<ImageAttachmentPreviewProps<ErmisChatGenerics>>;
   UnsupportedAttachmentPreview?: ComponentType<
-    UnsupportedAttachmentPreviewProps<StreamChatGenerics>
+    UnsupportedAttachmentPreviewProps<ErmisChatGenerics>
   >;
   VideoAttachmentPreview?: ComponentType<FileAttachmentPreviewProps>;
-  VoiceRecordingPreview?: ComponentType<VoiceRecordingPreviewProps<StreamChatGenerics>>;
+  VoiceRecordingPreview?: ComponentType<VoiceRecordingPreviewProps<ErmisChatGenerics>>;
 };
 
 export const AttachmentPreviewList = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   AudioAttachmentPreview = DefaultFilePreview,
   FileAttachmentPreview = DefaultFilePreview,
@@ -51,14 +51,14 @@ export const AttachmentPreviewList = <
   UnsupportedAttachmentPreview = DefaultUnknownAttachmentPreview,
   VideoAttachmentPreview = DefaultFilePreview,
   VoiceRecordingPreview = DefaultVoiceRecordingPreview,
-}: AttachmentPreviewListProps<StreamChatGenerics>) => {
+}: AttachmentPreviewListProps<ErmisChatGenerics>) => {
   const {
     attachments,
     fileOrder,
     imageOrder,
     removeAttachments,
     uploadAttachment,
-  } = useMessageInputContext<StreamChatGenerics>('AttachmentPreviewList');
+  } = useMessageInputContext<ErmisChatGenerics>('AttachmentPreviewList');
 
   return (
     <div className='str-chat__attachment-preview-list'>

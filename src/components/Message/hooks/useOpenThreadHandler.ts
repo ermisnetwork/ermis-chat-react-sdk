@@ -4,18 +4,18 @@ import type { ReactEventHandler } from '../types';
 
 import type { StreamMessage } from '../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useOpenThreadHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
+  message?: StreamMessage<ErmisChatGenerics>,
   customOpenThread?: (
-    message: StreamMessage<StreamChatGenerics>,
+    message: StreamMessage<ErmisChatGenerics>,
     event: React.BaseSyntheticEvent,
   ) => void,
 ): ReactEventHandler => {
-  const { openThread: channelOpenThread } = useChannelActionContext<StreamChatGenerics>(
+  const { openThread: channelOpenThread } = useChannelActionContext<ErmisChatGenerics>(
     'useOpenThreadHandler',
   );
 

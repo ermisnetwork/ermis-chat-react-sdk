@@ -6,14 +6,14 @@ import { useTranslationContext } from '../../context/TranslationContext';
 
 import type { StreamMessage } from '../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import { getDateString } from '../../i18n/utils';
 
 export type EventComponentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Message object */
-  message: StreamMessage<StreamChatGenerics>;
+  message: StreamMessage<ErmisChatGenerics>;
   /** Custom UI component to display user avatar, defaults to and accepts same props as: [Avatar](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Avatar/Avatar.tsx) */
   Avatar?: React.ComponentType<AvatarProps>;
 };
@@ -22,9 +22,9 @@ export type EventComponentProps<
  * Component to display system and channel event messages
  */
 const UnMemoizedEventComponent = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: EventComponentProps<StreamChatGenerics>,
+  props: EventComponentProps<ErmisChatGenerics>,
 ) => {
   const { Avatar = DefaultAvatar, message } = props;
 

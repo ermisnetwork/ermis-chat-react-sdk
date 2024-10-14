@@ -4,17 +4,17 @@ import { useChatContext } from '../../../context/ChatContext';
 
 import type { Channel, Event } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useUserPresenceChangedListener = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
+  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
 ) => {
-  const { client } = useChatContext<StreamChatGenerics>('useUserPresenceChangedListener');
+  const { client } = useChatContext<ErmisChatGenerics>('useUserPresenceChangedListener');
 
   useEffect(() => {
-    const handleEvent = (event: Event<StreamChatGenerics>) => {
+    const handleEvent = (event: Event<ErmisChatGenerics>) => {
       setChannels((channels) => {
         const newChannels = channels.map((channel) => {
           if (!event.user?.id || !channel.state.members[event.user.id]) {

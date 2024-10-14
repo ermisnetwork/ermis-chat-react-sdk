@@ -3,15 +3,15 @@ import { FileAttachmentPreview, FileAttachmentPreviewProps } from './FileAttachm
 import { ImageAttachmentPreview, ImageAttachmentPreviewProps } from './ImageAttachmentPreview';
 import { useMessageInputContext } from '../../../context';
 import { LocalAttachment, LocalFileAttachment, LocalImageAttachment } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 type PreviewAdapterProps<P> = { id: string; Preview?: ComponentType<P> };
 export const ImageUploadPreviewAdapter = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   id,
   Preview = ImageAttachmentPreview,
-}: PreviewAdapterProps<ImageAttachmentPreviewProps<StreamChatGenerics>>) => {
+}: PreviewAdapterProps<ImageAttachmentPreviewProps<ErmisChatGenerics>>) => {
   const { imageUploads, removeImage, uploadImage } = useMessageInputContext(
     'ImageUploadPreviewAdapter',
   );
@@ -19,13 +19,13 @@ export const ImageUploadPreviewAdapter = <
   const removeAttachments = useCallback((ids: string[]) => removeImage(ids[0]), [removeImage]);
 
   const handleRetry = useCallback(
-    (attachment: LocalAttachment<StreamChatGenerics>) =>
+    (attachment: LocalAttachment<ErmisChatGenerics>) =>
       attachment.localMetadata && uploadImage(attachment.localMetadata.id),
     [uploadImage],
   );
 
   const image = imageUploads[id];
-  const attachment = useMemo<LocalImageAttachment<StreamChatGenerics> | undefined>(
+  const attachment = useMemo<LocalImageAttachment<ErmisChatGenerics> | undefined>(
     () =>
       // do not display scraped attachments
       !image || image.og_scrape_url
@@ -55,7 +55,7 @@ export const ImageUploadPreviewAdapter = <
 };
 
 export const FileUploadPreviewAdapter = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   id,
   Preview = FileAttachmentPreview,
@@ -71,13 +71,13 @@ export const FileUploadPreviewAdapter = <
     [removeFile],
   );
   const handleRetry = useCallback(
-    (attachment: LocalAttachment<StreamChatGenerics>) =>
+    (attachment: LocalAttachment<ErmisChatGenerics>) =>
       attachment.localMetadata && uploadFile(attachment.localMetadata.id),
     [uploadFile],
   );
 
   const file = fileUploads[id];
-  const attachment = useMemo<LocalFileAttachment<StreamChatGenerics> | undefined>(
+  const attachment = useMemo<LocalFileAttachment<ErmisChatGenerics> | undefined>(
     () =>
       !file
         ? undefined

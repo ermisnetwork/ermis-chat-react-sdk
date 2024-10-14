@@ -19,7 +19,7 @@ import { useComponentContext } from '../../context/ComponentContext';
 
 import { QuotedMessagePreview as DefaultQuotedMessagePreview } from './QuotedMessagePreview';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../types/types';
 
 /**
  * @deprecated This component has beend deprecated in favor of [`MessageInputFlat`](./MessageInputFlat.tsx) from which
@@ -31,17 +31,17 @@ import type { CustomTrigger, DefaultStreamChatGenerics } from '../../types/types
  * **Will be removed with the complete transition to the theming V2 (next major release - `v11.0.0`).**
  */
 export const MessageInputSmall = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >() => {
   const {
     acceptedFiles,
     multipleUploads,
     quotedMessage,
-  } = useChannelStateContext<StreamChatGenerics>('MessageInputSmall');
+  } = useChannelStateContext<ErmisChatGenerics>('MessageInputSmall');
   const { setQuotedMessage } = useChannelActionContext('MessageInputSmall');
   const { t } = useTranslationContext('MessageInputSmall');
-  const { channel } = useChatContext<StreamChatGenerics>('MessageInputSmall');
+  const { channel } = useChatContext<ErmisChatGenerics>('MessageInputSmall');
 
   const {
     cooldownRemaining,
@@ -52,7 +52,7 @@ export const MessageInputSmall = <
     numberOfUploads,
     setCooldownRemaining,
     uploadNewFiles,
-  } = useMessageInputContext<StreamChatGenerics, V>('MessageInputSmall');
+  } = useMessageInputContext<ErmisChatGenerics, V>('MessageInputSmall');
 
   const {
     CooldownTimer = DefaultCooldownTimer,
@@ -60,10 +60,10 @@ export const MessageInputSmall = <
     SendButton = DefaultSendButton,
     QuotedMessagePreview = DefaultQuotedMessagePreview,
     EmojiPicker,
-  } = useComponentContext<StreamChatGenerics>('MessageInputSmall');
+  } = useComponentContext<ErmisChatGenerics>('MessageInputSmall');
 
   useEffect(() => {
-    const handleQuotedMessageUpdate = (e: Event<StreamChatGenerics>) => {
+    const handleQuotedMessageUpdate = (e: Event<ErmisChatGenerics>) => {
       if (!(quotedMessage && e.message?.id === quotedMessage.id)) return;
       if (e.type === 'message.deleted') {
         setQuotedMessage(undefined);

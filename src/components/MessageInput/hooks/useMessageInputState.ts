@@ -19,29 +19,29 @@ import type { MessageInputProps } from '../MessageInput';
 
 import type {
   CustomTrigger,
-  DefaultStreamChatGenerics,
+  DefaultErmisChatGenerics,
   SendMessageOptions,
 } from '../../../types/types';
 import { mergeDeep } from '../../../utils/mergeDeep';
 
 export type MessageInputState<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  attachments: LocalAttachment<StreamChatGenerics>[];
+  attachments: LocalAttachment<ErmisChatGenerics>[];
   fileOrder: string[];
   fileUploads: Record<string, FileUpload>;
   imageOrder: string[];
   imageUploads: Record<string, ImageUpload>;
   linkPreviews: LinkPreviewMap;
-  mentioned_users: UserResponse<StreamChatGenerics>[];
+  mentioned_users: UserResponse<ErmisChatGenerics>[];
   setText: (text: string) => void;
   text: string;
 };
 
 type UpsertAttachmentsAction<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  attachments: LocalAttachment<StreamChatGenerics>[];
+  attachments: LocalAttachment<ErmisChatGenerics>[];
   type: 'upsertAttachments';
 };
 
@@ -94,14 +94,14 @@ type RemoveFileUploadAction = {
 };
 
 type AddMentionedUserAction<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   type: 'addMentionedUser';
-  user: UserResponse<StreamChatGenerics>;
+  user: UserResponse<ErmisChatGenerics>;
 };
 
 export type MessageInputReducerAction<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > =
   | SetTextAction
   | ClearAction
@@ -110,17 +110,17 @@ export type MessageInputReducerAction<
   | SetLinkPreviewsAction
   | RemoveImageUploadAction
   | RemoveFileUploadAction
-  | AddMentionedUserAction<StreamChatGenerics>
+  | AddMentionedUserAction<ErmisChatGenerics>
   | UpsertAttachmentsAction
   | RemoveAttachmentsAction;
 
 export type MessageInputHookProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = EnrichURLsController & {
   handleChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   handleSubmit: (
     event?: React.BaseSyntheticEvent,
-    customMessageData?: Partial<Message<StreamChatGenerics>>,
+    customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => void;
   insertText: (textToInsert: string) => void;
@@ -128,26 +128,26 @@ export type MessageInputHookProps<
   maxFilesLeft: number;
   numberOfUploads: number;
   onPaste: (event: React.ClipboardEvent<HTMLTextAreaElement>) => void;
-  onSelectUser: (item: UserResponse<StreamChatGenerics>) => void;
-  recordingController: RecordingController<StreamChatGenerics>;
+  onSelectUser: (item: UserResponse<ErmisChatGenerics>) => void;
+  recordingController: RecordingController<ErmisChatGenerics>;
   removeAttachments: (ids: string[]) => void;
   removeFile: (id: string) => void;
   removeImage: (id: string) => void;
   textareaRef: React.MutableRefObject<HTMLTextAreaElement | null | undefined>;
   uploadAttachment: (
-    attachment: LocalAttachment<StreamChatGenerics>,
-  ) => Promise<LocalAttachment<StreamChatGenerics> | undefined>;
+    attachment: LocalAttachment<ErmisChatGenerics>,
+  ) => Promise<LocalAttachment<ErmisChatGenerics> | undefined>;
   uploadFile: (id: string) => void;
   uploadImage: (id: string) => void;
   uploadNewFiles: (files: FileList | File[]) => void;
   upsertAttachments: (
-    attachments: (Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>)[],
+    attachments: (Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>)[],
   ) => void;
 };
 
 const makeEmptyMessageInputState = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(): MessageInputState<StreamChatGenerics> => ({
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+>(): MessageInputState<ErmisChatGenerics> => ({
   attachments: [],
   fileOrder: [],
   fileUploads: {},
@@ -163,10 +163,10 @@ const makeEmptyMessageInputState = <
  * Initializes the state. Empty if the message prop is falsy.
  */
 const initState = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: Pick<StreamMessage<StreamChatGenerics>, 'attachments' | 'mentioned_users' | 'text'>,
-): MessageInputState<StreamChatGenerics> => {
+  message?: Pick<StreamMessage<ErmisChatGenerics>, 'attachments' | 'mentioned_users' | 'text'>,
+): MessageInputState<ErmisChatGenerics> => {
   if (!message) {
     return makeEmptyMessageInputState();
   }
@@ -242,7 +242,7 @@ const initState = <
           ({
             ...att,
             localMetadata: { id: nanoid() },
-          } as LocalAttachment<StreamChatGenerics>),
+          } as LocalAttachment<ErmisChatGenerics>),
       ) || [];
 
   const mentioned_users: StreamMessage['mentioned_users'] = message.mentioned_users || [];
@@ -264,10 +264,10 @@ const initState = <
  * MessageInput state reducer
  */
 const messageInputReducer = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  state: MessageInputState<StreamChatGenerics>,
-  action: MessageInputReducerAction<StreamChatGenerics>,
+  state: MessageInputState<ErmisChatGenerics>,
+  action: MessageInputReducerAction<ErmisChatGenerics>,
 ) => {
   switch (action.type) {
     case 'setText':
@@ -421,12 +421,12 @@ export type MentionsListState = {
  * hook for MessageInput state
  */
 export const useMessageInputState = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >(
-  props: MessageInputProps<StreamChatGenerics, V>,
-): MessageInputState<StreamChatGenerics> &
-  MessageInputHookProps<StreamChatGenerics> &
+  props: MessageInputProps<ErmisChatGenerics, V>,
+): MessageInputState<ErmisChatGenerics> &
+  MessageInputHookProps<ErmisChatGenerics> &
   CommandsListState &
   MentionsListState => {
   const {
@@ -443,19 +443,19 @@ export const useMessageInputState = <
     channelCapabilities = {},
     channelConfig,
     enrichURLForPreview: enrichURLForPreviewChannelContext,
-  } = useChannelStateContext<StreamChatGenerics>('useMessageInputState');
+  } = useChannelStateContext<ErmisChatGenerics>('useMessageInputState');
 
   const defaultValue = getDefaultValue?.() || additionalTextareaProps?.defaultValue;
   const initialStateValue =
     message ||
     ((Array.isArray(defaultValue)
       ? { text: defaultValue.join('') }
-      : { text: defaultValue?.toString() }) as Partial<StreamMessage<StreamChatGenerics>>);
+      : { text: defaultValue?.toString() }) as Partial<StreamMessage<ErmisChatGenerics>>);
 
   const [state, dispatch] = useReducer(
     messageInputReducer as Reducer<
-      MessageInputState<StreamChatGenerics>,
-      MessageInputReducerAction<StreamChatGenerics>
+      MessageInputState<ErmisChatGenerics>,
+      MessageInputReducerAction<ErmisChatGenerics>
     >,
     initialStateValue,
     initState,
@@ -469,7 +469,7 @@ export const useMessageInputState = <
       urlEnrichmentConfig?.enrichURLForPreview ?? enrichURLForPreviewChannelContext,
   });
 
-  const { handleChange, insertText, textareaRef } = useMessageInputText<StreamChatGenerics, V>(
+  const { handleChange, insertText, textareaRef } = useMessageInputText<ErmisChatGenerics, V>(
     props,
     state,
     dispatch,
@@ -510,9 +510,9 @@ export const useMessageInputState = <
     uploadImage,
     uploadNewFiles,
     upsertAttachments,
-  } = useAttachments<StreamChatGenerics, V>(props, state, dispatch, textareaRef);
+  } = useAttachments<ErmisChatGenerics, V>(props, state, dispatch, textareaRef);
 
-  const { handleSubmit } = useSubmitHandler<StreamChatGenerics, V>(
+  const { handleSubmit } = useSubmitHandler<ErmisChatGenerics, V>(
     props,
     state,
     dispatch,
@@ -538,7 +538,7 @@ export const useMessageInputState = <
     enrichURLsController.findAndEnqueueURLsToEnrich,
   );
 
-  const onSelectUser = useCallback((item: UserResponse<StreamChatGenerics>) => {
+  const onSelectUser = useCallback((item: UserResponse<ErmisChatGenerics>) => {
     dispatch({ type: 'addMentionedUser', user: item });
   }, []);
 

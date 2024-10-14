@@ -4,7 +4,7 @@ import { FilePreviewer, ImagePreviewer } from '../ReactFileUtilities';
 import { useChannelStateContext } from '../../context/ChannelStateContext';
 import { useMessageInputContext } from '../../context/MessageInputContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import { useChatContext } from '../../context';
 
 /**
@@ -15,10 +15,10 @@ import { useChatContext } from '../../context';
  * **Will be removed with the complete transition to the theming V2 (next major release - `v11.0.0`).**
  */
 export const UploadsPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
   const { themeVersion } = useChatContext('UploadsPreview');
-  const { maxNumberOfFiles = 0, multipleUploads } = useChannelStateContext<StreamChatGenerics>(
+  const { maxNumberOfFiles = 0, multipleUploads } = useChannelStateContext<ErmisChatGenerics>(
     'UploadsPreview',
   );
   const {
@@ -32,7 +32,7 @@ export const UploadsPreview = <
     uploadFile,
     uploadImage,
     uploadNewFiles,
-  } = useMessageInputContext<StreamChatGenerics>('UploadsPreview');
+  } = useMessageInputContext<ErmisChatGenerics>('UploadsPreview');
 
   const imagesToPreview = imageOrder
     .map((id) => imageUploads[id])

@@ -9,44 +9,44 @@ import {
 import { Streami18n } from '../../../i18n';
 import { version } from '../../../version';
 
-import type { AppSettingsAPIResponse, Channel, Event, Mute, StreamChat } from 'stream-chat';
+import type { AppSettingsAPIResponse, Channel, Event, Mute, ErmisChat } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type UseChatParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  client: StreamChat<StreamChatGenerics>;
+  client: ErmisChat<ErmisChatGenerics>;
   defaultLanguage?: SupportedTranslations;
   i18nInstance?: Streami18n;
   initialNavOpen?: boolean;
 };
 
 export const useChat = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   client,
   defaultLanguage = 'en',
   i18nInstance,
   initialNavOpen,
-}: UseChatParams<StreamChatGenerics>) => {
+}: UseChatParams<ErmisChatGenerics>) => {
   const [translators, setTranslators] = useState<TranslationContextValue>({
     t: (key: string) => key,
     tDateTimeParser: defaultDateTimeParser,
     userLanguage: 'en',
   });
 
-  const [channel, setChannel] = useState<Channel<StreamChatGenerics>>();
-  const [mutes, setMutes] = useState<Array<Mute<StreamChatGenerics>>>([]);
+  const [channel, setChannel] = useState<Channel<ErmisChatGenerics>>();
+  const [mutes, setMutes] = useState<Array<Mute<ErmisChatGenerics>>>([]);
   const [navOpen, setNavOpen] = useState(initialNavOpen);
   const [latestMessageDatesByChannels, setLatestMessageDatesByChannels] = useState({});
 
-  const clientMutes = (client.user?.mutes as Array<Mute<StreamChatGenerics>>) || [];
+  const clientMutes = (client.user?.mutes as Array<Mute<ErmisChatGenerics>>) || [];
 
   const closeMobileNav = () => setNavOpen(false);
   const openMobileNav = () => setTimeout(() => setNavOpen(true), 100);
 
-  const appSettings = useRef<Promise<AppSettingsAPIResponse<StreamChatGenerics>> | null>(null);
+  const appSettings = useRef<Promise<AppSettingsAPIResponse<ErmisChatGenerics>> | null>(null);
 
   const getAppSettings = () => {
     if (appSettings.current) {
@@ -69,7 +69,7 @@ export const useChat = <
   useEffect(() => {
     setMutes(clientMutes);
 
-    const handleEvent = (event: Event<StreamChatGenerics>) => {
+    const handleEvent = (event: Event<ErmisChatGenerics>) => {
       setMutes(event.me?.mutes || []);
     };
 
@@ -103,7 +103,7 @@ export const useChat = <
 
   const setActiveChannel = useCallback(
     async (
-      activeChannel?: Channel<StreamChatGenerics>,
+      activeChannel?: Channel<ErmisChatGenerics>,
       watchers: { limit?: number; offset?: number } = {},
       event?: React.BaseSyntheticEvent,
     ) => {

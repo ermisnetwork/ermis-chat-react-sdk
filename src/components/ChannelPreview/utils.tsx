@@ -6,14 +6,14 @@ import type { Channel, TranslationLanguages, UserResponse } from 'stream-chat';
 
 import type { TranslationContextValue } from '../../context/TranslationContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export const renderPreviewText = (text: string) => <ReactMarkdown skipHtml>{text}</ReactMarkdown>;
 
 export const getLatestMessagePreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  channel: Channel<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
   t: TranslationContextValue['t'],
   userLanguage: TranslationContextValue['userLanguage'] = 'en',
 ): string | JSX.Element => {
@@ -48,10 +48,10 @@ export const getLatestMessagePreview = <
 };
 
 export const getDisplayTitle = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  channel: Channel<StreamChatGenerics>,
-  currentUser?: UserResponse<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
+  currentUser?: UserResponse<ErmisChatGenerics>,
 ) => {
   let title = channel.data?.name;
   const members = Object.values(channel.state.members);
@@ -67,10 +67,10 @@ export const getDisplayTitle = <
 };
 
 export const getDisplayImage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  channel: Channel<StreamChatGenerics>,
-  currentUser?: UserResponse<StreamChatGenerics>,
+  channel: Channel<ErmisChatGenerics>,
+  currentUser?: UserResponse<ErmisChatGenerics>,
 ) => {
   let image = channel.data?.image;
   const members = Object.values(channel.state.members);

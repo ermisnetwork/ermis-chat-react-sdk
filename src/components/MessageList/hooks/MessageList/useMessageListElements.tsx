@@ -9,26 +9,26 @@ import { useComponentContext } from '../../../../context/ComponentContext';
 import type { ChannelState as StreamChannelState } from 'stream-chat';
 import type { StreamMessage } from '../../../../context/ChannelStateContext';
 
-import type { ChannelUnreadUiState, DefaultStreamChatGenerics } from '../../../../types/types';
+import type { ChannelUnreadUiState, DefaultErmisChatGenerics } from '../../../../types/types';
 import { MessageRenderer, SharedMessageProps } from '../../renderMessages';
 
 type UseMessageListElementsProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  enrichedMessages: StreamMessage<StreamChatGenerics>[];
-  internalMessageProps: SharedMessageProps<StreamChatGenerics>;
+  enrichedMessages: StreamMessage<ErmisChatGenerics>[];
+  internalMessageProps: SharedMessageProps<ErmisChatGenerics>;
   messageGroupStyles: Record<string, GroupStyle>;
-  renderMessages: MessageRenderer<StreamChatGenerics>;
+  renderMessages: MessageRenderer<ErmisChatGenerics>;
   returnAllReadData: boolean;
   threadList: boolean;
-  channelUnreadUiState?: ChannelUnreadUiState<StreamChatGenerics>;
-  read?: StreamChannelState<StreamChatGenerics>['read'];
+  channelUnreadUiState?: ChannelUnreadUiState<ErmisChatGenerics>;
+  read?: StreamChannelState<ErmisChatGenerics>['read'];
 };
 
 export const useMessageListElements = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: UseMessageListElementsProps<StreamChatGenerics>,
+  props: UseMessageListElementsProps<ErmisChatGenerics>,
 ) => {
   const {
     channelUnreadUiState,
@@ -41,8 +41,8 @@ export const useMessageListElements = <
     threadList,
   } = props;
 
-  const { client, customClasses } = useChatContext<StreamChatGenerics>('useMessageListElements');
-  const components = useComponentContext<StreamChatGenerics>('useMessageListElements');
+  const { client, customClasses } = useChatContext<ErmisChatGenerics>('useMessageListElements');
+  const components = useComponentContext<ErmisChatGenerics>('useMessageListElements');
 
   // get the readData, but only for messages submitted by the user themselves
   const readData = useLastReadData({

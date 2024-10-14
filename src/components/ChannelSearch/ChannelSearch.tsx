@@ -13,7 +13,7 @@ import {
 } from './SearchInput';
 import { AdditionalSearchResultsProps, SearchResults } from './SearchResults';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 import type { AdditionalSearchBarProps, SearchBarProps } from './SearchBar';
 
 export type AdditionalChannelSearchProps = {
@@ -24,17 +24,17 @@ export type AdditionalChannelSearchProps = {
 };
 
 export type ChannelSearchProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = AdditionalSearchBarProps &
   AdditionalSearchInputProps &
-  AdditionalSearchResultsProps<StreamChatGenerics> &
+  AdditionalSearchResultsProps<ErmisChatGenerics> &
   AdditionalChannelSearchProps &
-  ChannelSearchControllerParams<StreamChatGenerics>;
+  ChannelSearchControllerParams<ErmisChatGenerics>;
 
 const UnMemoizedChannelSearch = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ChannelSearchProps<StreamChatGenerics>,
+  props: ChannelSearchProps<ErmisChatGenerics>,
 ) => {
   const {
     AppMenu,
@@ -53,7 +53,7 @@ const UnMemoizedChannelSearch = <
     SearchResultsHeader,
     ...channelSearchParams
   } = props;
-  const { themeVersion } = useChatContext<StreamChatGenerics>('ChannelSearch');
+  const { themeVersion } = useChatContext<ErmisChatGenerics>('ChannelSearch');
 
   const {
     activateSearch,
@@ -67,7 +67,7 @@ const UnMemoizedChannelSearch = <
     searchBarRef,
     searching,
     selectResult,
-  } = useChannelSearch<StreamChatGenerics>(channelSearchParams);
+  } = useChannelSearch<ErmisChatGenerics>(channelSearchParams);
 
   const showSearchBarV2 = themeVersion === '2';
 

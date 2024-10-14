@@ -7,21 +7,21 @@ import { useChatContext } from '../../../context/ChatContext';
 
 import type { Channel, Event } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useChannelVisibleListener = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
+  setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
   customHandler?: (
-    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<StreamChatGenerics>>>>,
-    event: Event<StreamChatGenerics>,
+    setChannels: React.Dispatch<React.SetStateAction<Array<Channel<ErmisChatGenerics>>>>,
+    event: Event<ErmisChatGenerics>,
   ) => void,
 ) => {
-  const { client } = useChatContext<StreamChatGenerics>('useChannelVisibleListener');
+  const { client } = useChatContext<ErmisChatGenerics>('useChannelVisibleListener');
 
   useEffect(() => {
-    const handleEvent = async (event: Event<StreamChatGenerics>) => {
+    const handleEvent = async (event: Event<ErmisChatGenerics>) => {
       if (customHandler && typeof customHandler === 'function') {
         customHandler(setChannels, event);
       } else if (event.type && event.channel_type && event.channel_id) {

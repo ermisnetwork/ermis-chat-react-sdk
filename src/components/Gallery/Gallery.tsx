@@ -11,25 +11,25 @@ import { useTranslationContext } from '../../context/TranslationContext';
 
 import type { Attachment } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type GalleryProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   images: ((
     | {
         image_url?: string | undefined;
         thumb_url?: string | undefined;
       }
-    | Attachment<StreamChatGenerics>
+    | Attachment<ErmisChatGenerics>
   ) & { previewUrl?: string; style?: CSSProperties })[];
   innerRefs?: MutableRefObject<(HTMLElement | null)[]>;
 };
 
 const UnMemoizedGallery = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: GalleryProps<StreamChatGenerics>,
+  props: GalleryProps<ErmisChatGenerics>,
 ) => {
   const { images, innerRefs } = props;
 
@@ -86,10 +86,10 @@ const UnMemoizedGallery = <
         onClick={() => toggleModal(i)}
       >
         <BaseImage
-          alt={(image as Attachment<StreamChatGenerics>)?.fallback || imageFallbackTitle}
+          alt={(image as Attachment<ErmisChatGenerics>)?.fallback || imageFallbackTitle}
           src={sanitizeUrl(image.previewUrl || image.image_url || image.thumb_url)}
           style={image.style}
-          title={(image as Attachment<StreamChatGenerics>)?.fallback || imageFallbackTitle}
+          title={(image as Attachment<ErmisChatGenerics>)?.fallback || imageFallbackTitle}
           {...(innerRefs?.current && { ref: (r) => (innerRefs.current[i] = r) })}
         />
       </button>

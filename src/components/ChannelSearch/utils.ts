@@ -1,13 +1,13 @@
 import type { Channel, UserResponse } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ChannelOrUserResponse<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Channel<StreamChatGenerics> | UserResponse<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Channel<ErmisChatGenerics> | UserResponse<ErmisChatGenerics>;
 
 export const isChannel = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  output: ChannelOrUserResponse<StreamChatGenerics>,
-): output is Channel<StreamChatGenerics> => (output as Channel<StreamChatGenerics>).cid != null;
+  output: ChannelOrUserResponse<ErmisChatGenerics>,
+): output is Channel<ErmisChatGenerics> => (output as Channel<ErmisChatGenerics>).cid != null;

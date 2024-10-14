@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 import type { Dispatch, SetStateAction } from 'react';
 import type { ChannelState, MessageResponse } from 'stream-chat';
 import type { ChannelNotifications } from '../../context/ChannelStateContext';
-import type { DefaultStreamChatGenerics } from '../../types';
+import type { DefaultErmisChatGenerics } from '../../types';
 
 export const makeAddNotifications = (
   setNotifications: Dispatch<SetStateAction<ChannelNotifications>>,
@@ -33,10 +33,10 @@ export const makeAddNotifications = (
  * @param msgSet
  */
 export const findInMsgSetById = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   targetId: string,
-  msgSet: ReturnType<ChannelState<StreamChatGenerics>['formatMessage']>[],
+  msgSet: ReturnType<ChannelState<ErmisChatGenerics>['formatMessage']>[],
 ) => {
   for (let i = msgSet.length - 1; i >= 0; i--) {
     const item = msgSet[i];
@@ -59,12 +59,12 @@ export const findInMsgSetById = <
  * @param exact
  */
 export const findInMsgSetByDate = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   targetDate: Date,
   msgSet:
-    | MessageResponse<StreamChatGenerics>[]
-    | ReturnType<ChannelState<StreamChatGenerics>['formatMessage']>[],
+    | MessageResponse<ErmisChatGenerics>[]
+    | ReturnType<ChannelState<ErmisChatGenerics>['formatMessage']>[],
   exact = false,
 ) => {
   const targetTimestamp = targetDate.getTime();

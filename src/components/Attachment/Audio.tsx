@@ -7,12 +7,12 @@ import { useAudioController } from './hooks/useAudioController';
 
 import { useChatContext } from '../../context/ChatContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type AudioProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  og: Attachment<StreamChatGenerics>;
+  og: Attachment<ErmisChatGenerics>;
 };
 
 const AudioV1 = ({ og }: AudioProps) => {
@@ -111,11 +111,11 @@ const AudioV2 = ({ og }: AudioProps) => {
 };
 
 const UnMemoizedAudio = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: AudioProps<StreamChatGenerics>,
+  props: AudioProps<ErmisChatGenerics>,
 ) => {
-  const { themeVersion } = useChatContext<StreamChatGenerics>('Audio');
+  const { themeVersion } = useChatContext<ErmisChatGenerics>('Audio');
 
   return themeVersion === '1' ? <AudioV1 {...props} /> : <AudioV2 {...props} />;
 };

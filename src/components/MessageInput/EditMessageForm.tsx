@@ -16,13 +16,13 @@ import {
   useTranslationContext,
 } from '../../context';
 
-import type { CustomTrigger, DefaultStreamChatGenerics } from '../../types/types';
+import type { CustomTrigger, DefaultErmisChatGenerics } from '../../types/types';
 
 export const EditMessageForm = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   V extends CustomTrigger = CustomTrigger
 >() => {
-  const { acceptedFiles, multipleUploads } = useChannelStateContext<StreamChatGenerics>(
+  const { acceptedFiles, multipleUploads } = useChannelStateContext<ErmisChatGenerics>(
     'EditMessageForm',
   );
   const { t } = useTranslationContext('EditMessageForm');
@@ -33,12 +33,12 @@ export const EditMessageForm = <
     isUploadEnabled,
     maxFilesLeft,
     uploadNewFiles,
-  } = useMessageInputContext<StreamChatGenerics, V>('EditMessageForm');
+  } = useMessageInputContext<ErmisChatGenerics, V>('EditMessageForm');
 
   const {
     FileUploadIcon = DefaultFileUploadIcon,
     EmojiPicker,
-  } = useComponentContext<StreamChatGenerics>('EditMessageForm');
+  } = useComponentContext<ErmisChatGenerics>('EditMessageForm');
 
   const { themeVersion } = useChatContext('EditMessageForm');
 

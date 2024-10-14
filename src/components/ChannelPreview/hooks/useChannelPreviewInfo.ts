@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import type { Channel } from 'stream-chat';
 
 import { getDisplayImage, getDisplayTitle } from '../utils';
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 import { useChatContext } from '../../../context';
 
-export type ChannelPreviewInfoParams<StreamChatGenerics extends DefaultStreamChatGenerics> = {
-  channel: Channel<StreamChatGenerics>;
+export type ChannelPreviewInfoParams<ErmisChatGenerics extends DefaultErmisChatGenerics> = {
+  channel: Channel<ErmisChatGenerics>;
   /** Manually set the image to render, defaults to the Channel image */
   overrideImage?: string;
   /** Set title manually */
@@ -15,13 +15,13 @@ export type ChannelPreviewInfoParams<StreamChatGenerics extends DefaultStreamCha
 };
 
 export const useChannelPreviewInfo = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: ChannelPreviewInfoParams<StreamChatGenerics>,
+  props: ChannelPreviewInfoParams<ErmisChatGenerics>,
 ) => {
   const { channel, overrideImage, overrideTitle } = props;
 
-  const { client } = useChatContext<StreamChatGenerics>('ChannelPreview');
+  const { client } = useChatContext<ErmisChatGenerics>('ChannelPreview');
   const [displayTitle, setDisplayTitle] = useState(getDisplayTitle(channel, client.user));
   const [displayImage, setDisplayImage] = useState(getDisplayImage(channel, client.user));
 

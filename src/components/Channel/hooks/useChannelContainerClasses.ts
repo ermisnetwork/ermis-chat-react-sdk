@@ -1,14 +1,14 @@
 import type { ChatContextValue } from '../../../context/ChatContext';
 import { useChatContext } from '../../../context/ChatContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export const useChannelContainerClasses = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   customClasses,
 }: Pick<ChatContextValue, 'customClasses'>) => {
-  const { useImageFlagEmojisOnWindows } = useChatContext<StreamChatGenerics>('Channel');
+  const { useImageFlagEmojisOnWindows } = useChatContext<ErmisChatGenerics>('Channel');
 
   return {
     channelClass: customClasses?.channel ?? 'str-chat-channel str-chat__channel',

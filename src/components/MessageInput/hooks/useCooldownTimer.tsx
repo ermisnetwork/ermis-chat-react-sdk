@@ -3,7 +3,7 @@ import type { ChannelResponse } from 'stream-chat';
 
 import { useChannelStateContext, useChatContext } from '../../../context';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type CooldownTimerState = {
   cooldownInterval: number;
@@ -12,16 +12,16 @@ export type CooldownTimerState = {
 };
 
 export const useCooldownTimer = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(): CooldownTimerState => {
-  const { client, latestMessageDatesByChannels } = useChatContext<StreamChatGenerics>(
+  const { client, latestMessageDatesByChannels } = useChatContext<ErmisChatGenerics>(
     'useCooldownTimer',
   );
-  const { channel, messages = [] } = useChannelStateContext<StreamChatGenerics>('useCooldownTimer');
+  const { channel, messages = [] } = useChannelStateContext<ErmisChatGenerics>('useCooldownTimer');
   const [cooldownRemaining, setCooldownRemaining] = useState<number>();
 
   const { cooldown: cooldownInterval = 0, own_capabilities } = (channel.data ||
-    {}) as ChannelResponse<StreamChatGenerics>;
+    {}) as ChannelResponse<ErmisChatGenerics>;
 
   const skipCooldown = own_capabilities?.includes('skip-slow-mode');
 

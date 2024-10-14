@@ -5,14 +5,14 @@ import { ThreadStart as DefaultThreadStart } from './ThreadStart';
 
 import { useComponentContext } from '../../context';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export const ThreadHead = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: MessageProps<StreamChatGenerics>,
+  props: MessageProps<ErmisChatGenerics>,
 ) => {
-  const { ThreadStart = DefaultThreadStart } = useComponentContext<StreamChatGenerics>(
+  const { ThreadStart = DefaultThreadStart } = useComponentContext<ErmisChatGenerics>(
     'ThreadHead',
   );
   return (

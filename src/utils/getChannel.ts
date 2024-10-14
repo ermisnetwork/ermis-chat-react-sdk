@@ -2,9 +2,9 @@ import type {
   Channel,
   ChannelQueryOptions,
   QueryChannelAPIResponse,
-  StreamChat,
+  ErmisChat,
 } from 'stream-chat';
-import type { DefaultStreamChatGenerics } from '../types/types';
+import type { DefaultErmisChatGenerics } from '../types/types';
 
 /**
  * prevent from duplicate invocation of channel.watch()
@@ -16,13 +16,13 @@ const WATCH_QUERY_IN_PROGRESS_FOR_CHANNEL: Record<
 > = {};
 
 type GetChannelParams<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  client: StreamChat<StreamChatGenerics>;
-  channel?: Channel<StreamChatGenerics>;
+  client: ErmisChat<ErmisChatGenerics>;
+  channel?: Channel<ErmisChatGenerics>;
   id?: string;
   members?: string[];
-  options?: ChannelQueryOptions<StreamChatGenerics>;
+  options?: ChannelQueryOptions<ErmisChatGenerics>;
   type?: string;
 };
 /**
@@ -35,7 +35,7 @@ type GetChannelParams<
  * @param channel
  */
 export const getChannel = async <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   channel,
   client,
@@ -43,7 +43,7 @@ export const getChannel = async <
   members,
   options,
   type,
-}: GetChannelParams<StreamChatGenerics>) => {
+}: GetChannelParams<ErmisChatGenerics>) => {
   if (!channel && !type) {
     throw new Error('Channel or channel type have to be provided to query a channel.');
   }

@@ -8,27 +8,27 @@ import type { ReactEventHandler } from '../types';
 
 import type { StreamMessage } from '../../../context/ChannelStateContext';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 export type DeleteMessageNotifications<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  getErrorNotification?: (message: StreamMessage<StreamChatGenerics>) => string;
+  getErrorNotification?: (message: StreamMessage<ErmisChatGenerics>) => string;
   notify?: (notificationText: string, type: 'success' | 'error') => void;
 };
 
 export const useDeleteHandler = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
-  notifications: DeleteMessageNotifications<StreamChatGenerics> = {},
+  message?: StreamMessage<ErmisChatGenerics>,
+  notifications: DeleteMessageNotifications<ErmisChatGenerics> = {},
 ): ReactEventHandler => {
   const { getErrorNotification, notify } = notifications;
 
-  const { deleteMessage, updateMessage } = useChannelActionContext<StreamChatGenerics>(
+  const { deleteMessage, updateMessage } = useChannelActionContext<ErmisChatGenerics>(
     'useDeleteHandler',
   );
-  const { client } = useChatContext<StreamChatGenerics>('useDeleteHandler');
+  const { client } = useChatContext<ErmisChatGenerics>('useDeleteHandler');
   const { t } = useTranslationContext('useDeleteHandler');
 
   return async (event) => {

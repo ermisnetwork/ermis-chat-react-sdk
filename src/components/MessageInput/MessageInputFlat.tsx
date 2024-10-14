@@ -36,17 +36,17 @@ import { useTranslationContext } from '../../context/TranslationContext';
 import { useMessageInputContext } from '../../context/MessageInputContext';
 import { useComponentContext } from '../../context/ComponentContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export const MessageInputFlat = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
-  const { quotedMessage } = useChannelStateContext<StreamChatGenerics>('MessageInputFlat');
+  const { quotedMessage } = useChannelStateContext<ErmisChatGenerics>('MessageInputFlat');
   const { setQuotedMessage } = useChannelActionContext('MessageInputFlat');
-  const { channel, themeVersion } = useChatContext<StreamChatGenerics>('MessageInputFlat');
+  const { channel, themeVersion } = useChatContext<ErmisChatGenerics>('MessageInputFlat');
 
   useEffect(() => {
-    const handleQuotedMessageUpdate = (e: Event<StreamChatGenerics>) => {
+    const handleQuotedMessageUpdate = (e: Event<ErmisChatGenerics>) => {
       if (e.message?.id !== quotedMessage?.id) return;
       if (e.type === 'message.deleted') {
         setQuotedMessage(undefined);
@@ -65,20 +65,20 @@ export const MessageInputFlat = <
   }, [channel, quotedMessage]);
 
   return themeVersion === '2' ? (
-    <MessageInputV2<StreamChatGenerics> />
+    <MessageInputV2<ErmisChatGenerics> />
   ) : (
-    <MessageInputV1<StreamChatGenerics> />
+    <MessageInputV1<ErmisChatGenerics> />
   );
 };
 
 const MessageInputV1 = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
   const {
     acceptedFiles,
     multipleUploads,
     quotedMessage,
-  } = useChannelStateContext<StreamChatGenerics>('MessageInputFlat');
+  } = useChannelStateContext<ErmisChatGenerics>('MessageInputFlat');
   const { t } = useTranslationContext('MessageInputFlat');
   const {
     cooldownRemaining,
@@ -89,7 +89,7 @@ const MessageInputV1 = <
     numberOfUploads,
     setCooldownRemaining,
     uploadNewFiles,
-  } = useMessageInputContext<StreamChatGenerics>('MessageInputFlat');
+  } = useMessageInputContext<ErmisChatGenerics>('MessageInputFlat');
 
   const {
     CooldownTimer = DefaultCooldownTimer,
@@ -98,7 +98,7 @@ const MessageInputV1 = <
     SendButton = DefaultSendButton,
     AttachmentPreviewList = UploadsPreview,
     EmojiPicker,
-  } = useComponentContext<StreamChatGenerics>('MessageInputFlat');
+  } = useComponentContext<ErmisChatGenerics>('MessageInputFlat');
 
   return (
     <div
@@ -159,13 +159,13 @@ const MessageInputV1 = <
 };
 
 const MessageInputV2 = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
   const {
     acceptedFiles = [],
     multipleUploads,
     quotedMessage,
-  } = useChannelStateContext<StreamChatGenerics>('MessageInputV2');
+  } = useChannelStateContext<ErmisChatGenerics>('MessageInputV2');
 
   const { t } = useTranslationContext('MessageInputV2');
 
@@ -185,7 +185,7 @@ const MessageInputV2 = <
     setCooldownRemaining,
     text,
     uploadNewFiles,
-  } = useMessageInputContext<StreamChatGenerics>('MessageInputV2');
+  } = useMessageInputContext<ErmisChatGenerics>('MessageInputV2');
 
   const {
     AudioRecorder = DefaultAudioRecorder,
@@ -198,7 +198,7 @@ const MessageInputV2 = <
     SendButton = DefaultSendButton,
     StartRecordingAudioButton = DefaultStartRecordingAudioButton,
     EmojiPicker,
-  } = useComponentContext<StreamChatGenerics>('MessageInputV2');
+  } = useComponentContext<ErmisChatGenerics>('MessageInputV2');
 
   const [
     showRecordingPermissionDeniedNotification,

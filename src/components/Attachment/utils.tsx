@@ -10,7 +10,7 @@ import { Gallery as DefaultGallery, ImageComponent as DefaultImage } from '../Ga
 
 import type { Attachment } from 'stream-chat';
 import type { ATTACHMENT_GROUPS_ORDER, AttachmentProps } from './Attachment';
-import type { DefaultStreamChatGenerics, UnknownType } from '../../types/types';
+import type { DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 import type {
   LocalAttachment,
   LocalAudioAttachment,
@@ -28,93 +28,93 @@ export type AttachmentComponentType = typeof ATTACHMENT_GROUPS_ORDER[number];
 export type GroupedRenderedAttachment = Record<AttachmentComponentType, ReactNode[]>;
 
 export type GalleryAttachment<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  images: Attachment<StreamChatGenerics>[];
+  images: Attachment<ErmisChatGenerics>[];
   type: 'gallery';
 };
 
 export type AttachmentContainerProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  attachment: Attachment<StreamChatGenerics> | GalleryAttachment<StreamChatGenerics>;
+  attachment: Attachment<ErmisChatGenerics> | GalleryAttachment<ErmisChatGenerics>;
   componentType: AttachmentComponentType;
 };
 
 export type RenderAttachmentProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Omit<AttachmentProps<StreamChatGenerics>, 'attachments'> & {
-  attachment: Attachment<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Omit<AttachmentProps<ErmisChatGenerics>, 'attachments'> & {
+  attachment: Attachment<ErmisChatGenerics>;
 };
 
 export type RenderGalleryProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Omit<AttachmentProps<StreamChatGenerics>, 'attachments'> & {
-  attachment: GalleryAttachment<StreamChatGenerics>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Omit<AttachmentProps<ErmisChatGenerics>, 'attachments'> & {
+  attachment: GalleryAttachment<ErmisChatGenerics>;
 };
 
 export const isLocalAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   attachment: UnknownType,
-): attachment is LocalAttachment<StreamChatGenerics> =>
+): attachment is LocalAttachment<ErmisChatGenerics> =>
   !!(attachment.localMetadata as LocalAttachment)?.id;
 
 export const isScrapedContent = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics>,
+  attachment: Attachment<ErmisChatGenerics>,
 ) => attachment.og_scrape_url || attachment.title_link;
 
 export const isUploadedImage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics>,
+  attachment: Attachment<ErmisChatGenerics>,
 ) => attachment.type === 'image' && !isScrapedContent(attachment);
 
 export const isLocalImageAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
-): attachment is LocalImageAttachment<StreamChatGenerics> =>
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
+): attachment is LocalImageAttachment<ErmisChatGenerics> =>
   isUploadedImage(attachment) && isLocalAttachment(attachment);
 
 export const isGalleryAttachmentType = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  output: Attachment<StreamChatGenerics> | GalleryAttachment<StreamChatGenerics>,
-): output is GalleryAttachment<StreamChatGenerics> => Array.isArray(output.images);
+  output: Attachment<ErmisChatGenerics> | GalleryAttachment<ErmisChatGenerics>,
+): output is GalleryAttachment<ErmisChatGenerics> => Array.isArray(output.images);
 
 export const isAudioAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
 ) => attachment.type === 'audio';
 
 export const isLocalAudioAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
-): attachment is LocalAudioAttachment<StreamChatGenerics> =>
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
+): attachment is LocalAudioAttachment<ErmisChatGenerics> =>
   isAudioAttachment(attachment) && isLocalAttachment(attachment);
 
 export const isVoiceRecordingAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
 ): attachment is VoiceRecordingAttachment => attachment.type === 'voiceRecording';
 
 export const isLocalVoiceRecordingAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
-): attachment is LocalVoiceRecordingAttachment<StreamChatGenerics> =>
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
+): attachment is LocalVoiceRecordingAttachment<ErmisChatGenerics> =>
   isVoiceRecordingAttachment(attachment) && isLocalAttachment(attachment);
 
 export const isFileAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
 ) =>
   attachment.type === 'file' ||
   !!(
@@ -124,25 +124,25 @@ export const isFileAttachment = <
   );
 
 export const isLocalFileAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
-): attachment is LocalFileAttachment<StreamChatGenerics> =>
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
+): attachment is LocalFileAttachment<ErmisChatGenerics> =>
   isFileAttachment(attachment) && isLocalAttachment(attachment);
 
 export const isMediaAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
 ) =>
   (attachment.mime_type && SUPPORTED_VIDEO_FORMATS.indexOf(attachment.mime_type) !== -1) ||
   attachment.type === 'video';
 
 export const isLocalMediaAttachment = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  attachment: Attachment<StreamChatGenerics> | LocalAttachment<StreamChatGenerics>,
-): attachment is LocalVideoAttachment<StreamChatGenerics> =>
+  attachment: Attachment<ErmisChatGenerics> | LocalAttachment<ErmisChatGenerics>,
+): attachment is LocalVideoAttachment<ErmisChatGenerics> =>
   isMediaAttachment(attachment) && isLocalAttachment(attachment);
 
 export const isSvgAttachment = (attachment: Attachment) => {
@@ -155,9 +155,9 @@ export const isSvgAttachment = (attachment: Attachment) => {
  * replaced with the proper component equivalent `AttachmentContainer/AttachmentWithinContainer`
  */
 export const renderAttachmentWithinContainer = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: PropsWithChildren<AttachmentContainerProps<StreamChatGenerics>>,
+  props: PropsWithChildren<AttachmentContainerProps<ErmisChatGenerics>>,
 ) => {
   const { attachment, children, componentType } = props;
   const isGAT = isGalleryAttachmentType(attachment);
@@ -188,9 +188,9 @@ export const renderAttachmentWithinContainer = <
  * replaced with the proper component equivalent `AttachmentContainer/AttachmentActionsContainer`
  */
 export const renderAttachmentActions = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: RenderAttachmentProps<StreamChatGenerics>,
+  props: RenderAttachmentProps<ErmisChatGenerics>,
 ) => {
   const { actionHandler, attachment, AttachmentActions = DefaultAttachmentActions } = props;
 
@@ -213,9 +213,9 @@ export const renderAttachmentActions = <
  * replaced with the proper component equivalent `AttachmentContainer/GalleryContainer`
  */
 export const renderGallery = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: RenderGalleryProps<StreamChatGenerics>,
+  props: RenderGalleryProps<ErmisChatGenerics>,
 ) => {
   const { attachment, Gallery = DefaultGallery } = props;
 
@@ -231,9 +231,9 @@ export const renderGallery = <
  * replaced with the proper component equivalent `AttachmentContainer/ImageContainer`
  */
 export const renderImage = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: RenderAttachmentProps<StreamChatGenerics>,
+  props: RenderAttachmentProps<ErmisChatGenerics>,
 ) => {
   const { attachment, Image = DefaultImage } = props;
 
@@ -262,9 +262,9 @@ export const renderImage = <
  * replaced with the proper component equivalent `AttachmentContainer/CardContainer`
  */
 export const renderCard = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: RenderAttachmentProps<StreamChatGenerics>,
+  props: RenderAttachmentProps<ErmisChatGenerics>,
 ) => {
   const { attachment, Card = DefaultCard } = props;
 
@@ -293,9 +293,9 @@ export const renderCard = <
  * replaced with the proper component equivalent `AttachmentContainer/FileContainer`
  */
 export const renderFile = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: RenderAttachmentProps<StreamChatGenerics>,
+  props: RenderAttachmentProps<ErmisChatGenerics>,
 ) => {
   const { attachment, File = DefaultFile } = props;
 
@@ -313,9 +313,9 @@ export const renderFile = <
  * replaced with the proper component equivalent `AttachmentContainer/AudioContainer`
  */
 export const renderAudio = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: RenderAttachmentProps<StreamChatGenerics>,
+  props: RenderAttachmentProps<ErmisChatGenerics>,
 ) => {
   const { attachment, Audio = DefaultAudio } = props;
 
@@ -335,9 +335,9 @@ export const renderAudio = <
  * replaced with the proper component equivalent `AttachmentContainer/MediaContainer`
  */
 export const renderMedia = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: RenderAttachmentProps<StreamChatGenerics>,
+  props: RenderAttachmentProps<ErmisChatGenerics>,
 ) => {
   const { attachment, Media = ReactPlayer } = props;
 

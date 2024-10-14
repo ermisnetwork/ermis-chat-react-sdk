@@ -5,23 +5,23 @@ import { BaseImage as DefaultBaseImage } from '../../Gallery';
 import { useComponentContext } from '../../../context';
 import type { AttachmentPreviewProps } from './types';
 import type { LocalImageAttachment } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 export type ImageAttachmentPreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = AttachmentPreviewProps<
-  LocalImageAttachment<StreamChatGenerics, CustomLocalMetadata>,
-  StreamChatGenerics
+  LocalImageAttachment<ErmisChatGenerics, CustomLocalMetadata>,
+  ErmisChatGenerics
 >;
 
 export const ImageAttachmentPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
   handleRetry,
   removeAttachments,
-}: ImageAttachmentPreviewProps<StreamChatGenerics>) => {
+}: ImageAttachmentPreviewProps<ErmisChatGenerics>) => {
   const { BaseImage = DefaultBaseImage } = useComponentContext('ImagePreview');
   const [previewError, setPreviewError] = useState(false);
 

@@ -3,7 +3,7 @@ import { FileIcon } from '../../ReactFileUtilities';
 import { CloseIcon, DownloadIcon, LoadingIndicatorIcon, RetryIcon } from '../icons';
 import type { AttachmentPreviewProps } from './types';
 import { LocalAttachmentCast, LocalAttachmentUploadMetadata } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 type FileLikeAttachment = {
   asset_url?: string;
@@ -12,20 +12,20 @@ type FileLikeAttachment = {
 };
 
 export type FileAttachmentPreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = AttachmentPreviewProps<
   LocalAttachmentCast<FileLikeAttachment, LocalAttachmentUploadMetadata & CustomLocalMetadata>,
-  StreamChatGenerics
+  ErmisChatGenerics
 >;
 
 export const FileAttachmentPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
   handleRetry,
   removeAttachments,
-}: FileAttachmentPreviewProps<StreamChatGenerics>) => (
+}: FileAttachmentPreviewProps<ErmisChatGenerics>) => (
   <div className='str-chat__attachment-preview-file' data-testid='attachment-preview-file'>
     <div className='str-chat__attachment-preview-file-icon'>
       <FileIcon filename={attachment.title} mimeType={attachment.mime_type} version='2' />

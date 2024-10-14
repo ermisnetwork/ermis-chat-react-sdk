@@ -2,11 +2,11 @@ import deepequal from 'react-fast-compare';
 import emojiRegex from 'emoji-regex';
 
 import type { TFunction } from 'i18next';
-import type { MessageResponse, Mute, StreamChat, UserResponse } from 'stream-chat';
+import type { MessageResponse, Mute, ErmisChat, UserResponse } from 'stream-chat';
 import type { PinPermissions } from './hooks';
 import type { MessageProps } from './types';
 import type { MessageContextValue, StreamMessage } from '../../context';
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 /**
  * Following function validates a function which returns notification message.
@@ -36,10 +36,10 @@ export const validateAndGetMessage = <T extends unknown[]>(
  * Tell if the owner of the current message is muted
  */
 export const isUserMuted = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: StreamMessage<StreamChatGenerics>,
-  mutes?: Mute<StreamChatGenerics>[],
+  message: StreamMessage<ErmisChatGenerics>,
+  mutes?: Mute<ErmisChatGenerics>[],
 ) => {
   if (!mutes || !message) return false;
 
@@ -233,10 +233,10 @@ export const showMessageActionsBox = (
 };
 
 function areMessagesEqual<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  prevMessage: StreamMessage<StreamChatGenerics>,
-  nextMessage: StreamMessage<StreamChatGenerics>,
+  prevMessage: StreamMessage<ErmisChatGenerics>,
+  nextMessage: StreamMessage<ErmisChatGenerics>,
 ): boolean {
   return (
     prevMessage.deleted_at === nextMessage.deleted_at &&
@@ -252,21 +252,21 @@ function areMessagesEqual<
     Boolean(prevMessage.quoted_message) === Boolean(nextMessage.quoted_message) &&
     (!prevMessage.quoted_message ||
       areMessagesEqual(
-        prevMessage.quoted_message as StreamMessage<StreamChatGenerics>,
-        nextMessage.quoted_message as StreamMessage<StreamChatGenerics>,
+        prevMessage.quoted_message as StreamMessage<ErmisChatGenerics>,
+        nextMessage.quoted_message as StreamMessage<ErmisChatGenerics>,
       ))
   );
 }
 
 export const areMessagePropsEqual = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  prevProps: MessageProps<StreamChatGenerics> & {
-    mutes?: Mute<StreamChatGenerics>[];
+  prevProps: MessageProps<ErmisChatGenerics> & {
+    mutes?: Mute<ErmisChatGenerics>[];
     showDetailedReactions?: boolean;
   },
-  nextProps: MessageProps<StreamChatGenerics> & {
-    mutes?: Mute<StreamChatGenerics>[];
+  nextProps: MessageProps<ErmisChatGenerics> & {
+    mutes?: Mute<ErmisChatGenerics>[];
     showDetailedReactions?: boolean;
   },
 ) => {
@@ -299,12 +299,12 @@ export const areMessagePropsEqual = <
 };
 
 export const areMessageUIPropsEqual = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  prevProps: MessageContextValue<StreamChatGenerics> & {
+  prevProps: MessageContextValue<ErmisChatGenerics> & {
     showDetailedReactions?: boolean;
   },
-  nextProps: MessageContextValue<StreamChatGenerics> & {
+  nextProps: MessageContextValue<ErmisChatGenerics> & {
     showDetailedReactions?: boolean;
   },
 ) => {
@@ -332,21 +332,21 @@ export const areMessageUIPropsEqual = <
 };
 
 export const messageHasReactions = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
+  message?: StreamMessage<ErmisChatGenerics>,
 ) => Object.values(message?.reaction_groups ?? {}).some(({ count }) => count > 0);
 
 export const messageHasAttachments = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: StreamMessage<StreamChatGenerics>,
+  message?: StreamMessage<ErmisChatGenerics>,
 ) => !!message?.attachments && !!message.attachments.length;
 
 export const getImages = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: MessageResponse<StreamChatGenerics>,
+  message?: MessageResponse<ErmisChatGenerics>,
 ) => {
   if (!message?.attachments) {
     return [];
@@ -355,9 +355,9 @@ export const getImages = <
 };
 
 export const getNonImageAttachments = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message?: MessageResponse<StreamChatGenerics>,
+  message?: MessageResponse<ErmisChatGenerics>,
 ) => {
   if (!message?.attachments) {
     return [];
@@ -366,8 +366,8 @@ export const getNonImageAttachments = <
 };
 
 export interface TooltipUsernameMapper {
-  <StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics>(
-    user: UserResponse<StreamChatGenerics>,
+  <ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics>(
+    user: UserResponse<ErmisChatGenerics>,
   ): string;
 }
 
@@ -379,11 +379,11 @@ export interface TooltipUsernameMapper {
 export const mapToUserNameOrId: TooltipUsernameMapper = (user) => user.name || user.id;
 
 export const getReadByTooltipText = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  users: UserResponse<StreamChatGenerics>[],
+  users: UserResponse<ErmisChatGenerics>[],
   t: TFunction,
-  client: StreamChat<StreamChatGenerics>,
+  client: ErmisChat<ErmisChatGenerics>,
   tooltipUserNameMapper: TooltipUsernameMapper,
 ) => {
   let outStr = '';
@@ -445,15 +445,15 @@ export const isOnlyEmojis = (text?: string) => {
 };
 
 export const isMessageBounced = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: Pick<StreamMessage<StreamChatGenerics>, 'type' | 'moderation_details'>,
+  message: Pick<StreamMessage<ErmisChatGenerics>, 'type' | 'moderation_details'>,
 ) =>
   message.type === 'error' &&
   message.moderation_details?.action === 'MESSAGE_RESPONSE_ACTION_BOUNCE';
 
 export const isMessageEdited = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: Pick<StreamMessage<StreamChatGenerics>, 'message_text_updated_at'>,
+  message: Pick<StreamMessage<ErmisChatGenerics>, 'message_text_updated_at'>,
 ) => !!message.message_text_updated_at;

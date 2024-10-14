@@ -4,23 +4,23 @@ import { FileIcon } from '../../ReactFileUtilities';
 import { useTranslationContext } from '../../../context';
 import type { AttachmentPreviewProps } from './types';
 import type { AnyLocalAttachment } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 export type UnsupportedAttachmentPreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = AttachmentPreviewProps<
-  AnyLocalAttachment<StreamChatGenerics, CustomLocalMetadata>,
-  StreamChatGenerics
+  AnyLocalAttachment<ErmisChatGenerics, CustomLocalMetadata>,
+  ErmisChatGenerics
 >;
 
 export const UnsupportedAttachmentPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
   handleRetry,
   removeAttachments,
-}: UnsupportedAttachmentPreviewProps<StreamChatGenerics>) => {
+}: UnsupportedAttachmentPreviewProps<ErmisChatGenerics>) => {
   const { t } = useTranslationContext('UnsupportedAttachmentPreview');
   const title = attachment.title ?? t('Unsupported attachment');
   return (

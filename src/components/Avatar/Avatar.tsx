@@ -3,10 +3,10 @@ import { getWholeChar } from '../../utils/getWholeChar';
 
 import type { UserResponse } from 'stream-chat';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type AvatarProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
   /** Image URL or default is an image of the first initial of the name if there is one  */
   image?: string | null;
@@ -25,16 +25,16 @@ export type AvatarProps<
    */
   size?: number;
   /** The entire user object for the chat user displayed in the component */
-  user?: UserResponse<StreamChatGenerics>;
+  user?: UserResponse<ErmisChatGenerics>;
 };
 
 /**
  * A round avatar image with fallback to username's first letter
  */
 export const Avatar = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  props: AvatarProps<StreamChatGenerics>,
+  props: AvatarProps<ErmisChatGenerics>,
 ) => {
   const {
     image,

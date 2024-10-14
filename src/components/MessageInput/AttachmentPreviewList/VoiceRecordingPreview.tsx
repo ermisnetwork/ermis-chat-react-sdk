@@ -6,23 +6,23 @@ import { FileIcon } from '../../ReactFileUtilities';
 import { useAudioController } from '../../Attachment/hooks/useAudioController';
 import type { AttachmentPreviewProps } from './types';
 import type { LocalVoiceRecordingAttachment } from '../types';
-import type { DefaultStreamChatGenerics } from '../../../types';
+import type { DefaultErmisChatGenerics } from '../../../types';
 
 export type VoiceRecordingPreviewProps<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics,
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
   CustomLocalMetadata = Record<string, unknown>
 > = AttachmentPreviewProps<
-  LocalVoiceRecordingAttachment<StreamChatGenerics, CustomLocalMetadata>,
-  StreamChatGenerics
+  LocalVoiceRecordingAttachment<ErmisChatGenerics, CustomLocalMetadata>,
+  ErmisChatGenerics
 >;
 
 export const VoiceRecordingPreview = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   attachment,
   handleRetry,
   removeAttachments,
-}: VoiceRecordingPreviewProps<StreamChatGenerics>) => {
+}: VoiceRecordingPreviewProps<ErmisChatGenerics>) => {
   const { audioRef, isPlaying, secondsElapsed, togglePlay } = useAudioController({
     mimeType: attachment.mime_type,
   });

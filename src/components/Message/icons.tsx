@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { PinIndicatorProps } from './types';
 
-import type { DefaultStreamChatGenerics, IconProps } from '../../types/types';
+import type { DefaultErmisChatGenerics, IconProps } from '../../types/types';
 
 export const ActionsIcon = ({ className = '' }: IconProps) => (
   <svg
@@ -82,11 +82,11 @@ export const PinIcon = () => (
 );
 
 export const PinIndicator = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
   message,
   t,
-}: PinIndicatorProps<StreamChatGenerics>) => {
+}: PinIndicatorProps<ErmisChatGenerics>) => {
   if (!message || !t) return null;
 
   return (

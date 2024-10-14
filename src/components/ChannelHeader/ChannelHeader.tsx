@@ -9,7 +9,7 @@ import { useChannelStateContext } from '../../context/ChannelStateContext';
 import { useChatContext } from '../../context/ChatContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 
-import type { DefaultStreamChatGenerics } from '../../types/types';
+import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type ChannelHeaderProps = {
   /** UI component to display a user's avatar, defaults to and accepts same props as: [Avatar](https://github.com/GetStream/stream-chat-react/blob/master/src/components/Avatar/Avatar.tsx) */
@@ -25,7 +25,7 @@ export type ChannelHeaderProps = {
 };
 
 const UnMemoizedChannelHeader = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   props: ChannelHeaderProps,
 ) => {
@@ -37,8 +37,8 @@ const UnMemoizedChannelHeader = <
     title: overrideTitle,
   } = props;
 
-  const { channel, watcher_count } = useChannelStateContext<StreamChatGenerics>('ChannelHeader');
-  const { openMobileNav } = useChatContext<StreamChatGenerics>('ChannelHeader');
+  const { channel, watcher_count } = useChannelStateContext<ErmisChatGenerics>('ChannelHeader');
+  const { openMobileNav } = useChatContext<ErmisChatGenerics>('ChannelHeader');
   const { t } = useTranslationContext('ChannelHeader');
   const { displayImage, displayTitle } = useChannelPreviewInfo({
     channel,

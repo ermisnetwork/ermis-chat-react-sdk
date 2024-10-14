@@ -8,18 +8,18 @@ import type { CommandResponse } from 'stream-chat';
 
 import type { CommandTriggerSetting } from '../DefaultTriggerProvider';
 
-import type { DefaultStreamChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics } from '../../../types/types';
 
 type ValidCommand<
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
-> = Required<Pick<CommandResponse<StreamChatGenerics>, 'name'>> &
-  Omit<CommandResponse<StreamChatGenerics>, 'name'>;
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = Required<Pick<CommandResponse<ErmisChatGenerics>, 'name'>> &
+  Omit<CommandResponse<ErmisChatGenerics>, 'name'>;
 
 export const useCommandTrigger = <
-  StreamChatGenerics extends DefaultStreamChatGenerics = DefaultStreamChatGenerics
->(): CommandTriggerSetting<StreamChatGenerics> => {
-  const { themeVersion } = useChatContext<StreamChatGenerics>('useCommandTrigger');
-  const { channelConfig } = useChannelStateContext<StreamChatGenerics>('useCommandTrigger');
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+>(): CommandTriggerSetting<ErmisChatGenerics> => {
+  const { themeVersion } = useChatContext<ErmisChatGenerics>('useCommandTrigger');
+  const { channelConfig } = useChannelStateContext<ErmisChatGenerics>('useCommandTrigger');
   const { t } = useTranslationContext('useCommandTrigger');
 
   const commands = channelConfig?.commands;
@@ -60,11 +60,11 @@ export const useCommandTrigger = <
         onReady(
           result
             .filter(
-              (result): result is CommandResponse<StreamChatGenerics> & { name: string } =>
+              (result): result is CommandResponse<ErmisChatGenerics> & { name: string } =>
                 result.name !== undefined,
             )
             .map((commandData) => {
-              const translatedCommandData: ValidCommand<StreamChatGenerics> = {
+              const translatedCommandData: ValidCommand<ErmisChatGenerics> = {
                 name: commandData.name,
               };
 
