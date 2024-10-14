@@ -11,7 +11,7 @@
   "dependencies": {
     "react": "link:../../node_modules/react",
     "react-dom": "link:../../node_modules/react-dom",
-    "stream-chat-react": "link:../../"
+    "ermis-chat-react-sdk": "link:../../"
   },
   "devDependencies": {
     "@types/react": "link:../../node_modules/@types/react",

@@ -1,4 +1,4 @@
-import { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
+import { ChannelFilters, ChannelOptions, ChannelSort } from 'ermis-chat-js-sdk';
 import {
   Channel,
   ChannelHeader,
@@ -9,8 +9,8 @@ import {
   Thread,
   Window,
   useCreateChatClient,
-} from 'stream-chat-react';
-import 'stream-chat-react/css/v2/index.css';
+} from 'ermis-chat-react-sdk';
+import 'ermis-chat-react-sdk/css/v2/index.css';
 
 const params = (new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, property) => searchParams.get(property as string),
@@ -37,7 +37,7 @@ type LocalPollType = Record<string, unknown>;
 type LocalReactionType = Record<string, unknown>;
 type LocalUserType = Record<string, unknown>;
 
-type StreamChatGenerics = {
+type ErmisChatGenerics = {
   attachmentType: LocalAttachmentType;
   channelType: LocalChannelType;
   commandType: LocalCommandType;
@@ -50,7 +50,7 @@ type StreamChatGenerics = {
 };
 
 const App = () => {
-  const chatClient = useCreateChatClient<StreamChatGenerics>({
+  const chatClient = useCreateChatClient<ErmisChatGenerics>({
     apiKey,
     tokenOrProvider: userToken,
     userData: { id: userId },

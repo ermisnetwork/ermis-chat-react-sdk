@@ -12,9 +12,9 @@ body,
   height: 100%;
 }
 
-$stream-chat-theme-version: '2';
+$ermis-chat-theme-version: '2';
 
-@if $stream-chat-theme-version == '2' {
+@if $ermis-chat-theme-version == '2' {
   #root {
     display: flex;
     height: 100%;
