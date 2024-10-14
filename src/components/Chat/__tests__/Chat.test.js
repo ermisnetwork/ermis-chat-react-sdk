@@ -66,7 +66,7 @@ describe('Chat', () => {
       expect(context.openMobileNav).toBeInstanceOf(Function);
       expect(context.closeMobileNav).toBeInstanceOf(Function);
       expect(context.client.getUserAgent()).toBe(
-        `stream-chat-react-${version}-${originalUserAgent}`,
+        `ermis-chat-react-sdk-${version}-${originalUserAgent}`,
       );
     });
   });

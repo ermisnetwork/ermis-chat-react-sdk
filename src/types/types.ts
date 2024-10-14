@@ -135,7 +135,6 @@ export type ChannelUnreadUiState<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = Omit<ValuesType<StreamChannelState<ErmisChatGenerics>['read']>, 'user'>;
 
-// todo: fix export from stream-chat - for some reason not exported
 export type SendMessageOptions = {
   force_moderation?: boolean;
   is_pending_message?: boolean;
@@ -146,7 +145,6 @@ export type SendMessageOptions = {
   skip_push?: boolean;
 };
 
-// todo: fix export from stream-chat - for some reason not exported
 export type UpdateMessageOptions = {
   skip_enrich_url?: boolean;
 };
