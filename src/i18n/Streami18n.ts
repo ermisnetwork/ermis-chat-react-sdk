@@ -15,35 +15,11 @@ import type { TDateTimeParser } from '../context/TranslationContext';
 
 import type { UnknownType } from '../types/types';
 
-import {
-  deTranslations,
-  enTranslations,
-  esTranslations,
-  frTranslations,
-  hiTranslations,
-  itTranslations,
-  jaTranslations,
-  koTranslations,
-  nlTranslations,
-  ptTranslations,
-  ruTranslations,
-  trTranslations,
-} from './translations';
+import { enTranslations } from './translations';
 
 const defaultNS = 'translation';
 const defaultLng = 'en';
 
-import 'dayjs/locale/de';
-import 'dayjs/locale/es';
-import 'dayjs/locale/fr';
-import 'dayjs/locale/hi';
-import 'dayjs/locale/it';
-import 'dayjs/locale/ja';
-import 'dayjs/locale/ko';
-import 'dayjs/locale/nl';
-import 'dayjs/locale/pt';
-import 'dayjs/locale/ru';
-import 'dayjs/locale/tr';
 // These locale imports also set these locale globally.
 // So As a last step I am going to import english locale
 // to make sure I don't mess up language at other places in app.
@@ -431,18 +407,7 @@ export class Streami18n {
       [key: string]: typeof enTranslations | UnknownType;
     };
   } = {
-    de: { [defaultNS]: deTranslations },
     en: { [defaultNS]: enTranslations },
-    es: { [defaultNS]: esTranslations },
-    fr: { [defaultNS]: frTranslations },
-    hi: { [defaultNS]: hiTranslations },
-    it: { [defaultNS]: itTranslations },
-    ja: { [defaultNS]: jaTranslations },
-    ko: { [defaultNS]: koTranslations },
-    nl: { [defaultNS]: nlTranslations },
-    pt: { [defaultNS]: ptTranslations },
-    ru: { [defaultNS]: ruTranslations },
-    tr: { [defaultNS]: trTranslations },
   };
 
   /**
