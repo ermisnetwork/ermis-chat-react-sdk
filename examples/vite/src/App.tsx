@@ -16,7 +16,8 @@ const params = (new Proxy(new URLSearchParams(window.location.search), {
   get: (searchParams, property) => searchParams.get(property as string),
 }) as unknown) as Record<string, string | null>;
 
-const apiKey = import.meta.env.VITE_STREAM_KEY as string;
+const apiKey = import.meta.env.VITE_API_KEY as string;
+const projectId = import.meta.env.VITE_PROJECT_ID as string;
 const userId = params.uid ?? (import.meta.env.VITE_USER_ID as string);
 const userToken = params.ut ?? (import.meta.env.VITE_USER_TOKEN as string);
 
@@ -52,6 +53,11 @@ type ErmisChatGenerics = {
 const App = () => {
   const chatClient = useCreateChatClient<ErmisChatGenerics>({
     apiKey,
+    options: {
+      baseURL: 'https://api-dev.ermis.network',
+      timeout: 6000,
+    },
+    projectId,
     tokenOrProvider: userToken,
     userData: { id: userId },
   });

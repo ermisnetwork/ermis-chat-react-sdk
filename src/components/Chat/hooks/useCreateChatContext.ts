@@ -30,7 +30,7 @@ export const useCreateChatContext = <
   const channelsQueryInProgress = channelsQueryState.queryInProgress;
   const clientValues = `${client.clientID}${Object.keys(client.activeChannels).length}${
     Object.keys(client.listeners).length
-  }${client.mutedChannels.length}
+  }
   ${client.user?.id}`;
   const mutedUsersLength = mutes.length;
 

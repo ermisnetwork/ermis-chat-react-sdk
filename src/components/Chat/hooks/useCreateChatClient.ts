@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import {
   DefaultGenerics,
   ErmisChat,
+  ErmisChatOptions,
   ExtendableGenerics,
   OwnUserResponse,
   TokenOrProvider,
@@ -14,11 +15,13 @@ import {
  */
 export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGenerics>({
   apiKey,
+  options,
   projectId,
   tokenOrProvider,
   userData,
 }: {
   apiKey: string;
+  options: ErmisChatOptions;
   projectId: string;
   tokenOrProvider: TokenOrProvider;
   userData: OwnUserResponse<SCG> | UserResponse<SCG>;
@@ -31,7 +34,7 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
   }
 
   useEffect(() => {
-    const client = new ErmisChat<SCG>(apiKey, projectId);
+    const client = new ErmisChat<SCG>(apiKey, projectId, options);
     let didUserConnectInterrupt = false;
 
     const connectionPromise = client.connectUser(cachedUserData, tokenOrProvider).then(() => {

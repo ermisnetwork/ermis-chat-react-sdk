@@ -4,7 +4,7 @@ module.exports = {
   input: ['./src/**/*.{tsx,ts}'],
   keepRemoved: true,
   keySeparator: false,
-  locales: ['de', 'en', 'es', 'fr', 'hi', 'it', 'ja', 'ko', 'nl', 'pt', 'ru', 'tr'],
+  locales: ['en'],
   namespaceSeparator: false,
   output: 'src/i18n/$LOCALE.json',
   sort(a, b) {
