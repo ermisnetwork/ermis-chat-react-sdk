@@ -9,17 +9,7 @@ import { StreamMessage, useChannelStateContext } from '../../context/ChannelStat
 import { ComponentContextValue, useComponentContext } from '../../context/ComponentContext';
 import { MessageInputContextProvider } from '../../context/MessageInputContext';
 
-import type {
-  Channel,
-  ChannelFilters,
-  ChannelOptions,
-  ChannelSort,
-  Message,
-  SendFileAPIResponse,
-  UserFilters,
-  UserOptions,
-  UserSort,
-} from 'ermis-chat-js-sdk';
+import type { Channel, Message, SendFileAPIResponse } from 'ermis-chat-js-sdk';
 
 import type { MessageToSend } from '../../context/ChannelActionContext';
 import type {
