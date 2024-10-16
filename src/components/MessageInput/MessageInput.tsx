@@ -9,13 +9,23 @@ import { StreamMessage, useChannelStateContext } from '../../context/ChannelStat
 import { ComponentContextValue, useComponentContext } from '../../context/ComponentContext';
 import { MessageInputContextProvider } from '../../context/MessageInputContext';
 
-import type { Channel, Message, SendFileAPIResponse } from 'ermis-chat-js-sdk';
+import type {
+  Channel,
+  ChannelFilters,
+  ChannelOptions,
+  ChannelSort,
+  Message,
+  SendFileAPIResponse,
+  UserFilters,
+  UserOptions,
+  UserSort,
+} from 'ermis-chat-js-sdk';
 
-import type { SearchQueryParams } from '../ChannelSearch/hooks/useChannelSearch';
 import type { MessageToSend } from '../../context/ChannelActionContext';
 import type {
   CustomTrigger,
   DefaultErmisChatGenerics,
+  SearchQueryParams,
   SendMessageOptions,
   UnknownType,
 } from '../../types/types';

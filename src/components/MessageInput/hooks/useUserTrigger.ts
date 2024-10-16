@@ -10,10 +10,9 @@ import { useChannelStateContext } from '../../../context/ChannelStateContext';
 
 import type { UserResponse } from 'ermis-chat-js-sdk';
 
-import type { SearchQueryParams } from '../../ChannelSearch/hooks/useChannelSearch';
 import type { UserTriggerSetting } from '../../MessageInput/DefaultTriggerProvider';
 
-import type { DefaultErmisChatGenerics } from '../../../types/types';
+import type { DefaultErmisChatGenerics, SearchQueryParams } from '../../../types/types';
 
 export type UserTriggerParams<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics

@@ -613,7 +613,6 @@ describe('ChannelList', () => {
               <ChannelList
                 filters={{}}
                 options={{ presence: true, state: true }}
-                showChannelSearch
                 {...channeListProps}
               />
             </TranslationContext.Provider>
@@ -798,7 +797,6 @@ describe('ChannelList', () => {
                 additionalChannelSearchProps={{ searchForChannels: true }}
                 filters={{}}
                 options={{ presence: true, state: true }}
-                showChannelSearch
               />
             </Chat>,
           );

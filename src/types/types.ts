@@ -3,12 +3,18 @@ import type { LoadingIndicatorProps } from '../components/Loading/LoadingIndicat
 import type {
   APIErrorResponse,
   Attachment,
+  ChannelFilters,
+  ChannelOptions,
+  ChannelSort,
   ErrorFromResponse,
   Event,
   ExtendableGenerics,
   LiteralStringForUnion,
   Mute,
   ChannelState as StreamChannelState,
+  UserFilters,
+  UserOptions,
+  UserSort,
 } from 'ermis-chat-js-sdk';
 
 export type UnknownType = Record<string, unknown>;
@@ -155,3 +161,18 @@ export type Readable<T> = {
 } & {};
 
 export type ValuesType<T> = T[keyof T];
+
+export type SearchQueryParams<
+  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+> = {
+  channelFilters?: {
+    filters?: ChannelFilters<ErmisChatGenerics>;
+    options?: ChannelOptions;
+    sort?: ChannelSort<ErmisChatGenerics>;
+  };
+  userFilters?: {
+    filters?: UserFilters<ErmisChatGenerics> | ((query: string) => UserFilters<ErmisChatGenerics>);
+    options?: UserOptions;
+    sort?: UserSort<ErmisChatGenerics>;
+  };
+};
