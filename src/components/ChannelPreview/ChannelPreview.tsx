@@ -2,7 +2,6 @@ import throttle from 'lodash.throttle';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { ChannelPreviewMessenger } from './ChannelPreviewMessenger';
-import { useIsChannelMuted } from './hooks/useIsChannelMuted';
 import { useChannelPreviewInfo } from './hooks/useChannelPreviewInfo';
 import { getLatestMessagePreview } from './utils';
 
@@ -83,7 +82,7 @@ export const ChannelPreview = <
   });
 
   const isActive = activeChannel?.cid === channel.cid;
-  const { muted } = useIsChannelMuted(channel);
+  // const { muted } = useIsChannelMuted(channel);
 
   useEffect(() => {
     const handleEvent = (event: Event) => {
@@ -111,13 +110,14 @@ export const ChannelPreview = <
   const refreshUnreadCount = useMemo(
     () =>
       throttle(() => {
-        if (muted) {
-          setUnread(0);
-        } else {
-          setUnread(channel.countUnread());
-        }
+        // if (muted) {
+        //   setUnread(0);
+        // } else {
+        //   setUnread(channel.countUnread());
+        // }
+        setUnread(channel.countUnread());
       }, 400),
-    [channel, muted],
+    [channel],
   );
 
   useEffect(() => {

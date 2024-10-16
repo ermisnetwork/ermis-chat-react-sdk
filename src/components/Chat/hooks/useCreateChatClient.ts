@@ -50,7 +50,7 @@ export const useCreateChatClient = <SCG extends ExtendableGenerics = DefaultGene
           console.log(`Connection for user "${cachedUserData.id}" has been closed`);
         });
     };
-  }, [apiKey, cachedUserData, tokenOrProvider]);
+  }, [apiKey, projectId, cachedUserData, tokenOrProvider]);
 
   return chatClient;
 };

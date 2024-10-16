@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { ChannelListMessenger, ChannelListMessengerProps } from './ChannelListMessenger';
@@ -19,10 +19,6 @@ import { MAX_QUERY_CHANNELS_LIMIT, moveChannelUp } from './utils';
 
 import { AvatarProps, Avatar as DefaultAvatar } from '../Avatar/Avatar';
 import { ChannelPreview, ChannelPreviewUIComponentProps } from '../ChannelPreview/ChannelPreview';
-import {
-  ChannelSearchProps,
-  ChannelSearch as DefaultChannelSearch,
-} from '../ChannelSearch/ChannelSearch';
 import { ChatDown, ChatDownProps } from '../ChatDown/ChatDown';
 import {
   EmptyStateIndicator as DefaultEmptyStateIndicator,
@@ -34,7 +30,13 @@ import { LoadMorePaginator, LoadMorePaginatorProps } from '../LoadMore/LoadMoreP
 import { ChannelListContextProvider } from '../../context';
 import { useChatContext } from '../../context/ChatContext';
 
-import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, Event } from 'ermis-chat-js-sdk';
+import type {
+  Channel,
+  ChannelFilters,
+  ChannelOptions,
+  ChannelSort,
+  Event,
+} from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics, PaginatorProps } from '../../types/types';
 
@@ -45,8 +47,6 @@ const DEFAULT_SORT = {};
 export type ChannelListProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 > = {
-  /** Additional props for underlying ChannelSearch component and channel search controller */
-  additionalChannelSearchProps?: Omit<ChannelSearchProps<ErmisChatGenerics>, 'setChannels'>;
   /**
    * When the client receives `message.new`, `notification.message_new`, and `notification.added_to_channel` events, we automatically
    * push that channel to the top of the list. If the channel doesn't currently exist in the list, we grab the channel from
@@ -60,8 +60,6 @@ export type ChannelListProps<
   channelRenderFilterFn?: (
     channels: Array<Channel<ErmisChatGenerics>>,
   ) => Array<Channel<ErmisChatGenerics>>;
-  /** Custom UI component to display search results, defaults to and accepts same props as: [ChannelSearch](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/components/ChannelSearch/ChannelSearch.tsx) */
-  ChannelSearch?: React.ComponentType<ChannelSearchProps<ErmisChatGenerics>>;
   /** Set a channel (with this ID) to active and manually move it to the top of the list */
   customActiveChannel?: string;
   /** Custom function that handles the channel pagination. Has to build query filters, sort and options and query and append channels to the current channels state and update the hasNext pagination flag after each query. */
@@ -145,8 +143,6 @@ export type ChannelListProps<
   sendChannelsToList?: boolean;
   /** Last channel will be set as active channel if true, defaults to true */
   setActiveChannelOnMount?: boolean;
-  /** Whether or not to load the list with a search component, defaults to false */
-  showChannelSearch?: boolean;
   /** An object containing channel query sort parameters */
   sort?: ChannelSort<ErmisChatGenerics>;
   /** An object containing query parameters for fetching channel watchers */
@@ -159,11 +155,9 @@ const UnMemoizedChannelList = <
   props: ChannelListProps<ErmisChatGenerics>,
 ) => {
   const {
-    additionalChannelSearchProps,
     Avatar = DefaultAvatar,
     allowNewMessagesFromUnfilteredChannels,
     channelRenderFilterFn,
-    ChannelSearch = DefaultChannelSearch,
     customActiveChannel,
     customQueryChannels,
     EmptyStateIndicator = DefaultEmptyStateIndicator,
@@ -188,7 +182,6 @@ const UnMemoizedChannelList = <
     renderChannels,
     sendChannelsToList = false,
     setActiveChannelOnMount = true,
-    showChannelSearch = false,
     sort = DEFAULT_SORT,
     watchers = {},
   } = props;
@@ -207,7 +200,6 @@ const UnMemoizedChannelList = <
 
   const channelListRef = useRef<HTMLDivElement>(null);
   const [channelUpdateCount, setChannelUpdateCount] = useState(0);
-  const [searchActive, setSearchActive] = useState(false);
   /**
    * Set a channel with id {customActiveChannel} as active and move it to the top of the list.
    * If customActiveChannel prop is absent, then set the first channel in list as active channel.
@@ -253,22 +245,6 @@ const UnMemoizedChannelList = <
    * force a re-render. Incrementing this dummy variable ensures the channel previews update.
    */
   const forceUpdate = () => setChannelUpdateCount((count) => count + 1);
-
-  const onSearch = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.value) {
-      setSearchActive(false);
-    } else {
-      setSearchActive(true);
-    }
-    additionalChannelSearchProps?.onSearch?.(event);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const onSearchExit = useCallback(() => {
-    setSearchActive(false);
-    additionalChannelSearchProps?.onSearchExit?.();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const { channels, hasNextPage, loadNextPage, setChannels } = usePaginatedChannels(
     client,
@@ -353,45 +329,34 @@ const UnMemoizedChannelList = <
     },
   );
 
-  const showChannelList = !searchActive || additionalChannelSearchProps?.popupResults;
   return (
     <ChannelListContextProvider value={{ channels, setChannels }}>
       <div className={className} ref={channelListRef}>
-        {showChannelSearch && (
-          <ChannelSearch
-            onSearch={onSearch}
-            onSearchExit={onSearchExit}
-            setChannels={setChannels}
-            {...additionalChannelSearchProps}
-          />
-        )}
-        {showChannelList && (
-          <List
-            error={channelsQueryState.error}
-            loadedChannels={sendChannelsToList ? loadedChannels : undefined}
-            loading={
-              !!channelsQueryState.queryInProgress &&
-              ['reload', 'uninitialized'].includes(channelsQueryState.queryInProgress)
-            }
-            LoadingErrorIndicator={LoadingErrorIndicator}
-            LoadingIndicator={LoadingIndicator}
-            setChannels={setChannels}
-          >
-            {!loadedChannels?.length ? (
-              <EmptyStateIndicator listType='channel' />
-            ) : (
-              <Paginator
-                hasNextPage={hasNextPage}
-                isLoading={channelsQueryState.queryInProgress === 'load-more'}
-                loadNextPage={loadNextPage}
-              >
-                {renderChannels
-                  ? renderChannels(loadedChannels, renderChannel)
-                  : loadedChannels.map((channel) => renderChannel(channel))}
-              </Paginator>
-            )}
-          </List>
-        )}
+        <List
+          error={channelsQueryState.error}
+          loadedChannels={sendChannelsToList ? loadedChannels : undefined}
+          loading={
+            !!channelsQueryState.queryInProgress &&
+            ['reload', 'uninitialized'].includes(channelsQueryState.queryInProgress)
+          }
+          LoadingErrorIndicator={LoadingErrorIndicator}
+          LoadingIndicator={LoadingIndicator}
+          setChannels={setChannels}
+        >
+          {!loadedChannels?.length ? (
+            <EmptyStateIndicator listType='channel' />
+          ) : (
+            <Paginator
+              hasNextPage={hasNextPage}
+              isLoading={channelsQueryState.queryInProgress === 'load-more'}
+              loadNextPage={loadNextPage}
+            >
+              {renderChannels
+                ? renderChannels(loadedChannels, renderChannel)
+                : loadedChannels.map((channel) => renderChannel(channel))}
+            </Paginator>
+          )}
+        </List>
       </div>
     </ChannelListContextProvider>
   );

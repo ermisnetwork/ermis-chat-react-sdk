@@ -32,5 +32,5 @@
     "isolatedModules": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["./src/stories", "./src/mock-builders", "./src/**/__tests__/*"]
+  "exclude": ["./src/mock-builders", "./src/**/__tests__/*"]
 }

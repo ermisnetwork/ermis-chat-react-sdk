@@ -22,11 +22,11 @@ const userId = params.uid ?? (import.meta.env.VITE_USER_ID as string);
 const userToken = params.ut ?? (import.meta.env.VITE_USER_TOKEN as string);
 
 const filters: ChannelFilters = {
-  members: { $in: [userId] },
-  type: 'messaging',
+  // type: 'messaging',
+  // roles: ['owner', 'moder', 'member'],
 };
-const options: ChannelOptions = { limit: 10, presence: true, state: true };
-const sort: ChannelSort = { last_message_at: -1, updated_at: -1 };
+const options: ChannelOptions = { message_limit: 25 };
+const sort: ChannelSort = { last_message_at: -1 };
 
 type LocalAttachmentType = Record<string, unknown>;
 type LocalChannelType = Record<string, unknown>;

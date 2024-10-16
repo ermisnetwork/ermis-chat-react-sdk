@@ -18,6 +18,7 @@ import {
   ChannelMemberResponse,
   ChannelQueryOptions,
   ChannelState,
+  ErmisChat,
   ErrorFromResponse,
   Event,
   EventAPIResponse,
@@ -25,7 +26,6 @@ import {
   MessageResponse,
   SendMessageAPIResponse,
   Channel as StreamChannel,
-  ErmisChat,
   UpdatedMessage,
   UserResponse,
 } from 'ermis-chat-js-sdk';

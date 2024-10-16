@@ -5,7 +5,6 @@ export * from './Channel';
 export * from './ChannelHeader';
 export * from './ChannelList';
 export * from './ChannelPreview';
-export * from './ChannelSearch';
 export * from './Chat';
 export * from './ChatAutoComplete';
 export * from './ChatDown';
