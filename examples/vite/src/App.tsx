@@ -73,7 +73,7 @@ const App = () => {
           <MessageList />
           <MessageInput focus />
         </Window>
-        <Thread />
+        {/* <Thread /> */}
       </Channel>
     </Chat>
   );

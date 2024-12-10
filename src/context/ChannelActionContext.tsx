@@ -77,10 +77,7 @@ export type ChannelActionContextValue<
   markRead: (options?: MarkReadWrapperOptions) => void;
   onMentionsClick: CustomMentionHandler<ErmisChatGenerics>;
   onMentionsHover: CustomMentionHandler<ErmisChatGenerics>;
-  openThread: (
-    message: StreamMessage<ErmisChatGenerics>,
-    event?: React.BaseSyntheticEvent,
-  ) => void;
+  openThread: (message: StreamMessage<ErmisChatGenerics>, event?: React.BaseSyntheticEvent) => void;
   removeMessage: (message: StreamMessage<ErmisChatGenerics>) => void;
   retrySendMessage: RetrySendMessage<ErmisChatGenerics>;
   sendMessage: (

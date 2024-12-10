@@ -1,10 +1,7 @@
 import { useCallback, useEffect } from 'react';
 
-import { checkUploadPermissions } from './utils';
-
 import { useChannelActionContext } from '../../../context/ChannelActionContext';
 import { useChannelStateContext } from '../../../context/ChannelStateContext';
-import { useChatContext } from '../../../context/ChatContext';
 import { useTranslationContext } from '../../../context/TranslationContext';
 
 import type { SendFileAPIResponse } from 'ermis-chat-js-sdk';
@@ -26,7 +23,7 @@ export const useFileUploads = <
 
   const { channel } = useChannelStateContext<ErmisChatGenerics>('useFileUploads');
   const { addNotification } = useChannelActionContext<ErmisChatGenerics>('useFileUploads');
-  const { getAppSettings } = useChatContext<ErmisChatGenerics>('useFileUploads');
+  // const { getAppSettings } = useChatContext<ErmisChatGenerics>('useFileUploads');
   const { t } = useTranslationContext('useFileUploads');
 
   const uploadFile = useCallback((id: string) => {
@@ -50,15 +47,15 @@ export const useFileUploads = <
 
       const { file, id } = upload;
 
-      const canUpload = await checkUploadPermissions({
-        addNotification,
-        file,
-        getAppSettings,
-        t,
-        uploadType: 'file',
-      });
+      // const canUpload = await checkUploadPermissions({
+      //   addNotification,
+      //   file,
+      //   getAppSettings,
+      //   t,
+      //   uploadType: 'file',
+      // });
 
-      if (!canUpload) return removeFile(id);
+      // if (!canUpload) return removeFile(id);
 
       let response: SendFileAPIResponse;
 

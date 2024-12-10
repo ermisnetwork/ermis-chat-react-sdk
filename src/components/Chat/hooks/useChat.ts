@@ -9,7 +9,7 @@ import {
 import { Streami18n } from '../../../i18n';
 import { version } from '../../../version';
 
-import type { AppSettingsAPIResponse, Channel, ErmisChat, Event, Mute } from 'ermis-chat-js-sdk';
+import type { AppSettingsAPIResponse, Channel, ErmisChat, Mute } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 
@@ -68,12 +68,12 @@ export const useChat = <
   useEffect(() => {
     setMutes(clientMutes);
 
-    const handleEvent = (event: Event<ErmisChatGenerics>) => {
-      setMutes(event.me?.mutes || []);
-    };
+    // const handleEvent = (event: Event<ErmisChatGenerics>) => {
+    //   setMutes(event.me?.mutes || []);
+    // };
 
-    client.on('notification.mutes_updated', handleEvent);
-    return () => client.off('notification.mutes_updated', handleEvent);
+    // client.on('notification.mutes_updated', handleEvent);
+    // return () => client.off('notification.mutes_updated', handleEvent);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clientMutes?.length]);
 

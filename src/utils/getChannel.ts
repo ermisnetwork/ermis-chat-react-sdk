@@ -1,8 +1,8 @@
 import type {
   Channel,
   ChannelQueryOptions,
-  QueryChannelAPIResponse,
   ErmisChat,
+  QueryChannelAPIResponse,
 } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../types/types';
 
@@ -81,4 +81,23 @@ const generateChannelTempCid = (channelType: string, members?: string[]) => {
   if (!members) return;
   const membersStr = [...members].sort().join(',');
   return `${channelType}:!members-${membersStr}`;
+};
+
+export const getChannelDirectName = (members: any[], client: any) => {
+  const member = members.find((member: any) => member.user_id !== client.userID);
+  const userInfo = member ? client.state.users[member.user_id] : null;
+  return userInfo ? userInfo.name : member.user_id;
+};
+
+export const getMembersChannel = (members: any[], client: any) => {
+  const newMembers = members.map((member: any) => {
+    const userInfo = client.state.users[member.user_id] || null;
+    return {
+      ...member,
+      avatar: userInfo && userInfo.avatar ? userInfo.avatar : '',
+      name: userInfo ? userInfo.name : member.user_id,
+    };
+  });
+
+  return newMembers;
 };

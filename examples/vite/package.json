@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "react": "link:../../node_modules/react",
-    "react-dom": "link:../../node_modules/react-dom",
-    "ermis-chat-react-sdk": "link:../../"
+    "react-dom": "link:../../node_modules/react-dom"
   },
   "devDependencies": {
     "@types/react": "link:../../node_modules/@types/react",

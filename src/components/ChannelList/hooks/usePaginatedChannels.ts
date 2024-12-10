@@ -3,13 +3,20 @@ import uniqBy from 'lodash.uniqby';
 
 import { MAX_QUERY_CHANNELS_LIMIT } from '../utils';
 
-import type { Channel, ChannelFilters, ChannelOptions, ChannelSort, ErmisChat } from 'ermis-chat-js-sdk';
+import type {
+  Channel,
+  ChannelFilters,
+  ChannelOptions,
+  ChannelSort,
+  ErmisChat,
+} from 'ermis-chat-js-sdk';
 
 import { useChatContext } from '../../../context/ChatContext';
 
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 import type { ChannelsQueryState } from '../../Chat/hooks/useChannelsQueryState';
 import { DEFAULT_INITIAL_CHANNEL_PAGE_SIZE } from '../../../constants/limits';
+import { getChannelDirectName, getMembersChannel } from '../../../utils/getChannel';
 
 const RECOVER_LOADED_CHANNELS_THROTTLE_INTERVAL_IN_MS = 5000;
 const MIN_RECOVER_LOADED_CHANNELS_THROTTLE_INTERVAL_IN_MS = 2000;
@@ -86,6 +93,14 @@ export const usePaginatedChannels = <
         };
 
         const channelQueryResponse = await client.queryChannels(filters, sort || {}, newOptions);
+
+        channelQueryResponse.forEach((channel: any) => {
+          channel.data.members = getMembersChannel(channel.data.members, client);
+
+          if (channel.type === 'messaging') {
+            channel.data.name = getChannelDirectName(channel.data.members, client);
+          }
+        });
 
         const newChannels =
           queryType === 'reload'

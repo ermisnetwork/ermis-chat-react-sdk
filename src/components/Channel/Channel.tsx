@@ -29,7 +29,6 @@ import {
   UpdatedMessage,
   UserResponse,
 } from 'ermis-chat-js-sdk';
-import { nanoid } from 'nanoid';
 import clsx from 'clsx';
 
 import { channelReducer, ChannelStateReducer, initialState } from './channelState';
@@ -76,7 +75,7 @@ import type { UnreadMessagesNotificationProps } from '../MessageList';
 import { hasMoreMessagesProbably, UnreadMessagesSeparator } from '../MessageList';
 import { useChannelContainerClasses } from './hooks/useChannelContainerClasses';
 import { findInMsgSetByDate, findInMsgSetById, makeAddNotifications } from './utils';
-import { getChannel } from '../../utils';
+import { getChannel, getChannelDirectName, getMembersChannel } from '../../utils';
 
 import type { MessageProps } from '../Message/types';
 import type { MessageInputProps } from '../MessageInput/MessageInput';
@@ -703,10 +702,18 @@ const ChannelInner = <
     let queryResponse: ChannelAPIResponse<ErmisChatGenerics>;
 
     try {
-      queryResponse = await channel.query({
+      const response = await channel.query({
         messages: { id_lt: oldestID, limit: perPage },
-        watchers: { limit: perPage },
+        // watchers: { limit: perPage },
       });
+
+      response.channel.members = getMembersChannel(response.channel.members, client);
+
+      if (response.channel.type === 'messaging') {
+        response.channel.name = getChannelDirectName(response.channel.members, client);
+      }
+
+      queryResponse = response;
     } catch (e) {
       console.warn('message pagination request failed with error', e);
       dispatch({ loadingMore: false, type: 'setLoadingMore' });
@@ -732,10 +739,16 @@ const ChannelInner = <
     let queryResponse: ChannelAPIResponse<ErmisChatGenerics>;
 
     try {
-      queryResponse = await channel.query({
+      const response = await channel.query({
         messages: { id_gt: newestId, limit: perPage },
-        watchers: { limit: perPage },
+        // watchers: { limit: perPage },
       });
+      response.channel.members = getMembersChannel(response.channel.members, client);
+
+      if (response.channel.type === 'messaging') {
+        response.channel.name = getChannelDirectName(response.channel.members, client);
+      }
+      queryResponse = response;
     } catch (e) {
       console.warn('message pagination request failed with error', e);
       dispatch({ loadingMoreNewer: false, type: 'setLoadingMoreNewer' });
@@ -970,7 +983,7 @@ const ChannelInner = <
     customMessageData?: Partial<Message<ErmisChatGenerics>>,
     options?: SendMessageOptions,
   ) => {
-    const { attachments, id, mentioned_users = [], parent_id, text } = message;
+    const { attachments, mentioned_users = [], parent_id, text } = message;
 
     // channel.sendMessage expects an array of user id strings
     const mentions = isUserResponseArray<ErmisChatGenerics>(mentioned_users)
@@ -979,7 +992,6 @@ const ChannelInner = <
 
     const messageData = {
       attachments,
-      id,
       mentioned_users: mentions,
       parent_id,
       quoted_message_id: parent_id === quotedMessage?.parent_id ? quotedMessage?.id : undefined,
@@ -1069,7 +1081,7 @@ const ChannelInner = <
       attachments,
       created_at: new Date(),
       html: text,
-      id: customMessageData?.id ?? `${client.userID}-${nanoid()}`,
+      // id: customMessageData?.id ?? `${client.userID}-${nanoid()}`,
       mentioned_users,
       reactions: [],
       status: 'sending',
@@ -1079,7 +1091,7 @@ const ChannelInner = <
       ...(parent?.id ? { parent_id: parent.id } : null),
     };
 
-    updateMessage(messagePreview);
+    // updateMessage(messagePreview);
 
     await doSendMessage(messagePreview, customMessageData, options);
   };

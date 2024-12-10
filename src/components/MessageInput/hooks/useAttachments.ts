@@ -3,13 +3,11 @@ import { nanoid } from 'nanoid';
 
 import { useImageUploads } from './useImageUploads';
 import { useFileUploads } from './useFileUploads';
-import { checkUploadPermissions } from './utils';
 import { isLocalAttachment, isLocalImageAttachment, isUploadedImage } from '../../Attachment';
 
 import {
   useChannelActionContext,
   useChannelStateContext,
-  useChatContext,
   useTranslationContext,
 } from '../../../context';
 
@@ -55,7 +53,7 @@ export const useAttachments = <
 ) => {
   const { doFileUploadRequest, doImageUploadRequest, errorHandler, noFiles } = props;
   const { fileUploads, imageUploads } = state;
-  const { getAppSettings } = useChatContext<ErmisChatGenerics>('useAttachments');
+  // const { getAppSettings } = useChatContext<ErmisChatGenerics>('useAttachments');
   const { t } = useTranslationContext('useAttachments');
   const { addNotification } = useChannelActionContext<ErmisChatGenerics>('useAttachments');
   const { channel, maxNumberOfFiles, multipleUploads } = useChannelStateContext<ErmisChatGenerics>(
@@ -142,20 +140,20 @@ export const useAttachments = <
       const id = localMetadata?.id ?? nanoid();
       const { file } = localMetadata;
 
-      const canUpload = await checkUploadPermissions({
-        addNotification,
-        file,
-        getAppSettings,
-        t,
-        uploadType: isImage ? 'image' : 'file',
-      });
+      // const canUpload = await checkUploadPermissions({
+      //   addNotification,
+      //   file,
+      //   getAppSettings,
+      //   t,
+      //   uploadType: isImage ? 'image' : 'file',
+      // });
 
-      if (!canUpload) {
-        const notificationText = t('Missing permissions to upload the attachment');
-        console.error(new Error(notificationText));
-        addNotification(notificationText, 'error');
-        return att;
-      }
+      // if (!canUpload) {
+      //   const notificationText = t('Missing permissions to upload the attachment');
+      //   console.error(new Error(notificationText));
+      //   addNotification(notificationText, 'error');
+      //   return att;
+      // }
 
       upsertAttachments([
         {
@@ -241,7 +239,6 @@ export const useAttachments = <
       doFileUploadRequest,
       doImageUploadRequest,
       errorHandler,
-      getAppSettings,
       removeAttachments,
       t,
       upsertAttachments,
