@@ -104,9 +104,7 @@ export class MediaRecorderController<
   recordingUri: string | undefined;
   mediaType: RecordedMediaType;
 
-  signalRecordingReady:
-    | ((r: LocalVoiceRecordingAttachment<ErmisChatGenerics>) => void)
-    | undefined;
+  signalRecordingReady: ((r: LocalVoiceRecordingAttachment<ErmisChatGenerics>) => void) | undefined;
 
   recordingState = new BehaviorSubject<MediaRecordingState | undefined>(undefined);
   recording = new BehaviorSubject<LocalVoiceRecordingAttachment<ErmisChatGenerics> | undefined>(
