@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import {
   defaultDateTimeParser,
@@ -9,7 +9,7 @@ import {
 import { Streami18n } from '../../../i18n';
 import { version } from '../../../version';
 
-import type { AppSettingsAPIResponse, Channel, ErmisChat, Mute } from 'ermis-chat-js-sdk';
+import type { Channel, ErmisChat, Mute } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 
@@ -45,16 +45,6 @@ export const useChat = <
 
   const closeMobileNav = () => setNavOpen(false);
   const openMobileNav = () => setTimeout(() => setNavOpen(true), 100);
-
-  const appSettings = useRef<Promise<AppSettingsAPIResponse<ErmisChatGenerics>> | null>(null);
-
-  const getAppSettings = () => {
-    if (appSettings.current) {
-      return appSettings.current;
-    }
-    appSettings.current = client.getAppSettings();
-    return appSettings.current;
-  };
 
   useEffect(() => {
     if (client) {
@@ -125,7 +115,6 @@ export const useChat = <
   return {
     channel,
     closeMobileNav,
-    getAppSettings,
     latestMessageDatesByChannels,
     mutes,
     navOpen,

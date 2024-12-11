@@ -80,7 +80,6 @@ export const Chat = <ErmisChatGenerics extends DefaultErmisChatGenerics = Defaul
   const {
     channel,
     closeMobileNav,
-    getAppSettings,
     latestMessageDatesByChannels,
     mutes,
     navOpen,
@@ -106,7 +105,6 @@ export const Chat = <ErmisChatGenerics extends DefaultErmisChatGenerics = Defaul
     client,
     closeMobileNav,
     customClasses,
-    getAppSettings,
     latestMessageDatesByChannels,
     mutes,
     navOpen,

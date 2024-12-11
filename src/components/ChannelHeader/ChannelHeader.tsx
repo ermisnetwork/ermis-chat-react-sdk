@@ -37,7 +37,7 @@ const UnMemoizedChannelHeader = <
     title: overrideTitle,
   } = props;
 
-  const { channel, watcher_count } = useChannelStateContext<ErmisChatGenerics>('ChannelHeader');
+  const { channel } = useChannelStateContext<ErmisChatGenerics>('ChannelHeader');
   const { openMobileNav } = useChatContext<ErmisChatGenerics>('ChannelHeader');
   const { t } = useTranslationContext('ChannelHeader');
   const { displayImage, displayTitle } = useChannelPreviewInfo({
@@ -77,10 +77,9 @@ const UnMemoizedChannelHeader = <
               {t('{{ memberCount }} members', {
                 memberCount: member_count,
               })}
-              ,{' '}
             </>
           )}
-          {t<string>('{{ watcherCount }} online', { watcherCount: watcher_count })}
+          {/* {t<string>('{{ watcherCount }} online', { watcherCount: watcher_count })} */}
         </p>
       </div>
     </div>

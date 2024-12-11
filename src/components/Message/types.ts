@@ -32,8 +32,6 @@ export type MessageProps<
   closeReactionSelectorOnClick?: boolean;
   /** Object containing custom message actions and function handlers */
   customMessageActions?: MessageContextValue<ErmisChatGenerics>['customMessageActions'];
-  /** If true, disables the ability for users to quote messages, defaults to false */
-  disableQuotedMessages?: boolean;
   /** When true, the message is the last one in a group sent by a specific user (only used in the `VirtualizedMessageList`) */
   endOfGroup?: boolean;
   /** When true, the message is the first one in a group sent by a specific user (only used in the `VirtualizedMessageList`) */
@@ -74,8 +72,6 @@ export type MessageProps<
   messageActions?: MessageActionsArray;
   /** DOMRect object for parent MessageList component */
   messageListRect?: DOMRect;
-  /** If true, only the sender of the message has editing privileges */
-  onlySenderCanEdit?: boolean;
   /** Custom mention click handler to override default in [ChannelActionContext] */
   onMentionsClick?: ChannelActionContextValue<ErmisChatGenerics>['onMentionsClick'];
   /** Custom mention hover handler to override default in [ChannelActionContext] */

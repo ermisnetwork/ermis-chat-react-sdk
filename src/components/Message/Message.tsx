@@ -93,17 +93,7 @@ const MessageWithContext = <
     onUserHoverHandler: propOnUserHover,
   });
 
-  const {
-    canDelete,
-    canEdit,
-    canFlag,
-    canMarkUnread,
-    canMute,
-    canQuote,
-    canReact,
-    canReply,
-    isMyMessage,
-  } = userRoles;
+  const { canDelete, canEdit, canReact, canReply, isMyMessage } = userRoles;
 
   const messageIsUnread = useMemo(
     () =>
@@ -123,32 +113,16 @@ const MessageWithContext = <
       getMessageActions(messageActions, {
         canDelete,
         canEdit,
-        canFlag,
-        canMarkUnread,
-        canMute,
         canPin,
-        canQuote,
         canReact,
         canReply,
       }),
-    [
-      messageActions,
-      canDelete,
-      canEdit,
-      canFlag,
-      canMarkUnread,
-      canMute,
-      canPin,
-      canQuote,
-      canReact,
-      canReply,
-    ],
+    [messageActions, canDelete, canEdit, canPin, canReact, canReply],
   );
 
   const {
     canPin: canPinPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
     messageActions: messageActionsPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
-    onlySenderCanEdit: onlySenderCanEditPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
     onUserClick: onUserClickPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
     onUserHover: onUserHoverPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
     userRoles: userRolesPropToNotPass, // eslint-disable-line @typescript-eslint/no-unused-vars
@@ -193,7 +167,6 @@ export const Message = <
 ) => {
   const {
     closeReactionSelectorOnClick,
-    disableQuotedMessages,
     getDeleteMessageErrorNotification,
     getFetchReactionsErrorNotification,
     getFlagMessageErrorNotification,
@@ -204,7 +177,6 @@ export const Message = <
     getMuteUserSuccessNotification,
     getPinMessageErrorNotification,
     message,
-    onlySenderCanEdit = false,
     onMentionsClick: propOnMentionsClick,
     onMentionsHover: propOnMentionsHover,
     openThread: propOpenThread,
@@ -224,7 +196,7 @@ export const Message = <
   const handleOpenThread = useOpenThreadHandler(message, propOpenThread);
   const handleReaction = useReactionHandler(message);
   const handleRetry = useRetryHandler(propRetrySendMessage);
-  const userRoles = useUserRole(message, onlySenderCanEdit, disableQuotedMessages);
+  const userRoles = useUserRole(message);
 
   const handleFetchReactions = useReactionsFetcher(message, {
     getErrorNotification: getFetchReactionsErrorNotification,
@@ -279,7 +251,6 @@ export const Message = <
       autoscrollToBottom={props.autoscrollToBottom}
       canPin={canPin}
       customMessageActions={props.customMessageActions}
-      disableQuotedMessages={props.disableQuotedMessages}
       endOfGroup={props.endOfGroup}
       firstOfGroup={props.firstOfGroup}
       formatDate={props.formatDate}

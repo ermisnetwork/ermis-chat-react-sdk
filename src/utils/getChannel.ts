@@ -94,8 +94,11 @@ export const getMembersChannel = (members: any[], client: any) => {
     const userInfo = client.state.users[member.user_id] || null;
     return {
       ...member,
-      avatar: userInfo && userInfo.avatar ? userInfo.avatar : '',
-      name: userInfo ? userInfo.name : member.user_id,
+      user: {
+        ...member.user,
+        image: userInfo && userInfo.avatar ? userInfo.avatar : '',
+        name: userInfo ? userInfo.name : member.user_id,
+      },
     };
   });
 

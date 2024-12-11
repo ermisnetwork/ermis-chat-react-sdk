@@ -20,10 +20,10 @@ export const useCooldownTimer = <
   const { channel, messages = [] } = useChannelStateContext<ErmisChatGenerics>('useCooldownTimer');
   const [cooldownRemaining, setCooldownRemaining] = useState<number>();
 
-  const { cooldown: cooldownInterval = 0, own_capabilities } = (channel.data ||
+  const { cooldown: cooldownInterval = 0, member_capabilities } = (channel.data ||
     {}) as ChannelResponse<ErmisChatGenerics>;
 
-  const skipCooldown = own_capabilities?.includes('skip-slow-mode');
+  const skipCooldown = member_capabilities?.includes('skip-slow-mode');
 
   const ownLatestMessageDate = useMemo(
     () =>

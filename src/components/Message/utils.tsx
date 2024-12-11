@@ -2,7 +2,7 @@ import deepequal from 'react-fast-compare';
 import emojiRegex from 'emoji-regex';
 
 import type { TFunction } from 'i18next';
-import type { MessageResponse, Mute, ErmisChat, UserResponse } from 'ermis-chat-js-sdk';
+import type { ErmisChat, MessageResponse, Mute, UserResponse } from 'ermis-chat-js-sdk';
 import type { PinPermissions } from './hooks';
 import type { MessageProps } from './types';
 import type { MessageContextValue, StreamMessage } from '../../context';
@@ -125,28 +125,14 @@ export const defaultPinPermissions: PinPermissions = {
 export type Capabilities = {
   canDelete?: boolean;
   canEdit?: boolean;
-  canFlag?: boolean;
-  canMarkUnread?: boolean;
-  canMute?: boolean;
   canPin?: boolean;
-  canQuote?: boolean;
   canReact?: boolean;
   canReply?: boolean;
 };
 
 export const getMessageActions = (
   actions: MessageActionsArray | boolean,
-  {
-    canDelete,
-    canEdit,
-    canFlag,
-    canMarkUnread,
-    canMute,
-    canPin,
-    canQuote,
-    canReact,
-    canReply,
-  }: Capabilities,
+  { canDelete, canEdit, canPin, canReact, canReply }: Capabilities,
 ): MessageActionsArray => {
   const messageActionsAfterPermission: MessageActionsArray = [];
   let messageActions: MessageActionsArray = [];
@@ -168,24 +154,8 @@ export const getMessageActions = (
     messageActionsAfterPermission.push(MESSAGE_ACTIONS.edit);
   }
 
-  if (canFlag && messageActions.indexOf(MESSAGE_ACTIONS.flag) > -1) {
-    messageActionsAfterPermission.push(MESSAGE_ACTIONS.flag);
-  }
-
-  if (canMarkUnread && messageActions.indexOf(MESSAGE_ACTIONS.markUnread) > -1) {
-    messageActionsAfterPermission.push(MESSAGE_ACTIONS.markUnread);
-  }
-
-  if (canMute && messageActions.indexOf(MESSAGE_ACTIONS.mute) > -1) {
-    messageActionsAfterPermission.push(MESSAGE_ACTIONS.mute);
-  }
-
   if (canPin && messageActions.indexOf(MESSAGE_ACTIONS.pin) > -1) {
     messageActionsAfterPermission.push(MESSAGE_ACTIONS.pin);
-  }
-
-  if (canQuote && messageActions.indexOf(MESSAGE_ACTIONS.quote) > -1) {
-    messageActionsAfterPermission.push(MESSAGE_ACTIONS.quote);
   }
 
   if (canReact && messageActions.indexOf(MESSAGE_ACTIONS.react) > -1) {

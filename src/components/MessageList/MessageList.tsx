@@ -150,7 +150,6 @@ const MessageListWithContext = <
       additionalMessageInputProps: props.additionalMessageInputProps,
       closeReactionSelectorOnClick: props.closeReactionSelectorOnClick,
       customMessageActions: props.customMessageActions,
-      disableQuotedMessages: props.disableQuotedMessages,
       formatDate: props.formatDate,
       getDeleteMessageErrorNotification: props.getDeleteMessageErrorNotification,
       getFlagMessageErrorNotification: props.getFlagMessageErrorNotification,
@@ -163,7 +162,6 @@ const MessageListWithContext = <
       Message: props.Message,
       messageActions,
       messageListRect: wrapperRect,
-      onlySenderCanEdit: props.onlySenderCanEdit,
       onMentionsClick: props.onMentionsClick,
       onMentionsHover: props.onMentionsHover,
       onUserClick: props.onUserClick,
@@ -283,7 +281,6 @@ type PropsDrilledToMessage =
   | 'additionalMessageInputProps'
   | 'closeReactionSelectorOnClick'
   | 'customMessageActions'
-  | 'disableQuotedMessages'
   | 'formatDate'
   | 'getDeleteMessageErrorNotification'
   | 'getFlagMessageErrorNotification'
@@ -295,7 +292,6 @@ type PropsDrilledToMessage =
   | 'getPinMessageErrorNotification'
   | 'Message'
   | 'messageActions'
-  | 'onlySenderCanEdit'
   | 'onMentionsClick'
   | 'onMentionsHover'
   | 'onUserClick'

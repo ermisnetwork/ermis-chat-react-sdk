@@ -28,8 +28,9 @@ export const useChannelUpdatedListener = <
           newChannels[channelIndex].data = {
             ...event.channel,
             hidden: event.channel?.hidden ?? newChannels[channelIndex].data?.hidden,
-            own_capabilities:
-              event.channel?.own_capabilities ?? newChannels[channelIndex].data?.own_capabilities,
+            member_capabilities:
+              event.channel?.member_capabilities ??
+              newChannels[channelIndex].data?.member_capabilities,
           };
 
           return [...newChannels];

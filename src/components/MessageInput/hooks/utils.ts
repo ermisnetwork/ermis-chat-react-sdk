@@ -1,11 +1,5 @@
-import type { ImageUpload } from '../../ReactFileUtilities';
-import type { AppSettingsAPIResponse, FileUploadConfig, UserResponse } from 'ermis-chat-js-sdk';
-
-import type { ChannelActionContextValue } from '../../../context/ChannelActionContext';
-import type { ChatContextValue } from '../../../context/ChatContext';
-import type { TranslationContextValue } from '../../../context/TranslationContext';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../../../types/types';
-import { DEFAULT_UPLOAD_SIZE_LIMIT_BYTES } from '../../../constants/limits';
 
 export const accentsMap: { [key: string]: string } = {
   a: 'á|à|ã|â|À|Á|Ã|Â',
@@ -112,101 +106,101 @@ export const searchLocalUsers = <
   return matchingUsers;
 };
 
-type CheckUploadPermissionsParams<
-  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
-> = {
-  addNotification: ChannelActionContextValue<ErmisChatGenerics>['addNotification'];
-  file: ImageUpload['file'];
-  getAppSettings: ChatContextValue<ErmisChatGenerics>['getAppSettings'];
-  t: TranslationContextValue['t'];
-  uploadType: 'image' | 'file';
-};
+// type CheckUploadPermissionsParams<
+//   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+// > = {
+//   addNotification: ChannelActionContextValue<ErmisChatGenerics>['addNotification'];
+//   file: ImageUpload['file'];
+//   getAppSettings: ChatContextValue<ErmisChatGenerics>['getAppSettings'];
+//   t: TranslationContextValue['t'];
+//   uploadType: 'image' | 'file';
+// };
 
-export const checkUploadPermissions = async <
-  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
->(
-  params: CheckUploadPermissionsParams<ErmisChatGenerics>,
-) => {
-  const { addNotification, file, getAppSettings, t, uploadType } = params;
+// export const checkUploadPermissions = async <
+//   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+// >(
+//   params: CheckUploadPermissionsParams<ErmisChatGenerics>,
+// ) => {
+//   const { addNotification, file, getAppSettings, t, uploadType } = params;
 
-  let appSettings: AppSettingsAPIResponse<ErmisChatGenerics> | null = null;
-  appSettings = await getAppSettings();
+//   let appSettings: AppSettingsAPIResponse<ErmisChatGenerics> | null = null;
+//   appSettings = await getAppSettings();
 
-  const {
-    allowed_file_extensions,
-    allowed_mime_types,
-    blocked_file_extensions,
-    blocked_mime_types,
-    size_limit,
-  } =
-    ((uploadType === 'image'
-      ? appSettings?.app?.image_upload_config
-      : appSettings?.app?.file_upload_config) as FileUploadConfig) || {};
+//   const {
+//     allowed_file_extensions,
+//     allowed_mime_types,
+//     blocked_file_extensions,
+//     blocked_mime_types,
+//     size_limit,
+//   } =
+//     ((uploadType === 'image'
+//       ? appSettings?.app?.image_upload_config
+//       : appSettings?.app?.file_upload_config) as FileUploadConfig) || {};
 
-  const sendNotAllowedErrorNotification = () =>
-    addNotification(
-      t(`Upload type: "{{ type }}" is not allowed`, { type: file.type || 'unknown type' }),
-      'error',
-    );
+//   const sendNotAllowedErrorNotification = () =>
+//     addNotification(
+//       t(`Upload type: "{{ type }}" is not allowed`, { type: file.type || 'unknown type' }),
+//       'error',
+//     );
 
-  if (allowed_file_extensions?.length) {
-    const allowed = allowed_file_extensions.some((ext) =>
-      file.name.toLowerCase().endsWith(ext.toLowerCase()),
-    );
+//   if (allowed_file_extensions?.length) {
+//     const allowed = allowed_file_extensions.some((ext) =>
+//       file.name.toLowerCase().endsWith(ext.toLowerCase()),
+//     );
 
-    if (!allowed) {
-      sendNotAllowedErrorNotification();
-      return false;
-    }
-  }
+//     if (!allowed) {
+//       sendNotAllowedErrorNotification();
+//       return false;
+//     }
+//   }
 
-  if (blocked_file_extensions?.length) {
-    const blocked = blocked_file_extensions.some((ext) =>
-      file.name.toLowerCase().endsWith(ext.toLowerCase()),
-    );
+//   if (blocked_file_extensions?.length) {
+//     const blocked = blocked_file_extensions.some((ext) =>
+//       file.name.toLowerCase().endsWith(ext.toLowerCase()),
+//     );
 
-    if (blocked) {
-      sendNotAllowedErrorNotification();
-      return false;
-    }
-  }
+//     if (blocked) {
+//       sendNotAllowedErrorNotification();
+//       return false;
+//     }
+//   }
 
-  if (allowed_mime_types?.length) {
-    const allowed = allowed_mime_types.some(
-      (type) => type.toLowerCase() === file.type?.toLowerCase(),
-    );
+//   if (allowed_mime_types?.length) {
+//     const allowed = allowed_mime_types.some(
+//       (type) => type.toLowerCase() === file.type?.toLowerCase(),
+//     );
 
-    if (!allowed) {
-      sendNotAllowedErrorNotification();
-      return false;
-    }
-  }
+//     if (!allowed) {
+//       sendNotAllowedErrorNotification();
+//       return false;
+//     }
+//   }
 
-  if (blocked_mime_types?.length) {
-    const blocked = blocked_mime_types.some(
-      (type) => type.toLowerCase() === file.type?.toLowerCase(),
-    );
+//   if (blocked_mime_types?.length) {
+//     const blocked = blocked_mime_types.some(
+//       (type) => type.toLowerCase() === file.type?.toLowerCase(),
+//     );
 
-    if (blocked) {
-      sendNotAllowedErrorNotification();
-      return false;
-    }
-  }
+//     if (blocked) {
+//       sendNotAllowedErrorNotification();
+//       return false;
+//     }
+//   }
 
-  const sizeLimit = size_limit || DEFAULT_UPLOAD_SIZE_LIMIT_BYTES;
-  if (file.size && file.size > sizeLimit) {
-    addNotification(
-      t('File is too large: {{ size }}, maximum upload size is {{ limit }}', {
-        limit: prettifyFileSize(sizeLimit),
-        size: prettifyFileSize(file.size),
-      }),
-      'error',
-    );
-    return false;
-  }
+//   const sizeLimit = size_limit || DEFAULT_UPLOAD_SIZE_LIMIT_BYTES;
+//   if (file.size && file.size > sizeLimit) {
+//     addNotification(
+//       t('File is too large: {{ size }}, maximum upload size is {{ limit }}', {
+//         limit: prettifyFileSize(sizeLimit),
+//         size: prettifyFileSize(file.size),
+//       }),
+//       'error',
+//     );
+//     return false;
+//   }
 
-  return true;
-};
+//   return true;
+// };
 
 export function prettifyFileSize(bytes: number, precision = 3) {
   const units = ['B', 'kB', 'MB', 'GB'];

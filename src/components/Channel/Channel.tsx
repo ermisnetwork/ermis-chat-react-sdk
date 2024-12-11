@@ -421,7 +421,7 @@ const ChannelInner = <
   const lastRead = useRef<Date | undefined>();
   const online = useRef(true);
 
-  const channelCapabilitiesArray = channel.data?.own_capabilities as string[];
+  const channelCapabilitiesArray = channel.data?.member_capabilities as string[];
 
   const throttledCopyStateFromChannel = throttle(
     () => dispatch({ channel, type: 'copyStateFromChannelOnEvent' }),
@@ -707,7 +707,13 @@ const ChannelInner = <
         // watchers: { limit: perPage },
       });
 
-      response.channel.members = getMembersChannel(response.channel.members, client);
+      const newMembers = getMembersChannel(response.channel.members, client);
+      const newMembersObject = newMembers.reduce((acc, user) => {
+        acc[user.user_id] = user;
+        return acc;
+      }, {});
+      response.channel.members = newMembers;
+      channel.state.members = newMembersObject;
 
       if (response.channel.type === 'messaging') {
         response.channel.name = getChannelDirectName(response.channel.members, client);

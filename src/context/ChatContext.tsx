@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useContext } from 'react';
 
-import type { AppSettingsAPIResponse, Channel, Mute } from 'ermis-chat-js-sdk';
+import type { Channel, Mute } from 'ermis-chat-js-sdk';
 
 import { getDisplayName } from './utils/getDisplayName';
 import type { ChatProps } from '../components/Chat/Chat';
@@ -33,7 +33,6 @@ export type ChatContextValue<
    */
   channelsQueryState: ChannelsQueryState;
   closeMobileNav: () => void;
-  getAppSettings: () => Promise<AppSettingsAPIResponse<ErmisChatGenerics>> | null;
   latestMessageDatesByChannels: Record<ChannelCID, Date>;
   mutes: Array<Mute<ErmisChatGenerics>>;
   openMobileNav: () => void;

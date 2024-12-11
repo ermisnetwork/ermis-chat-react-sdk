@@ -26,18 +26,16 @@ const userToConnect: UserResponse<ErmisChatGenerics> = {
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container!);
 root.render(
-  <React.StrictMode>
-    <ThemeContextProvider targetOrigin={targetOrigin}>
-      <App
-        apiKey={apiKey!}
-        projectId={projectId!}
-        userToConnect={userToConnect}
-        userToken={userToken}
-        targetOrigin={targetOrigin!}
-        channelListOptions={channelListOptions}
-      />
-    </ThemeContextProvider>
-  </React.StrictMode>,
+  <ThemeContextProvider targetOrigin={targetOrigin}>
+    <App
+      apiKey={apiKey!}
+      projectId={projectId!}
+      userToConnect={userToConnect}
+      userToken={userToken}
+      targetOrigin={targetOrigin!}
+      channelListOptions={channelListOptions}
+    />
+  </ThemeContextProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

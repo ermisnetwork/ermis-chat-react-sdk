@@ -1,6 +1,7 @@
 import React from 'react';
 import { logChatPromiseExecution } from 'ermis-chat-js-sdk';
 import {
+  ChannelHeader,
   MessageInput,
   MessageList,
   Thread,
@@ -64,7 +65,8 @@ const ChannelInner = (props: ChannelInnerProps) => {
   return (
     <>
       <Window>
-        <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
+        <ChannelHeader />
+        {/* <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} /> */}
         <MessageList messageActions={actions} />
         <MessageInput
           focus

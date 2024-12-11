@@ -95,7 +95,13 @@ export const usePaginatedChannels = <
         const channelQueryResponse = await client.queryChannels(filters, sort || {}, newOptions);
 
         channelQueryResponse.forEach((channel: any) => {
-          channel.data.members = getMembersChannel(channel.data.members, client);
+          const newMembers = getMembersChannel(channel.data.members, client);
+          const newMembersObject = newMembers.reduce((acc, user) => {
+            acc[user.user_id] = user;
+            return acc;
+          }, {});
+          channel.data.members = newMembers;
+          channel.state.members = newMembersObject;
 
           if (channel.type === 'messaging') {
             channel.data.name = getChannelDirectName(channel.data.members, client);
