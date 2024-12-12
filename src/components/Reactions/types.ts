@@ -4,13 +4,10 @@ import { DefaultErmisChatGenerics } from '../../types';
 
 export interface ReactionSummary {
   EmojiComponent: ComponentType | null;
-  firstReactionAt: Date | null;
   isOwnReaction: boolean;
-  lastReactionAt: Date | null;
-  latestReactedUserNames: string[];
+  latestReactedUsers: { avatar: string; id: string; name: string | undefined }[];
   reactionCount: number;
   reactionType: string;
-  unlistedReactedUserCount: number;
 }
 
 export type ReactionsComparator = (a: ReactionSummary, b: ReactionSummary) => number;

@@ -31,46 +31,15 @@ export const useReactionHandler = <
       reaction: ReactionResponse<ErmisChatGenerics>,
       message: StreamMessage<ErmisChatGenerics>,
     ): StreamMessage<ErmisChatGenerics> => {
-      const newReactionGroups = message?.reaction_groups || {};
-      const reactionType = reaction.type;
-      const hasReaction = !!newReactionGroups[reactionType];
-
-      if (add) {
-        const timestamp = new Date().toISOString();
-        newReactionGroups[reactionType] = hasReaction
-          ? { ...newReactionGroups[reactionType], count: newReactionGroups[reactionType].count + 1 }
-          : {
-              count: 1,
-              first_reaction_at: timestamp,
-              last_reaction_at: timestamp,
-              sum_scores: 1,
-            };
-      } else {
-        if (hasReaction && newReactionGroups[reactionType].count > 1) {
-          newReactionGroups[reactionType] = {
-            ...newReactionGroups[reactionType],
-            count: newReactionGroups[reactionType].count - 1,
-          };
-        } else {
-          delete newReactionGroups[reactionType];
-        }
-      }
-
       const newReactions: Reaction<ErmisChatGenerics>[] | undefined = add
         ? [reaction, ...(message?.latest_reactions || [])]
         : message.latest_reactions?.filter(
             (item) => !(item.type === reaction.type && item.user_id === reaction.user_id),
           );
 
-      const newOwnReactions = add
-        ? [reaction, ...(message?.own_reactions || [])]
-        : message?.own_reactions?.filter((item) => item.type !== reaction.type);
-
       return {
         ...message,
         latest_reactions: newReactions || message.latest_reactions,
-        own_reactions: newOwnReactions,
-        reaction_groups: newReactionGroups,
       } as StreamMessage<ErmisChatGenerics>;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,15 +85,15 @@ export const useReactionHandler = <
 
     let userExistingReaction = (null as unknown) as ReactionResponse<ErmisChatGenerics>;
 
-    if (message.own_reactions) {
-      message.own_reactions.forEach((reaction) => {
+    if (message.latest_reactions) {
+      message.latest_reactions.forEach((reaction) => {
         // own user should only ever contain the current user id
         // just in case we check to prevent bugs with message updates from breaking reactions
         if (reaction.user && client.userID === reaction.user.id && reaction.type === reactionType) {
           userExistingReaction = reaction;
         } else if (reaction.user && client.userID !== reaction.user.id) {
           console.warn(
-            `message.own_reactions contained reactions from a different user, this indicates a bug`,
+            `message.latest_reactions contained reactions from a different user, this indicates a bug`,
           );
         }
       });

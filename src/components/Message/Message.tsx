@@ -12,7 +12,6 @@ import {
   usePinHandler,
   useReactionClick,
   useReactionHandler,
-  useReactionsFetcher,
   useRetryHandler,
   useUserHandler,
   useUserRole,
@@ -42,7 +41,6 @@ type MessageContextPropsToPick =
   | 'handleOpenThread'
   | 'handlePin'
   | 'handleReaction'
-  | 'handleFetchReactions'
   | 'handleRetry'
   | 'isReactionEnabled'
   | 'mutes'
@@ -50,10 +48,8 @@ type MessageContextPropsToPick =
   | 'onMentionsHoverMessage'
   | 'onReactionListClick'
   | 'reactionSelectorRef'
-  | 'reactionDetailsSort'
   | 'showDetailedReactions'
-  | 'sortReactions'
-  | 'sortReactionDetails';
+  | 'sortReactions';
 
 type MessageWithContextProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
@@ -168,7 +164,6 @@ export const Message = <
   const {
     closeReactionSelectorOnClick,
     getDeleteMessageErrorNotification,
-    getFetchReactionsErrorNotification,
     getFlagMessageErrorNotification,
     getFlagMessageSuccessNotification,
     getMarkMessageUnreadErrorNotification,
@@ -181,9 +176,7 @@ export const Message = <
     onMentionsHover: propOnMentionsHover,
     openThread: propOpenThread,
     pinPermissions,
-    reactionDetailsSort,
     retrySendMessage: propRetrySendMessage,
-    sortReactionDetails,
     sortReactions,
   } = props;
 
@@ -197,11 +190,6 @@ export const Message = <
   const handleReaction = useReactionHandler(message);
   const handleRetry = useRetryHandler(propRetrySendMessage);
   const userRoles = useUserRole(message);
-
-  const handleFetchReactions = useReactionsFetcher(message, {
-    getErrorNotification: getFetchReactionsErrorNotification,
-    notify: addNotification,
-  });
 
   const handleDelete = useDeleteHandler(message, {
     getErrorNotification: getDeleteMessageErrorNotification,
@@ -258,7 +246,6 @@ export const Message = <
       groupStyles={props.groupStyles}
       handleAction={handleAction}
       handleDelete={handleDelete}
-      handleFetchReactions={handleFetchReactions}
       handleFlag={handleFlag}
       handleMarkUnread={handleMarkUnread}
       handleMute={handleMute}
@@ -281,12 +268,10 @@ export const Message = <
       onUserClick={props.onUserClick}
       onUserHover={props.onUserHover}
       pinPermissions={props.pinPermissions}
-      reactionDetailsSort={reactionDetailsSort}
       reactionSelectorRef={reactionSelectorRef}
       readBy={props.readBy}
       renderText={props.renderText}
       showDetailedReactions={showDetailedReactions}
-      sortReactionDetails={sortReactionDetails}
       sortReactions={sortReactions}
       threadList={props.threadList}
       unsafeHTML={props.unsafeHTML}

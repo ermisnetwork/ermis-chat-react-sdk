@@ -1,12 +1,12 @@
 import type { TFunction } from 'i18next';
-import type { ReactionSort, UserResponse } from 'ermis-chat-js-sdk';
+import type { UserResponse } from 'ermis-chat-js-sdk';
 
 import type { PinPermissions, UserEventHandler } from './hooks';
 import type { MessageActionsArray } from './utils';
 
 import type { GroupStyle } from '../MessageList/utils';
 import type { MessageInputProps } from '../MessageInput/MessageInput';
-import type { ReactionDetailsComparator, ReactionsComparator } from '../Reactions/types';
+import type { ReactionsComparator } from '../Reactions/types';
 
 import type { ChannelActionContextValue } from '../../context/ChannelActionContext';
 import type { StreamMessage } from '../../context/ChannelStateContext';
@@ -84,8 +84,6 @@ export type MessageProps<
   openThread?: ChannelActionContextValue<ErmisChatGenerics>['openThread'];
   /** @deprecated in favor of `channelCapabilities - The user roles allowed to pin messages in various channel types */
   pinPermissions?: PinPermissions;
-  /** Sort options to provide to a reactions query */
-  reactionDetailsSort?: ReactionSort<ErmisChatGenerics>;
   /** A list of users that have read this Message if the message is the last one and was posted by my user */
   readBy?: UserResponse<ErmisChatGenerics>[];
   /** Custom function to render message text content, defaults to the renderText function: [utils](https://github.com/ermisnetwork/ermis-chat-react-sdk/blob/master/src/utils.ts) */
@@ -96,10 +94,6 @@ export type MessageProps<
   ) => JSX.Element | null;
   /** Custom retry send message handler to override default in [ChannelActionContext] */
   retrySendMessage?: ChannelActionContextValue<ErmisChatGenerics>['retrySendMessage'];
-  /** Comparator function to sort the list of reacted users
-   * @deprecated use `reactionDetailsSort` instead
-   */
-  sortReactionDetails?: ReactionDetailsComparator;
   /** Comparator function to sort reactions, defaults to chronological order */
   sortReactions?: ReactionsComparator;
   /** Whether the Message is in a Thread */

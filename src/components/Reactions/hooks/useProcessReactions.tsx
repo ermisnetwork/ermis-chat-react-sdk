@@ -1,28 +1,15 @@
 import { useCallback, useMemo } from 'react';
 
-import { useComponentContext, useMessageContext } from '../../../context';
+import { useChatContext, useComponentContext, useMessageContext } from '../../../context';
 
 import type { ReactionsListProps } from '../ReactionsList';
 import type { DefaultErmisChatGenerics } from '../../../types/types';
 import type { ReactionsComparator, ReactionSummary } from '../types';
 
-type SharedReactionListProps =
-  | 'own_reactions'
-  | 'reaction_counts'
-  | 'reaction_groups'
-  | 'reactionOptions'
-  | 'reactions';
+type SharedReactionListProps = 'reaction_counts' | 'reactionOptions' | 'reactions';
 
 type UseProcessReactionsParams = Pick<ReactionsListProps, SharedReactionListProps> & {
   sortReactions?: ReactionsComparator;
-};
-
-export const defaultReactionsSort: ReactionsComparator = (a, b) => {
-  if (a.firstReactionAt && b.firstReactionAt) {
-    return +a.firstReactionAt - +b.firstReactionAt;
-  }
-
-  return a.reactionType.localeCompare(b.reactionType, 'en');
 };
 
 export const useProcessReactions = <
@@ -31,30 +18,19 @@ export const useProcessReactions = <
   params: UseProcessReactionsParams,
 ) => {
   const {
-    own_reactions: propOwnReactions,
-    reaction_groups: propReactionGroups,
+    reaction_counts: propReactionCounts,
     reactionOptions: propReactionOptions,
     reactions: propReactions,
-    sortReactions: propSortReactions,
   } = params;
-  const { message, sortReactions: contextSortReactions } = useMessageContext<ErmisChatGenerics>(
-    'useProcessReactions',
-  );
+  const { message } = useMessageContext<ErmisChatGenerics>('useProcessReactions');
   const { reactionOptions: contextReactionOptions } = useComponentContext<ErmisChatGenerics>(
     'useProcessReactions',
   );
+  const { client } = useChatContext('useProcessReactions');
 
   const reactionOptions = propReactionOptions ?? contextReactionOptions;
-  const sortReactions = propSortReactions ?? contextSortReactions ?? defaultReactionsSort;
   const latestReactions = propReactions || message.latest_reactions;
-  const ownReactions = propOwnReactions || message?.own_reactions;
-  const reactionGroups = propReactionGroups || message?.reaction_groups;
-
-  const isOwnReaction = useCallback(
-    (reactionType: string) =>
-      ownReactions?.some((reaction) => reaction.type === reactionType) ?? false,
-    [ownReactions],
-  );
+  const reactionCounts = propReactionCounts || message?.reaction_counts;
 
   const getEmojiByReactionType = useCallback(
     (reactionType: string) =>
@@ -62,61 +38,48 @@ export const useProcessReactions = <
     [reactionOptions],
   );
 
-  const isSupportedReaction = useCallback(
-    (reactionType: string) =>
-      reactionOptions.some((reactionOption) => reactionOption.type === reactionType),
-    [reactionOptions],
-  );
+  // const isSupportedReaction = useCallback(
+  //   (reactionType: string) =>
+  //     reactionOptions.some((reactionOption) => reactionOption.type === reactionType),
+  //   [reactionOptions],
+  // );
 
-  const getLatestReactedUserNames = useCallback(
+  const getLatestReactedUsers = useCallback(
     (reactionType?: string) =>
       latestReactions?.flatMap((reaction) => {
         if (reactionType && reactionType === reaction.type) {
-          const username = reaction.user?.name || reaction.user?.id;
-          return username ? [username] : [];
+          const id = reaction.user_id || '';
+          const user = client.state.users[id];
+          const name = user ? user.name : id;
+          const avatar = user ? user.avatar || '' : '';
+          return { avatar, id, name };
         }
         return [];
       }) ?? [],
-    [latestReactions],
+    [client, latestReactions],
   );
 
   const existingReactions: ReactionSummary[] = useMemo(() => {
-    if (!reactionGroups) {
+    if (!reactionCounts) {
       return [];
     }
 
-    const unsortedReactions = Object.entries(reactionGroups).flatMap(
-      ([reactionType, { count, first_reaction_at, last_reaction_at }]) => {
-        if (count === 0 || !isSupportedReaction(reactionType)) {
-          return [];
-        }
+    const unsortedReactions = Object.keys(reactionCounts).map((reactionType) => {
+      const latestReactedUsers = getLatestReactedUsers(reactionType);
+      const isOwnReaction = latestReactedUsers.some((user) => user.id === client.userID);
+      const count = reactionCounts[reactionType];
 
-        const latestReactedUserNames = getLatestReactedUserNames(reactionType);
+      return {
+        EmojiComponent: getEmojiByReactionType(reactionType),
+        isOwnReaction,
+        latestReactedUsers,
+        reactionCount: count,
+        reactionType,
+      };
+    });
 
-        return [
-          {
-            EmojiComponent: getEmojiByReactionType(reactionType),
-            firstReactionAt: first_reaction_at ? new Date(first_reaction_at) : null,
-            isOwnReaction: isOwnReaction(reactionType),
-            lastReactionAt: last_reaction_at ? new Date(last_reaction_at) : null,
-            latestReactedUserNames,
-            reactionCount: count,
-            reactionType,
-            unlistedReactedUserCount: count - latestReactedUserNames.length,
-          },
-        ];
-      },
-    );
-
-    return unsortedReactions.sort(sortReactions);
-  }, [
-    getEmojiByReactionType,
-    getLatestReactedUserNames,
-    isOwnReaction,
-    isSupportedReaction,
-    reactionGroups,
-    sortReactions,
-  ]);
+    return unsortedReactions;
+  }, [client, getEmojiByReactionType, getLatestReactedUsers, reactionCounts]);
 
   const hasReactions = existingReactions.length > 0;
 

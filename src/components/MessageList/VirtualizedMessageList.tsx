@@ -71,9 +71,7 @@ type VirtualizedMessageListPropsForContext =
   | 'Message'
   | 'messageActions'
   | 'shouldGroupByUser'
-  | 'reactionDetailsSort'
   | 'sortReactions'
-  | 'sortReactionDetails'
   | 'threadList';
 
 /**
@@ -206,8 +204,6 @@ const VirtualizedMessageListWithContext = <
     separateGiphyPreview = false,
     shouldGroupByUser = false,
     showUnreadNotificationAlways,
-    reactionDetailsSort,
-    sortReactionDetails,
     sortReactions,
     stickToBottomScrollBehavior = 'smooth',
     suppressAutoscroll,
@@ -461,9 +457,7 @@ const VirtualizedMessageListWithContext = <
               numItemsPrepended,
               ownMessagesReadByOthers,
               processedMessages,
-              reactionDetailsSort,
               shouldGroupByUser,
-              sortReactionDetails,
               sortReactions,
               threadList,
               unreadMessageCount: channelUnreadUiState?.unread_messages,
@@ -510,9 +504,7 @@ type PropsDrilledToMessage =
   | 'additionalMessageInputProps'
   | 'customMessageActions'
   | 'messageActions'
-  | 'reactionDetailsSort'
-  | 'sortReactions'
-  | 'sortReactionDetails';
+  | 'sortReactions';
 
 export type VirtualizedMessageListProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics

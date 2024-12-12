@@ -211,7 +211,6 @@ function areMessagesEqual<
   return (
     prevMessage.deleted_at === nextMessage.deleted_at &&
     prevMessage.latest_reactions?.length === nextMessage.latest_reactions?.length &&
-    prevMessage.own_reactions?.length === nextMessage.own_reactions?.length &&
     prevMessage.pinned === nextMessage.pinned &&
     prevMessage.reply_count === nextMessage.reply_count &&
     prevMessage.status === nextMessage.status &&
@@ -305,7 +304,7 @@ export const messageHasReactions = <
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
   message?: StreamMessage<ErmisChatGenerics>,
-) => Object.values(message?.reaction_groups ?? {}).some(({ count }) => count > 0);
+) => message?.latest_reactions && !message.deleted_at;
 
 export const messageHasAttachments = <
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics

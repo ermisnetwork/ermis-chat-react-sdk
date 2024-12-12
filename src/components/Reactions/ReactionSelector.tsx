@@ -8,10 +8,11 @@ import { AvatarProps, Avatar as DefaultAvatar } from '../Avatar';
 import { useComponentContext } from '../../context/ComponentContext';
 import { useMessageContext } from '../../context/MessageContext';
 
-import type { ReactionGroupResponse, ReactionResponse } from 'ermis-chat-js-sdk';
+import type { ReactionResponse } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';
 import type { ReactionOptions } from './reactionOptions';
+import { useChatContext } from '../../context';
 
 export type ReactionSelectorProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
@@ -24,15 +25,7 @@ export type ReactionSelectorProps<
   handleReaction?: (reactionType: string, event: React.BaseSyntheticEvent) => Promise<void>;
   /** An array of the reaction objects to display in the list */
   latest_reactions?: ReactionResponse<ErmisChatGenerics>[];
-  /** An array of the own reaction objects to distinguish own reactions visually */
-  own_reactions?: ReactionResponse<ErmisChatGenerics>[];
-  /**
-   * An object that keeps track of the count of each type of reaction on a message
-   * @deprecated This override value is no longer taken into account. Use `reaction_groups` to override reaction counts instead.
-   * */
   reaction_counts?: Record<string, number>;
-  /** An object containing summary for each reaction type on a message */
-  reaction_groups?: Record<string, ReactionGroupResponse>;
   /** A list of the currently supported reactions on a message */
   reactionOptions?: ReactionOptions;
   /** If true, adds a CSS class that reverses the horizontal positioning of the selector */
@@ -49,8 +42,7 @@ const UnMemoizedReactionSelector = React.forwardRef(
       detailedView = true,
       handleReaction: propHandleReaction,
       latest_reactions: propLatestReactions,
-      own_reactions: propOwnReactions,
-      reaction_groups: propReactionGroups,
+      reaction_counts: propReactionCounts,
       reactionOptions: propReactionOptions,
       reverse = false,
     } = props;
@@ -59,19 +51,17 @@ const UnMemoizedReactionSelector = React.forwardRef(
       Avatar: contextAvatar,
       reactionOptions: contextReactionOptions,
     } = useComponentContext<ErmisChatGenerics>('ReactionSelector');
-    const {
-      handleReaction: contextHandleReaction,
-      message,
-    } = useMessageContext<ErmisChatGenerics>('ReactionSelector');
+    const { handleReaction: contextHandleReaction, message } = useMessageContext<ErmisChatGenerics>(
+      'ReactionSelector',
+    );
+    const { client } = useChatContext<ErmisChatGenerics>('ReactionSelector');
 
     const reactionOptions = propReactionOptions ?? contextReactionOptions;
 
     const Avatar = propAvatar || contextAvatar || DefaultAvatar;
     const handleReaction = propHandleReaction || contextHandleReaction;
     const latestReactions = propLatestReactions || message?.latest_reactions || [];
-    const ownReactions = propOwnReactions || message?.own_reactions || [];
-    const reactionGroups = propReactionGroups || message?.reaction_groups || {};
-
+    const reactionCounts = propReactionCounts || message?.reaction_counts || {};
     const [tooltipReactionType, setTooltipReactionType] = useState<string | null>(null);
     const [tooltipPositions, setTooltipPositions] = useState<{
       arrow: number;
@@ -128,7 +118,9 @@ const UnMemoizedReactionSelector = React.forwardRef(
         .filter(Boolean);
 
     const iHaveReactedWithReaction = (reactionType: string) =>
-      ownReactions.find((reaction) => reaction.type === reactionType);
+      latestReactions.find(
+        (reaction) => reaction.type === reactionType && reaction.user_id === client.userID,
+      );
 
     const getLatestUserForReactionType = (type: string | null) =>
       latestReactions.find((reaction) => reaction.type === type && !!reaction.user)?.user ||
@@ -162,7 +154,7 @@ const UnMemoizedReactionSelector = React.forwardRef(
         <ul className='str-chat__message-reactions-list str-chat__message-reactions-options'>
           {reactionOptions.map(({ Component, name: reactionName, type: reactionType }) => {
             const latestUser = getLatestUserForReactionType(reactionType);
-            const count = reactionGroups[reactionType]?.count ?? 0;
+            const count = reactionCounts[reactionType] ?? 0;
             return (
               <li key={reactionType}>
                 <button
