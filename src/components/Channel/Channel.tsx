@@ -962,13 +962,14 @@ const ChannelInner = <
       if (doDeleteMessageRequest) {
         deletedMessage = await doDeleteMessageRequest(message);
       } else {
-        const result = await client.deleteMessage(message.id);
+        // const result = await client.deleteMessage(message.id);
+        const result = await channel.deleteMessage(message.id);
         deletedMessage = result.message;
       }
 
       return deletedMessage;
     },
-    [client, doDeleteMessageRequest],
+    [channel, doDeleteMessageRequest],
   );
 
   const updateMessage = (

@@ -67,7 +67,7 @@ const ChannelInner = (props: ChannelInnerProps) => {
       <Window>
         <ChannelHeader />
         {/* <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} /> */}
-        <MessageList messageActions={actions} />
+        <MessageList />
         <MessageInput
           focus
           overrideSubmitHandler={overrideSubmitHandler}

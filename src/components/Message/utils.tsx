@@ -126,13 +126,13 @@ export type Capabilities = {
   canDelete?: boolean;
   canEdit?: boolean;
   canPin?: boolean;
+  canQuote?: boolean;
   canReact?: boolean;
-  canReply?: boolean;
 };
 
 export const getMessageActions = (
   actions: MessageActionsArray | boolean,
-  { canDelete, canEdit, canPin, canReact, canReply }: Capabilities,
+  { canDelete, canEdit, canPin, canQuote, canReact }: Capabilities,
 ): MessageActionsArray => {
   const messageActionsAfterPermission: MessageActionsArray = [];
   let messageActions: MessageActionsArray = [];
@@ -162,9 +162,13 @@ export const getMessageActions = (
     messageActionsAfterPermission.push(MESSAGE_ACTIONS.react);
   }
 
-  if (canReply && messageActions.indexOf(MESSAGE_ACTIONS.reply) > -1) {
-    messageActionsAfterPermission.push(MESSAGE_ACTIONS.reply);
+  if (canQuote && messageActions.indexOf(MESSAGE_ACTIONS.quote) > -1) {
+    messageActionsAfterPermission.push(MESSAGE_ACTIONS.quote);
   }
+
+  // if (canReply && messageActions.indexOf(MESSAGE_ACTIONS.reply) > -1) {
+  //   messageActionsAfterPermission.push(MESSAGE_ACTIONS.reply);
+  // }
 
   return messageActionsAfterPermission;
 };
@@ -424,5 +428,5 @@ export const isMessageBounced = <
 export const isMessageEdited = <
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >(
-  message: Pick<StreamMessage<ErmisChatGenerics>, 'message_text_updated_at'>,
-) => !!message.message_text_updated_at;
+  message: Pick<StreamMessage<ErmisChatGenerics>, 'updated_at'>,
+) => !!message?.updated_at;

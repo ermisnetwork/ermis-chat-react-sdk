@@ -31,13 +31,15 @@ export const useUserRole = <
 
   const canReact = !isMember || channelCapabilities['send-reaction'];
 
-  const canReply = !isMember || channelCapabilities['send-reply'];
+  // const canReply = !isMember || channelCapabilities['send-reply'];
+  const canQuote = !isMember || channelCapabilities['quote-message'];
 
   return {
     canDelete,
     canEdit,
+    canQuote,
     canReact,
-    canReply,
+    // canReply,
     isMember,
     isModerator,
     isMyMessage,

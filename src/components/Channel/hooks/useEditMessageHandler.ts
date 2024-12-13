@@ -17,12 +17,18 @@ export const useEditMessageHandler = <
 >(
   doUpdateMessageRequest?: UpdateHandler<ErmisChatGenerics>,
 ) => {
-  const { channel, client } = useChatContext<ErmisChatGenerics>('useEditMessageHandler');
+  const { channel } = useChatContext<ErmisChatGenerics>('useEditMessageHandler');
 
   return (updatedMessage: UpdatedMessage<ErmisChatGenerics>, options?: UpdateMessageOptions) => {
+    const messageId = String(updatedMessage.id) || '';
+    const text = String(updatedMessage.text) || '';
+
     if (doUpdateMessageRequest && channel) {
       return Promise.resolve(doUpdateMessageRequest(channel.cid, updatedMessage, options));
     }
-    return client.updateMessage(updatedMessage, undefined, options);
+
+    return channel?.editMessage(messageId, text);
+
+    // return client.updateMessage(updatedMessage, undefined, options);
   };
 };

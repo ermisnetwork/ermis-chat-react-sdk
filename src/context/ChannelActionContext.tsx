@@ -7,7 +7,6 @@ import type {
   Message,
   MessageResponse,
   UpdatedMessage,
-  UpdateMessageAPIResponse,
   UserResponse,
 } from 'ermis-chat-js-sdk';
 
@@ -64,10 +63,7 @@ export type ChannelActionContextValue<
     message: StreamMessage<ErmisChatGenerics>,
   ) => Promise<MessageResponse<ErmisChatGenerics>>;
   dispatch: React.Dispatch<ChannelStateReducerAction<ErmisChatGenerics>>;
-  editMessage: (
-    message: UpdatedMessage<ErmisChatGenerics>,
-    options?: UpdateMessageOptions,
-  ) => Promise<UpdateMessageAPIResponse<ErmisChatGenerics> | void>;
+  editMessage: (message: UpdatedMessage<ErmisChatGenerics>, options?: UpdateMessageOptions) => void;
   jumpToFirstUnreadMessage: (queryMessageLimit?: number) => Promise<void>;
   jumpToLatestMessage: () => Promise<void>;
   jumpToMessage: (messageId: string, limit?: number) => Promise<void>;

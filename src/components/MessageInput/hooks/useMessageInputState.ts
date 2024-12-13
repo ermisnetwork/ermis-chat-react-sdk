@@ -162,9 +162,7 @@ const makeEmptyMessageInputState = <
 /**
  * Initializes the state. Empty if the message prop is falsy.
  */
-const initState = <
-  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
->(
+const initState = <ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics>(
   message?: Pick<StreamMessage<ErmisChatGenerics>, 'attachments' | 'mentioned_users' | 'text'>,
 ): MessageInputState<ErmisChatGenerics> => {
   if (!message) {

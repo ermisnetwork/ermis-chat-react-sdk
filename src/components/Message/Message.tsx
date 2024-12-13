@@ -89,7 +89,7 @@ const MessageWithContext = <
     onUserHoverHandler: propOnUserHover,
   });
 
-  const { canDelete, canEdit, canReact, canReply, isMyMessage } = userRoles;
+  const { canDelete, canEdit, canQuote, canReact, isMyMessage } = userRoles;
 
   const messageIsUnread = useMemo(
     () =>
@@ -110,10 +110,10 @@ const MessageWithContext = <
         canDelete,
         canEdit,
         canPin,
+        canQuote,
         canReact,
-        canReply,
       }),
-    [messageActions, canDelete, canEdit, canPin, canReact, canReply],
+    [messageActions, canDelete, canEdit, canPin, canQuote, canReact],
   );
 
   const {
