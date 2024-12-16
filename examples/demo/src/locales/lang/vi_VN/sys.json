@@ -1,0 +1,157 @@
+{
+  "sys": {
+    "api": {
+      "operationSuccess": "Thao tác thành công",
+      "operationFailed": "Thao tác thất bại",
+      "errorTip": "Thông báo lỗi",
+      "successTip": "Thông báo thành công",
+      "errorMessage": "Thao tác thất bại, hệ thống có lỗi!",
+      "timeoutMessage": "Đăng nhập quá hạn, vui lòng đăng nhập lại!",
+      "apiTimeoutMessage": "Yêu cầu giao diện quá hạn, vui lòng làm mới trang và thử lại!",
+      "apiRequestFailed": "Yêu cầu thất bại, vui lòng thử lại sau",
+      "networkException": "Mạng bất thường",
+      "networkExceptionMsg": "Mạng bất thường, vui lòng kiểm tra kết nối mạng của bạn!",
+
+      "errMsg401": "Người dùng không có quyền (token, tên đăng nhập, mật khẩu sai)!",
+      "errMsg403": "Người dùng đã được cấp quyền nhưng bị cấm truy cập!",
+      "errMsg404": "Lỗi yêu cầu mạng, không tìm thấy tài nguyên!",
+      "errMsg405": "Lỗi yêu cầu mạng, phương thức yêu cầu không được phép!",
+      "errMsg408": "Yêu cầu mạng quá thời gian!",
+      "errMsg500": "Lỗi máy chủ, vui lòng liên hệ quản trị viên!",
+      "errMsg501": "Mạng chưa được thực hiện!",
+      "errMsg502": "Lỗi mạng!",
+      "errMsg503": "Dịch vụ không khả dụng, máy chủ đang quá tải hoặc bảo trì!",
+      "errMsg504": "Quá thời gian mạng!",
+      "errMsg505": "Phiên bản HTTP không hỗ trợ yêu cầu này!"
+    },
+    "login": {
+      "backSignIn": "Quay lại",
+      "signInFormTitle": "Đăng nhập",
+      "mobileSignInFormTitle": "Đăng nhập bằng điện thoại",
+      "qrSignInFormTitle": "Đăng nhập bằng mã QR",
+      "signUpFormTitle": "Đăng ký",
+      "forgetFormTitle": "Đặt lại mật khẩu",
+
+      "signInPrimaryTitle": "Chào mừng trở lại",
+      "signInSecondTitle": "Hệ thống quản lý trung gian có sẵn",
+      "signInDesc": "Nhập thông tin cá nhân của bạn để bắt đầu sử dụng!",
+      "policy": "Tôi đồng ý với chính sách quyền riêng tư của xxx",
+      "scanSign": "Quét mã rồi nhấp vào 'Xác nhận' để hoàn tất đăng nhập",
+      "forgetFormSecondTitle": "Nhập địa chỉ email liên kết với tài khoản của bạn, chúng tôi sẽ gửi liên kết đặt lại mật khẩu qua email.",
+
+      "loginButton": "Đăng nhập",
+      "registerButton": "Đăng ký",
+      "rememberMe": "Ghi nhớ tôi",
+      "forgetPassword": "Quên mật khẩu?",
+      "otherSignIn": "Các cách đăng nhập khác",
+      "sendSmsButton": "Gửi mã xác minh",
+      "sendSmsText": "{{second}} giây nữa để lấy lại",
+      "sendEmailButton": "Gửi email",
+
+      "loginSuccessTitle": "Đăng nhập thành công",
+      "loginSuccessDesc": "Chào mừng trở lại",
+
+      "accountPlaceholder": "Nhập tài khoản",
+      "passwordPlaceholder": "Nhập mật khẩu",
+      "confirmPasswordPlaceholder": "Nhập lại mật khẩu",
+      "emaildPlaceholder": "Nhập email",
+      "smsPlaceholder": "Nhập mã xác minh",
+      "mobilePlaceholder": "Nhập số điện thoại",
+      "policyPlaceholder": "Chọn vào để đăng ký",
+      "diffPwd": "Hai lần nhập mật khẩu không khớp",
+      "emailInvalid": "Email không hợp lệ",
+      "userNameInvalid": "User name không hợp lệ",
+      "passwordValidMinLength": "Mật khẩu phải lớn hơn 8 ký tự",
+
+      "userName": "Tài khoản",
+      "password": "Mật khẩu",
+      "confirmPassword": "Xác nhận mật khẩu",
+      "email": "Email",
+      "smsCode": "Mã xác minh",
+      "mobile": "Số điện thoại",
+
+      "registerAndAgree": "Đăng ký nghĩa là tôi đồng ý",
+      "termsOfService": " Điều khoản dịch vụ ",
+      "privacyPolicy": " Chính sách quyền riêng tư ",
+      "logout": "Đăng xuất",
+      "registerSuccessfully": "Đăng ký thành công"
+    },
+    "tab": {
+      "fullscreen": "Toàn màn hình nội dung",
+      "refresh": "Làm mới",
+      "close": "Đóng tab",
+      "closeOthers": "Đóng các tab khác",
+      "closeAll": "Đóng tất cả các tab",
+      "closeLeft": "Đóng tab bên trái",
+      "closeRight": "Đóng tab bên phải"
+    },
+    "menu": {
+      "dashboard": "Bảng điều khiển",
+      "workbench": "Bàn làm việc",
+      "analysis": "Phân tích",
+      "management": "Quản lý",
+      "user": {
+        "index": "Người dùng",
+        "profile": "Hồ sơ cá nhân",
+        "account": "Tài khoản"
+      },
+      "system": {
+        "index": "Hệ thống",
+        "organization": "Tổ chức",
+        "permission": "Quyền hạn",
+        "role": "Vai trò",
+        "user": "Người dùng",
+        "user_detail": "Chi tiết người dùng"
+      },
+      "blog": "Blog",
+      "components": "Thành phần",
+      "icon": "Biểu tượng",
+      "animate": "Hoạt hình",
+      "scroll": "Cuộn",
+      "markdown": "Markdown",
+      "editor": "Trình soạn thảo văn bản",
+      "i18n": "Đa ngôn ngữ",
+      "upload": "Tải lên",
+      "chart": "Biểu đồ",
+      "functions": "Chức năng",
+      "clipboard": "Bảng tạm",
+      "token_expired": "Token hết hạn",
+      "menulevel": {
+        "index": "Menu nhiều cấp",
+        "1a": "Menu nhiều cấp 1a",
+        "1b": {
+          "index": "Menu nhiều cấp 1b",
+          "2a": "Menu nhiều cấp 2a",
+          "2b": {
+            "index": "Menu nhiều cấp 2b",
+            "3a": "Menu nhiều cấp 3a",
+            "3b": "Menu nhiều cấp 3b"
+          }
+        }
+      },
+      "disabled": "Mục bị vô hiệu hóa",
+      "label": "Nhãn mục",
+      "frame": "Liên kết ngoài dự án",
+      "external_link": "Liên kết ngoài",
+      "iframe": "Iframe",
+      "blank": "Trống",
+      "calendar": "Lịch",
+      "kanban": "Bảng Kanban",
+      "error": {
+        "index": "Trang lỗi",
+        "403": "403",
+        "404": "404",
+        "500": "500"
+      },
+      "project": "Dự án",
+      "projects": "Projects",
+      "client": "Client",
+      "team": "Team",
+      "security": "Security",
+      "projectDetail": "Project detail",
+      "chains": "Chains",
+      "billing": "Billing"
+    },
+    "docs": "Tài liệu"
+  }
+}
