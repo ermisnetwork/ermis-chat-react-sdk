@@ -37,6 +37,7 @@ import type { MessageUIComponentProps } from './types';
 import type { DefaultErmisChatGenerics } from '../../types/types';
 import { useTranslationContext } from '../../context';
 import { MessageEditedTimestamp } from './MessageEditedTimestamp';
+import { getUserNameAndImage } from '../../utils';
 
 type MessageSimpleWithContextProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
@@ -87,7 +88,7 @@ const MessageSimpleWithContext = <
     ReactionsList = DefaultReactionList,
     PinIndicator,
   } = useComponentContext<ErmisChatGenerics>('MessageSimple');
-  const { themeVersion } = useChatContext('MessageSimple');
+  const { client, themeVersion } = useChatContext('MessageSimple');
 
   const hasAttachment = messageHasAttachments(message);
   const hasReactions = messageHasReactions(message);
@@ -113,6 +114,7 @@ const MessageSimpleWithContext = <
   const allowRetry = message.status === 'failed' && message.errorStatusCode !== 403;
   const isBounced = isMessageBounced(message);
   const isEdited = isMessageEdited(message);
+  const userInfo = getUserNameAndImage(String(message.user?.id), client);
 
   let handleClick: (() => void) | undefined = undefined;
 
@@ -173,8 +175,8 @@ const MessageSimpleWithContext = <
           {themeVersion === '1' && <MessageStatus />}
           {message.user && (
             <Avatar
-              image={message.user.image}
-              name={message.user.name || message.user.id}
+              image={userInfo.image}
+              name={userInfo.name}
               onClick={onUserClick}
               onMouseOver={onUserHover}
               user={message.user}
@@ -217,7 +219,8 @@ const MessageSimpleWithContext = <
               <div className='str-chat__message-data str-chat__message-simple-data'>
                 {!isMyMessage() && message.user ? (
                   <span className='str-chat__message-simple-name'>
-                    {message.user.name || message.user.id}
+                    {/* {message.user.name || message.user.id} */}
+                    {userInfo.name}
                   </span>
                 ) : null}
                 <MessageTimestamp calendar customClass='str-chat__message-simple-timestamp' />
@@ -235,7 +238,8 @@ const MessageSimpleWithContext = <
               <MessageStatus />
               {!isMyMessage() && !!message.user && (
                 <span className='str-chat__message-simple-name'>
-                  {message.user.name || message.user.id}
+                  {/* {message.user.name || message.user.id} */}
+                  {userInfo.name}
                 </span>
               )}
               <MessageTimestamp calendar customClass='str-chat__message-simple-timestamp' />

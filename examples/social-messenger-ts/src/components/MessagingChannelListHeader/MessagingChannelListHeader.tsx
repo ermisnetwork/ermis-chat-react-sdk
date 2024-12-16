@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, useChatContext } from 'ermis-chat-react-sdk';
 
 import { CreateChannelIcon } from '../../assets';
-import streamLogo from '../../assets/ProfilePic_LogoMark_GrdntOnWt.png';
+import ermisLogo from '../../assets/logo.png';
 
 import type { ErmisChatGenerics } from '../../types';
 
@@ -15,7 +15,7 @@ const MessagingChannelListHeader = React.memo((props: Props) => {
 
   const { client } = useChatContext<ErmisChatGenerics>();
 
-  const { id, image = streamLogo as string, name = 'Example User' } = client.user || {};
+  const { id, image = ermisLogo as string, name = 'ErmisChat' } = client.user || {};
 
   return (
     <div className='messaging__channel-list__header'>

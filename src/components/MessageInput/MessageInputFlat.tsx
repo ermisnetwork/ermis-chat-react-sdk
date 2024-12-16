@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { FileUploadButton, ImageDropzone } from '../ReactFileUtilities';
+import { FileUploadButton, ImageDropzone, UploadButton } from '../ReactFileUtilities';
 import type { Event } from 'ermis-chat-js-sdk';
 import clsx from 'clsx';
 import { useDropzone } from 'react-dropzone';
-
-import { FileUploadIconFlat as DefaultFileUploadIcon } from './icons';
+import { nanoid } from 'nanoid';
+import {
+  FileUploadIconFlat as DefaultFileUploadIcon,
+  UploadIcon as DefaultUploadIcon,
+} from './icons';
 import { CooldownTimer as DefaultCooldownTimer } from './CooldownTimer';
 import { SendButton as DefaultSendButton } from './SendButton';
 import {
@@ -17,6 +20,7 @@ import {
   QuotedMessagePreview as DefaultQuotedMessagePreview,
   QuotedMessagePreviewHeader,
 } from './QuotedMessagePreview';
+import { AttachmentPreviewList as DefaultAttachmentPreviewList } from './AttachmentPreviewList';
 import { LinkPreviewList as DefaultLinkPreviewList } from './LinkPreviewList';
 import { UploadsPreview } from './UploadsPreview';
 
@@ -184,7 +188,9 @@ const MessageInputV2 = <
 
   const {
     AudioRecorder = DefaultAudioRecorder,
+    AttachmentPreviewList = DefaultAttachmentPreviewList,
     CooldownTimer = DefaultCooldownTimer,
+    FileUploadIcon = DefaultUploadIcon,
     LinkPreviewList = DefaultLinkPreviewList,
     QuotedMessagePreview = DefaultQuotedMessagePreview,
     RecordingPermissionDeniedNotification = DefaultRecordingPermissionDeniedNotification,
@@ -200,6 +206,8 @@ const MessageInputV2 = <
   const closePermissionDeniedNotification = useCallback(() => {
     setShowRecordingPermissionDeniedNotification(false);
   }, []);
+
+  const id = useMemo(() => nanoid(), []);
 
   const accept = useMemo(
     () =>
@@ -253,8 +261,29 @@ const MessageInputV2 = <
         {displayQuotedMessage && <QuotedMessagePreviewHeader />}
 
         <div className='str-chat__message-input-inner'>
+          <div className='str-chat__file-input-container' data-testid='file-upload-button'>
+            <UploadButton
+              accept={acceptedFiles?.join(',')}
+              aria-label={t('aria/File upload')}
+              className='str-chat__file-input'
+              data-testid='file-input'
+              disabled={!isUploadEnabled || maxFilesLeft === 0}
+              id={id}
+              multiple={multipleUploads}
+              onFileChange={uploadNewFiles}
+            />
+            <label className='str-chat__file-input-label' htmlFor={id}>
+              <FileUploadIcon />
+            </label>
+          </div>
           <div className='str-chat__message-textarea-container'>
             {displayQuotedMessage && <QuotedMessagePreview quotedMessage={quotedMessage} />}
+
+            {isUploadEnabled &&
+              !!(
+                numberOfUploads ||
+                (attachments.length && attachments.length !== linkPreviews.size)
+              ) && <AttachmentPreviewList />}
 
             <div className='str-chat__message-textarea-with-emoji-picker'>
               <ChatAutoComplete />

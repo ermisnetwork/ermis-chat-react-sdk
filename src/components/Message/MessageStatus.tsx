@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import { DeliveredCheckIcon, MessageDeliveredIcon } from './icons';
@@ -15,6 +15,7 @@ import { useMessageContext } from '../../context/MessageContext';
 import { useTranslationContext } from '../../context/TranslationContext';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';
+import { getUserNameAndImage } from '../../utils';
 
 export type MessageStatusProps = {
   /* Custom UI component to display a user's avatar (overrides the value from `ComponentContext`) */
@@ -58,20 +59,31 @@ const UnMemoizedMessageStatus = <
   } = useMessageContext<ErmisChatGenerics>('MessageStatus');
   const { t } = useTranslationContext('MessageStatus');
   const [referenceElement, setReferenceElement] = useState<HTMLSpanElement | null>(null);
+  const [newReadBy, setNewReadBy] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (readBy && readBy.length) {
+      const newArr = readBy.map((user) => {
+        const userInfo = getUserNameAndImage(user.id, client);
+        return { ...user, image: userInfo.image, name: userInfo.name };
+      });
+      setNewReadBy(newArr);
+    }
+  }, [readBy, client]);
 
   const Avatar = propAvatar || contextAvatar || DefaultAvatar;
 
   if (!isMyMessage() || message.type === 'error') return null;
 
-  const justReadByMe = readBy?.length === 1 && readBy[0].id === client.user?.id;
+  const justReadByMe = newReadBy?.length === 1 && newReadBy[0].id === client.user?.id;
   const rootClassName = `str-chat__message-${messageType}-status str-chat__message-status`;
 
   const sending = message.status === 'sending';
   const delivered = message.status === 'received' && message.id === lastReceivedId && !threadList;
-  const deliveredAndRead = !!(readBy?.length && !threadList && !justReadByMe);
+  const deliveredAndRead = !!(newReadBy?.length && !threadList && !justReadByMe);
 
   const [lastReadUser] = deliveredAndRead
-    ? readBy.filter((item) => item.id !== client.user?.id)
+    ? newReadBy.filter((item) => item.id !== client.user?.id)
     : [];
 
   return (
@@ -131,7 +143,7 @@ const UnMemoizedMessageStatus = <
         ) : (
           <>
             {themeVersion === '1' && (
-              <Tooltip>{getReadByTooltipText(readBy, t, client, tooltipUserNameMapper)}</Tooltip>
+              <Tooltip>{getReadByTooltipText(newReadBy, t, client, tooltipUserNameMapper)}</Tooltip>
             )}
             {themeVersion === '2' && (
               <PopperTooltip
@@ -139,7 +151,7 @@ const UnMemoizedMessageStatus = <
                 referenceElement={referenceElement}
                 visible={tooltipVisible}
               >
-                {getReadByTooltipText(readBy, t, client, tooltipUserNameMapper)}
+                {getReadByTooltipText(newReadBy, t, client, tooltipUserNameMapper)}
               </PopperTooltip>
             )}
             <Avatar
@@ -149,12 +161,12 @@ const UnMemoizedMessageStatus = <
               user={lastReadUser}
             />
 
-            {readBy.length > 2 && (
+            {newReadBy.length > 2 && (
               <span
                 className={`str-chat__message-${messageType}-status-number`}
                 data-testid='message-status-read-by-many'
               >
-                {readBy.length - 1}
+                {newReadBy.length - 1}
               </span>
             )}
           </>

@@ -11,10 +11,14 @@ import { useChannelActionContext } from '../../context/ChannelActionContext';
 import type { TranslationLanguages } from 'ermis-chat-js-sdk';
 
 import type { DefaultErmisChatGenerics } from '../../types/types';
+import { useChatContext } from '../../context';
+import { getUserNameAndImage } from '../../utils';
 
 export const QuotedMessage = <
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >() => {
+  const { client } = useChatContext('QuotedMessage');
+
   const { Attachment, Avatar: ContextAvatar } = useComponentContext<ErmisChatGenerics>(
     'QuotedMessage',
   );
@@ -39,6 +43,8 @@ export const QuotedMessage = <
       ? quoted_message.attachments[0]
       : null;
 
+  const userInfo = getUserNameAndImage(String(message.user?.id), client);
+
   if (!quotedMessageText && !quotedMessageAttachment) return null;
 
   return (
@@ -54,8 +60,8 @@ export const QuotedMessage = <
       >
         {quoted_message.user && (
           <Avatar
-            image={quoted_message.user.image}
-            name={quoted_message.user.name || quoted_message.user.id}
+            image={userInfo.image}
+            name={userInfo.name}
             size={20}
             user={quoted_message.user}
           />

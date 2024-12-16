@@ -104,3 +104,12 @@ export const getMembersChannel = (members: any[], client: any) => {
 
   return newMembers;
 };
+
+export const getUserNameAndImage = (userId: string, client: any) => {
+  if (!userId) return { image: '', name: '' };
+  const userInfo = client.state.users[userId];
+  const name = String(userInfo ? userInfo.name : userId);
+  const image = String(userInfo ? userInfo.avatar || '' : '');
+
+  return { image, name };
+};
