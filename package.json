@@ -1,6 +1,6 @@
 {
   "name": "ermis-chat-react-sdk",
-  "version": "0.0.0-development",
+  "version": "0.0.1",
   "description": "React components to create chat conversations style chat",
   "author": "ErmisChat",
   "homepage": "https://ermis.network/",
