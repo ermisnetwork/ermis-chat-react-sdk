@@ -2248,11 +2248,6 @@
     crypto-browserify "^3.11.0"
     process-es6 "^0.11.2"
 
-"@stream-io/stream-chat-css@^4.16.1":
-  version "4.16.1"
-  resolved "https://registry.yarnpkg.com/@stream-io/stream-chat-css/-/stream-chat-css-4.16.1.tgz#1d9235341bc82537775d175ccfad46ec6f007438"
-  integrity sha512-wVYWBQKL2Bn0UsflqVQMdRoU6ajIaICPs272GiMWgibfWctVIkltDbDHcaeHuvJEOFkLM9tv8ibN5l49G2RLfw==
-
 "@stream-io/transliterate@^1.5.5":
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/@stream-io/transliterate/-/transliterate-1.5.5.tgz#38ef7710f0dc85ed3d4e976a00810fd4e00897c7"
@@ -5687,6 +5682,11 @@ eol@^0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/eol/-/eol-0.9.1.tgz#f701912f504074be35c6117a5c4ade49cd547acd"
   integrity sha512-Ds/TEoZjwggRoz/Q2O7SE3i4Jm66mqTDfmdHdq/7DKVk3bro9Q8h6WdXKdPqFLMoqxrDK5SVRzHVPOS6uuGtrg==
+
+ermis-chat-css@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/ermis-chat-css/-/ermis-chat-css-0.0.2.tgz#c0fb5a2d7713e96e7b58b82373e9dd6e6735ee1f"
+  integrity sha512-/hda1y/kBo7q0gC/GsIlFEYXbrGw44OwYPcnYSY4pEZjmlBeQO27huAn5mil0zGKdcfHBnG5vrG6EndcUXHsjw==
 
 ermis-chat-js-sdk@^1.2.9:
   version "1.2.9"

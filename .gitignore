@@ -75,7 +75,7 @@ client/dist
 .vscode/
 coverage.out
 
-# stream-chat-css/docusaurus files
+# ermis-chat-css/docusaurus files
 docusaurus/docs/React/theming
-docusaurus/docs/React/assets/stream-chat-css*
+docusaurus/docs/React/assets/ermis-chat-css*
 shared

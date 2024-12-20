@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 usage() {
-  echo "Missing path to stream-chat-css directory"
-  echo "Usage: $(basename $0) <path_to_stream-chat-css_directory>"
+  echo "Missing path to ermis-chat-css directory"
+  echo "Usage: $(basename $0) <path_to_ermis-chat-css_directory>"
 }
 
 main() {
