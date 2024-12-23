@@ -1,4 +1,9 @@
-import type { Attachment, DefaultGenerics, ExtendableGenerics, OGAttachment } from 'ermis-chat-js-sdk';
+import type {
+  Attachment,
+  DefaultGenerics,
+  ExtendableGenerics,
+  OGAttachment,
+} from 'ermis-chat-js-sdk';
 import type { DefaultErmisChatGenerics } from '../../types/types';
 
 export type AttachmentLoadingState = 'uploading' | 'finished' | 'failed';

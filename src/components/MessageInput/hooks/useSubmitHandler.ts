@@ -18,7 +18,7 @@ import type { EnrichURLsController } from './useLinkPreviews';
 
 const getAttachmentTypeFromMime = (mime: string) => {
   if (mime.includes('video/')) return 'video';
-  if (mime.includes('audio/')) return 'audio';
+  // if (mime.includes('audio/')) return 'audio';
   return 'file';
 };
 
@@ -78,13 +78,15 @@ export const useSubmitHandler = <
         if (!textReference.current.hasChanged) return true;
         return !upload.og_scrape_url;
       })
-      .map<Attachment<ErmisChatGenerics>>(({ file: { name }, url, ...rest }) => ({
+      .map<Attachment<ErmisChatGenerics>>(({ file: { name, size, type }, url, ...rest }) => ({
         author_name: rest.author_name,
         fallback: name,
+        file_size: size,
         image_url: url,
+        mime_type: type,
         og_scrape_url: rest.og_scrape_url,
         text: rest.text,
-        title: rest.title,
+        title: name,
         title_link: rest.title_link,
         type: 'image',
       }));

@@ -96,10 +96,17 @@ export const useFileUploads = <
         return;
       }
 
+      let thumbUrl = '';
+      if (file.type?.split('/')[0] === 'video') {
+        const thumbBlob = await channel.getThumbBlobVideo(file as File);
+        const responseThumb = await channel.sendFile(thumbBlob as File);
+        thumbUrl = responseThumb.file;
+      }
+
       dispatch({
         id,
         state: 'finished',
-        thumb_url: response.thumb_url,
+        thumb_url: thumbUrl,
         type: 'setFileUpload',
         url: response.file,
       });
