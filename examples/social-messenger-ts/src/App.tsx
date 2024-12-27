@@ -7,7 +7,7 @@ import { EmojiPicker } from 'ermis-chat-react-sdk/emojis';
 import data from '@emoji-mart/data';
 import { init, SearchIndex } from 'emoji-mart';
 
-import 'ermis-chat-react-sdk/dist/css/v2/index.css';
+import 'ermis-chat-css/dist/v2/css/index.css';
 import './styles/index.css';
 
 import {

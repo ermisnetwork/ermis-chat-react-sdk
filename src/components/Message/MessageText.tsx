@@ -1,9 +1,14 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { QuotedMessage as DefaultQuotedMessage } from './QuotedMessage';
 import { isOnlyEmojis, messageHasAttachments } from './utils';
 
-import { useComponentContext, useMessageContext, useTranslationContext } from '../../context';
+import {
+  useChannelStateContext,
+  useComponentContext,
+  useMessageContext,
+  useTranslationContext,
+} from '../../context';
 import { renderText as defaultRenderText } from './renderText';
 import { MessageErrorText } from './MessageErrorText';
 
@@ -54,13 +59,41 @@ const UnMemoizedMessageTextComponent = <
   const { userLanguage } = useTranslationContext('MessageText');
   const message = propMessage || contextMessage;
   const hasAttachment = messageHasAttachments(message);
+  const { channel } = useChannelStateContext();
+  const [mentionedUsers, setMentionedUsers] = useState<{ id: ''; image: ''; name: '' }[]>([]);
+
+  useEffect(() => {
+    const members = channel.data?.members
+      ? channel.data?.members.map((member: any) => member.user)
+      : [];
+    const allObj = { id: 'all', image: '', name: 'All' };
+    const mentions = [allObj, ...members];
+
+    if (message.mentioned_all) {
+      const mentionsInText = String(message.text).match(/@\S+/g) || [];
+      const mentionedUsers = mentionsInText
+        .map((mention) => mention.slice(1))
+        .map((mention) => mentions.find((member) => member.id === mention))
+        .filter(Boolean);
+
+      setMentionedUsers(mentionedUsers);
+    } else {
+      if (message.mentioned_users?.length) {
+        const mentionedUsers = message.mentioned_users.map((mentionId: any) => {
+          const memberInfo = mentions.find((member) => member.id === mentionId);
+          return memberInfo;
+        });
+        setMentionedUsers(mentionedUsers);
+      }
+    }
+  }, [channel, message]);
 
   const messageTextToRender =
     message.i18n?.[`${userLanguage}_text` as `${TranslationLanguages}_text`] || message.text;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const messageText = useMemo(() => renderText(messageTextToRender, message.mentioned_users), [
-    message.mentioned_users,
+  const messageText = useMemo(() => renderText(messageTextToRender, mentionedUsers), [
+    mentionedUsers,
     messageTextToRender,
   ]);
 

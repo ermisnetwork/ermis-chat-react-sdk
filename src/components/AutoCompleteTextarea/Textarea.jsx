@@ -390,7 +390,8 @@ export class ReactTextareaAutocomplete extends React.Component {
 
     if (!currentTrigger || !data || (data && !data.length)) return null;
 
-    return data;
+    const allObj = { id: 'all', image: '', name: 'All' };
+    return [allObj, ...data];
   };
 
   /**
@@ -431,6 +432,7 @@ export class ReactTextareaAutocomplete extends React.Component {
       'dropdownStyle',
       'grow',
       'handleSubmit',
+      'isDirectChannel',
       'innerRef',
       'itemClassName',
       'itemStyle',
@@ -660,6 +662,7 @@ export class ReactTextareaAutocomplete extends React.Component {
       disableMentions,
       dropdownClassName,
       dropdownStyle,
+      isDirectChannel,
       itemClassName,
       itemStyle,
       listClassName,
@@ -675,7 +678,8 @@ export class ReactTextareaAutocomplete extends React.Component {
       isComposing ||
       !triggerProps.values ||
       !triggerProps.currentTrigger ||
-      (disableMentions && triggerProps.currentTrigger === '@')
+      (disableMentions && triggerProps.currentTrigger === '@') ||
+      isDirectChannel
     )
       return null;
 
@@ -790,6 +794,7 @@ ReactTextareaAutocomplete.propTypes = {
   disableMentions: PropTypes.bool,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
+  isDirectChannel: PropTypes.bool,
   itemClassName: PropTypes.string,
   itemStyle: PropTypes.object,
   listClassName: PropTypes.string,

@@ -46,7 +46,11 @@ export const useUserTrigger = <
   const { watchers } = channel.state;
 
   const getMembersAndWatchers = useCallback(() => {
-    const memberUsers = members ? Object.values(members).map(({ user }) => user) : [];
+    const memberUsers = members
+      ? Object.values(members)
+          .filter((user) => user.channel_role !== 'pending' && !user.banned)
+          .map(({ user }) => user)
+      : [];
     const watcherUsers = watchers ? Object.values(watchers) : [];
     const users = [...memberUsers, ...watcherUsers];
 

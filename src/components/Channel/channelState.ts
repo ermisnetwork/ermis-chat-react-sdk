@@ -1,5 +1,9 @@
 import type { Reducer } from 'react';
-import type { Channel, MessageResponse, ChannelState as StreamChannelState } from 'ermis-chat-js-sdk';
+import type {
+  Channel,
+  MessageResponse,
+  ChannelState as StreamChannelState,
+} from 'ermis-chat-js-sdk';
 
 import type { ChannelState, StreamMessage } from '../../context/ChannelStateContext';
 

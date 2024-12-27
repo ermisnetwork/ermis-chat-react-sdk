@@ -13,6 +13,7 @@ import type { TriggerSettings } from '../MessageInput/DefaultTriggerProvider';
 
 import type { CustomTrigger, DefaultErmisChatGenerics, UnknownType } from '../../types/types';
 import { EmojiSearchIndex } from 'components/MessageInput';
+import { useChannelStateContext } from '../../context';
 
 type ObjectUnion<T> = T[keyof T];
 
@@ -130,6 +131,7 @@ const UnMemoizedChatAutoComplete = <
     AutocompleteSuggestionList: SuggestionList,
   } = useComponentContext<ErmisChatGenerics, V>('ChatAutoComplete');
   const { t } = useTranslationContext('ChatAutoComplete');
+  const { channel } = useChannelStateContext();
 
   const messageInput = useMessageInputContext<ErmisChatGenerics, V>('ChatAutoComplete');
   const { cooldownRemaining, disabled, emojiSearchIndex, textareaRef: innerRef } = messageInput;
@@ -176,6 +178,7 @@ const UnMemoizedChatAutoComplete = <
       grow={messageInput.grow}
       handleSubmit={props.handleSubmit || messageInput.handleSubmit}
       innerRef={updateInnerRef}
+      isDirectChannel={channel.type === 'messaging'}
       itemClassName='str-chat__emojisearch__item'
       listClassName='str-chat__emojisearch__list'
       loadingComponent={LoadingIndicator}

@@ -27,7 +27,7 @@ import {
   SendMessageAPIResponse,
   Channel as StreamChannel,
   UpdatedMessage,
-  UserResponse,
+  // UserResponse,
 } from 'ermis-chat-js-sdk';
 import clsx from 'clsx';
 
@@ -204,12 +204,12 @@ type ChannelPropsForwardedToComponentContext<
   VirtualMessage?: ComponentContextValue<ErmisChatGenerics>['VirtualMessage'];
 };
 
-const isUserResponseArray = <
-  ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
->(
-  output: string[] | UserResponse<ErmisChatGenerics>[],
-): output is UserResponse<ErmisChatGenerics>[] =>
-  (output as UserResponse<ErmisChatGenerics>[])[0]?.id != null;
+// const isUserResponseArray = <
+//   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
+// >(
+//   output: string[] | UserResponse<ErmisChatGenerics>[],
+// ): output is UserResponse<ErmisChatGenerics>[] =>
+//   (output as UserResponse<ErmisChatGenerics>[])[0]?.id != null;
 
 export type ChannelProps<
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics,
@@ -985,6 +985,13 @@ const ChannelInner = <
     });
   };
 
+  const replaceMentionsWithIds = (inputValue: any, mentions: any[]) => {
+    mentions.forEach((user) => {
+      inputValue = inputValue.replaceAll(`@${user.name}`, `@${user.id}`);
+    });
+    return inputValue;
+  };
+
   const doSendMessage = async (
     message: MessageToSend<ErmisChatGenerics> | StreamMessage<ErmisChatGenerics>,
     customMessageData?: Partial<Message<ErmisChatGenerics>>,
@@ -993,18 +1000,30 @@ const ChannelInner = <
     const { attachments, mentioned_users = [], parent_id, text } = message;
 
     // channel.sendMessage expects an array of user id strings
-    const mentions = isUserResponseArray<ErmisChatGenerics>(mentioned_users)
-      ? mentioned_users.map(({ id }) => id)
-      : mentioned_users;
+    // const mentions = isUserResponseArray<ErmisChatGenerics>(mentioned_users)
+    //   ? mentioned_users.map(({ id }) => id)
+    //   : mentioned_users;
 
     const messageData = {
       attachments,
-      mentioned_users: mentions,
       parent_id,
       quoted_message_id: parent_id === quotedMessage?.parent_id ? quotedMessage?.id : undefined,
       text,
       ...customMessageData,
     } as Message<ErmisChatGenerics>;
+
+    if (mentioned_users.length) {
+      const mentionIds = mentioned_users.map((item) => item.id);
+      if (mentionIds.includes('all')) {
+        messageData.mentioned_all = true;
+        messageData.mentioned_users = [];
+        messageData.text = replaceMentionsWithIds(String(text).trim(), mentioned_users);
+      } else {
+        messageData.mentioned_all = false;
+        messageData.mentioned_users = mentionIds;
+        messageData.text = replaceMentionsWithIds(String(text).trim(), mentioned_users);
+      }
+    }
 
     try {
       let messageResponse: void | SendMessageAPIResponse<ErmisChatGenerics>;

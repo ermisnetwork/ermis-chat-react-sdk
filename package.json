@@ -1,6 +1,6 @@
 {
   "name": "ermis-chat-react-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React components to create chat conversations style chat",
   "author": "ErmisChat",
   "homepage": "https://ermis.network/",
@@ -65,8 +65,8 @@
     "clsx": "^2.0.0",
     "dayjs": "^1.10.4",
     "emoji-regex": "^9.2.0",
-    "ermis-chat-css": "^0.0.2",
-    "ermis-chat-js-sdk": "^1.2.9",
+    "ermis-chat-css": "^0.0.3",
+    "ermis-chat-js-sdk": "^1.3.0",
     "fix-webm-duration": "^1.0.5",
     "hast-util-find-and-replace": "^5.0.1",
     "i18next": "^21.6.14",

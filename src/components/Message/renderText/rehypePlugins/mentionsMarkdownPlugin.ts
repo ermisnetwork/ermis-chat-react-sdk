@@ -13,13 +13,13 @@ export const mentionsMarkdownPlugin = <
 >(
   mentioned_users: UserResponse<ErmisChatGenerics>[],
 ) => () => {
-  const mentioned_usernames = mentioned_users
-    .map((user) => user.name || user.id)
+  const mentioned_userIds = mentioned_users
+    .map((user) => user.id)
     .filter(Boolean)
     .map(escapeRegExp);
 
   const mentionedUsersRegex = new RegExp(
-    mentioned_usernames.map((username) => `@${username}`).join('|'),
+    mentioned_userIds.map((userId) => `@${userId}`).join('|'),
     'g',
   );
 
@@ -34,7 +34,7 @@ export const mentionsMarkdownPlugin = <
   };
 
   const transform = (tree: Nodes) => {
-    if (!mentioned_usernames.length) return;
+    if (!mentioned_userIds.length) return;
 
     // handles special cases of mentions where user.name is an e-mail
     // Remark GFM translates all e-mail-like text nodes to links creating

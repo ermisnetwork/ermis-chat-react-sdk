@@ -14,10 +14,12 @@ export type MentionProps<
 export const Mention = <
   ErmisChatGenerics extends DefaultErmisChatGenerics = DefaultErmisChatGenerics
 >({
-  children,
   node: { mentionedUser },
 }: MentionProps<ErmisChatGenerics>) => (
-  <span className='str-chat__message-mention' data-user-id={mentionedUser.id}>
-    {children}
+  <span
+    className={`str-chat__message-mention ${mentionedUser.id === 'all' && 'mention-all'}`}
+    data-user-id={mentionedUser.id}
+  >
+    {mentionedUser.name}
   </span>
 );

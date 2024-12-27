@@ -5683,15 +5683,15 @@ eol@^0.9.1:
   resolved "https://registry.yarnpkg.com/eol/-/eol-0.9.1.tgz#f701912f504074be35c6117a5c4ade49cd547acd"
   integrity sha512-Ds/TEoZjwggRoz/Q2O7SE3i4Jm66mqTDfmdHdq/7DKVk3bro9Q8h6WdXKdPqFLMoqxrDK5SVRzHVPOS6uuGtrg==
 
-ermis-chat-css@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/ermis-chat-css/-/ermis-chat-css-0.0.2.tgz#c0fb5a2d7713e96e7b58b82373e9dd6e6735ee1f"
-  integrity sha512-/hda1y/kBo7q0gC/GsIlFEYXbrGw44OwYPcnYSY4pEZjmlBeQO27huAn5mil0zGKdcfHBnG5vrG6EndcUXHsjw==
+ermis-chat-css@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ermis-chat-css/-/ermis-chat-css-0.0.3.tgz#67f11cae049a058457d3f877cca72efeab6b0a34"
+  integrity sha512-GG+W8enSchAqfSkFvktQTmnNeC/ZUQ6CPba9aC4ciSJUTZr9kvhbjZPLDp0TJShf+AcJWAUv91irQwyLBB3IRw==
 
-ermis-chat-js-sdk@^1.2.9:
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/ermis-chat-js-sdk/-/ermis-chat-js-sdk-1.2.9.tgz#83a14341251d496c09023a16e5d30e8ad81677b2"
-  integrity sha512-g29CNcQpcBiDeJHMbC6dGP8VaqQDy4L/SiRVA1xXoRe/GD/VsmDodtdp5wlDfienflP6ERrUc8a5ps5Bflr59Q==
+ermis-chat-js-sdk@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ermis-chat-js-sdk/-/ermis-chat-js-sdk-1.3.0.tgz#f9f5f157d4f12ef962cef42588bdf6be45959cf7"
+  integrity sha512-bEATUdWmFHldzkUcVxqeRSA9dCPDXvJvP9151JJnfRwWls7fArwIqCWqQn+FeVJfDMMl179qSDkEDr5nXQEIpg==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/event-source-polyfill" "^1.0.5"
